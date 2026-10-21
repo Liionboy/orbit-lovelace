@@ -1,0 +1,9 @@
+{
+  "name": "lovelace-action-button-card",
+  "version": "0.1.0",
+  "type": "module",
+  "private": false,
+  "scripts": {
+    "check": "node --check dist/action-button-card.js"
+  }
+}

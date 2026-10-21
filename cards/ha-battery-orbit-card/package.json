@@ -1,0 +1,13 @@
+{
+  "name": "ha-battery-orbit-card",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Informational Battery Orbit Home Assistant Dashboard card",
+  "scripts": {
+    "check": "node --check ha-battery-orbit-card.js && node --check test/card.test.mjs && node --check test/browser.mjs",
+    "test": "node --test test/card.test.mjs",
+    "test:browser": "node test/browser.mjs"
+  },
+  "license": "MIT"
+}

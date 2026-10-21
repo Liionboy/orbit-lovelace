@@ -1,0 +1,9 @@
+{
+  "name": "lovelace-switch-control-card",
+  "version": "1.0.1",
+  "private": false,
+  "type": "module",
+  "scripts": {
+    "check": "node --check switch-control-card.js"
+  }
+}

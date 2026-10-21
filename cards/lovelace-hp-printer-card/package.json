@@ -1,0 +1,9 @@
+{
+  "name": "lovelace-hp-printer-card",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check dist/hp-printer-card.js"
+  }
+}

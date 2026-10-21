@@ -1,0 +1,8 @@
+{
+  "name": "lovelace-climate-control-card",
+  "version": "1.3.3",
+  "type": "module",
+  "scripts": {
+    "check": "node --check dist/climate-control-card.js"
+  }
+}

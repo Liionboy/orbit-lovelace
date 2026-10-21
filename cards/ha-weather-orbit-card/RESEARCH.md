@@ -1,0 +1,12 @@
+# Research contracts
+
+Verified against official sources on 2026-10-21, before implementation:
+
+- [Frontend weather data](https://github.com/home-assistant/frontend/blob/dev/src/data/weather.ts): WeatherEntityFeature DAILY=1, HOURLY=2, TWICE_DAILY=4; subscribeForecast delegates to connection.subscribeMessage(callback, {type: "weather/subscribe_forecast", entity_id, forecast_type}); event {type, forecast}, forecast may be null. Optional low temperature, condition, precipitation, is_daytime are not assumed.
+- [Core weather WebSocket API](https://github.com/home-assistant/core/blob/dev/homeassistant/components/weather/websocket_api.py): validates weather entity, supported forecast flag, daily/hourly/twice_daily; sends initial forecast and subsequent listener updates. Card never reads the removed legacy forecast attribute or invokes a service.
+- [WebSocket connection](https://github.com/home-assistant/home-assistant-js-websocket/blob/master/lib/connection.ts): subscribeMessage resolves to an asynchronous unsubscribe; ready/disconnected lifecycle and connected status. Connector owns network reconnection; card invalidates its generation and subscription on disconnect, then requests a fresh subscription on ready. Late callbacks/results cannot replace new data; delayed unsubscribe results are disposed. Unsubscribe errors are caught.
+- [Current card API](https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/): setConfig, hass, sizing, custom-element type, HA theme card surface; relevant-state-only updates.
+- [Frontend native form types at 20260527.4](https://github.com/home-assistant/frontend/blob/20260527.4/src/panels/lovelace/types.ts): static getConfigForm returns schema/computeLabel/computeHelper. [Core 2026.6.0 constraints](https://github.com/home-assistant/core/blob/2026.6.0/homeassistant/package_constraints.txt) pins home-assistant-frontend==20260527.4. This establishes the declared minimum HA 2026.6.0 has this API; it is not a claim of live native-editor validation.
+- [HACS Dashboard packaging](https://www.hacs.xyz/docs/publish/plugin/): JavaScript file matches repository slug at root; root hacs.json identifies it.
+
+Current readings use weather state and temperature/temperature_unit, wind_speed/wind_speed_unit, humidity (%). No unit conversion or stale unavailable values. Forecast dates use Intl with HA language, HA time zone (or local when requested) and HA 12/24-hour preference. More Info fires hass-more-info with exact {entityId}; no service API exists in this card.

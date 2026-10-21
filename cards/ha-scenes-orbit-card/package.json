@@ -1,0 +1,13 @@
+{
+  "name": "ha-scenes-orbit-card",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Compact Orbit scene and script actions for Home Assistant",
+  "scripts": {
+    "check": "node --check ha-scenes-orbit-card.js",
+    "test": "node --test test/card.test.mjs",
+    "test:browser": "node test/browser.mjs"
+  },
+  "license": "MIT"
+}

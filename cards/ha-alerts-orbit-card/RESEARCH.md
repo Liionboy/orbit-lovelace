@@ -1,0 +1,11 @@
+# Contracts checked (2026-10-21)
+
+- [Official custom card documentation](https://github.com/home-assistant/developers.home-assistant/blob/master/docs/frontend/custom-ui/custom-card.md): static getConfigForm returns schema, computeLabel, computeHelper and assertConfig; hass setter; customCards registration.
+- [HA 2026.6.0 frontend manifest](https://github.com/home-assistant/core/blob/2026.6.0/homeassistant/components/frontend/manifest.json) pins frontend 20260527.4; [that frontend's Lovelace types](https://github.com/home-assistant/frontend/blob/20260527.4/src/panels/lovelace/types.ts) support getConfigForm. This verifies the chosen conservative minimum 2026.6.0, not an assertion that the API first appeared then: frontend 20260429.0 already includes it.
+- [Pinned selector contracts](https://github.com/home-assistant/frontend/blob/20260527.4/src/data/selector.ts): entity multiple and filter array, domain/device_class filters; number min/max/step/mode; optional fields.
+- [More Info dispatcher](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/more-info/show-ha-more-info-dialog.ts) and [dialog params](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/more-info/ha-more-info-dialog.ts): hass-more-info event, detail { entityId }, bubbles/composed.
+- [Core binary sensor semantics](https://github.com/home-assistant/core/blob/dev/homeassistant/components/binary_sensor/const.py): battery on=low, door/window/opening/garage_door on=open, safety on=unsafe, smoke/gas/moisture/problem/etc on=detected/active. Classes selected explicitly, not generic on=alarm for every binary sensor.
+- [Sensor battery contract](https://github.com/home-assistant/core/blob/dev/homeassistant/components/sensor/const.py): device_class battery uses %. We require %; accept absent battery class for manually selected percent sensors, reject any conflicting class. Never interpret voltage as percent.
+- [HACS Dashboard packaging](https://github.com/hacs/documentation/blob/main/source/docs/publish/plugin.md): root or dist JavaScript with repository-matching filename.
+
+No services or WebSocket queries are used. Native editor and live HA remain unverified; synthetic tests use HA component/icon stubs.

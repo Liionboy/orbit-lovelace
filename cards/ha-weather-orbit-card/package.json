@@ -1,0 +1,13 @@
+{
+  "name": "ha-weather-orbit-card",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Compact read-only Home Assistant weather and forecast card",
+  "scripts": {
+    "check": "node --check ha-weather-orbit-card.js",
+    "test": "node --test test/card.test.mjs",
+    "test:browser": "node test/browser.mjs"
+  },
+  "license": "MIT"
+}

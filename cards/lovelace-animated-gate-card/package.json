@@ -1,0 +1,9 @@
+{
+  "name": "lovelace-animated-gate-card",
+  "version": "1.0.9",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check dist/animated-gate-card.js"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Temperature & Humidity Card",
+  "filename": "temperature-humidity-card.js",
+  "render_readme": true,
+  "homeassistant": "2026.6.0"
+}

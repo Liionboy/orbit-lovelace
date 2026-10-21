@@ -1,0 +1,13 @@
+{
+  "name": "ha-fan-orbit-card",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Compact, capability-aware Orbit fan Dashboard card",
+  "scripts": {
+    "check": "node --check ha-fan-orbit-card.js && node --check test/browser.mjs",
+    "test": "node --test test/card.test.mjs",
+    "test:browser": "node test/browser.mjs"
+  },
+  "license": "MIT"
+}

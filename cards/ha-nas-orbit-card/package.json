@@ -1,0 +1,9 @@
+{
+  "name": "ha-nas-orbit-card",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check ha-nas-orbit-card.js"
+  }
+}

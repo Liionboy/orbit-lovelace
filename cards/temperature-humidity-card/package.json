@@ -1,0 +1,8 @@
+{
+  "name": "temperature-humidity-card",
+  "version": "1.2.6",
+  "type": "module",
+  "scripts": {
+    "check": "node --check dist/temperature-humidity-card.js"
+  }
+}

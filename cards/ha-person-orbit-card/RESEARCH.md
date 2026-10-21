@@ -1,0 +1,20 @@
+# Contract research
+
+Inspected official documentation and source on 2026-10-21 before implementation.
+
+- [Custom cards](https://contributors.home-assistant.io/frontend/custom-ui/card/), reached from the official developers custom-card URL: setConfig, hass setter, sizing, theme-aware ha-card, and `hass.formatEntityState(stateObj)`. Only relevant derived display values participate in rerender detection; unrelated states/GPS attributes are neither rendered nor serialized.
+- [Card editor and picker](https://contributors.home-assistant.io/frontend/custom-ui/card-editor/): static getConfigForm returns schema/computeLabel/computeHelper; optional native text/icon/entity/boolean/number/select selectors; window.customCards registration. [Released frontend 20260527.0 types](https://github.com/home-assistant/frontend/blob/20260527.0/src/panels/lovelace/types.ts) include getConfigForm. [Core 2026.6.0 package constraints](https://github.com/home-assistant/core/blob/2026.6.0/homeassistant/package_constraints.txt) pin frontend 20260527.4, confirming the 2026.6.0 minimum includes the API (not a claim of native-editor testing).
+- [Person entity source](https://github.com/home-assistant/core/blob/dev/homeassistant/components/person/entity.py): person state comes from HA's selected tracker, picture is entity_picture; source can include latitude/longitude. This card uses only state, friendly_name and an allowlisted picture URL, never derives tracking or coordinates.
+- [Frontend state formatting](https://github.com/home-assistant/frontend/blob/dev/src/common/entity/compute_state_display.ts): formatter handles unknown/unavailable and translated states; escaped state fallback remains usable when formatter is absent/throws.
+- [More Info event source](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/more-info/show-ha-more-info-dialog.ts): `hass-more-info` receives parameters. [Dialog parameters](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/more-info/ha-more-info-dialog.ts) use `entityId`. Card dispatches `{ entityId }`, bubbles/composed.
+- [Sensor entity docs](https://developers.home-assistant.io/docs/core/entity/sensor/): percentage battery uses `%`; this card requires explicit percent unit and numeric finite 0–100, rejecting voltage battery sensors. Travel-time units are preserved verbatim without conversion.
+- [HACS plugin publishing](https://www.hacs.xyz/docs/publish/plugin/): root/dist JavaScript matching repository name. Root manifest and asset follow this contract; no automated publication/release workflow.
+
+Security choice rather than HA guarantee: avatar paths are deliberately narrower than all HA-supported entity_picture values. Only local HA image endpoints are accepted; arbitrary external/relative paths are rejected. Native components are not stable public APIs; synthetic tests clearly stub them.
+
+## v1.1.0 optional readings (2026-10-22)
+
+- Re-inspected [released selector types](https://github.com/home-assistant/frontend/blob/20260527.4/src/data/selector.ts): entity selectors support `filter.domain` as a string or array; new fields use sensor filters and sensor/binary_sensor for charging. Native text/icon/select selectors reuse the existing verified form contract.
+- Additional readings consume only the explicitly selected sensor state, friendly_name, icon and unit_of_measurement. Numeric values preserve sign/decimals/units; nonnumeric sensor states use the existing HA formatter/fallback. No device-tracker coordinate attributes are read.
+- Charging is an explicit display mapping, not a query or service: binary sensor `on`, or sensor state `charging` (case-insensitive). Unknown/unavailable/unrecognized values never infer charging.
+- Compact layout is opt-in to preserve the existing appearance. Synthetic Chromium reproduces 243px screenshot-like and 167px narrow tiles, with complete readings/height assertions. Hidden labels are intentionally excluded from geometry checks; visible values are not. Native editor, actual HA icon glyphs, live sensors and Companion apps remain unverified.

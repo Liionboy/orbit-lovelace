@@ -1,0 +1,13 @@
+{
+  "name": "ha-welcome-orbit-card",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Orbit dashboard greeting, date, weather and room/scene shortcuts",
+  "scripts": {
+    "check": "node --check ha-welcome-orbit-card.js",
+    "test": "node --test test/card.test.mjs",
+    "test:browser": "node test/browser.mjs"
+  },
+  "license": "MIT"
+}

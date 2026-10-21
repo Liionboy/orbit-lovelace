@@ -1,0 +1,13 @@
+{
+  "name": "ha-sensor-graph-orbit-card",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Read-only Orbit numeric sensor history card",
+  "scripts": {
+    "check": "node --check ha-sensor-graph-orbit-card.js",
+    "test": "node --test test/card.test.mjs",
+    "test:browser": "node test/browser.mjs"
+  },
+  "license": "MIT"
+}

@@ -1,0 +1,30 @@
+# Inventory, provenance and packaging audit
+
+Reviewed local checkouts and public GitHub stable releases on 2026-10-22. Scope includes all 13 explicitly named Orbit repositories and 14 matching companion packages from the same collection, including Vacuum Commander. UniFi contributes two cards, for 28 card types from27 packages.
+
+All included local HEAD commits matched the corresponding public release commits at import time. JavaScript artifacts are pinned by commit/release and SHA256 in components.json. Vacuum Commander's distribution is a release-built artifact (not tracked in its source tree); its public release asset digest was verified before import. Original repository licenses/configuration references and available upstream regression sources are retained under cards/.
+
+## Preserved boundaries
+
+- Local uncommitted Pi-hole changes were **not** imported. The public v1.2.0 snapshot is included. Existing working files were not changed.
+- Untracked Climate/Temperature copies in the Media Player checkout were **not** imported. Each card comes from its own canonical repository.
+- NAS and Server remain distinct cards. NAS is not generalized beyond its original UGREEN-oriented telemetry.
+- The separate ha-media-hub-card checkout pointing to the Jellyfin/Sonarr/Radarr project, older duplicate checkouts, backend integrations, UI Lovelace Minimalist fork and unrelated older energy/retail/MotoGP/utility/AI/qBittorrent projects are not part of this Orbit/companion collection and were not imported. This is not a bundle of every Home Assistant repository owned by the author.
+- Pi-hole v1.2.0 still has package version1.1.0, and Switch v1.2.0 still has package version1.0.1. Both values are explicitly recorded; the public release tag controls the included component version.
+
+## Build transformations
+
+1. Each component is isolated in its own function scope; identical constants/classes in formerly separate resources cannot collide.
+2. Standalone-only UniFi and Vacuum ES module export statements are removed by exact checked replacements. Their registered Lovelace elements are preserved. No other source rewriting/minification occurs.
+3. Temperature & Humidity v1.2.6 tries to register the same constructor for both temperature-humidity-card and living-temperature-card, which browsers prohibit. The legacy alias is registered with a subclass in the bundle, and the stale1.2.5 banner is corrected to1.2.6. Original upstream source remains unchanged for traceability.
+4. The wrapper guards already registered card types and isolates per-component failures with explicit errors in window.orbitLovelace.errors. Tests require no errors in a clean frontend.
+5. Missing picker metadata (notably Vacuum Commander) is added without changing existing card registrations. UniFi metadata incorrectly prefixed its picker types with custom:; the wrapper normalizes those two metadata entries without changing either actual Lovelace type. Repeated suite loading cannot add duplicate picker entries.
+6. The single JS includes first-party MIT and compiled Lit BSD notices. No dynamic imports, backend files, external script requests or module-loader network requests are introduced.
+
+## Verification boundary
+
+The suite provides integrity/registration/legacy compatibility checks, sequential upstream tests and a combined synthetic Chromium test. These are not a new full behavioral audit of every older card, nor native HA/editor/Companion or real-device certification. Original control safeguards and unresolved upstream functional limitations remain unchanged (including pending Media/Bravia application/channel work). No real HA instance, dashboard or devices were modified to build this suite.
+
+## Maintaining the suite
+
+Update one pinned component at a time from a verified public release. Retain its license, update source SHA256/version/commit metadata and any matching src/test snapshot, then rebuild and run all checks sequentially. Review exact build transformations if upstream source changes. Check the full bundle in a clean browser and in the migration scenarios, then tag/release the tested artifact. Individual upstream repositories can remain available; the suite must receive a new release to deliver a newer component version.

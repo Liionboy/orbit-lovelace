@@ -1,0 +1,7 @@
+{
+  "name": "ha-server-orbit-card",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "check": "node --check ha-server-orbit-card.js" }
+}

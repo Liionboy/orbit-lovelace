@@ -1,0 +1,8 @@
+{
+  "name": "lovelace-luma-control-card",
+  "version": "1.2.1",
+  "type": "module",
+  "scripts": {
+    "check": "node --check dist/luma-control-card.js"
+  }
+}
