@@ -15,11 +15,20 @@ Add **Weather Orbit Card** in the picker, or use:
     entity: weather.example
     title: Weather
     palette: aurora
+    show_time: true
+    show_date: true
+    time_zone: ""
     show_forecast: true
     forecast_type: daily
     forecast_count: 3
 
-All six fields are optional and exposed by the native visual editor. Defaults match this example except **entity defaults to empty**. No entities are automatically selected. The empty card explains how to configure it. Entity must be a weather entity. forecast_type accepts daily, hourly, twice_daily; forecast_count is an integer 1–7 (display limit, not a server-side query limit). Choose a type supported by the provider. Set show_forecast: false for current-only mode. Delete optional values to restore defaults.
+All nine fields are optional and exposed by the native visual editor. Defaults match this example except **entity defaults to empty**. No entities are automatically selected. The empty card explains how to configure it. Entity must be a weather entity. forecast_type accepts daily, hourly, twice_daily; forecast_count is an integer 1–7 (display limit, not a server-side query limit). Choose a type supported by the provider. Set show_forecast: false for current-only mode. Delete optional values to restore defaults.
+
+## Clock and date (v1.1.0)
+
+The clock and full calendar date are shown by default, even without weather data. No time/date sensor is required. They use the Home Assistant language and 12/24-hour preference. Time zone follows the HA profile preference (browser zone when set to local, otherwise HA configuration); optional `time_zone` overrides it with a valid IANA zone, such as `Europe/Bucharest`. Invalid HA locale/zone values safely fall back to English/browser zone. Forecast timestamps use the same resolved zone.
+
+Set `show_time: false` and/or `show_date: false` to hide them. The mounted clock refreshes at each minute boundary, including midnight and DST changes, without a new weather state, forecast request or replacement of weather controls. The timer is cleaned up on removal, is not duplicated on reconnect, and stops when both fields are hidden. The time comes from the device clock, not a server time sensor.
 
 Current temperature and wind retain the entity's units; humidity is percent. Missing values are omitted. Missing/unknown/unavailable entities never show stale readings or forecasts. Forecast rows tolerate missing low temperature, condition, precipitation and day/night indicators. Bad dates are omitted. Long labels wrap, and narrow cards use multiple forecast rows rather than horizontal scrolling.
 

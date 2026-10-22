@@ -1,7 +1,7 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "packages": 27,
   "cards": 28,
-  "bytes": 588862,
-  "sha256": "0764bca645eeca2cc3bd177989b64e1a1d27b08bc7ea87316dec5d34e350182d"
+  "bytes": 591552,
+  "sha256": "f3b04a802e6cf2ce2ad5b999cb476329700f6be9cd05cfc39560b0675f165147"
 }

@@ -17,19 +17,19 @@ function connection() {
  };
 }
 function setup(config = { entity: 'weather.example' }, overrides = {}) {
- const registry = new Map(), events = [], calls = [];
+ const registry = new Map(), events = [], calls = [], timers = new Map(); let nextTimer = 0;
  class Element {
-  attachShadow() { this.shadowRoot = { html: '', writes: 0, listeners: {}, addEventListener(name, cb) { this.listeners[name] = cb; }, get innerHTML() { return this.html; }, set innerHTML(v) { this.html = v; this.writes++; } }; }
+  attachShadow() { this.shadowRoot = { html: '', writes: 0, listeners: {}, nodes: {}, querySelector(selector) { return this.nodes[selector] ||= { textContent: '', setAttribute(k, v) { this[k] = v; } }; }, addEventListener(name, cb) { this.listeners[name] = cb; }, get innerHTML() { return this.html; }, set innerHTML(v) { this.html = v; this.writes++; } }; }
   dispatchEvent(e) { events.push(e); return true; }
  }
- const context = vm.createContext({ HTMLElement: Element, Intl, window: {}, customElements: { get: (n) => registry.get(n), define: (n, c) => { assert.ok(!registry.has(n)); registry.set(n, c); } }, CustomEvent: class { constructor(type, options) { this.type = type; Object.assign(this, options); } } });
+ const context = vm.createContext({ HTMLElement: Element, Intl, setTimeout: (cb, delay) => { const id = ++nextTimer; timers.set(id, { cb, delay }); return id; }, clearTimeout: (id) => timers.delete(id), window: {}, customElements: { get: (n) => registry.get(n), define: (n, c) => { assert.ok(!registry.has(n)); registry.set(n, c); } }, CustomEvent: class { constructor(type, options) { this.type = type; Object.assign(this, options); } } });
  vm.runInContext(source, context);
  const Card = registry.get('ha-weather-orbit-card'), card = new Card(), conn = connection();
  card.setConfig(config); card.hass = { states: { 'weather.example': weather(), 'weather.other': weather({ temperature: -3 }) }, connection: conn, config: { time_zone: 'UTC' }, locale: { language: 'en-GB', time_format: '24' }, callService: (...args) => calls.push(args), ...overrides }; card.connectedCallback();
- return { Card, card, conn, calls, context, events, html: () => card.shadowRoot.innerHTML, click(action, disabled = false) { card.shadowRoot.listeners.click({ composedPath: () => [{ dataset: { action }, disabled }] }); } };
+ return { Card, card, conn, calls, context, events, timers, html: () => card.shadowRoot.innerHTML, click(action, disabled = false) { card.shadowRoot.listeners.click({ composedPath: () => [{ dataset: { action }, disabled }] }); } };
 }
 test('empty useful card, no guessed entities or services', () => { const e = setup({}); assert.match(e.html(), /Choose a weather entity/); assert.equal(e.conn.requests.length, 0); e.click('info'); e.click('retry'); assert.deepEqual(e.calls, []); assert.deepEqual(e.events, []); });
-test('metadata root asset version and minimum', () => { const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url))); const hacs = JSON.parse(readFileSync(new URL('../hacs.json', import.meta.url))); assert.equal(pkg.version, '1.0.0'); assert.equal(hacs.homeassistant, '2026.6.0'); assert.equal(hacs.filename, pkg.name + '.js'); assert.doesNotMatch(source, /callService|attributes\.forecast/); });
+test('metadata root asset version and minimum', () => { const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url))); const hacs = JSON.parse(readFileSync(new URL('../hacs.json', import.meta.url))); assert.equal(pkg.version, '1.1.0'); assert.equal(hacs.homeassistant, '2026.6.0'); assert.equal(hacs.filename, pkg.name + '.js'); assert.doesNotMatch(source, /callService|attributes\.forecast/); });
 test('native form all optional defaults consistent and complete', () => { const e = setup({}), stub = e.Card.getStubConfig(), f = e.Card.getConfigForm(); assert.deepEqual(plain(f.schema.map((x) => x.name).sort()), Object.keys(stub).sort()); assert.equal(stub.entity, ''); for (const s of f.schema) { assert.notEqual(s.required, true); assert.ok(f.computeLabel(s)); if (s.default !== undefined) assert.equal(s.default, stub[s.name]); } assert.equal(f.schema[0].selector.entity.domain, 'weather'); });
 for (const config of [null, [], 1, { entity: 'sensor.foo' }, { entity: 'weather.x" onmouseover="bad' }, { title: 3 }, { palette: '__proto__' }, { forecast_type: 'constructor' }, { show_forecast: 'false' }, ...[0, 8, -1, 1.2, '3', Infinity].map((forecast_count) => ({ forecast_count }))]) test('reject bad config ' + JSON.stringify(config), () => { assert.throws(() => setup(config)); });
 for (const palette of ['aurora', 'ocean', 'sunset', 'lavender']) test('palette ' + palette, () => { assert.match(setup({ palette }).html(), new RegExp('data-palette="' + palette + '"')); });
@@ -52,3 +52,38 @@ test('connection replacement detaches listeners and disposes old request', async
 test('permission/network failure independent of current weather; retry duplicate gate', async () => { const e = setup(); e.conn.requests[0].reject({ code: 'unauthorized', message: '<secret details>' }); await flush(); assert.match(e.html(), /Forecast unavailable. Try again/); assert.match(e.html(), /21.7<small>/); assert.doesNotMatch(e.html(), /secret/); e.card.hass = { ...e.card.hass }; assert.equal(e.conn.requests.length, 1); e.click('retry'); e.click('retry'); assert.equal(e.conn.requests.length, 2); assert.match(e.html(), /Loading forecast/); e.conn.requests[1].done(); e.conn.requests[1].cb({ type: 'daily', forecast: forecasts(1) }); await flush(); assert.equal(e.card._forecast.length, 1); assert.equal(e.calls.length, 0); });
 test('late rejection cannot replace new forecast', async () => { const e = setup(); const old = e.conn.requests[0]; e.card.setConfig({ entity: 'weather.other' }); e.conn.requests[1].cb({ type: 'daily', forecast: forecasts(1) }); old.reject(new Error('late')); await flush(); assert.doesNotMatch(e.html(), /Try again/); assert.equal(e.card._forecast.length, 1); });
 test('missing connector and sync subscribe/unsubscribe errors are contained', async () => { const e = setup(undefined, { connection: undefined }); assert.match(e.html(), /connection unavailable/); const conn = connection(); conn.subscribeMessage = () => { throw new Error('offline'); }; e.card.hass = { ...e.card.hass, connection: conn }; assert.match(e.html(), /Try again/); e.card._dispose(() => { throw Error('closed'); }); e.card._dispose(() => Promise.reject(Error('closed'))); await flush(); });
+
+for (const config of [{ show_time: 'true' }, { show_date: 1 }, { time_zone: 42 }, { time_zone: 'Not/AZone' }]) test('reject invalid clock config ' + JSON.stringify(config), () => assert.throws(() => setup(config)));
+test('clock and full date default on, optional and work without weather', () => {
+ const e = setup({}); assert.match(e.html(), /class="clock"/); assert.match(e.html(), /class="calendar"/); assert.equal(e.timers.size, 1);
+ e.card.setConfig({ show_time: false }); assert.doesNotMatch(e.html(), /class="clock"/); assert.match(e.html(), /class="calendar"/);
+ e.card.setConfig({ show_time: false, show_date: false }); assert.doesNotMatch(e.html(), /class="datetime"/); assert.equal(e.timers.size, 0);
+ e.card.setConfig({ show_date: false }); assert.match(e.html(), /class="clock"/); assert.doesNotMatch(e.html(), /class="calendar"/); assert.equal(e.timers.size, 1);
+});
+test('clock follows HA zone, 12/24 format, locale and explicit override', () => {
+ const e = setup({}); e.card._now = () => new Date('2026-10-22T21:30:00Z');
+ e.card.hass = { ...e.card.hass, config: { time_zone: 'Europe/Bucharest' }, locale: { language: 'ro', time_format: '24' } };
+ const node = (name) => e.card.shadowRoot.querySelector(name);
+ assert.equal(node('.clock').textContent, '00:30'); assert.match(node('.calendar').textContent, /23 octombrie 2026/);
+ e.card.setConfig({ time_zone: 'America/New_York' }); assert.equal(node('.clock').textContent, '17:30'); assert.match(node('.calendar').textContent, /22 octombrie/);
+ e.card.hass = { ...e.card.hass, locale: { language: 'en-US', time_format: '12' } }; assert.match(node('.clock').textContent, /05:30 PM/);
+ e.card.setConfig({}); e.card.hass = { ...e.card.hass, config: { time_zone: 'invalid' }, locale: { language: 'invalid_@', time_format: '24' } }; assert.doesNotThrow(() => e.card._updateClock()); assert.ok(node('.calendar').textContent);
+ e.card.hass = { ...e.card.hass, config: { time_zone: 'Asia/Tokyo' }, locale: { time_zone: 'local' } }; assert.equal(e.card._zone(), undefined);
+ e.card.setConfig({ time_zone: 'UTC' }); assert.equal(e.card._zone(), 'UTC');
+});
+test('minute-aligned timer advances date at midnight without hass or forecast queries, then cleans up', () => {
+ const e = setup(); let now = new Date('2026-12-31T23:59:59.500Z'); e.card._now = () => now; e.card._updateClock(); e.card._startClock();
+ assert.equal(e.timers.size, 1); const [id, timer] = [...e.timers][0]; assert.equal(timer.delay, 500);
+ const writes = e.card.shadowRoot.writes, requests = e.conn.requests.length;
+ now = new Date('2027-01-01T00:00:00Z'); e.timers.delete(id); timer.cb();
+ assert.equal(e.card.shadowRoot.querySelector('.clock').textContent, '00:00'); assert.match(e.card.shadowRoot.querySelector('.calendar').textContent, /1 January 2027/);
+ assert.equal(e.card.shadowRoot.querySelector('.clock').datetime, now.toISOString());
+ assert.equal(e.card.shadowRoot.writes, writes); assert.equal(e.conn.requests.length, requests); assert.equal(e.calls.length, 0); assert.equal(e.timers.size, 1);
+ e.card.connectedCallback(); e.card.connectedCallback(); assert.equal(e.timers.size, 1);
+ e.card.disconnectedCallback(); assert.equal(e.timers.size, 0); e.card.connectedCallback(); assert.equal(e.timers.size, 1);
+ e.card.setConfig({ show_time: false, show_date: false }); assert.equal(e.timers.size, 0);
+});
+test('DST jump uses the same resolved zone for calendar and clock', () => {
+ const e = setup({ time_zone: 'Europe/Bucharest' }); e.card._now = () => new Date('2026-10-25T00:59:00Z'); e.card._updateClock(); assert.equal(e.card.shadowRoot.querySelector('.clock').textContent, '03:59');
+ e.card._now = () => new Date('2026-10-25T01:00:00Z'); e.card._updateClock(); assert.equal(e.card.shadowRoot.querySelector('.clock').textContent, '03:00'); assert.match(e.card.shadowRoot.querySelector('.calendar').textContent, /25 October 2026/);
+});
