@@ -13,6 +13,7 @@ Add **Weather Orbit Card** in the picker, or use:
 
     type: custom:ha-weather-orbit-card
     entity: weather.example
+    outdoor_temperature_entity: sensor.outdoor_temperature
     title: Weather
     palette: aurora
     show_time: true
@@ -22,7 +23,15 @@ Add **Weather Orbit Card** in the picker, or use:
     forecast_type: daily
     forecast_count: 3
 
-All nine fields are optional and exposed by the native visual editor. Defaults match this example except **entity defaults to empty**. No entities are automatically selected. The empty card explains how to configure it. Entity must be a weather entity. forecast_type accepts daily, hourly, twice_daily; forecast_count is an integer 1–7 (display limit, not a server-side query limit). Choose a type supported by the provider. Set show_forecast: false for current-only mode. Delete optional values to restore defaults.
+All ten fields are optional and exposed by the native visual editor. Defaults match this example except **entity and outdoor_temperature_entity default to empty**. No entities are automatically selected. The empty card explains how to configure it. Entity must be a weather entity. forecast_type accepts daily, hourly, twice_daily; forecast_count is an integer 1–7 (display limit, not a server-side query limit). Choose a type supported by the provider. Set show_forecast: false for current-only mode. Delete optional values to restore defaults.
+
+## Measured outdoor temperature (v1.2.0)
+
+Select **Outdoor temperature sensor (optional)** in the editor, or set `outdoor_temperature_entity: sensor.outdoor_temperature` to your own sensor ID. Nothing is automatically selected. Its measured value appears in a distinct **Outdoor sensor** panel; the original weather temperature is labelled **Weather provider**. Forecasts still come only from the weather entity. This is not an apparent/feels-like calculation and does not replace the provider temperature.
+
+The sensor uses its numeric state and own `unit_of_measurement` (°C, °F or K), without unit conversion or forcing provider rounding. Zero/negative values and decimal precision are retained with localized formatting. Missing/unknown/unavailable/nonnumeric data or absent/incompatible units show **Unavailable**, never the provider value or a stale measurement. If no sensor is selected, the panel and extra provider label are absent. A sensor-only card (no weather entity) is also supported.
+
+Tap the panel or use Enter/Space to open More Info for exactly the configured sensor. Missing entities disable that action; existing unavailable sensors still permit inspection. Sensor updates use existing HA state, without new subscriptions/queries or service calls.
 
 ## Clock and date (v1.1.0)
 

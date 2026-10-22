@@ -1,5 +1,13 @@
 # Verification records
 
+## v1.2.0 — Measured outdoor temperature
+
+- Only Weather Orbit updated, from verified public v1.2.0 commit `cbaee1068c911d2ea8694dd7fa90fcda164ebefc`, JS SHA256 `7d9c657b66cd40a025522dfc465e03750df0a19d146c456caf8029cbb2b51942`; all other pins unchanged.
+- Reproducible build/syntax, 32 suite +330 upstream Node regressions (362 total), 2 smoke suites and combined synthetic Chromium passed sequentially. All 28 card types mounted; duplicate/picker/alias/migration and prior clock/Person/fan/light/scene checks retained.
+- From the final bundle, measured `6,43 °C` and provider `14°C` rendered independently; selected sensor More Info, state-only update to `-2,75 °C`, no new queries, weather/sensor independent availability and no service calls checked. Sensor readings fit 167/243/440px with a single-line height below 30px. Romanian light/dark243px screenshots inspected.
+- Standalone Weather has 75 Node regressions and Chromium measured-panel checks167–440px plus existing clock/forecast167–760px. Own units/precision, missing/invalid states/units, zero/negative values, sensor-only, hostile strings and keyboard inspected/tested.
+- Synthetic HA components/icons only; no live sensor, native editor, Companion or dashboard/resource modifications/validation.
+
 ## v1.1.0 — Weather clock and date
 
 - Only Weather Orbit was updated, from its verified public v1.1.0 commit `25585ee730fb5897896f66bcf664281c39bf885e`; source SHA256 `34db08cd02e02fd4af300d69746ee88fa70668344bea264334a4484675b130f6`. Other component pins remain unchanged.

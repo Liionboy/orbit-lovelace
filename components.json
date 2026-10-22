@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -230,13 +230,13 @@
       "id": "ha-weather-orbit-card",
       "name": "Weather Orbit Card",
       "category": "Orbit",
-      "version": "1.1.0",
-      "packageVersion": "1.1.0",
+      "version": "1.2.0",
+      "packageVersion": "1.2.0",
       "repository": "Liionboy/ha-weather-orbit-card",
-      "upstreamCommit": "25585ee730fb5897896f66bcf664281c39bf885e",
+      "upstreamCommit": "cbaee1068c911d2ea8694dd7fa90fcda164ebefc",
       "upstreamAsset": "ha-weather-orbit-card.js",
       "source": "cards/ha-weather-orbit-card/ha-weather-orbit-card.js",
-      "sha256": "34db08cd02e02fd4af300d69746ee88fa70668344bea264334a4484675b130f6",
+      "sha256": "7d9c657b66cd40a025522dfc465e03750df0a19d146c456caf8029cbb2b51942",
       "types": [
         "ha-weather-orbit-card"
       ],

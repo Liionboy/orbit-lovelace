@@ -29,7 +29,7 @@ function setup(config = { entity: 'weather.example' }, overrides = {}) {
  return { Card, card, conn, calls, context, events, timers, html: () => card.shadowRoot.innerHTML, click(action, disabled = false) { card.shadowRoot.listeners.click({ composedPath: () => [{ dataset: { action }, disabled }] }); } };
 }
 test('empty useful card, no guessed entities or services', () => { const e = setup({}); assert.match(e.html(), /Choose a weather entity/); assert.equal(e.conn.requests.length, 0); e.click('info'); e.click('retry'); assert.deepEqual(e.calls, []); assert.deepEqual(e.events, []); });
-test('metadata root asset version and minimum', () => { const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url))); const hacs = JSON.parse(readFileSync(new URL('../hacs.json', import.meta.url))); assert.equal(pkg.version, '1.1.0'); assert.equal(hacs.homeassistant, '2026.6.0'); assert.equal(hacs.filename, pkg.name + '.js'); assert.doesNotMatch(source, /callService|attributes\.forecast/); });
+test('metadata root asset version and minimum', () => { const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url))); const hacs = JSON.parse(readFileSync(new URL('../hacs.json', import.meta.url))); assert.equal(pkg.version, '1.2.0'); assert.equal(hacs.homeassistant, '2026.6.0'); assert.equal(hacs.filename, pkg.name + '.js'); assert.doesNotMatch(source, /callService|attributes\.forecast/); });
 test('native form all optional defaults consistent and complete', () => { const e = setup({}), stub = e.Card.getStubConfig(), f = e.Card.getConfigForm(); assert.deepEqual(plain(f.schema.map((x) => x.name).sort()), Object.keys(stub).sort()); assert.equal(stub.entity, ''); for (const s of f.schema) { assert.notEqual(s.required, true); assert.ok(f.computeLabel(s)); if (s.default !== undefined) assert.equal(s.default, stub[s.name]); } assert.equal(f.schema[0].selector.entity.domain, 'weather'); });
 for (const config of [null, [], 1, { entity: 'sensor.foo' }, { entity: 'weather.x" onmouseover="bad' }, { title: 3 }, { palette: '__proto__' }, { forecast_type: 'constructor' }, { show_forecast: 'false' }, ...[0, 8, -1, 1.2, '3', Infinity].map((forecast_count) => ({ forecast_count }))]) test('reject bad config ' + JSON.stringify(config), () => { assert.throws(() => setup(config)); });
 for (const palette of ['aurora', 'ocean', 'sunset', 'lavender']) test('palette ' + palette, () => { assert.match(setup({ palette }).html(), new RegExp('data-palette="' + palette + '"')); });
@@ -86,4 +86,44 @@ test('minute-aligned timer advances date at midnight without hass or forecast qu
 test('DST jump uses the same resolved zone for calendar and clock', () => {
  const e = setup({ time_zone: 'Europe/Bucharest' }); e.card._now = () => new Date('2026-10-25T00:59:00Z'); e.card._updateClock(); assert.equal(e.card.shadowRoot.querySelector('.clock').textContent, '03:59');
  e.card._now = () => new Date('2026-10-25T01:00:00Z'); e.card._updateClock(); assert.equal(e.card.shadowRoot.querySelector('.clock').textContent, '03:00'); assert.match(e.card.shadowRoot.querySelector('.calendar').textContent, /25 October 2026/);
+});
+
+const outdoorConfig = { entity: 'weather.example', outdoor_temperature_entity: 'sensor.outdoor' };
+const outdoorState = (state = '6.4', unit = '°C', name = 'Outdoor thermometer') => ({ state, attributes: { unit_of_measurement: unit, friendly_name: name } });
+const outdoorSetup = (state = outdoorState()) => setup(outdoorConfig, { states: { 'weather.example': weather(), ...(state ? { 'sensor.outdoor': state } : {}) } });
+for (const value of [5, 'weather.example', 'binary_sensor.outdoor', 'sensor.x" onclick=bad']) test('invalid outdoor entity ' + value, () => assert.throws(() => setup({ outdoor_temperature_entity: value })));
+test('outdoor entity is optional, not auto-selected and exposed as a sensor selector', () => {
+ const e = setup({}), schema = e.Card.getConfigForm().schema.find(s => s.name === 'outdoor_temperature_entity');
+ assert.equal(e.Card.getStubConfig().outdoor_temperature_entity, ''); assert.equal(schema.selector.entity.domain, 'sensor'); assert.notEqual(schema.required, true); assert.doesNotMatch(e.html(), /class="outdoor"/);
+});
+for (const [state, unit, rendered] of [['0', '°C', '0 °C'], ['-2.7', '°C', '-2.7 °C'], ['43.5', '°F', '43.5 °F'], ['273.15', 'K', '273.15 K']]) test('measured sensor preserves units and finite readings ' + state + unit, () => {
+ const e = outdoorSetup(outdoorState(state, unit)); assert.ok(e.html().includes('class="outdoor-value">' + rendered)); assert.match(e.html(), /Outdoor sensor/); assert.match(e.html(), /Weather provider/); assert.match(e.html(), /21.7<small>°C/); assert.equal(e.conn.requests.length, 1); assert.equal(e.calls.length, 0);
+});
+test('invalid/missing sensor data never substitutes weather or stale measured values', () => {
+ const e = outdoorSetup(); for (const sensor of [undefined, outdoorState('unknown'), outdoorState('unavailable'), outdoorState('bad'), outdoorState(''), outdoorState(' '), outdoorState('Infinity'), outdoorState(null), outdoorState(false), { state: '6', attributes: {} }, outdoorState('6', '%'), outdoorState('6', '<img>')]) {
+  e.card.hass = { ...e.card.hass, states: { 'weather.example': weather(), ...(sensor ? { 'sensor.outdoor': sensor } : {}) } };
+  assert.match(e.html(), /class="outdoor-value unavailable">Unavailable/); assert.doesNotMatch(e.html(), /class="outdoor-value">6.4/); assert.match(e.html(), /21.7<small>°C/);
+ }
+});
+test('outdoor remains independent when weather is unavailable, omitted or forecast fails', async () => {
+ const e = outdoorSetup(); e.conn.requests[0].reject(new Error('permission')); await flush(); assert.match(e.html(), /class="outdoor-value">6.4 °C/);
+ e.card.hass = { ...e.card.hass, states: { ...e.card.hass.states, 'weather.example': weather({}, 'unavailable') } }; assert.match(e.html(), /class="outdoor-value">6.4 °C/); assert.doesNotMatch(e.html(), /class="temperature"/);
+ e.card.setConfig({ outdoor_temperature_entity: 'sensor.outdoor' }); assert.match(e.html(), /class="outdoor-value">6.4 °C/); assert.doesNotMatch(e.html(), /Choose a weather entity|class="current"|class="forecast"/);
+});
+test('sensor updates, unit-only changes and exact independent More Info, no extra queries', () => {
+ const e = outdoorSetup(); const writes = e.card.shadowRoot.writes;
+ e.card.hass = { ...e.card.hass, states: { ...e.card.hass.states, 'sensor.unrelated': { state: 'new' } } }; assert.equal(e.card.shadowRoot.writes, writes);
+ e.click('outdoor-info'); e.click('info'); assert.deepEqual(plain(e.events.map(event => event.detail)), [{ entityId: 'sensor.outdoor' }, { entityId: 'weather.example' }]);
+ e.card.hass.states['sensor.outdoor'].state = '-0.7'; e.card.hass = { ...e.card.hass }; assert.match(e.html(), /class="outdoor-value">-0.7 °C/);
+ e.card.hass.states['sensor.outdoor'].attributes.unit_of_measurement = '°F'; e.card.hass = { ...e.card.hass }; assert.match(e.html(), /class="outdoor-value">-0.7 °F/);
+ assert.equal(e.conn.requests.length, 1); assert.equal(e.calls.length, 0);
+});
+test('missing outdoor entity cannot open More Info; existing unavailable can', () => {
+ const e = outdoorSetup(null); e.click('outdoor-info'); assert.equal(e.events.length, 0); assert.match(e.html(), /class="outdoor"[^>]* disabled/);
+ e.card.hass = { ...e.card.hass, states: { ...e.card.hass.states, 'sensor.outdoor': outdoorState('unavailable') } }; e.click('outdoor-info'); assert.equal(e.events[0].detail.entityId, 'sensor.outdoor'); e.click('outdoor-info', true); assert.equal(e.events.length, 1);
+});
+test('outdoor hostile name is escaped and switching/removing sensor preserves weather subscription', () => {
+ const e = outdoorSetup(outdoorState('6', '°C', '"><img src=x onerror=alert(1)>')); assert.doesNotMatch(e.html(), /<img|aria-label="[^"]*" on/); assert.match(e.html(), /&lt;img/);
+ e.card.hass = { ...e.card.hass, states: { ...e.card.hass.states, 'sensor.second': outdoorState('-3') } }; e.card.setConfig({ ...outdoorConfig, outdoor_temperature_entity: 'sensor.second' }); e.click('outdoor-info'); assert.equal(e.events[0].detail.entityId, 'sensor.second'); assert.match(e.html(), /class="outdoor-value">-3 °C/);
+ e.card.setConfig({ entity: 'weather.example' }); assert.doesNotMatch(e.html(), /class="outdoor"|Weather provider/); assert.equal(e.conn.requests.length, 1); assert.equal(e.calls.length, 0);
 });

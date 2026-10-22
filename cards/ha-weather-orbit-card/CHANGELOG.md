@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.2.0
+
+- Add optional `outdoor_temperature_entity` native editor/YAML sensor selection.
+- Show measured outdoor temperature separately from the weather provider; retain own units/precision, zero/negative values and independent availability. No guessed entities, unit conversion, apparent-temperature calculation or provider substitution.
+- Exact sensor More Info via pointer/keyboard, with missing-entity protection and no device commands.
+- Unconfigured cards retain existing appearance; sensor-only mode is supported. Clock/date/forecasts remain compatible.
+- Verified with 75 Node tests and synthetic Chromium; native HA/editor/Companion remain unverified.
+
 ## 1.1.0
 
 - Show current time and full calendar date by default. No sensor required.

@@ -16,7 +16,7 @@ The suite retains these exact types. Use the linked component README for card op
 | [Speedtest Orbit Card](cards/ha-speedtest-orbit-card/README.md) | [1.0.2](https://github.com/Liionboy/ha-speedtest-orbit-card/releases/tag/v1.0.2) | `custom:ha-speedtest-orbit-card` |
 | [UniFi Orbit Card](cards/ha-unifi-orbit-card/README.md) | [0.2.0](https://github.com/Liionboy/ha-unifi-orbit-card/releases/tag/v0.2.0) | `custom:unifi-orbit-card`, `custom:unifi-command-center-card` |
 | [Vacuum Commander Card](cards/ha-vacuum-commander-card/README.md) | [1.3.0](https://github.com/Liionboy/ha-vacuum-commander-card/releases/tag/v1.3.0) | `custom:ha-vacuum-commander-card` |
-| [Weather Orbit Card](cards/ha-weather-orbit-card/README.md) | [1.1.0](https://github.com/Liionboy/ha-weather-orbit-card/releases/tag/v1.1.0) | `custom:ha-weather-orbit-card` |
+| [Weather Orbit Card](cards/ha-weather-orbit-card/README.md) | [1.2.0](https://github.com/Liionboy/ha-weather-orbit-card/releases/tag/v1.2.0) | `custom:ha-weather-orbit-card` |
 | [Welcome Orbit Card](cards/ha-welcome-orbit-card/README.md) | [1.0.0](https://github.com/Liionboy/ha-welcome-orbit-card/releases/tag/v1.0.0) | `custom:ha-welcome-orbit-card` |
 | [Action Button Card](cards/lovelace-action-button-card/README.md) | [0.1.0](https://github.com/Liionboy/lovelace-action-button-card/releases/tag/v0.1.0) | `custom:action-button-card` |
 | [AlecoAir Dehumidifier Card](cards/lovelace-alecoair-dehumidifier-card/README.md) | [1.0.2](https://github.com/Liionboy/lovelace-alecoair-dehumidifier-card/releases/tag/v1.0.2) | `custom:alecoair-dehumidifier-card` |
