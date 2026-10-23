@@ -1,5 +1,13 @@
 # Verification records
 
+## v1.3.0 — Compact Welcome navigation
+
+- Only Welcome Orbit updated to verified public v1.1.0 commit `a30e5cb31023f47df056738cd5dd9837ee9bac57`, source SHA256 `a6ffbfd4744f6a20a0deea0d4661db744ade078f865a05fb2f0d75907fff35a8`. Other pins, including Weather v1.2.0, unchanged.
+- Reproducible build/syntax, 32 suite +343 upstream Node regressions (375 total), 2 smoke suites and synthetic Chromium28/28 passed sequentially. Legacy/duplicate/picker/migration, Weather clock/sensor, Person and fan/light/scene mock checks retained.
+- Actual combined artifact exercised compact disclosure with Enter/Space and focus restoration, collapsed/expanded state, 5 links, persistence through HA/clock updates, exact weather More Info, settings and shortcut routes without cross-triggering/services.
+- Combined compact167–500px bounds checked; collapsed162px / expanded254px at500px with5 links and no clock. Light/dark screenshots inspected. Standalone additionally checked classic200–760px, compact0–8 shortcuts, read-only scenes, motion and midnight behavior with66 tests.
+- HA components/icons are stubbed. No native editor/Companion/live dashboard/resources/devices were modified or validated.
+
 ## v1.2.0 — Measured outdoor temperature
 
 - Only Weather Orbit updated, from verified public v1.2.0 commit `cbaee1068c911d2ea8694dd7fa90fcda164ebefc`, JS SHA256 `7d9c657b66cd40a025522dfc465e03750df0a19d146c456caf8029cbb2b51942`; all other pins unchanged.

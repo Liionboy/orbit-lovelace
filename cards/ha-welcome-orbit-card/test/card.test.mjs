@@ -76,7 +76,7 @@ test('optional shortcuts accept label/icon-only slots, one path and sparse slots
  assert.equal(shortcuts(sparse).length, 2);
  assert.match(shortcuts(sparse)[0], /data-index="1"/); assert.match(shortcuts(sparse)[1], /data-index="8"/);
  assert.match(sparse.shadowRoot.innerHTML, />Evening<|>Evening<\/span>/);
- assert.doesNotMatch(sparse.shadowRoot.innerHTML, /data-index="[2-7]"/);
+ assert.doesNotMatch(shortcuts(sparse).join(''), /data-index="[2-7]"/);
 });
 
 test('all eight shortcut slots retain stable configured indices', () => {
@@ -94,7 +94,7 @@ test('native config form exposes only optional fields including all nested selec
  const names = fields.map((field) => field.name);
  for (const name of ['title', 'name', 'show_name', 'show_date', 'show_time', 'weather_entity', 'time_zone', 'palette', 'animate', 'read_only']) assert.ok(names.includes(name), name);
  for (let i = 1; i <= 8; i++) for (const prefix of ['path_', 'scene_', 'name_', 'icon_']) assert.ok(names.includes(prefix + i), prefix + i);
- assert.equal(new Set(names).size, 42); assert.equal(fields.length, 42);
+ assert.equal(new Set(names).size, 45); assert.equal(fields.length, 45);
  for (const field of fields) { assert.equal(typeof form.computeLabel(field), 'string'); assert.ok(form.computeLabel(field).length); }
  assert.equal(fields.find((field) => field.name === 'weather_entity').selector.entity.domain, 'weather');
  assert.equal(fields.find((field) => field.name === 'scene_8').selector.entity.domain, 'scene');
@@ -342,4 +342,37 @@ test('registration, manifest and package version agree when supporting files exi
  const manifest = JSON.parse(readFileSync(manifestURL, 'utf8')), pkg = JSON.parse(readFileSync(packageURL, 'utf8'));
  assert.equal(manifest.filename, 'ha-welcome-orbit-card.js'); assert.equal(pkg.name, 'ha-welcome-orbit-card');
  assert.equal(manifest.filename, pkg.name + '.js'); assert.ok(source.includes("const VERSION = '" + pkg.version + "'"));
+});
+
+test('classic stays default; compact disclosure is optional, accessible and initially closed', async () => {
+ const e=setup({layout:'compact',path_1:'/room'});assert.equal(e.Card.getStubConfig().layout,'classic');assert.match(e.card.shadowRoot.innerHTML,/aria-expanded="false"/);assert.match(e.card.shadowRoot.innerHTML,/aria-controls="welcome-shortcuts"/);assert.match(e.card.shadowRoot.innerHTML,/<nav[^>]* hidden>/);
+ await e.card._activate('expand');assert.match(e.card.shadowRoot.innerHTML,/aria-expanded="true"/);assert.doesNotMatch(e.card.shadowRoot.innerHTML,/<nav[^>]* hidden>/);assert.deepEqual(e.calls,[]);assert.deepEqual(e.routes,[]);
+ await e.card._activate('expand');assert.match(e.card.shadowRoot.innerHTML,/aria-expanded="false"/);
+ e.card.setConfig({path_1:'/room'});assert.doesNotMatch(e.card.shadowRoot.innerHTML,/class="toolbar"|<nav[^>]* hidden>/);
+});
+test('expanded state survives hass/timer updates and same-mode config; explicit default changes reset it', async () => {
+ const e=setup({layout:'compact',path_8:'/room'});await e.card._activate('expand');e.card.connectedCallback();e.setNow('2026-10-22T00:00:00Z');e.tick();e.card.hass={...e.card.hass,user:{name:'New'}};assert.equal(e.card._expanded,true);
+ e.card.setConfig({layout:'compact',path_8:'/new'});assert.equal(e.card._expanded,true);e.card.setConfig({layout:'compact',path_8:'/new',shortcuts_expanded:true});assert.equal(e.card._expanded,true);e.card.setConfig({layout:'compact',path_8:'/new',shortcuts_expanded:false});assert.equal(e.card._expanded,false);e.card.disconnectedCallback();
+});
+test('zero configured shortcuts hides toggle and nav; compact date chip needs no weather entity', async () => {
+ const e=setup({layout:'compact'});assert.doesNotMatch(e.card.shadowRoot.innerHTML,/data-action="expand"|<nav|data-action="settings"/);assert.match(e.card.shadowRoot.innerHTML,/class="date-chip"/);assert.match(e.card.shadowRoot.innerHTML,/21 Oct/);await e.card._activate('expand');assert.equal(e.card._expanded,false);
+ e.card.setConfig({layout:'compact',show_date:false,show_time:false});assert.doesNotMatch(e.card.shadowRoot.innerHTML,/class="date-chip"|class="clock"/);
+});
+test('compact weather chip shows actual weather icon, short date and temperature with exact More Info', async () => {
+ const e=setup({layout:'compact',weather_entity:'weather.home'},{states:{'weather.home':state('rainy',{temperature:6.4,temperature_unit:'°C'})}});assert.match(e.card.shadowRoot.innerHTML,/mdi:weather-rainy/);assert.match(e.card.shadowRoot.innerHTML,/21 Oct/);assert.match(e.card.shadowRoot.innerHTML,/>6.4<small>°C/);assert.doesNotMatch(e.card.shadowRoot.innerHTML,/class="weather-copy"|class="orbit"/);await e.card._activate('weather');assert.equal(e.events[0].detail.entityId,'weather.home');assert.deepEqual(e.calls,[]);
+});
+test('missing configured weather cannot dispatch More Info in either layout', async () => {
+ for(const layout of ['classic','compact']){const e=setup({layout,weather_entity:'weather.missing'});await e.card._activate('weather');assert.deepEqual(e.events,[]);}
+});
+test('settings path is explicit, local, read-only-safe, uses exact HA navigation and does not toggle', async () => {
+ const e=setup({layout:'compact',settings_path:'/config/dashboard?tab=views#main',path_1:'/room',read_only:true});assert.match(e.card.shadowRoot.innerHTML,/class="toolbar-control settings"/);assert.equal(e.click('settings',undefined),1);await flush();assert.equal(e.routes[0][2],'/config/dashboard?tab=views#main');assert.equal(e.routingEvents.length,1);assert.deepEqual(plain(e.routingEvents[0].detail),{replace:false});assert.equal(e.card._expanded,false);assert.deepEqual(e.calls,[]);await e.card._activate('settings');assert.equal(e.routes.length,1);
+});
+for(const path of ['https://bad.invalid','//bad.invalid','/bad path','/bad\\path',3])test('unsafe settings rejected '+path,()=>assert.throws(()=>setup({layout:'compact',settings_path:path})));
+test('compact invalid options rejected; hidden settings and modified clicks do nothing', async () => {
+ for(const c of [{layout:'other'},{shortcuts_expanded:'false'},{settings_path:{}}])assert.throws(()=>setup(c));
+ const e=setup({layout:'compact',settings_path:'/config'});for(const m of [{ctrlKey:true},{metaKey:true},{shiftKey:true},{altKey:true},{button:1}])assert.equal(e.click('settings',undefined,m),0);await flush();assert.deepEqual(e.routes,[]);
+ e.card.setConfig({settings_path:'/config'});await e.card._activate('settings');assert.deepEqual(e.routes,[]);
+});
+test('compact retains scene/read-only guards and sparse indices after toggling', async () => {
+ const e=setup({layout:'compact',shortcuts_expanded:true,path_1:'/room',scene_8:'scene.evening',read_only:true},{states:{'scene.evening':state('unknown')}});assert.equal(shortcuts(e.card).length,2);await e.card._activate('scene',8);assert.deepEqual(e.calls,[]);await e.card._activate('expand');await e.card._activate('expand');await e.card._activate('navigate',1);assert.equal(e.routes[0][2],'/room');
 });

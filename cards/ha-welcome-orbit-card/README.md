@@ -49,10 +49,40 @@ icon_3: mdi:weather-night
 
 Replace sample entity IDs and routes with your own. Routes are never inferred from room names. Choose **either** `path_N` **or** `scene_N` per slot (N=1…8); label and icon alone do not display a shortcut. Visual editor groups are expandable and optional.
 
+## Compact header (v1.1.0)
+
+Choose **Header layout → compact** in the visual editor for a top-left quick-navigation disclosure, centered weather/date chip, optional top-right settings link and rounded icon/label shortcuts. Classic remains the default so existing dashboards do not change unexpectedly.
+
+```yaml
+type: custom:ha-welcome-orbit-card
+layout: compact
+show_time: false
+shortcuts_expanded: true
+weather_entity: weather.home
+settings_path: /config/dashboard
+path_1: /dashboard-home/overview
+name_1: Home
+icon_1: mdi:home
+path_2: /dashboard-home/lights
+name_2: Lights
+icon_2: mdi:lightbulb
+```
+
+Replace all sample routes/entities with your own. `settings_path` is empty by default: no destination is inferred, and the cog is hidden until configured. It is only a navigation link, not an action that edits settings. The current HA user permissions still apply.
+
+`shortcuts_expanded` defaults to false and sets the initial state; the arrow toggles the existing 0–8 configured shortcuts. It has an accessible expanded state and supports Enter/Space. State survives ordinary HA updates, clock refreshes and same-mode config changes while the card lives; it is not stored across a frontend reload. No configured shortcuts means no arrow or navigation row. Compact weather shows the condition icon, short date (when enabled) and current provider temperature; tap opens the selected weather entity, never navigation or scenes. Without weather, an optional date-only chip is shown.
+
+At narrow widths, toolbar/shortcuts wrap onto additional rows; they do not scroll horizontally. The compact mode omits the classic title/decorative orbit; its optional clock remains controlled by `show_time`. Scene shortcuts retain all read-only/availability/busy guards. Settings and navigation remain available in read-only mode.
+
+If installed through **Orbit Lovelace**, update the suite and fully reload the frontend instead of adding a second standalone resource.
+
 ## Options
 
 | Key | Default | Purpose |
 | --- | --- | --- |
+| `layout` | `classic` | `classic` or opt-in `compact` |
+| `shortcuts_expanded` | `false` | Initial compact shortcut panel state |
+| `settings_path` | none | Explicit local settings navigation path; compact only |
 | `title` | `Home overview` | Small header title |
 | `name` | current HA user | Optional greeting-name override |
 | `show_name` | `true` | Set false for anonymous/shared displays |

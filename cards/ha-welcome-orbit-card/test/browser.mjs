@@ -26,8 +26,8 @@ try {
  const card = page.locator('ha-welcome-orbit-card');
  const measure = async (label, budget) => {
   const m = await card.evaluate((el) => {
-   const outer = el.getBoundingClientRect(), nodes = [...el.shadowRoot.querySelectorAll('.copy,.weather,.temperature,.shortcut,.meta,h1')];
-   return { width: outer.width, height: outer.height, overflow: nodes.filter((n) => { const r = n.getBoundingClientRect(); return r.right > outer.right + 1 || r.left < outer.left - 1 || n.scrollWidth > n.clientWidth + 1; }).map((n) => n.className || n.tagName) };
+   const outer = el.getBoundingClientRect(), nodes = [...el.shadowRoot.querySelectorAll('.copy,.weather,.temperature,.shortcut,.meta,h1,.toolbar,.toolbar-center,.toolbar-control,.chip-date')];
+   return { width: outer.width, height: outer.height, overflow: nodes.filter((n) => n.getClientRects().length).filter((n) => { const r = n.getBoundingClientRect(); return r.right > outer.right + 1 || r.left < outer.left - 1 || n.scrollWidth > n.clientWidth + 1; }).map((n) => n.className || n.tagName) };
   });
   assert.deepEqual(m.overflow, [], label); if (budget) assert.ok(m.height <= budget, label + ' height ' + m.height);
   console.log(label, JSON.stringify(m));
@@ -94,6 +94,22 @@ try {
  const beforeDate = await card.locator('.date').innerText();
  await page.evaluate(() => { window.card._now = () => new Date('2026-10-21T21:01:00Z'); window.card._update(); });
  assert.notEqual(await card.locator('.date').innerText(), beforeDate);
+ // Opt-in compact header: actual disclosure, weather chip, settings and configured routes.
+ await page.setViewportSize({width:1000,height:1000});
+ await page.evaluate(()=>{document.body.classList.remove('dark');document.querySelector('#host').style.width='500px';window.compactConfig={layout:'compact',show_time:false,name:'Alex Example',weather_entity:'weather.home',settings_path:'/config/dashboard'};for(let i=1;i<=5;i++){compactConfig['path_'+i]='/dashboard-home/quick-'+i;compactConfig['name_'+i]=['Home','Lights','Network','Energy','Garden'][i-1];compactConfig['icon_'+i]=['mdi:home','mdi:lightbulb','mdi:shield','mdi:solar-panel','mdi:flower'][i-1];}card.hass.states['weather.home']={state:'rainy',attributes:{temperature:6.4,temperature_unit:'°C',friendly_name:'Example weather'}};card._now=()=>new Date('2026-10-23T05:28:00Z');card.setConfig(compactConfig);card.hass={...card.hass};});
+ assert.equal(await card.locator('.toggle').getAttribute('aria-expanded'),'false');assert.equal(await card.locator('.shortcuts').isVisible(),false);await measure('compact-collapsed-500',200);
+ const callsBefore=await page.evaluate(()=>calls.length),routesBefore=await page.evaluate(()=>routes.length),infosBefore=await page.evaluate(()=>infos.length);
+ await card.locator('.toggle').focus();await page.keyboard.press('Enter');assert.equal(await card.locator('.toggle').getAttribute('aria-expanded'),'true');assert.equal(await card.locator('.shortcuts').isVisible(),true);assert.equal(await card.locator('.toggle').evaluate(el=>el===el.getRootNode().activeElement),true);await measure('compact-expanded-500',280);
+ await page.keyboard.press('Space');assert.equal(await card.locator('.shortcuts').isVisible(),false);assert.equal(await page.evaluate(()=>calls.length),callsBefore);assert.equal(await page.evaluate(()=>routes.length),routesBefore);
+ await card.locator('.toggle').click();await page.evaluate(()=>{card.hass={...card.hass,states:{...card.hass.states,'sensor.unrelated':{state:'new'}}};card._now=()=>new Date('2026-10-23T05:29:00Z');card._update();});assert.equal(await card.locator('.shortcuts').isVisible(),true);
+ await card.locator('.weather').click();assert.deepEqual(await page.evaluate(n=>infos.slice(n),infosBefore),[{entityId:'weather.home'}]);assert.equal(await page.evaluate(()=>routes.length),routesBefore);
+ await card.locator('.settings').focus();await page.keyboard.press('Enter');assert.equal(new URL(page.url()).pathname,'/config/dashboard');assert.equal(await page.evaluate(()=>routes.length),routesBefore+1);assert.equal(await card.locator('.shortcuts').isVisible(),true);
+ await card.locator('.shortcut[data-index="2"]').click();assert.equal(new URL(page.url()).pathname,'/dashboard-home/quick-2');assert.equal(await page.evaluate(()=>routes.length),routesBefore+2);assert.equal(await page.evaluate(()=>calls.length),callsBefore);
+ for(const width of [440,320,280,243,200,167]){await page.evaluate(w=>document.querySelector('#host').style.width=w+'px',width);await measure('compact-expanded-'+width,width>=320?380:570);}
+ await page.evaluate(()=>{document.querySelector('#host').style.width='500px';document.body.classList.add('dark');});await measure('compact-dark-500',280);
+ await page.evaluate(()=>{const c={...compactConfig,shortcuts_expanded:true};for(let i=6;i<=8;i++){c['path_'+i]='/dashboard-home/room-'+i;c['name_'+i]=i===8?'VeryLongRoomNameWithoutSpaces':'Room '+i;}card.setConfig(c);document.querySelector('#host').style.width='200px';});assert.equal(await card.locator('.shortcut').count(),8);await measure('compact-eight-200',750);
+ await page.evaluate(()=>card.setConfig({layout:'compact',show_time:false}));assert.equal(await card.locator('.toggle,.settings,.shortcut,.weather').count(),0);assert.match(await card.locator('.chip-date').innerText(),/23 Oct/);await measure('compact-no-entities-200',260);
+ await page.evaluate(()=>{card.setConfig({...compactConfig,shortcuts_expanded:true,read_only:true,scene_8:'scene.evening'});});assert.equal(await card.locator('button[data-index="8"]').isDisabled(),true);await card.locator('.settings').click();assert.equal(new URL(page.url()).pathname,'/config/dashboard');assert.equal(await page.evaluate(()=>calls.length),callsBefore);
  assert.deepEqual(errors, []);
  console.log('PASS: widths 200–760, phone/dark, 0–8 shortcuts, real navigation/keyboard, More Info, mocked scene payload, read-only, motion opt-outs, weather updates, escaping and midnight refresh. HA icons/components stubbed; no live devices.');
 } finally { await browser.close(); }

@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.2.0",
+  "version": "1.3.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -249,13 +249,13 @@
       "id": "ha-welcome-orbit-card",
       "name": "Welcome Orbit Card",
       "category": "Orbit",
-      "version": "1.0.0",
-      "packageVersion": "1.0.0",
+      "version": "1.1.0",
+      "packageVersion": "1.1.0",
       "repository": "Liionboy/ha-welcome-orbit-card",
-      "upstreamCommit": "228ab241a48cf27d5efe8473a550ed33f62755ca",
+      "upstreamCommit": "a30e5cb31023f47df056738cd5dd9837ee9bac57",
       "upstreamAsset": "ha-welcome-orbit-card.js",
       "source": "cards/ha-welcome-orbit-card/ha-welcome-orbit-card.js",
-      "sha256": "7a3ead78d7e1176af2eaa7693d3ca55571b47a5d5455c06fd18ee450b5bdd14b",
+      "sha256": "a6ffbfd4744f6a20a0deea0d4661db744ade078f865a05fb2f0d75907fff35a8",
       "types": [
         "ha-welcome-orbit-card"
       ],
