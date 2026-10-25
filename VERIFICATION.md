@@ -1,5 +1,12 @@
 # Verification records
 
+## v1.9.1 — Person compact paired readings
+
+- Only Person pin changed to verified public1.1.1/6f2b43b143bdeeac309b7354549690c8b49e5aca; imported source/package/README/tests exactly match tag.26 other pins and Orbit Themes1.0.0/YAML/catalog/bridge contracts unchanged.
+- Syntax/deterministic build,470 Node tests (52 suite/theme+418 upstream),2 smoke, standard28-card browser and complete Person regression from final bundle passed sequentially. Person has74 Node tests; browser tests verify1–6 metrics across440/280/243/220/200/167px with real column/row geometry, odd/sparse counts, absent primary fields, full single-line decimal/unit values and visible wrapped long text. Exact native More Info events preserved, zero service calls/queries/external requests.
+- Screenshot-style battery70%,distance0.0055km,altitude376.0m,activityStopped occupies two rows/126px total at243px; prior148px. Full compact six metrics148px at243px; ≤200px safe single-column fallback unchanged. Default labeled tiles/charging/low battery/keyboard/privacy retained. Standalone and final-bundle light/dark/narrow screenshots inspected.
+- Synthetic HA components/icons/data only; native HA/Companion unverified. No live HA/dashboard/resource/device changed.
+
 ## v1.9.0 — Complete Orbit theme pack / opt-in bridge
 
 - Adds Orbit Themes1.0.0: Graphite/Fjord/Dune, six native light/dark variants in one optional YAML. No pinned component source/version/commit/hash changed. Build-only CSS bridge contracts are explicit; no-theme fallbacks, later palette/state precedence retained. Metadata locks theme and bundle digests.

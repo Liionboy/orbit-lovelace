@@ -19,6 +19,10 @@ The resource path is **/hacsfiles/orbit-lovelace/orbit-lovelace.js**. If you alr
 
 For manual installation, copy only `dist/orbit-lovelace.js` to `config/www/orbit-lovelace.js` and register `/local/orbit-lovelace.js` as a JavaScript module. Do not register files under `cards/` as additional resources.
 
+## Person compact paired readings (v1.9.1)
+
+Person Orbit1.1.1 places all compact readings two per row, including extra sensors. Existing `metrics_layout: compact` configurations update automatically; labeled `tiles` remain unchanged. Very narrow cards (container ≤200px) retain the single-column fallback for readability. Update the suite in HACS and fully reload; do not add a standalone resource.
+
 ## Complete Orbit themes (v1.9.0)
 
 **Graphite · Fjord · Dune**, each with native light/dark modes: coordinated HA navigation, canvas, forms/dialog surfaces and optional Orbit accent/surface styling. No card-mod or external assets. **HACS Dashboard updates install the card JS, not the theme YAML**: download the companion file and follow [THEMES.md](THEMES.md) to merge it into your existing theme setup safely. Existing styles remain when no Orbit theme is selected; card types/YAML and semantic state colors are retained. The preview dashboard layout is illustrative, not installed by a theme.

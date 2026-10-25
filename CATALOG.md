@@ -10,7 +10,7 @@ The suite retains these exact types. Use the linked component README for card op
 | [Battery Orbit](cards/ha-battery-orbit-card/README.md) | [1.0.0](https://github.com/Liionboy/ha-battery-orbit-card/releases/tag/v1.0.0) | `custom:ha-battery-orbit-card` |
 | [Fan Orbit Card](cards/ha-fan-orbit-card/README.md) | [1.0.0](https://github.com/Liionboy/ha-fan-orbit-card/releases/tag/v1.0.0) | `custom:ha-fan-orbit-card` |
 | [NAS Orbit Card](cards/ha-nas-orbit-card/README.md) | [1.0.1](https://github.com/Liionboy/ha-nas-orbit-card/releases/tag/v1.0.1) | `custom:ha-nas-orbit-card` |
-| [Person Orbit Card](cards/ha-person-orbit-card/README.md) | [1.1.0](https://github.com/Liionboy/ha-person-orbit-card/releases/tag/v1.1.0) | `custom:ha-person-orbit-card` |
+| [Person Orbit Card](cards/ha-person-orbit-card/README.md) | [1.1.1](https://github.com/Liionboy/ha-person-orbit-card/releases/tag/v1.1.1) | `custom:ha-person-orbit-card` |
 | [Room Orbit Card](cards/ha-room-orbit-card/README.md) | [1.6.0](https://github.com/Liionboy/ha-room-orbit-card/releases/tag/v1.6.0) | `custom:ha-room-orbit-card` |
 | [Scenes Orbit Card](cards/ha-scenes-orbit-card/README.md) | [1.0.0](https://github.com/Liionboy/ha-scenes-orbit-card/releases/tag/v1.0.0) | `custom:ha-scenes-orbit-card` |
 | [Sensor Graph Orbit Card](cards/ha-sensor-graph-orbit-card/README.md) | [1.0.0](https://github.com/Liionboy/ha-sensor-graph-orbit-card/releases/tag/v1.0.0) | `custom:ha-sensor-graph-orbit-card` |

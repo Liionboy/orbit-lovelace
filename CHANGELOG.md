@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.9.1
+
+- Updates Person Orbit to1.1.1: compact extra readings share the same equal-width two-column grid as battery/travel, rather than each spanning a full row. Empty slots reserve no space; configured order preserved. Existing narrow (container ≤200px) single-column fallback and default labeled tiles are unchanged.
+- Geometry tested for1–6 readings at440/280/243/220/200/167px, decimal units/text/long values, missing primary fields, odd counts and exact More Info. Four screenshot-style readings measure126px at243px, down from148px. No YAML/entity/service changes. Orbit Themes1.0.0 unchanged.
+
 ## 1.9.0
 
 - Adds Orbit Themes v1.0.0: Graphite, Fjord and Dune, each with native light/dark modes, one optional companion YAML and safe installation/rollback instructions. HA navigation/canvas/forms/dialog/card surfaces use coordinated legacy/modern frontend tokens.
