@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile, mkdir } from 'node:fs/promises';
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
-const source = await readFile(new URL('../ha-weather-orbit-card.js', import.meta.url), 'utf8');
+const source = await readFile(process.env.CARD_RESOURCE || new URL('../ha-weather-orbit-card.js', import.meta.url), 'utf8');
 const out = process.env.SCREENSHOT_DIR;
 if (out) await mkdir(out, { recursive: true });
 const browser = await chromium.launch({ headless: true, ...(process.env.CHROMIUM_EXECUTABLE ? { executablePath: process.env.CHROMIUM_EXECUTABLE } : {}) });
@@ -39,7 +39,7 @@ try {
  await page.evaluate(() => { card.hass = { ...card.hass, locale: { language: 'en-GB', time_format: '24' } }; card.setConfig(config); });
  const metrics = [];
  async function measure(label, budget) {
-  const m = await card.evaluate((el) => { const outer = el.getBoundingClientRect(), nodes = [...el.shadowRoot.querySelectorAll('.shell,.current,.temperature,.reading,.entry,.high,.low,.datetime,.clock,.calendar,.outdoor,.outdoor-value,time')]; return { width: outer.width, height: outer.height, overflow: nodes.filter((n) => { const r = n.getBoundingClientRect(); return r.right > outer.right + 1 || r.left < outer.left - 1 || n.scrollWidth > n.clientWidth + 1; }).map((n) => n.className || n.tagName), temperatureHeight: el.shadowRoot.querySelector('.temperature')?.getBoundingClientRect().height }; });
+  const m = await card.evaluate((el) => { const outer = el.getBoundingClientRect(), nodes = [...el.shadowRoot.querySelectorAll('.shell,.current,.temperature,.reading,.entry,.high,.low,.datetime,.clock,.calendar,.outdoor,.outdoor-value,time,.bar-day,.range-line,.range-track,.range-low,.range-high,.range-value')]; return { width: outer.width, height: outer.height, overflow: nodes.filter((n) => { const r = n.getBoundingClientRect(); return r.right > outer.right + 1 || r.left < outer.left - 1 || n.scrollWidth > n.clientWidth + 1; }).map((n) => n.className || n.tagName), temperatureHeight: el.shadowRoot.querySelector('.temperature')?.getBoundingClientRect().height }; });
   assert.deepEqual(m.overflow, [], label); assert.ok(m.height <= budget, label + ' height ' + m.height); assert.ok(!m.temperatureHeight || m.temperatureHeight < 40, 'single line reading'); metrics.push({ label, ...m }); console.log(label, JSON.stringify(m)); if (out) await card.screenshot({ path: out + '/' + label + '.png' });
  }
  for (const width of [167, 200, 243, 280, 320, 440, 760]) { await page.evaluate((w) => document.querySelector('#host').style.width = w + 'px', width); await measure('light-' + width, width <= 243 ? 560 : 410); }
@@ -75,6 +75,33 @@ try {
  await page.evaluate(() => { card.hass.states['sensor.outdoor'].state='unavailable';card.hass={...card.hass}; }); assert.equal(await card.locator('.outdoor-value').innerText(),'Unavailable');
  await page.evaluate(() => {delete card.hass.states['sensor.outdoor'];card.hass={...card.hass};}); assert.equal(await card.locator('.outdoor').isDisabled(),true);
  await page.evaluate(() => {card.hass.states['sensor.outdoor']={state:'0',attributes:{unit_of_measurement:'°C',friendly_name:'"><img src=x onerror=alert(1)>'}};card.hass={...card.hass};card.setConfig({outdoor_temperature_entity:'sensor.outdoor'});document.querySelector('#host').style.width='243px';});assert.equal(await card.locator('.outdoor-value').innerText(),'0 °C');assert.equal(await card.locator('img,script,.current,.forecast').count(),0);await measure('sensor-only-243',300);
+
+ // Daily bars from standalone or CARD_RESOURCE combined suite; no live HA.
+ await page.evaluate(()=>{
+  document.body.classList.remove('dark');document.querySelector('#host').style.width='440px';
+  card.hass={...card.hass,locale:{language:'en-GB',time_format:'24'},states:{...card.hass.states,'weather.example':{state:'cloudy',attributes:{temperature:6,temperature_unit:'°C',humidity:82,supported_features:7}}}};
+  window.barForecasts=[6,8,3,5,3].map((low,i)=>({datetime:'2026-10-'+(25+i)+'T00:00:00Z',templow:low,temperature:[14,14,16,16,18][i],condition:i<2?'rainy':'partlycloudy'}));
+  window.forecasts=barForecasts;
+  window.barConfig={...config,forecast_type:'daily',forecast_layout:'bars',forecast_count:5};card.setConfig(barConfig);requests.at(-1).cb({type:'daily',forecast:barForecasts});
+ });
+ assert.equal(await card.locator('.bar-entry').count(),5);assert.equal(await card.locator('.range-low .range-value').first().innerText(),'6 °C');assert.equal(await card.locator('.range-high .range-value').first().innerText(),'14 °C');
+ const barQueries=await page.evaluate(()=>requests.length);
+ const barGeometry=await card.locator('.range-track').evaluateAll(els=>els.map(el=>{const b=el.getBoundingClientRect(),f=el.querySelector('.range-fill').getBoundingClientRect();return {width:b.width,relativeLeft:(f.left-b.left)/b.width,relativeWidth:f.width/b.width};}));
+ assert.ok(barGeometry.every(m=>Math.abs(m.width-barGeometry[0].width)<.1));assert.ok(Math.abs(barGeometry[0].relativeLeft-3/15)<.01);assert.ok(Math.abs(barGeometry[0].relativeWidth-8/15)<.01);
+ for(const w of [167,200,243,280,320,440,760]){await page.evaluate(w=>document.querySelector('#host').style.width=w+'px',w);await measure('bars-light-'+w,w<=300?700:550);const values=await card.locator('.range-value').evaluateAll(els=>els.map(e=>({height:e.getBoundingClientRect().height,overflow:e.scrollWidth>e.clientWidth+1})));assert.ok(values.every(v=>v.height<=17&&!v.overflow));}
+ await page.evaluate(()=>{document.body.classList.add('dark');document.querySelector('#host').style.width='440px';});await measure('bars-dark-440',550);
+ const infosBeforeBar=await page.evaluate(()=>infos.length);await card.locator('.range-track').first().click();assert.equal(await page.evaluate(()=>infos.length),infosBeforeBar);
+ await page.evaluate(()=>{card.setConfig({...barConfig,forecast_layout:'tiles'});});assert.equal(await card.locator('.bar-entry').count(),0);assert.equal(await card.locator('.entry').count(),5);await page.evaluate(()=>card.setConfig(barConfig));assert.equal(await page.evaluate(()=>requests.length),barQueries);
+ await page.evaluate(()=>{window.barButton=card.shadowRoot.querySelector('.current');card.hass={...card.hass,states:{...card.hass.states,'sensor.other':{state:'new'}}};});assert.equal(await page.evaluate(()=>barButton===card.shadowRoot.querySelector('.current')),true);
+ await page.clock.fastForward(60000);assert.equal(await page.evaluate(()=>barButton===card.shadowRoot.querySelector('.current')),true);assert.equal(await page.evaluate(()=>requests.length),barQueries);
+ await card.locator('.current').focus();await page.keyboard.press('Enter');assert.equal(await page.evaluate(()=>infos.at(-1).entityId),'weather.example');
+ await page.evaluate(()=>{requests.at(-1).cb({type:'daily',forecast:[{...barForecasts[0],templow:-2.7,temperature:0},{...barForecasts[1],temperature:5,templow:undefined},{...barForecasts[2],templow:0,temperature:0},{...barForecasts[3],templow:8,temperature:5}]});card.hass.states['weather.example'].attributes.temperature_unit='°F';card.hass={...card.hass,locale:{language:'ro',time_format:'24'}};});
+ assert.equal(await card.locator('.range-low .range-value').first().innerText(),'-2,7 °F');assert.equal(await card.locator('.range-high .range-value').first().innerText(),'0 °F');assert.equal(await card.locator('.range-fill').count(),2);assert.equal(await card.locator('.range-point').count(),1);assert.equal(await card.locator('.range-low .range-value').nth(1).innerText(),'—');assert.match(await card.locator('.range-line').nth(3).getAttribute('aria-label'),/range unavailable/);
+ await page.evaluate(()=>{requests.at(-1).cb({type:'daily',forecast:Array.from({length:7},(_,i)=>({...barForecasts[i%5],datetime:'2026-10-'+(25+i)+'T00:00:00Z'}))});card.setConfig({...barConfig,forecast_count:7});});assert.equal(await card.locator('.bar-entry').count(),7);await measure('bars-seven-440',700);
+ await page.evaluate(()=>{card.setConfig({...barConfig,forecast_type:'hourly'});});await card.locator('.entry').first().waitFor();assert.equal(await card.locator('.bar-entry').count(),0);await page.evaluate(()=>{card.setConfig(barConfig);});await card.locator('.bar-entry').first().waitFor();
+ await page.evaluate(()=>{connection.connected=false;for(const fn of listeners.disconnected)fn();});assert.equal(await card.locator('.bar-entry').count(),0);assert.match(await card.locator('.shell').innerText(),/Forecast offline/);
+ await page.evaluate(()=>{connection.connected=true;for(const fn of listeners.ready)fn();});await card.locator('.bar-entry').first().waitFor();
+ console.log('Daily bars min/max, shared geometry, layout switching/no extra query, missing/negative/equal/reversed ranges, locale, offline and narrow themes: PASS');
  await page.evaluate(() => card.setConfig({ ...config, show_time: false, show_date: false })); assert.equal(await card.locator('.datetime').count(), 0); assert.equal(await page.evaluate(() => card._clockTimer), undefined);
  await page.evaluate(() => card.setConfig({ ...config, show_time: false })); assert.equal(await card.locator('.clock').count(), 0); assert.equal(await card.locator('.calendar').count(), 1);
  await page.evaluate(() => { card.remove(); }); assert.equal(await page.evaluate(() => card._clockTimer), undefined);

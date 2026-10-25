@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.6.0
+
+- Update Weather Orbit to v1.3.0: selectable daily forecast `forecast_layout: tiles|bars` (tiles remains default). Horizontal bars show explicit provider minimum/maximum, weekday and condition icon on a common displayed-day scale.
+- Missing/invalid/reversed ranges remain neutral without inferred temperatures; equal endpoints are points. Responsive narrow full-width bars, locale/unit/time zone support and no additional forecast requests when switching layout.
+- Existing clock/date, measured outdoor sensor and all other pins unchanged (including Room1.6.0). HACS suite update → full reload → Daily forecast layout bars.
+
 ## 1.5.0
 
 - Update Room Orbit to v1.6.0: any valid entity domain in all four shortcut selectors/YAML fields, including all binary_sensor types and custom integration domains. The number of slots is unchanged.

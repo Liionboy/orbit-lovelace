@@ -1,5 +1,14 @@
 # Verification records
 
+## v1.6.0 — Weather daily min–max bars
+
+- Only Weather updated to verified public v1.3.0 commit `5773bf0cb5a34959e36633fe58cffeafdcb71d27`, source SHA256 `73a51f2c14983c5008c92577aeb74801978576b1c4cf1eb4bcb840cd958f9afb`. Selected imports match the tag; other pins including Room1.6.0 unchanged.
+- Reproducible build/syntax, 32 suite +374 upstream Node tests (406 total),2 smoke suites and full synthetic Chromium28/28 passed sequentially.
+- Complete Weather browser regression ran against **dist/orbit-lovelace.js** through CARD_RESOURCE: new layout/default switching, exact shared min–max geometry/equal track widths, values/units/locale, zero/negative/decimal/missing/reversed/equal ranges, count limits, minute/unrelated-state stability/no extra requests, independent More Info, offline/reconnect, existing sensor/clock/lifecycle.
+- Bar fixture167–760px no overflow; five days with clock/date/current451px high at440px,584px at167px. Full min/max labels fit; narrow bars get a separate full-width line. Light/dark/narrow combined-artifact screenshots inspected.
+- Standalone Weather92/92 Node tests and synthetic browser passed; CI main/tag, public release/tag/raw/asset/digest/latest verified before importing. Browser fixture initially let its queued default response override manual bar data; corrected fixture delivery order, not production logic.
+- HA components/icons are stubs; native editor/Companion/live device checks remain unverified. No HA/dashboard/resource/device changed.
+
 ## v1.5.0 — Any Room shortcut entity
 
 - Only Room updated to verified public v1.6.0 commit `74588ce9eebe3c4edafa5f464f00929ae1fef4a2`, source SHA256 `2395fdd1da15f6df28c2c9e4138bde6e905811881e846390eab255e32690f0a5`; all other pins unchanged. Selected imports match the public tag.

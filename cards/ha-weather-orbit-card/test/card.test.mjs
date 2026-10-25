@@ -7,6 +7,52 @@ const plain = (v) => JSON.parse(JSON.stringify(v));
 const flush = () => new Promise((r) => setImmediate(r));
 const weather = (attrs = {}, state = 'sunny') => ({ state, attributes: { friendly_name: 'Example weather', supported_features: 7, temperature: 21.7, temperature_unit: '°C', humidity: 57, wind_speed: 12.3, wind_speed_unit: 'km/h', precipitation_unit: 'mm', ...attrs } });
 const forecasts = (count = 8) => Array.from({ length: count }, (_, i) => ({ datetime: '2026-10-' + (22 + i) + 'T00:00:00Z', temperature: 20 + i, templow: i, condition: 'sunny', precipitation: 0 }));
+
+const barsConfig = {entity:'weather.example',forecast_layout:'bars'};
+function barsSetup(data=forecasts()) {const e=setup(barsConfig);e.conn.requests[0].cb({type:'daily',forecast:data});return e;}
+for(const forecast_layout of ['unknown','__proto__','constructor',false,0,{},[]])test('reject invalid forecast layout '+JSON.stringify(forecast_layout),()=>assert.throws(()=>setup({forecast_layout})));
+test('daily layout defaults to existing tiles and is selectable without changing subscription',()=>{
+ const e=setup();const form=e.Card.getConfigForm();assert.equal(e.Card.getStubConfig().forecast_layout,'tiles');assert.deepEqual(plain(form.schema.find(s=>s.name==='forecast_layout').selector.select.options),['tiles','bars']);
+ e.conn.requests[0].cb({type:'daily',forecast:forecasts()});assert.equal((e.html().match(/class="entry"/g)||[]).length,3);
+ e.card.setConfig(barsConfig);assert.match(e.html(),/class="entries bars"/);assert.equal((e.html().match(/class="entry bar-entry"/g)||[]).length,3);assert.equal(e.conn.requests.length,1);
+ e.card.setConfig({entity:'weather.example'});assert.doesNotMatch(e.html(),/class="entries bars"/);assert.equal(e.conn.requests.length,1);
+});
+test('bars show explicit min and max with zero, negative and decimal values',()=>{
+ const e=barsSetup([{datetime:'2026-10-25T00:00:00Z',templow:-2.7,temperature:0,condition:'rainy',precipitation:0}]);
+ for(const t of ['Minimum -2.7 °C; maximum 0 °C','Min</span>','Max</span>','-2.7 °C','0 °C'])assert.ok(e.html().includes(t),t);assert.match(e.html(),/style="left:0%;width:100%"/);assert.equal(e.calls.length,0);
+});
+test('shared scale accurately positions and sizes displayed intervals',()=>{
+ const {card}=setup();const r=plain(card._ranges([{templow:0,temperature:10},{templow:5,temperature:20},{templow:10,temperature:10}]));assert.deepEqual(r,[{left:0,width:50,point:false},{left:25,width:75,point:false},{left:50,width:0,point:true}]);
+});
+test('missing, invalid or reversed endpoints do not invent a range',()=>{
+ const e=barsSetup();for(const f of [{temperature:5},{templow:0},{temperature:null,templow:0},{temperature:5,templow:''},{temperature:5,templow:NaN},{temperature:5,templow:Infinity},{temperature:5,templow:false},{temperature:5,templow:8}]){
+  e.conn.requests[0].cb({type:'daily',forecast:[{datetime:'2026-10-25T00:00:00Z',...f}]});assert.match(e.html(),/range unavailable/);assert.doesNotMatch(e.html(),/class="range-fill/);assert.doesNotMatch(e.html(),/left:NaN|width:NaN|width:Infinity/);
+ }
+ e.conn.requests[0].cb({type:'daily',forecast:[{datetime:'2026-10-25T00:00:00Z',temperature:5}]});assert.match(e.html(),/Minimum unavailable; maximum 5 °C/);assert.match(e.html(),/class="range-value">—/);
+});
+test('equal intervals are points and extreme spans cannot create invalid CSS',()=>{
+ const {card}=setup();assert.deepEqual(plain(card._ranges([{templow:0,temperature:0}])),[{left:50,width:0,point:true}]);assert.deepEqual(plain(card._ranges([{templow:-1e308,temperature:1e308}])),[null]);
+ const e=barsSetup([{datetime:'2026-10-25T00:00:00Z',templow:0,temperature:0}]);assert.match(e.html(),/class="range-fill range-point"/);
+});
+test('bar scale uses only displayed complete ranges and respects count limits',()=>{
+ const e=barsSetup([{datetime:'2026-10-25T00:00:00Z',templow:0,temperature:10},{datetime:'2026-10-26T00:00:00Z',templow:5,temperature:20},{datetime:'2026-10-27T00:00:00Z',temperature:200}]);assert.match(e.html(),/left:0%;width:50%/);
+ e.card.setConfig({...barsConfig,forecast_count:1});assert.match(e.html(),/left:0%;width:100%/);assert.equal((e.html().match(/class="entry bar-entry"/g)||[]).length,1);assert.equal(e.conn.requests.length,1);
+ e.conn.requests[0].cb({type:'daily',forecast:forecasts()});e.card.setConfig({...barsConfig,forecast_count:7});assert.equal((e.html().match(/class="entry bar-entry"/g)||[]).length,7);
+});
+test('bar labels retain provider units/localized values, no assumed units',()=>{
+ const e=barsSetup([{datetime:'2026-10-25T00:00:00Z',templow:-2.7,temperature:6.4}]);e.card.hass={...e.card.hass,locale:{language:'ro'},states:{'weather.example':weather({temperature_unit:'°F'})}};assert.match(e.html(),/-2,7 °F/);assert.match(e.html(),/6,4 °F/);
+ delete e.card.hass.states['weather.example'].attributes.temperature_unit;e.card.hass={...e.card.hass};assert.doesNotMatch(e.html(),/°F|°C/);assert.match(e.html(),/>6,4</);
+});
+test('hourly and twice-daily remain tiles even with stored bars preference',()=>{
+ for(const forecast_type of ['hourly','twice_daily']){const e=setup({...barsConfig,forecast_type});e.conn.requests[0].cb({type:forecast_type,forecast:forecasts()});assert.doesNotMatch(e.html(),/class="entries bars"|class="entry bar-entry"/);assert.match(e.html(),/class="entry"/);}
+});
+test('bars preserve existing lifecycle, offline/empty/error and current/weather separation',async()=>{
+ const e=barsSetup();e.conn.requests[0].done();await flush();e.conn.emit('disconnected');assert.doesNotMatch(e.html(),/class="entry bar-entry"/);assert.match(e.html(),/Forecast offline/);e.conn.emit('ready');assert.equal(e.conn.requests.length,2);e.conn.requests[1].cb({type:'daily',forecast:[]});assert.match(e.html(),/No forecast data/);assert.doesNotMatch(e.html(),/class="entry bar-entry"/);e.card.setConfig({...barsConfig,show_forecast:false});assert.doesNotMatch(e.html(),/<section class="forecast"/);assert.equal(e.calls.length,0);
+});
+test('bar inputs escape hostile units/conditions and numeric CSS never uses strings',()=>{
+ const e=barsSetup([{datetime:'2026-10-25T00:00:00Z',templow:'0',temperature:'10',condition:'"><img src=x onerror=1>'}]);e.card.hass.states['weather.example'].attributes.temperature_unit='"><svg onload=1>';e.card.hass={...e.card.hass};assert.doesNotMatch(e.html(),/<img|<svg|<script|style="[^"]*onerror/);assert.match(e.html(),/&lt;svg/);assert.match(e.html(),/style="left:0%;width:100%"/);
+});
+
 function connection() {
  const listeners = new Map(), requests = [];
  return { connected: true, requests, listeners,
@@ -29,7 +75,7 @@ function setup(config = { entity: 'weather.example' }, overrides = {}) {
  return { Card, card, conn, calls, context, events, timers, html: () => card.shadowRoot.innerHTML, click(action, disabled = false) { card.shadowRoot.listeners.click({ composedPath: () => [{ dataset: { action }, disabled }] }); } };
 }
 test('empty useful card, no guessed entities or services', () => { const e = setup({}); assert.match(e.html(), /Choose a weather entity/); assert.equal(e.conn.requests.length, 0); e.click('info'); e.click('retry'); assert.deepEqual(e.calls, []); assert.deepEqual(e.events, []); });
-test('metadata root asset version and minimum', () => { const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url))); const hacs = JSON.parse(readFileSync(new URL('../hacs.json', import.meta.url))); assert.equal(pkg.version, '1.2.0'); assert.equal(hacs.homeassistant, '2026.6.0'); assert.equal(hacs.filename, pkg.name + '.js'); assert.doesNotMatch(source, /callService|attributes\.forecast/); });
+test('metadata root asset version and minimum', () => { const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url))); const hacs = JSON.parse(readFileSync(new URL('../hacs.json', import.meta.url))); assert.equal(pkg.version, '1.3.0'); assert.equal(hacs.homeassistant, '2026.6.0'); assert.equal(hacs.filename, pkg.name + '.js'); assert.doesNotMatch(source, /callService|attributes\.forecast/); });
 test('native form all optional defaults consistent and complete', () => { const e = setup({}), stub = e.Card.getStubConfig(), f = e.Card.getConfigForm(); assert.deepEqual(plain(f.schema.map((x) => x.name).sort()), Object.keys(stub).sort()); assert.equal(stub.entity, ''); for (const s of f.schema) { assert.notEqual(s.required, true); assert.ok(f.computeLabel(s)); if (s.default !== undefined) assert.equal(s.default, stub[s.name]); } assert.equal(f.schema[0].selector.entity.domain, 'weather'); });
 for (const config of [null, [], 1, { entity: 'sensor.foo' }, { entity: 'weather.x" onmouseover="bad' }, { title: 3 }, { palette: '__proto__' }, { forecast_type: 'constructor' }, { show_forecast: 'false' }, ...[0, 8, -1, 1.2, '3', Infinity].map((forecast_count) => ({ forecast_count }))]) test('reject bad config ' + JSON.stringify(config), () => { assert.throws(() => setup(config)); });
 for (const palette of ['aurora', 'ocean', 'sunset', 'lavender']) test('palette ' + palette, () => { assert.match(setup({ palette }).html(), new RegExp('data-palette="' + palette + '"')); });

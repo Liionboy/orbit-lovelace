@@ -21,9 +21,29 @@ Add **Weather Orbit Card** in the picker, or use:
     time_zone: ""
     show_forecast: true
     forecast_type: daily
+    forecast_layout: tiles
     forecast_count: 3
 
-All ten fields are optional and exposed by the native visual editor. Defaults match this example except **entity and outdoor_temperature_entity default to empty**. No entities are automatically selected. The empty card explains how to configure it. Entity must be a weather entity. forecast_type accepts daily, hourly, twice_daily; forecast_count is an integer 1–7 (display limit, not a server-side query limit). Choose a type supported by the provider. Set show_forecast: false for current-only mode. Delete optional values to restore defaults.
+All configuration fields are optional and exposed by the native visual editor. Defaults match this example except **entity and outdoor_temperature_entity default to empty**. No entities are automatically selected. The empty card explains how to configure it. Entity must be a weather entity. forecast_type accepts daily, hourly, twice_daily; forecast_count is an integer 1–7 (display limit, not a server-side query limit). Choose a type supported by the provider. Set show_forecast: false for current-only mode. Delete optional values to restore defaults.
+
+## Daily forecast layout (v1.3.0)
+
+In the visual editor choose **Daily forecast layout**:
+
+- **tiles** — existing forecast cards (default, preserving older configurations).
+- **bars** — one row per day with weekday, condition icon, explicit Min/Max values and a horizontal temperature interval. On narrow cards the row stacks; below220px the bar takes its own full-width line.
+
+```yaml
+forecast_type: daily
+forecast_layout: bars
+forecast_count: 5
+```
+
+The reported daily minimum is `templow` and maximum is `temperature`, in the weather provider’s temperature unit, independent of the separate outdoor sensor. Bars share a common scale from the lowest minimum to highest maximum among **complete, valid displayed daily ranges**; the track widths are identical across rows. Changing the number of displayed days can change this scale. Equal minimum/maximum is a point marker. Colors are decorative; read the actual numeric labels for temperatures.
+
+Missing/nonnumeric minimum or maximum shows **—** and an empty neutral track; it is never estimated from another day/current weather/outdoor sensor. Reversed ranges also leave the track empty without reordering the reported labels. Empty/offline/unsupported forecast states keep their existing messages. Dates and values follow HA language/time zone; the full forecast date is available in the weekday tooltip. Hourly and twice-daily forecasts keep tiles even if bars is selected.
+
+Changing only the layout or count reuses the existing forecast subscription; no extra weather request or service is added. Clock/date, measured outdoor sensor and native More Info remain unchanged. If using **Orbit Lovelace**, update that suite and fully reload instead of adding standalone Weather alongside it.
 
 ## Measured outdoor temperature (v1.2.0)
 

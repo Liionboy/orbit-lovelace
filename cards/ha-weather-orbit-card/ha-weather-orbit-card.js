@@ -1,6 +1,6 @@
 (() => {
 const TYPE = 'ha-weather-orbit-card';
-const DEFAULTS = { entity: '', title: 'Weather', palette: 'aurora', show_forecast: true, forecast_type: 'daily', forecast_count: 3, show_time: true, show_date: true, time_zone: '', outdoor_temperature_entity: '' };
+const DEFAULTS = { entity: '', title: 'Weather', palette: 'aurora', show_forecast: true, forecast_type: 'daily', forecast_count: 3, forecast_layout: 'tiles', show_time: true, show_date: true, time_zone: '', outdoor_temperature_entity: '' };
 const PALETTES = ['aurora', 'ocean', 'sunset', 'lavender'];
 const FEATURES = { daily: 1, hourly: 2, twice_daily: 4 };
 const CONDITIONS = { sunny: ['Sunny', 'sunny'], 'clear-night': ['Clear night', 'night'], cloudy: ['Cloudy', 'cloudy'], partlycloudy: ['Partly cloudy', 'partly-cloudy'], rainy: ['Rainy', 'rainy'], pouring: ['Heavy rain', 'pouring'], snowy: ['Snowy', 'snowy'], 'snowy-rainy': ['Snow and rain', 'snowy-rainy'], hail: ['Hail', 'hail'], fog: ['Fog', 'fog'], windy: ['Windy', 'windy'], 'windy-variant': ['Windy and cloudy', 'windy-variant'], lightning: ['Thunderstorms', 'lightning'], 'lightning-rainy': ['Thunderstorms and rain', 'lightning-rainy'], exceptional: ['Exceptional weather', 'cloudy-alert'] };
@@ -9,6 +9,7 @@ const finite = (v) => (typeof v === 'number' || typeof v === 'string' && v.trim(
 const available = (s) => !!s && typeof s.state === 'string' && !['', 'unknown', 'unavailable'].includes(s.state);
 const condition = (v) => Object.hasOwn(CONDITIONS, v) ? CONDITIONS[v] : [String(v ?? 'Forecast'), 'cloudy-alert'];
 const icon = (name) => '<ha-icon aria-hidden="true" icon="mdi:weather-' + esc(name) + '"></ha-icon>';
+const BARS_STYLE = '.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.entries.bars{grid-template-columns:minmax(0,1fr);gap:6px}.bar-entry{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;gap:0 8px;padding:6px 8px;text-align:left}.bar-day{display:flex;align-items:center;gap:6px;min-width:0}.bar-day time{font-size:11px;overflow-wrap:anywhere;min-width:0}.bar-day ha-icon{margin:0;--mdc-icon-size:20px}.bar-condition{display:inline-flex;flex:none}.range-line{display:grid;grid-template-columns:minmax(0,48px) minmax(16px,1fr) minmax(0,48px);align-items:center;gap:6px;min-width:0}.range-low,.range-high{display:flex;flex-direction:column;min-width:0;max-width:68px;font-variant-numeric:tabular-nums}.range-high{text-align:right}.range-label{font-size:9px;line-height:12px;color:var(--secondary-text-color,#637282)}.range-value{font-size:11px;line-height:16px;overflow-wrap:anywhere}.range-high .range-value{font-weight:700}.range-track{display:block;position:relative;height:10px;min-width:0;overflow:hidden;border-radius:8px;background:color-mix(in srgb,var(--accent) 9%,transparent)}.range-fill{position:absolute;top:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent2),#dbb45c)}.range-point{min-width:3px;transform:translateX(-50%)}.range-unavailable{opacity:.45}.bar-rain{grid-column:2;font-size:9px}@container weather (max-width:300px){.bar-entry{grid-template-columns:minmax(0,1fr);gap:3px;padding:6px}.bar-day{justify-content:space-between}.bar-rain{grid-column:1}.range-low,.range-high{max-width:52px}}@container weather (max-width:220px){.range-line{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.range-low,.range-high{flex-direction:row;align-items:center;gap:3px;max-width:none}.range-high{justify-content:flex-end}.range-track{grid-column:1/-1;grid-row:2}}';
 const STYLE = [
  ':host{display:block;min-width:0;max-width:100%;color:var(--primary-text-color,#202c3c)}*{box-sizing:border-box}',
  'ha-card{display:block;container:weather/inline-size;overflow:hidden;border-radius:22px;border:1px solid var(--divider-color,#dce5e9);background:var(--ha-card-background,var(--card-background-color,#fff));box-shadow:var(--ha-card-box-shadow,0 2px 6px #182c3510);--accent:#078f72;--accent2:#27b7b0}',
@@ -24,7 +25,7 @@ const STYLE = [
 class WeatherOrbitCard extends HTMLElement {
  static getStubConfig() { return { ...DEFAULTS }; }
  static getConfigForm() {
-  const labels = { entity: 'Weather entity (optional)', title: 'Title', palette: 'Orbit palette', show_forecast: 'Show forecast', forecast_type: 'Forecast type', forecast_count: 'Forecast entries (1–7)', show_time: 'Show clock', show_date: 'Show date', time_zone: 'Time zone override (optional)', outdoor_temperature_entity: 'Outdoor temperature sensor (optional)' };
+  const labels = { entity: 'Weather entity (optional)', title: 'Title', palette: 'Orbit palette', show_forecast: 'Show forecast', forecast_type: 'Forecast type', forecast_count: 'Forecast entries (1–7)', forecast_layout: 'Daily forecast layout', show_time: 'Show clock', show_date: 'Show date', time_zone: 'Time zone override (optional)', outdoor_temperature_entity: 'Outdoor temperature sensor (optional)' };
   return { schema: [
    { name: 'entity', selector: { entity: { domain: 'weather' } } },
    { name: 'outdoor_temperature_entity', selector: { entity: { domain: 'sensor' } } },
@@ -32,11 +33,12 @@ class WeatherOrbitCard extends HTMLElement {
    { name: 'palette', default: DEFAULTS.palette, selector: { select: { options: PALETTES, mode: 'dropdown' } } },
    { name: 'show_forecast', default: true, selector: { boolean: {} } },
    { name: 'forecast_type', default: 'daily', selector: { select: { options: Object.keys(FEATURES), mode: 'dropdown' } } },
+   { name: 'forecast_layout', default: 'tiles', selector: { select: { options: ['tiles', 'bars'], mode: 'dropdown' } } },
    { name: 'forecast_count', default: 3, selector: { number: { min: 1, max: 7, step: 1, mode: 'box' } } },
    { name: 'show_time', default: true, selector: { boolean: {} } },
    { name: 'show_date', default: true, selector: { boolean: {} } },
    { name: 'time_zone', selector: { text: {} } },
-  ], computeLabel: ({ name }) => labels[name], computeHelper: ({ name }) => name === 'forecast_type' ? 'Choose a forecast type supported by your weather provider. The card only reads data.' : name === 'time_zone' ? 'Optional IANA zone, e.g. Europe/London. Otherwise follows the Home Assistant time zone preference.' : name === 'outdoor_temperature_entity' ? 'Measured outdoor temperature, shown separately from the weather provider. Choose a sensor with °C, °F or K units.' : undefined };
+  ], computeLabel: ({ name }) => labels[name], computeHelper: ({ name }) => name === 'forecast_layout' ? 'Daily forecast: tiles or horizontal minimum–maximum bars. Hourly and twice-daily retain tiles. Missing low temperatures are never estimated.' : name === 'forecast_type' ? 'Choose a forecast type supported by your weather provider. The card only reads data.' : name === 'time_zone' ? 'Optional IANA zone, e.g. Europe/London. Otherwise follows the Home Assistant time zone preference.' : name === 'outdoor_temperature_entity' ? 'Measured outdoor temperature, shown separately from the weather provider. Choose a sensor with °C, °F or K units.' : undefined };
  }
  constructor() {
   super(); this.attachShadow({ mode: 'open' }); this._config = { ...DEFAULTS }; this._generation = 0; this._forecast = []; this._status = ''; this._mounted = false;
@@ -56,6 +58,7 @@ class WeatherOrbitCard extends HTMLElement {
   if (config.entity && !/^weather\.[a-z0-9_]+$/.test(config.entity)) throw new Error('entity must be a weather entity ID.');
   if (config.outdoor_temperature_entity && !/^sensor\.[a-z0-9_]+$/.test(config.outdoor_temperature_entity)) throw new Error('outdoor_temperature_entity must be a sensor entity ID.');
   if (config.palette != null && !PALETTES.includes(config.palette)) throw new Error('Unknown Orbit palette.');
+  if (config.forecast_layout != null && !['tiles', 'bars'].includes(config.forecast_layout)) throw new Error('forecast_layout must be tiles or bars.');
   if (config.forecast_type != null && !Object.hasOwn(FEATURES, config.forecast_type)) throw new Error('Unsupported forecast type.');
   for (const key of ['show_forecast', 'show_time', 'show_date']) if (config[key] != null && typeof config[key] !== 'boolean') throw new Error(key + ' must be true or false.');
   if (config.time_zone) { try { new Intl.DateTimeFormat('en', { timeZone: config.time_zone }); } catch { throw new Error('time_zone must be a valid IANA time zone.'); } }
@@ -137,6 +140,29 @@ class WeatherOrbitCard extends HTMLElement {
   return this._formatDate(new Date(value), options);
  }
  _value(value, unit, precision = 1) { return finite(value) ? esc(this._number(value, precision)) + (unit ? ' ' + esc(unit) : '') : ''; }
+ _ranges(entries) {
+  const valid = entries.filter(f => finite(f.templow) && finite(f.temperature) && Number(f.templow) <= Number(f.temperature));
+  if (!valid.length) return entries.map(() => null);
+  const min = Math.min(...valid.map(f => Number(f.templow))), max = Math.max(...valid.map(f => Number(f.temperature))), span = max - min;
+  if (!Number.isFinite(span)) return entries.map(() => null);
+  const percent = n => Math.round(Math.max(0, Math.min(100, n)) * 1e6) / 1e6;
+  return entries.map(f => {
+   if (!finite(f.templow) || !finite(f.temperature) || Number(f.templow) > Number(f.temperature)) return null;
+   const low = Number(f.templow), high = Number(f.temperature);
+   return { left: span ? percent((low - min) / span * 100) : 50, width: span ? percent((high - low) / span * 100) : 0, point: low === high };
+  });
+ }
+ _barEntries(entries, attrs) {
+  const ranges = this._ranges(entries);
+  return entries.map((f, i) => {
+   const fc = condition(f.condition), range = ranges[i];
+   const low = finite(f.templow) ? this._value(f.templow, attrs.temperature_unit) : '—';
+   const high = finite(f.temperature) ? this._value(f.temperature, attrs.temperature_unit) : '—';
+   const label = 'Minimum ' + (finite(f.templow) ? this._number(f.templow) + (attrs.temperature_unit ? ' ' + attrs.temperature_unit : '') : 'unavailable') + '; maximum ' + (finite(f.temperature) ? this._number(f.temperature) + (attrs.temperature_unit ? ' ' + attrs.temperature_unit : '') : 'unavailable') + (!range ? '; range unavailable' : '');
+   const rain = finite(f.precipitation) && Number(f.precipitation) >= 0 ? this._value(f.precipitation, attrs.precipitation_unit) : '';
+   return '<div class="entry bar-entry"><div class="bar-day"><time datetime="' + esc(f.datetime) + '" title="' + esc(this._date(f.datetime)) + '">' + esc(this._formatDate(new Date(f.datetime), { weekday: 'short' })) + '</time><span class="bar-condition" title="' + esc(fc[0]) + '">' + icon(fc[1]) + '<span class="sr-only">' + esc(fc[0]) + '</span></span></div><div class="range-line" role="img" aria-label="' + esc(label) + '"><span class="range-low"><span class="range-label">Min</span><span class="range-value">' + low + '</span></span><span class="range-track' + (!range ? ' range-unavailable' : '') + '" aria-hidden="true">' + (range ? '<span class="range-fill' + (range.point ? ' range-point' : '') + '" style="left:' + range.left + '%;width:' + range.width + '%"></span>' : '') + '</span><span class="range-high"><span class="range-label">Max</span><span class="range-value">' + high + '</span></span></div>' + (rain ? '<div class="rain bar-rain">Rain ' + rain + '</div>' : '') + '</div>';
+  }).join('');
+ }
  _outdoor() {
   const id = this._config.outdoor_temperature_entity;
   if (!id) return '';
@@ -155,11 +181,12 @@ class WeatherOrbitCard extends HTMLElement {
   let label = valid ? cond[0] : 'Current weather unavailable';
   if (valid) { try { label = this._hass?.formatEntityState?.(s) || label; } catch { /* Safe English fallback. */ } }
   const stats = valid ? [finite(a.wind_speed) ? '<span class="reading">Wind <strong>' + this._value(a.wind_speed, a.wind_speed_unit) + '</strong></span>' : '', finite(a.humidity) && Number(a.humidity) >= 0 && Number(a.humidity) <= 100 ? '<span class="reading">Humidity <strong>' + this._value(a.humidity, '%') + '</strong></span>' : ''].join('') : '';
-  const entries = valid ? this._forecast.slice(0, c.forecast_count).map((f) => {
+  const bars = c.forecast_type === 'daily' && c.forecast_layout === 'bars';
+  const entries = valid && bars ? this._barEntries(this._forecast.slice(0, c.forecast_count), a) : valid ? this._forecast.slice(0, c.forecast_count).map((f) => {
    const fc = condition(f.condition), rain = finite(f.precipitation) && Number(f.precipitation) >= 0 ? this._value(f.precipitation, a.precipitation_unit) : '';
    return '<div class="entry"><time datetime="' + esc(f.datetime) + '">' + esc(this._date(f.datetime)) + '</time>' + (typeof f.is_daytime === 'boolean' ? '<div class="period">' + (f.is_daytime ? 'Day' : 'Night') + '</div>' : '') + icon(fc[1]) + '<div class="condition">' + esc(fc[0]) + '</div>' + (finite(f.temperature) ? '<div class="high">' + this._value(f.temperature, a.temperature_unit) + '</div>' : '') + (finite(f.templow) ? '<div class="low">Low ' + this._value(f.templow, a.temperature_unit) + '</div>' : '') + (rain ? '<div class="rain">Rain ' + rain + '</div>' : '') + '</div>';
   }).join('') : '';
-  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '"><div class="shell"><div class="eyebrow">' + esc(c.title || 'Weather') + '</div>' + (c.show_time || c.show_date ? '<div class="datetime">' + (c.show_time ? '<time class="clock"></time>' : '') + (c.show_date ? '<time class="calendar"></time>' : '') + '</div>' : '') + this._outdoor() + (!c.entity ? (c.outdoor_temperature_entity ? '' : '<p class="message">Choose a weather entity in the card configuration to see current conditions and forecasts.</p>') : '<button class="current" data-action="info" aria-label="More information: ' + esc(a.friendly_name || 'Weather') + '"' + (!s ? ' disabled' : '') + '><span class="orbit">' + icon(valid ? cond[1] : 'cloudy-alert') + '</span><span class="copy">' + (c.outdoor_temperature_entity ? '<div class="source-label">Weather provider</div>' : '') + (valid && finite(a.temperature) ? '<div class="temperature">' + esc(this._number(a.temperature)) + '<small>' + esc(a.temperature_unit || '') + '</small></div>' : '') + '<div class="condition">' + esc(label) + '</div></span></button>' + (stats ? '<div class="stats">' + stats + '</div>' : '') + (c.show_forecast ? '<section class="forecast" aria-label="Forecast"><div class="forecast-heading">' + esc(c.forecast_type.replace('_', '-')) + ' forecast' + (this._status === 'Forecast unavailable. Try again.' ? '<button class="retry" data-action="retry">Retry</button>' : '') + '</div>' + (entries ? '<div class="entries">' + entries + '</div>' : '<div class="message" role="status">' + esc(this._status) + '</div>') + '</section>' : '')) + '</div></ha-card>';
+  this.shadowRoot.innerHTML = '<style>' + STYLE + BARS_STYLE + '</style><ha-card data-palette="' + c.palette + '"><div class="shell"><div class="eyebrow">' + esc(c.title || 'Weather') + '</div>' + (c.show_time || c.show_date ? '<div class="datetime">' + (c.show_time ? '<time class="clock"></time>' : '') + (c.show_date ? '<time class="calendar"></time>' : '') + '</div>' : '') + this._outdoor() + (!c.entity ? (c.outdoor_temperature_entity ? '' : '<p class="message">Choose a weather entity in the card configuration to see current conditions and forecasts.</p>') : '<button class="current" data-action="info" aria-label="More information: ' + esc(a.friendly_name || 'Weather') + '"' + (!s ? ' disabled' : '') + '><span class="orbit">' + icon(valid ? cond[1] : 'cloudy-alert') + '</span><span class="copy">' + (c.outdoor_temperature_entity ? '<div class="source-label">Weather provider</div>' : '') + (valid && finite(a.temperature) ? '<div class="temperature">' + esc(this._number(a.temperature)) + '<small>' + esc(a.temperature_unit || '') + '</small></div>' : '') + '<div class="condition">' + esc(label) + '</div></span></button>' + (stats ? '<div class="stats">' + stats + '</div>' : '') + (c.show_forecast ? '<section class="forecast" aria-label="Forecast"><div class="forecast-heading">' + esc(c.forecast_type.replace('_', '-')) + ' forecast' + (this._status === 'Forecast unavailable. Try again.' ? '<button class="retry" data-action="retry">Retry</button>' : '') + '</div>' + (entries ? '<div class="entries' + (bars ? ' bars' : '') + '">' + entries + '</div>' : '<div class="message" role="status">' + esc(this._status) + '</div>') + '</section>' : '')) + '</div></ha-card>';
   this._updateClock();
  }
 }
