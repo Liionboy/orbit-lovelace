@@ -1,0 +1,244 @@
+{
+  "ha-alerts-orbit-card": [
+    "accent",
+    "accent2",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background"
+  ],
+  "ha-battery-orbit-card": [
+    "accent",
+    "accent2",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background"
+  ],
+  "ha-fan-orbit-card": [
+    "accent",
+    "accent2",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background"
+  ],
+  "ha-nas-orbit-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "ha-person-orbit-card": [
+    "accent",
+    "accent2",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background"
+  ],
+  "ha-room-orbit-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background"
+  ],
+  "ha-scenes-orbit-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background"
+  ],
+  "ha-sensor-graph-orbit-card": [
+    "accent",
+    "accent2",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background"
+  ],
+  "ha-server-orbit-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "ha-speedtest-orbit-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "ha-unifi-orbit-card": [
+    ".eyebrow:color"
+  ],
+  "ha-vacuum-commander-card": [
+    "vac-a",
+    "vac-b",
+    "vac-c",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell::before:background",
+    ".eyebrow:color"
+  ],
+  "ha-weather-orbit-card": [
+    "accent",
+    "accent2",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "ha-welcome-orbit-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-action-button-card": [
+    "accent",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-alecoair-dehumidifier-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-animated-gate-card": [
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-climate-control-card": [
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".eyebrow:color",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-frigate-control-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-home-connect-washer-card": [
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-hp-printer-card": [
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".eyebrow:color"
+  ],
+  "lovelace-luma-control-card": [
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-pihole-control-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-sensor-meter-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "lovelace-switch-control-card": [
+    "accent",
+    "accent2",
+    "accent3",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".eyebrow:color"
+  ],
+  "media-player-card": [
+    "accent",
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".brand-icon:background",
+    ".brand-icon:color",
+    ".eyebrow:color",
+    ".control.primary:background",
+    ".control.primary:color",
+    ".turn-on:background",
+    ".turn-on:color"
+  ],
+  "temperature-humidity-card": [
+    "ha-card:border-radius",
+    "ha-card:box-shadow",
+    ".shell:background",
+    ".shell:before:background",
+    ".brand-icon:background",
+    ".brand-icon:color",
+    ".eyebrow:color",
+    ".temperature:border-color",
+    ".temperature:background",
+    ".humidity:border-color",
+    ".humidity:background",
+    ".temperature .metric-label:color",
+    ".humidity .metric-label:color",
+    ".metric-badge:background",
+    ".temperature .metric-badge:color",
+    ".humidity .metric-badge:color",
+    ".temperature .metric-value:color",
+    ".humidity .metric-value:color",
+    ".scale-labels:color",
+    ".humidity-ring:before:background"
+  ]
+}

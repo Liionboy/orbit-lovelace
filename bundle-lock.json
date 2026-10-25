@@ -1,7 +1,10 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "packages": 27,
   "cards": 28,
-  "bytes": 618697,
-  "sha256": "b1bff289f710ee0743299b3aa051e705b88fabc2b20b4eef6c0d47e2c1fef29f"
+  "themeBridgeVersion": 1,
+  "themesVersion": "1.0.0",
+  "themeSha256": "27786b22def6bbc7e790373f1fa891e9527de412498a5a8d95440635411bef42",
+  "bytes": 624370,
+  "sha256": "c3c6aaaf35fdca2eaf6f1e4d1f253ca70f8d11bebe3dbc53fc1397ea9064950c"
 }

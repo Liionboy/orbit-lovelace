@@ -1,0 +1,83 @@
+{
+  "version": "1.0.0",
+  "families": [
+    {
+      "name": "Orbit Graphite",
+      "description": "Architectural neutrals with a restrained indigo accent.",
+      "light": {
+        "bg": "#f1f3f7",
+        "surface": "#ffffff",
+        "raised": "#e7ebf2",
+        "text": "#1d2635",
+        "muted": "#56647a",
+        "line": "#d6deea",
+        "accent": "#4f56b8",
+        "accent2": "#336f95",
+        "button": "#4f56b8"
+      },
+      "dark": {
+        "bg": "#0d1117",
+        "surface": "#141820",
+        "raised": "#1b212b",
+        "text": "#e8edf6",
+        "muted": "#a7b4c6",
+        "line": "#343f50",
+        "accent": "#a6b2ff",
+        "accent2": "#87bdc8",
+        "button": "#46559b"
+      }
+    },
+    {
+      "name": "Orbit Fjord",
+      "description": "Deep petrol surfaces and precise, muted teal accents.",
+      "light": {
+        "bg": "#edf4f4",
+        "surface": "#fcfefe",
+        "raised": "#e0eded",
+        "text": "#19323c",
+        "muted": "#4c6873",
+        "line": "#c6dcdf",
+        "accent": "#176b65",
+        "accent2": "#2b6782",
+        "button": "#176b65"
+      },
+      "dark": {
+        "bg": "#0b171b",
+        "surface": "#13262d",
+        "raised": "#1b323a",
+        "text": "#e4f0f1",
+        "muted": "#a4bdc4",
+        "line": "#304a54",
+        "accent": "#8ed4cb",
+        "accent2": "#a3becd",
+        "button": "#1d675f"
+      }
+    },
+    {
+      "name": "Orbit Dune",
+      "description": "Warm stone surfaces, generous contrast and quiet bronze accents.",
+      "light": {
+        "bg": "#f5f1ea",
+        "surface": "#fffcf7",
+        "raised": "#ece5d9",
+        "text": "#332c24",
+        "muted": "#6e6052",
+        "line": "#ddd0bf",
+        "accent": "#805c2d",
+        "accent2": "#75694d",
+        "button": "#805c2d"
+      },
+      "dark": {
+        "bg": "#1a1714",
+        "surface": "#25211d",
+        "raised": "#302a24",
+        "text": "#f2eae0",
+        "muted": "#c2b3a1",
+        "line": "#4b4137",
+        "accent": "#dfbd8c",
+        "accent2": "#c8b798",
+        "button": "#76572f"
+      }
+    }
+  ]
+}

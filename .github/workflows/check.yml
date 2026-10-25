@@ -11,6 +11,6 @@ jobs:
         with:
           node-version: 22
       - run: npm run build
-      - run: git diff --exit-code -- dist/orbit-lovelace.js bundle-lock.json
+      - run: git diff --exit-code -- dist/orbit-lovelace.js bundle-lock.json themes/orbit-themes.yaml themes/catalog.json
       - run: npm run check
       - run: npm test

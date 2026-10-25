@@ -1,5 +1,7 @@
 # Included card catalog
 
+Suite v1.9.0 also includes optional [complete HA themes](THEMES.md). A guarded build-only CSS theme bridge adds fallback variables; pinned upstream assets/versions below are unchanged. Default styles remain when no theme is selected.
+
 The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
 
 | Card / package | Included release | Existing Lovelace types |

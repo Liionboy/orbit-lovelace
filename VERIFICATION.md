@@ -1,5 +1,16 @@
 # Verification records
 
+## v1.9.0 — Complete Orbit theme pack / opt-in bridge
+
+- Adds Orbit Themes1.0.0: Graphite/Fjord/Dune, six native light/dark variants in one optional YAML. No pinned component source/version/commit/hash changed. Build-only CSS bridge contracts are explicit; no-theme fallbacks, later palette/state precedence retained. Metadata locks theme and bundle digests.
+- Deterministic JS/YAML/catalog build, syntax (including preview),52 suite/theme +417 upstream Node tests (469 total) and2 smoke suites passed sequentially. Generated quoted YAML also parsed with a real installed YAML parser and compared to the catalog with unique keys. CI guards generated theme outputs.
+- Core token-pair normal text contrast >=4.5:1, primary on card >=7:1, accent/action/semantic token pairs checked; not a blanket WCAG claim for every device/state/chart. Native themes carry legacy and modern semantic aliases verified against official frontend sources.
+- Theme Chromium matrix168 sequential mounts (28 types ×6 variants), six populated desktop/390px-phone previews (Welcome,2 Rooms,Weather,Media,Temperature/Humidity), dialog token examples, live-mode control identity/no extra queries, explicit ocean palette, warm-state override, exact Weather More Info and themed Media pause payload/feedback passed. Six populated no-theme card computed profiles exactly match v1.8.0 colors/backgrounds/radius/shadow/geometry.
+- Six desktop variants, representative three phone variants and both Graphite dialog previews visually inspected. Visual review caught full-inset pseudo-overlays incorrectly treated as narrow stripes; separated transparent overlay hook, added regression, reran matrix and inspected final captures. No CSS-only success claim without screenshot review.
+- Full standard browser28/28 plus complete Media mobile touch and Weather bar/marker/clock regressions ran against final combined artifact and passed. All work sequential; no subagents/live commands.
+- Themes are a separate manual companion download; HACS Dashboard update does not copy or activate them. THEMES.md preserves existing frontend/includes/themes, covers reload/first-enable validation/restart choice, profile selection and rollback. No new repository/dependency/card-mod/external font.
+- Preview shell/icons/data are synthetic; native HA profile loading/stock dialogs/editor, physical Companion and all legacy/device-specific states remain unverified. No live HA config/dashboard/resource/theme/device changed.
+
 ## v1.8.0 — Media Player mobile command feedback
 
 - Only Media Player updated to public v1.2.5 commit `c817349b79d2a0708ca49b789d2edb8404d943ea`, source SHA256 `e3726fb55a8f28f56c4e7aa1ea836d2a7d5ea7ba1310d051e1467f8f13b28600`. Selected docs/package/source/tests match the verified tag. Other pins, including Weather1.4.0, unchanged.

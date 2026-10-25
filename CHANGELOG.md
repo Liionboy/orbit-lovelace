@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.9.0
+
+- Adds Orbit Themes v1.0.0: Graphite, Fjord and Dune, each with native light/dark modes, one optional companion YAML and safe installation/rollback instructions. HA navigation/canvas/forms/dialog/card surfaces use coordinated legacy/modern frontend tokens.
+- Guarded build-only theme bridge adapts default decorative accents/surfaces, card radius/shadow and companion metrics without changing pinned upstream source, public types/YAML/services or semantic state colors. No-theme defaults retained; explicit palette/state overrides preserved.
+- Adds interactive local design preview, desktop/phone images, theme contrast/schema/fallback tests and a168-mount sequential browser theme matrix. Native HA/Companion remains unverified; no live config or theme selection changed.
+- Important: updating the HACS Dashboard plugin does not install/activate theme YAML. Follow THEMES.md for the separate companion file. No new repository, card-mod, external fonts or runtime dependencies.
+
 ## 1.8.0
 
 - Media Player v1.2.5: immediate pending/sent/error feedback for media commands, including Turn on, with duplicate pending-request suppression and a15s unknown-result timeout. No optimistic player-state changes or automatic retries.
