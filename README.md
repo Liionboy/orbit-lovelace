@@ -19,9 +19,9 @@ The resource path is **/hacsfiles/orbit-lovelace/orbit-lovelace.js**. If you alr
 
 For manual installation, copy only `dist/orbit-lovelace.js` to `config/www/orbit-lovelace.js` and register `/local/orbit-lovelace.js` as a JavaScript module. Do not register files under `cards/` as additional resources.
 
-## Room update (v1.4.0)
+## Room update (v1.5.0)
 
-Room Orbit v1.5.0 accepts humidifiers/dehumidifiers in **Room climate / humidifier** and fans in any shortcut entity slot. Humidifier badges show reported activity and open More Info; fan quick taps toggle power only when supported. Existing YAML remains valid. Update this suite in HACS, fully reload, then select your entities in Room’s editor. No additional standalone resource is needed.
+Room Orbit v1.6.0 accepts **any entity domain** in the four shortcut slots, including all binary sensors, people, media players, vacuums, helpers and custom integrations. Binary icons follow device class/state. Existing direct light/switch/helper/fan and cover controls remain; other types open native More Info only, without inferred services. Humidifiers/dehumidifiers remain supported in **Room climate / humidifier**. Existing YAML remains valid. Update this suite in HACS, fully reload, then select your entities in Room’s editor. No additional standalone resource is needed.
 
 ## Included cards
 

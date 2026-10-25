@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.5.0
+
+- Update Room Orbit to v1.6.0: any valid entity domain in all four shortcut selectors/YAML fields, including all binary_sensor types and custom integration domains. The number of slots is unchanged.
+- Binary icons follow all29 standard device classes and on/off state; unavailable/unknown/missing values use neutral icons. Metadata/slot overrides retained.
+- Existing direct controls remain explicitly allowed; all other domains open exact native More Info without inferred services (including locks, alarms, buttons, scenes/scripts and updates).
+- All other component pins unchanged. HACS suite update → full reload → select entities in Room editor.
+
 ## 1.4.0
 
 - Update Room Orbit to v1.5.0: `climate_entity` accepts thermostats and humidifiers/dehumidifiers; reported Humidifying/Drying/Idle/Off badge with native More Info and no humidifier commands.

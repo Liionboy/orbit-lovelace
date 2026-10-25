@@ -1,5 +1,14 @@
 # Verification records
 
+## v1.5.0 — Any Room shortcut entity
+
+- Only Room updated to verified public v1.6.0 commit `74588ce9eebe3c4edafa5f464f00929ae1fef4a2`, source SHA256 `2395fdd1da15f6df28c2c9e4138bde6e905811881e846390eab255e32690f0a5`; all other pins unchanged. Selected imports match the public tag.
+- Reproducible build/syntax, 32 suite +357 upstream Node tests (389 total),2 smoke suites and synthetic Chromium28/28 passed sequentially.
+- Complete Room regression ran from the combined artifact via CARD_RESOURCE=dist/orbit-lovelace.js: arbitrary domain pointer/keyboard More Info, no new services or routing, binary state/device-class icon changes, unavailable neutral icon, HA-formatted label, read-only, and all prior climate/humidifier/fan/navigation/temperature/cover tests.
+- Standalone45 tests include34 additional domains in all4 slots,29 native binary classes, malformed IDs, custom/prototype-like domains/classes, icon overrides and escaping. Full browser fixture uses stub HA components/icons; native HA editor/Companion/hardware remains unverified.
+- Generic binary fixture118px high at243/440px and124px at164/200px, complete readings; light/dark combined screenshots inspected. Slots remain4, dedicated fields remain domain-filtered, existing service allowlist retained.
+- No live HA/dashboard/resource/device changed.
+
 ## v1.4.0 — Room humidifier and fan support
 
 - Only Room Orbit updated to verified public v1.5.0 commit `59e6b3db0516af7ddb96ed592f6abf2af7856e17`, source SHA256 `788216015a48a478b073461cf4fca9458e9378c1c002584cd177ad6c72cc19d4`. All other component pins unchanged.

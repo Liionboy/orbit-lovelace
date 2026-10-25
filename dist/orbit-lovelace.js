@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.4.0 — MIT. */
+/* Orbit Lovelace v1.5.0 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.4.0",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.5.0",components:{},skipped:{},errors:[]};
 /* ha-alerts-orbit-card @ 1.0.0 (83df41182a3b9b4a8f2b02e806be9bbeeff36ecf) */
 try { (() => {
 const knownTypes=["ha-alerts-orbit-card"];
@@ -852,14 +852,30 @@ for(const entry of window.customCards){const type=String(entry.type).startsWith(
 if(!window.customCards.some(card=>card.type==="ha-person-orbit-card"))window.customCards.push({type:"ha-person-orbit-card",name:"Person Orbit Card",description:"Included in Orbit Lovelace",preview:false});
 suite.components["ha-person-orbit-card"]={version:"1.1.0",types:["ha-person-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"ha-person-orbit-card",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","ha-person-orbit-card",error);}
-/* ha-room-orbit-card @ 1.5.0 (59e6b3db0516af7ddb96ed592f6abf2af7856e17) */
+/* ha-room-orbit-card @ 1.6.0 (74588ce9eebe3c4edafa5f464f00929ae1fef4a2) */
 try { (() => {
 const knownTypes=["ha-room-orbit-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["ha-room-orbit-card"]="Already registered; remove old resources and reload to use the suite version.";return;}
 const TYPE = 'ha-room-orbit-card';
-const VERSION = '1.5.0';
+const VERSION = '1.6.0';
 const PALETTES = ['aurora', 'ocean', 'sunset', 'lavender'];
-const DOMAINS = ['light', 'switch', 'input_boolean', 'cover', 'sensor', 'binary_sensor', 'climate', 'humidifier', 'fan'];
+// Any shortcut domain is displayable; _actions remains the explicit service allowlist.
+const BINARY_ICONS = {
+ battery: ['battery', 'battery-outline'], battery_charging: ['battery', 'battery-charging'], carbon_monoxide: ['smoke-detector', 'smoke-detector-alert'],
+ cold: ['thermometer', 'snowflake'], connectivity: ['close-network-outline', 'check-network-outline'], door: ['door-closed', 'door-open'],
+ garage_door: ['garage', 'garage-open'], gas: ['check-circle', 'alert-circle'], glass_break: ['glass-fragile', 'glass-fragile'],
+ heat: ['thermometer', 'fire'], light: ['brightness-5', 'brightness-7'], lock: ['lock', 'lock-open'], moisture: ['water-off', 'water'],
+ motion: ['motion-sensor-off', 'motion-sensor'], moving: ['octagon', 'arrow-right'], occupancy: ['home-outline', 'home'], opening: ['square', 'square-outline'],
+ plug: ['power-plug-off', 'power-plug'], power: ['power-plug-off', 'power-plug'], presence: ['home-outline', 'home'], problem: ['check-circle', 'alert-circle'],
+ running: ['stop', 'play'], safety: ['check-circle', 'alert-circle'], smoke: ['smoke-detector-variant', 'smoke-detector-variant-alert'], sound: ['music-note-off', 'music-note'],
+ tamper: ['check-circle', 'alert-circle'], update: ['package', 'package-up'], vibration: ['crop-portrait', 'vibrate'], window: ['window-closed', 'window-open'],
+};
+const DOMAIN_ICONS = { light: 'lightbulb', cover: 'window-shutter', switch: 'power-socket-eu', input_boolean: 'toggle-switch', fan: 'fan', sensor: 'chart-line',
+ lock: 'lock', alarm_control_panel: 'shield-home', media_player: 'cast', vacuum: 'robot-vacuum', person: 'account', device_tracker: 'map-marker',
+ scene: 'palette', script: 'script-text', automation: 'robot', button: 'gesture-tap-button', input_button: 'gesture-tap-button',
+ select: 'format-list-bulleted', input_select: 'format-list-bulleted', number: 'numeric', input_number: 'numeric', text: 'form-textbox', input_text: 'form-textbox',
+ timer: 'timer-outline', counter: 'counter', calendar: 'calendar', weather: 'weather-partly-cloudy', camera: 'camera', update: 'package-up',
+ date: 'calendar', input_datetime: 'calendar-clock', datetime: 'calendar-clock', time: 'clock-outline', event: 'lightning-bolt', remote: 'remote', siren: 'bullhorn', water_heater: 'water-boiler', valve: 'valve', image: 'image', notify: 'message' };
 const DEFAULTS = { title: 'Room Orbit', icon: 'mdi:sofa', palette: 'aurora', read_only: false, navigation_path: '', temperature_effect: false, temperature_animation: true, temperature_cold_below: 22, temperature_warm_from: 25 };
 const FIELDS = ['temperature_entity', 'humidity_entity', 'presence_entity', 'climate_entity', 'entity_1', 'entity_2', 'entity_3', 'entity_4'];
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
@@ -906,7 +922,7 @@ class RoomOrbitCard extends HTMLElement {
    { name: 'climate_entity', selector: { entity: { domain: ['climate', 'humidifier'] } } },
   ];
   for (let i = 1; i <= 4; i++) schema.push(
-   { name: 'entity_' + i, selector: { entity: { domain: DOMAINS } } },
+   { name: 'entity_' + i, selector: { entity: {} } },
    { name: 'name_' + i, selector: { text: {} } },
    { name: 'icon_' + i, selector: { icon: {} } },
   );
@@ -929,8 +945,7 @@ class RoomOrbitCard extends HTMLElement {
  setConfig(config) {
   if (!config || typeof config !== 'object' || Array.isArray(config)) throw new Error('Room Orbit requires an object configuration.');
   if (config.navigation_path && (typeof config.navigation_path !== 'string' || !/^\/(?!\/)[^\s\\]*$/.test(config.navigation_path))) throw new Error('navigation_path must be a local path such as /dashboard-home/living-room.');
-  for (const key of FIELDS) if (config[key] && (typeof config[key] !== 'string' || !/^[a-z_]+\.[a-z0-9_]+$/.test(config[key]))) throw new Error(key + ' must be an entity ID.');
-  for (let i = 1; i <= 4; i++) if (config['entity_' + i] && !DOMAINS.includes(domain(config['entity_' + i]))) throw new Error('Shortcut ' + i + ' has an unsupported entity domain.');
+  for (const key of FIELDS) if (config[key] && (typeof config[key] !== 'string' || !/^[a-z_][a-z0-9_]*\.[a-z0-9_]+$/.test(config[key]))) throw new Error(key + ' must be an entity ID.');
   for (const key of ['temperature_entity', 'humidity_entity']) if (config[key] && domain(config[key]) !== 'sensor') throw new Error(key + ' must be a sensor.');
   if (config.presence_entity && domain(config.presence_entity) !== 'binary_sensor') throw new Error('Presence must be a binary sensor.');
   if (config.climate_entity && !['climate', 'humidifier'].includes(domain(config.climate_entity))) throw new Error('climate_entity must be a climate or humidifier entity.');
@@ -948,6 +963,17 @@ class RoomOrbitCard extends HTMLElement {
  getGridOptions() { return { columns: 6, min_columns: 6 }; }
  _ids() { return [...new Set(FIELDS.map((key) => this._config[key]).filter(Boolean))]; }
  _state(id) { return this._hass?.states?.[id]; }
+ _entityIcon(id) {
+  const s = this._state(id), d = domain(id);
+  if (s?.attributes?.icon) return s.attributes.icon;
+  if (d === 'binary_sensor') {
+   if (!available(s) || !['on', 'off'].includes(s.state)) return 'mdi:help-circle-outline';
+   const dc = s.attributes?.device_class;
+   const pair = Object.hasOwn(BINARY_ICONS, dc) ? BINARY_ICONS[dc] : ['radiobox-blank', 'checkbox-marked-circle'];
+   return 'mdi:' + pair[s.state === 'on' ? 1 : 0];
+  }
+  return 'mdi:' + (Object.hasOwn(DOMAIN_ICONS, d) ? DOMAIN_ICONS[d] : 'bookmark-outline');
+ }
  _temperatureEffect() {
   if (!this._config.temperature_effect) return 'normal';
   const s = this._state(this._config.temperature_entity);
@@ -1022,7 +1048,7 @@ class RoomOrbitCard extends HTMLElement {
   const readings = [['temperature_entity', 'Temperature', 'mdi:thermometer'], ['humidity_entity', 'Humidity', 'mdi:water-percent']].filter(([field]) => c[field]).map(([field, label, image]) => this._infoButton(c[field], icon(image) + '<span class="sr-only">' + label + ': </span><span class="reading-value">' + esc(this._format(this._state(c[field]))) + '</span>', 'reading')).join('');
   const slots = [1, 2, 3, 4].filter((i) => c['entity_' + i]).map((i) => {
    const id = c['entity_' + i], s = this._state(id), d = domain(id);
-   const image = c['icon_' + i] || s?.attributes?.icon || ({ light: 'mdi:lightbulb', cover: 'mdi:window-shutter', switch: 'mdi:power-socket-eu', input_boolean: 'mdi:toggle-switch', binary_sensor: 'mdi:motion-sensor', fan: 'mdi:fan' })[d] || 'mdi:chart-line';
+   const image = c['icon_' + i] || this._entityIcon(id);
    const airDevice = ['climate', 'humidifier'].includes(d);
    const airStatus = airDevice ? this._climate(id) : null;
    const active = airDevice ? (d === 'climate' ? airStatus.kind === 'heating' : ['humidifying', 'drying'].includes(airStatus.kind)) : available(s) && ['on', 'open', 'opening', 'closing'].includes(s.state);
@@ -1075,7 +1101,7 @@ console.info('ROOM ORBIT ' + VERSION);
 window.customCards ||= [];
 for(const entry of window.customCards){const type=String(entry.type).startsWith("custom:")?entry.type.slice(7):entry.type;if(knownTypes.includes(type))entry.type=type;}
 if(!window.customCards.some(card=>card.type==="ha-room-orbit-card"))window.customCards.push({type:"ha-room-orbit-card",name:"Room Orbit Card",description:"Included in Orbit Lovelace",preview:false});
-suite.components["ha-room-orbit-card"]={version:"1.5.0",types:["ha-room-orbit-card"]};
+suite.components["ha-room-orbit-card"]={version:"1.6.0",types:["ha-room-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"ha-room-orbit-card",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","ha-room-orbit-card",error);}
 /* ha-scenes-orbit-card @ 1.0.0 (f5b6741347f807e4a07c520e9cd9038d7b59df9c) */
 try { (() => {

@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -100,13 +100,13 @@
       "id": "ha-room-orbit-card",
       "name": "Room Orbit Card",
       "category": "Orbit",
-      "version": "1.5.0",
-      "packageVersion": "1.5.0",
+      "version": "1.6.0",
+      "packageVersion": "1.6.0",
       "repository": "Liionboy/ha-room-orbit-card",
-      "upstreamCommit": "59e6b3db0516af7ddb96ed592f6abf2af7856e17",
+      "upstreamCommit": "74588ce9eebe3c4edafa5f464f00929ae1fef4a2",
       "upstreamAsset": "ha-room-orbit-card.js",
       "source": "cards/ha-room-orbit-card/ha-room-orbit-card.js",
-      "sha256": "788216015a48a478b073461cf4fca9458e9378c1c002584cd177ad6c72cc19d4",
+      "sha256": "2395fdd1da15f6df28c2c9e4138bde6e905811881e846390eab255e32690f0a5",
       "types": [
         "ha-room-orbit-card"
       ],
