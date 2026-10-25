@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.7.0
+
+- Weather Orbit v1.4.0: current-temperature dot on today’s daily bar, matched by full date in the card’s resolved zone. Uses weather temperature/unit, not the separate outdoor sensor.
+- Shared scale expands to include valid current weather outside predicted ranges without changing Min/Max. Invalid current/today range shows no dot; tomorrow is never used as a fallback.
+- Existing-state updates and hidden-clock midnight refresh add no subscriptions/services and retain weather controls. Other pins and layouts unchanged.
+
 ## 1.6.0
 
 - Update Weather Orbit to v1.3.0: selectable daily forecast `forecast_layout: tiles|bars` (tiles remains default). Horizontal bars show explicit provider minimum/maximum, weekday and condition icon on a common displayed-day scale.

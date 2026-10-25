@@ -79,6 +79,7 @@ try {
  // Daily bars from standalone or CARD_RESOURCE combined suite; no live HA.
  await page.evaluate(()=>{
   document.body.classList.remove('dark');document.querySelector('#host').style.width='440px';
+  card._now=()=>new Date('2026-10-25T12:00:00Z');
   card.hass={...card.hass,locale:{language:'en-GB',time_format:'24'},states:{...card.hass.states,'weather.example':{state:'cloudy',attributes:{temperature:6,temperature_unit:'°C',humidity:82,supported_features:7}}}};
   window.barForecasts=[6,8,3,5,3].map((low,i)=>({datetime:'2026-10-'+(25+i)+'T00:00:00Z',templow:low,temperature:[14,14,16,16,18][i],condition:i<2?'rainy':'partlycloudy'}));
   window.forecasts=barForecasts;
@@ -86,6 +87,14 @@ try {
  });
  assert.equal(await card.locator('.bar-entry').count(),5);assert.equal(await card.locator('.range-low .range-value').first().innerText(),'6 °C');assert.equal(await card.locator('.range-high .range-value').first().innerText(),'14 °C');
  const barQueries=await page.evaluate(()=>requests.length);
+ assert.equal(await card.locator('.range-current').count(),1);
+ assert.match(await card.locator('.range-line').first().getAttribute('aria-label'),/Current weather temperature 6 °C/);
+ const markerPosition=()=>card.locator('.range-current').evaluate(el=>{const m=el.getBoundingClientRect(),t=el.parentElement.getBoundingClientRect();return (m.left+m.width/2-t.left)/t.width;});
+ assert.ok(Math.abs(await markerPosition()-3/15)<.01);
+ await page.evaluate(()=>{card.hass.states['weather.example'].attributes.temperature=10.5;card.hass={...card.hass};});assert.ok(Math.abs(await markerPosition()-7.5/15)<.01);
+ await page.evaluate(()=>{card.hass.states['weather.example'].attributes.temperature=25;card.hass={...card.hass};});assert.ok(Math.abs(await markerPosition()-1)<.01);assert.equal(await card.locator('.range-high .range-value').first().innerText(),'14 °C');
+ await page.evaluate(()=>{card.hass.states['weather.example'].attributes.temperature=6;card.hass={...card.hass};});
+
  const barGeometry=await card.locator('.range-track').evaluateAll(els=>els.map(el=>{const b=el.getBoundingClientRect(),f=el.querySelector('.range-fill').getBoundingClientRect();return {width:b.width,relativeLeft:(f.left-b.left)/b.width,relativeWidth:f.width/b.width};}));
  assert.ok(barGeometry.every(m=>Math.abs(m.width-barGeometry[0].width)<.1));assert.ok(Math.abs(barGeometry[0].relativeLeft-3/15)<.01);assert.ok(Math.abs(barGeometry[0].relativeWidth-8/15)<.01);
  for(const w of [167,200,243,280,320,440,760]){await page.evaluate(w=>document.querySelector('#host').style.width=w+'px',w);await measure('bars-light-'+w,w<=300?700:550);const values=await card.locator('.range-value').evaluateAll(els=>els.map(e=>({height:e.getBoundingClientRect().height,overflow:e.scrollWidth>e.clientWidth+1})));assert.ok(values.every(v=>v.height<=17&&!v.overflow));}
@@ -101,6 +110,16 @@ try {
  await page.evaluate(()=>{card.setConfig({...barConfig,forecast_type:'hourly'});});await card.locator('.entry').first().waitFor();assert.equal(await card.locator('.bar-entry').count(),0);await page.evaluate(()=>{card.setConfig(barConfig);});await card.locator('.bar-entry').first().waitFor();
  await page.evaluate(()=>{connection.connected=false;for(const fn of listeners.disconnected)fn();});assert.equal(await card.locator('.bar-entry').count(),0);assert.match(await card.locator('.shell').innerText(),/Forecast offline/);
  await page.evaluate(()=>{connection.connected=true;for(const fn of listeners.ready)fn();});await card.locator('.bar-entry').first().waitFor();
+
+ // Calendar changes only refresh noninteractive forecast rows; no clock or HA event required.
+ await page.evaluate(()=>{card.setConfig({...barConfig,show_time:false,show_date:false,time_zone:'UTC'});window.markerNow=new Date('2026-10-25T23:59:59.500Z');card._now=()=>markerNow;card._startClock();window.calendarButton=card.shadowRoot.querySelector('.current');window.calendarQueries=requests.length;});
+ assert.equal(await card.locator('.bar-entry').first().locator('.range-current').count(),1);
+ await page.evaluate(()=>window.markerNow=new Date('2026-10-26T00:00:00Z'));await page.clock.fastForward(500);
+ assert.equal(await card.locator('.bar-entry').first().locator('.range-current').count(),0);assert.equal(await card.locator('.bar-entry').nth(1).locator('.range-current').count(),1);
+ assert.equal(await page.evaluate(()=>calendarButton===card.shadowRoot.querySelector('.current')),true);assert.equal(await page.evaluate(()=>requests.length),await page.evaluate(()=>calendarQueries));
+ await page.evaluate(()=>{window.markerNow=new Date('2027-10-26T12:00:00Z');card._updateClock();});assert.equal(await card.locator('.range-current').count(),0);
+ await page.evaluate(()=>{card._now=()=>new Date('2026-10-25T12:00:00Z');card.setConfig(barConfig);card.hass.states['weather.example'].attributes.temperature=null;card.hass={...card.hass};});assert.equal(await card.locator('.range-current').count(),0);
+ console.log('Current marker: exact browser geometry, updates, extended scale, today-only, hidden clock midnight/full-date rollover and no new requests PASS');
  console.log('Daily bars min/max, shared geometry, layout switching/no extra query, missing/negative/equal/reversed ranges, locale, offline and narrow themes: PASS');
  await page.evaluate(() => card.setConfig({ ...config, show_time: false, show_date: false })); assert.equal(await card.locator('.datetime').count(), 0); assert.equal(await page.evaluate(() => card._clockTimer), undefined);
  await page.evaluate(() => card.setConfig({ ...config, show_time: false })); assert.equal(await card.locator('.clock').count(), 0); assert.equal(await card.locator('.calendar').count(), 1);

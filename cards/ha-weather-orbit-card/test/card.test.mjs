@@ -53,6 +53,43 @@ test('bar inputs escape hostile units/conditions and numeric CSS never uses stri
  const e=barsSetup([{datetime:'2026-10-25T00:00:00Z',templow:'0',temperature:'10',condition:'"><img src=x onerror=1>'}]);e.card.hass.states['weather.example'].attributes.temperature_unit='"><svg onload=1>';e.card.hass={...e.card.hass};assert.doesNotMatch(e.html(),/<img|<svg|<script|style="[^"]*onerror/);assert.match(e.html(),/&lt;svg/);assert.match(e.html(),/style="left:0%;width:100%"/);
 });
 
+function markerSetup(temp, data = [{datetime:'2026-10-25T00:00:00Z',templow:0,temperature:10},{datetime:'2026-10-26T00:00:00Z',templow:5,temperature:20}]) {
+ if (!arguments.length) temp=5;
+ const e = setup(barsConfig); e.card._now = () => new Date('2026-10-25T12:00:00Z');
+ e.card.hass = {...e.card.hass,states:{...e.card.hass.states,'weather.example':weather({temperature:temp})}};
+ e.conn.requests[0].cb({type:'daily',forecast:data}); return e;
+}
+const dot = html => html.match(/class="range-current"[^>]*style="left:([^%]+)%"/)?.[1];
+test('current weather dot uses today only and exact shared scale',()=>{
+ const e=markerSetup();assert.equal(Number(dot(e.html())),25);assert.equal((e.html().match(/class="range-current"/g)||[]).length,1);assert.match(e.html(),/maximum 10 °C; Current weather temperature 5 °C/);assert.equal(e.conn.requests.length,1);assert.equal(e.calls.length,0);
+ e.card.hass={...e.card.hass,states:{...e.card.hass.states,'weather.example':weather({temperature:10})}};assert.equal(Number(dot(e.html())),50);assert.equal(e.conn.requests.length,1);
+});
+for(const temperature of [0,-2.7,25])test('current dot scale includes exact reported temperature '+temperature,()=>{
+ const e=markerSetup(temperature);const scale=e.card._scale(e.card._forecast,temperature);assert.equal(Number(dot(e.html())),(temperature-scale.min)/scale.span*100);assert.match(e.html(),/Minimum 0 °C; maximum 10 °C/);assert.equal(e.conn.requests.length,1);
+});
+for(const value of [null,undefined,'',false,'bad',NaN,Infinity])test('invalid current marker omitted '+String(value),()=>assert.equal(dot(markerSetup(value).html()),undefined));
+test('marker needs today and complete non-reversed range, never guesses first day',()=>{
+ for(const data of [[{datetime:'2026-10-26T00:00:00Z',templow:0,temperature:10}],[{datetime:'2026-10-25T00:00:00Z',temperature:10}],[{datetime:'2026-10-25T00:00:00Z',templow:10,temperature:0}]])assert.equal(dot(markerSetup(5,data).html()),undefined);
+ const e=markerSetup(0,[{datetime:'2026-10-25T00:00:00Z',templow:0,temperature:0}]);assert.equal(Number(dot(e.html())),50);assert.match(e.html(),/range-point/);
+ e.card._now=()=>new Date('2026-10-26T12:00:00Z');assert.equal(dot(e.card._barEntries(e.card._forecast.slice(0,1),e.card.hass.states['weather.example'].attributes)),undefined);
+});
+test('current marker follows resolved zone, full calendar date and DST',()=>{
+ const e=markerSetup();e.card._now=()=>new Date('2026-10-25T23:30:00Z');e.card.setConfig({...barsConfig,time_zone:'Europe/Bucharest'});assert.match(e.html(),/maximum 20 °C; Current weather temperature/);
+ e.card.setConfig({...barsConfig,time_zone:'UTC'});assert.match(e.html(),/maximum 10 °C; Current weather temperature/);
+ e.card._now=()=>new Date('2027-10-25T12:00:00Z');assert.equal(dot(e.card._barEntries(e.card._forecast,e.card.hass.states['weather.example'].attributes)),undefined);
+ e.card._now=()=>new Date('2026-10-25T00:30:00Z');e.card.setConfig({...barsConfig,time_zone:'Europe/Bucharest'});const before=dot(e.html());e.card._now=()=>new Date('2026-10-25T01:30:00Z');assert.equal(dot(e.card._barEntries(e.card._forecast,e.card.hass.states['weather.example'].attributes)),before);
+});
+test('current marker never takes outdoor sensor, requires provider unit and availability',()=>{
+ const e=markerSetup();e.card.hass.states['sensor.outdoor']={state:'99',attributes:{unit_of_measurement:'°F'}};e.card.setConfig({...barsConfig,outdoor_temperature_entity:'sensor.outdoor'});assert.equal(Number(dot(e.html())),25);
+ for(const temperature_unit of ['°F','K']){e.card.hass.states['weather.example'].attributes.temperature_unit=temperature_unit;e.card.hass={...e.card.hass};assert.equal(Number(dot(e.html())),25);assert.ok(e.html().includes('Current weather temperature 5 '+temperature_unit));}
+ for(const temperature_unit of [undefined,'','bad','"><svg onload=1>']){e.card.hass.states['weather.example'].attributes.temperature_unit=temperature_unit;e.card.hass={...e.card.hass};assert.equal(dot(e.html()),undefined);assert.doesNotMatch(e.html(),/<svg/);}
+ e.card.hass.states['weather.example']=weather({},'unavailable');e.card.hass={...e.card.hass};assert.equal(dot(e.html()),undefined);
+});
+test('hidden clock maintains marker calendar and stops timer on disconnect',()=>{
+ const e=markerSetup();e.card.setConfig({...barsConfig,show_time:false,show_date:false});assert.equal(e.timers.size,1);const writes=e.card.shadowRoot.writes;
+ e.card._now=()=>new Date('2026-10-26T00:00:00Z');const [id,timer]=[...e.timers.entries()][0];e.timers.delete(id);timer.cb();assert.match(e.card.shadowRoot.nodes['.entries.bars'].innerHTML,/maximum 20 °C; Current weather temperature/);assert.equal(e.card.shadowRoot.writes,writes);assert.equal(e.conn.requests.length,1);e.card.disconnectedCallback();assert.equal(e.timers.size,0);
+});
+
 function connection() {
  const listeners = new Map(), requests = [];
  return { connected: true, requests, listeners,
@@ -71,11 +108,12 @@ function setup(config = { entity: 'weather.example' }, overrides = {}) {
  const context = vm.createContext({ HTMLElement: Element, Intl, setTimeout: (cb, delay) => { const id = ++nextTimer; timers.set(id, { cb, delay }); return id; }, clearTimeout: (id) => timers.delete(id), window: {}, customElements: { get: (n) => registry.get(n), define: (n, c) => { assert.ok(!registry.has(n)); registry.set(n, c); } }, CustomEvent: class { constructor(type, options) { this.type = type; Object.assign(this, options); } } });
  vm.runInContext(source, context);
  const Card = registry.get('ha-weather-orbit-card'), card = new Card(), conn = connection();
+ card._now = () => new Date('2027-01-01T12:00:00Z'); // Existing fixtures are not today; marker tests explicitly set their date.
  card.setConfig(config); card.hass = { states: { 'weather.example': weather(), 'weather.other': weather({ temperature: -3 }) }, connection: conn, config: { time_zone: 'UTC' }, locale: { language: 'en-GB', time_format: '24' }, callService: (...args) => calls.push(args), ...overrides }; card.connectedCallback();
  return { Card, card, conn, calls, context, events, timers, html: () => card.shadowRoot.innerHTML, click(action, disabled = false) { card.shadowRoot.listeners.click({ composedPath: () => [{ dataset: { action }, disabled }] }); } };
 }
 test('empty useful card, no guessed entities or services', () => { const e = setup({}); assert.match(e.html(), /Choose a weather entity/); assert.equal(e.conn.requests.length, 0); e.click('info'); e.click('retry'); assert.deepEqual(e.calls, []); assert.deepEqual(e.events, []); });
-test('metadata root asset version and minimum', () => { const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url))); const hacs = JSON.parse(readFileSync(new URL('../hacs.json', import.meta.url))); assert.equal(pkg.version, '1.3.0'); assert.equal(hacs.homeassistant, '2026.6.0'); assert.equal(hacs.filename, pkg.name + '.js'); assert.doesNotMatch(source, /callService|attributes\.forecast/); });
+test('metadata root asset version and minimum', () => { const pkg = JSON.parse(readFileSync(new URL('../package.json', import.meta.url))); const hacs = JSON.parse(readFileSync(new URL('../hacs.json', import.meta.url))); assert.equal(pkg.version, '1.4.0'); assert.equal(hacs.homeassistant, '2026.6.0'); assert.equal(hacs.filename, pkg.name + '.js'); assert.doesNotMatch(source, /callService|attributes\.forecast/); });
 test('native form all optional defaults consistent and complete', () => { const e = setup({}), stub = e.Card.getStubConfig(), f = e.Card.getConfigForm(); assert.deepEqual(plain(f.schema.map((x) => x.name).sort()), Object.keys(stub).sort()); assert.equal(stub.entity, ''); for (const s of f.schema) { assert.notEqual(s.required, true); assert.ok(f.computeLabel(s)); if (s.default !== undefined) assert.equal(s.default, stub[s.name]); } assert.equal(f.schema[0].selector.entity.domain, 'weather'); });
 for (const config of [null, [], 1, { entity: 'sensor.foo' }, { entity: 'weather.x" onmouseover="bad' }, { title: 3 }, { palette: '__proto__' }, { forecast_type: 'constructor' }, { show_forecast: 'false' }, ...[0, 8, -1, 1.2, '3', Infinity].map((forecast_count) => ({ forecast_count }))]) test('reject bad config ' + JSON.stringify(config), () => { assert.throws(() => setup(config)); });
 for (const palette of ['aurora', 'ocean', 'sunset', 'lavender']) test('palette ' + palette, () => { assert.match(setup({ palette }).html(), new RegExp('data-palette="' + palette + '"')); });

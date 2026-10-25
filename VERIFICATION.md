@@ -1,5 +1,14 @@
 # Verification records
 
+## v1.7.0 — Current-temperature dot on today’s daily bar
+
+- Only Weather updated to public v1.4.0 commit `e9ef5834fec155b9fb2cc03fe2edf19f54501f84`, source SHA256 `2307d27fdee7b3faa440b7a2b85825a283b4220416767c98fb65da3e7611f2a0`. Selected imports match that verified tag; all other pins unchanged.
+- Deterministic build/syntax, 32 suite +389 upstream Node tests (421 total),2 smoke suites and synthetic Chromium28/28 passed sequentially.
+- Full Weather browser regression ran from **dist/orbit-lovelace.js** via CARD_RESOURCE. Marker geometry, attribute-only temperature changes, scale extension with unchanged forecast endpoints, today-only/full-year matching, hidden-clock midnight move/removal without replacing weather buttons or new requests passed. Prior layout/sensor/clock/offline/More Info checks retained.
+- Standalone107 tests also cover finite zero/negative/decimal readings, missing/invalid/unknown units, equal/reversed/missing ranges, date/time-zone/DST, sensor independence and timer cleanup. Existing bar tests now freeze a non-today date explicitly, avoiding host-date-dependent scale expectations. New fixture corrections covered default-argument undefined, UTC-to-local forecast dates, and simulated timer consumption; production behavior was not changed to satisfy incorrect fixture assumptions.
+- Combined light/dark/narrow screenshots inspected. Widths167–760px no overflow;5-day fixture451px at440px,584px at167px. Dot fits within existing rows and does not intercept actions.
+- Standalone CI main/tag and public release/tag/raw/package/asset/latest/digest verified before importing. Native HA components/icons are stubs; native editor/Companion/hardware unverified. No live HA/dashboard/resource/device changed.
+
 ## v1.6.0 — Weather daily min–max bars
 
 - Only Weather updated to verified public v1.3.0 commit `5773bf0cb5a34959e36633fe58cffeafdcb71d27`, source SHA256 `73a51f2c14983c5008c92577aeb74801978576b1c4cf1eb4bcb840cd958f9afb`. Selected imports match the tag; other pins including Room1.6.0 unchanged.

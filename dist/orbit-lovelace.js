@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.6.0 — MIT. */
+/* Orbit Lovelace v1.7.0 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.6.0",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.7.0",components:{},skipped:{},errors:[]};
 /* ha-alerts-orbit-card @ 1.0.0 (83df41182a3b9b4a8f2b02e806be9bbeeff36ecf) */
 try { (() => {
 const knownTypes=["ha-alerts-orbit-card"];
@@ -2487,7 +2487,7 @@ for(const entry of window.customCards){const type=String(entry.type).startsWith(
 if(!window.customCards.some(card=>card.type==="ha-vacuum-commander-card"))window.customCards.push({type:"ha-vacuum-commander-card",name:"Vacuum Commander Card",description:"Included in Orbit Lovelace",preview:false});
 suite.components["ha-vacuum-commander-card"]={version:"1.3.0",types:["ha-vacuum-commander-card"]};
 })() } catch(error){suite.errors.push({component:"ha-vacuum-commander-card",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","ha-vacuum-commander-card",error);}
-/* ha-weather-orbit-card @ 1.3.0 (5773bf0cb5a34959e36633fe58cffeafdcb71d27) */
+/* ha-weather-orbit-card @ 1.4.0 (e9ef5834fec155b9fb2cc03fe2edf19f54501f84) */
 try { (() => {
 const knownTypes=["ha-weather-orbit-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["ha-weather-orbit-card"]="Already registered; remove old resources and reload to use the suite version.";return;}
@@ -2502,7 +2502,7 @@ const finite = (v) => (typeof v === 'number' || typeof v === 'string' && v.trim(
 const available = (s) => !!s && typeof s.state === 'string' && !['', 'unknown', 'unavailable'].includes(s.state);
 const condition = (v) => Object.hasOwn(CONDITIONS, v) ? CONDITIONS[v] : [String(v ?? 'Forecast'), 'cloudy-alert'];
 const icon = (name) => '<ha-icon aria-hidden="true" icon="mdi:weather-' + esc(name) + '"></ha-icon>';
-const BARS_STYLE = '.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.entries.bars{grid-template-columns:minmax(0,1fr);gap:6px}.bar-entry{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;gap:0 8px;padding:6px 8px;text-align:left}.bar-day{display:flex;align-items:center;gap:6px;min-width:0}.bar-day time{font-size:11px;overflow-wrap:anywhere;min-width:0}.bar-day ha-icon{margin:0;--mdc-icon-size:20px}.bar-condition{display:inline-flex;flex:none}.range-line{display:grid;grid-template-columns:minmax(0,48px) minmax(16px,1fr) minmax(0,48px);align-items:center;gap:6px;min-width:0}.range-low,.range-high{display:flex;flex-direction:column;min-width:0;max-width:68px;font-variant-numeric:tabular-nums}.range-high{text-align:right}.range-label{font-size:9px;line-height:12px;color:var(--secondary-text-color,#637282)}.range-value{font-size:11px;line-height:16px;overflow-wrap:anywhere}.range-high .range-value{font-weight:700}.range-track{display:block;position:relative;height:10px;min-width:0;overflow:hidden;border-radius:8px;background:color-mix(in srgb,var(--accent) 9%,transparent)}.range-fill{position:absolute;top:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent2),#dbb45c)}.range-point{min-width:3px;transform:translateX(-50%)}.range-unavailable{opacity:.45}.bar-rain{grid-column:2;font-size:9px}@container weather (max-width:300px){.bar-entry{grid-template-columns:minmax(0,1fr);gap:3px;padding:6px}.bar-day{justify-content:space-between}.bar-rain{grid-column:1}.range-low,.range-high{max-width:52px}}@container weather (max-width:220px){.range-line{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.range-low,.range-high{flex-direction:row;align-items:center;gap:3px;max-width:none}.range-high{justify-content:flex-end}.range-track{grid-column:1/-1;grid-row:2}}';
+const BARS_STYLE = '.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}.entries.bars{grid-template-columns:minmax(0,1fr);gap:6px}.bar-entry{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;gap:0 8px;padding:6px 8px;text-align:left}.bar-day{display:flex;align-items:center;gap:6px;min-width:0}.bar-day time{font-size:11px;overflow-wrap:anywhere;min-width:0}.bar-day ha-icon{margin:0;--mdc-icon-size:20px}.bar-condition{display:inline-flex;flex:none}.range-line{display:grid;grid-template-columns:minmax(0,48px) minmax(16px,1fr) minmax(0,48px);align-items:center;gap:6px;min-width:0}.range-low,.range-high{display:flex;flex-direction:column;min-width:0;max-width:68px;font-variant-numeric:tabular-nums}.range-high{text-align:right}.range-label{font-size:9px;line-height:12px;color:var(--secondary-text-color,#637282)}.range-value{font-size:11px;line-height:16px;overflow-wrap:anywhere}.range-high .range-value{font-weight:700}.range-track{display:block;position:relative;height:10px;min-width:0;overflow:visible;border-radius:8px;background:color-mix(in srgb,var(--accent) 9%,transparent)}.range-fill{position:absolute;top:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--accent2),#dbb45c)}.range-point{min-width:3px;transform:translateX(-50%)}.range-current{position:absolute;top:50%;width:9px;height:9px;border-radius:50%;background:#fff;border:2px solid var(--primary-text-color,#202c3c);box-shadow:0 0 0 1px #fff8;transform:translate(-50%,-50%);pointer-events:none}.range-unavailable{opacity:.45}.bar-rain{grid-column:2;font-size:9px}@container weather (max-width:300px){.bar-entry{grid-template-columns:minmax(0,1fr);gap:3px;padding:6px}.bar-day{justify-content:space-between}.bar-rain{grid-column:1}.range-low,.range-high{max-width:52px}}@container weather (max-width:220px){.range-line{grid-template-columns:repeat(2,minmax(0,1fr));gap:4px}.range-low,.range-high{flex-direction:row;align-items:center;gap:3px;max-width:none}.range-high{justify-content:flex-end}.range-track{grid-column:1/-1;grid-row:2}}';
 const STYLE = [
  ':host{display:block;min-width:0;max-width:100%;color:var(--primary-text-color,#202c3c)}*{box-sizing:border-box}',
  'ha-card{display:block;container:weather/inline-size;overflow:hidden;border-radius:22px;border:1px solid var(--divider-color,#dce5e9);background:var(--ha-card-background,var(--card-background-color,#fff));box-shadow:var(--ha-card-box-shadow,0 2px 6px #182c3510);--accent:#078f72;--accent2:#27b7b0}',
@@ -2616,11 +2616,15 @@ class WeatherOrbitCard extends HTMLElement {
  _clearClock() { if (this._clockTimer !== undefined) clearTimeout(this._clockTimer); this._clockTimer = undefined; }
  _startClock() {
   this._clearClock();
-  if (!this._mounted || (!this._config.show_time && !this._config.show_date)) return;
+  if (!this._mounted || (!this._config.show_time && !this._config.show_date && !this._hasDailyBars())) return;
   this._clockTimer = setTimeout(() => { this._clockTimer = undefined; this._updateClock(); this._startClock(); }, 60000 - (this._now().getTime() % 60000));
  }
  _updateClock() {
   const now = this._now();
+  if (this._hasDailyBars() && this._barDay !== this._dayKey(now)) {
+   const entries = this.shadowRoot.querySelector('.entries.bars');
+   if (entries) entries.innerHTML = this._barEntries(this._forecast.slice(0, this._config.forecast_count), this._hass?.states?.[this._config.entity]?.attributes || {});
+  }
   const clock = this.shadowRoot.querySelector('.clock'), calendar = this.shadowRoot.querySelector('.calendar');
   if (clock) { clock.textContent = this._formatDate(now, this._timeOptions()); clock.setAttribute('datetime', now.toISOString()); }
   if (calendar) { calendar.textContent = this._formatDate(now, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }); calendar.setAttribute('datetime', now.toISOString()); }
@@ -2633,11 +2637,17 @@ class WeatherOrbitCard extends HTMLElement {
   return this._formatDate(new Date(value), options);
  }
  _value(value, unit, precision = 1) { return finite(value) ? esc(this._number(value, precision)) + (unit ? ' ' + esc(unit) : '') : ''; }
- _ranges(entries) {
+ _hasDailyBars() { return this._config.show_forecast && this._config.forecast_type === 'daily' && this._config.forecast_layout === 'bars'; }
+ _dayKey(date) { return new Intl.DateTimeFormat('en-CA', { timeZone: this._zone(), calendar: 'gregory', numberingSystem: 'latn', year: 'numeric', month: '2-digit', day: '2-digit' }).format(date); }
+ _scale(entries, current) {
   const valid = entries.filter(f => finite(f.templow) && finite(f.temperature) && Number(f.templow) <= Number(f.temperature));
-  if (!valid.length) return entries.map(() => null);
-  const min = Math.min(...valid.map(f => Number(f.templow))), max = Math.max(...valid.map(f => Number(f.temperature))), span = max - min;
-  if (!Number.isFinite(span)) return entries.map(() => null);
+  if (!valid.length) return null;
+  const min = Math.min(...valid.map(f => Number(f.templow)), ...(finite(current) ? [Number(current)] : [])), max = Math.max(...valid.map(f => Number(f.temperature)), ...(finite(current) ? [Number(current)] : [])), span = max - min;
+  return Number.isFinite(span) ? { min, max, span } : null;
+ }
+ _ranges(entries, scale = this._scale(entries)) {
+  if (!scale) return entries.map(() => null);
+  const { min, span } = scale;
   const percent = n => Math.round(Math.max(0, Math.min(100, n)) * 1e6) / 1e6;
   return entries.map(f => {
    if (!finite(f.templow) || !finite(f.temperature) || Number(f.templow) > Number(f.temperature)) return null;
@@ -2646,14 +2656,20 @@ class WeatherOrbitCard extends HTMLElement {
   });
  }
  _barEntries(entries, attrs) {
-  const ranges = this._ranges(entries);
+  this._barDay = this._dayKey(this._now());
+  const currentIndex = available(this._hass?.states?.[this._config.entity]) && finite(attrs.temperature) && ['°C', '°F', 'K'].includes(attrs.temperature_unit)
+   ? entries.findIndex(f => this._dayKey(new Date(f.datetime)) === this._barDay && finite(f.templow) && finite(f.temperature) && Number(f.templow) <= Number(f.temperature)) : -1;
+  const scale = this._scale(entries, currentIndex < 0 ? undefined : attrs.temperature), ranges = this._ranges(entries, scale);
+  const position = scale && currentIndex >= 0 ? (scale.span ? Math.max(0, Math.min(100, (Number(attrs.temperature) - scale.min) / scale.span * 100)) : 50) : null;
   return entries.map((f, i) => {
    const fc = condition(f.condition), range = ranges[i];
    const low = finite(f.templow) ? this._value(f.templow, attrs.temperature_unit) : '—';
    const high = finite(f.temperature) ? this._value(f.temperature, attrs.temperature_unit) : '—';
-   const label = 'Minimum ' + (finite(f.templow) ? this._number(f.templow) + (attrs.temperature_unit ? ' ' + attrs.temperature_unit : '') : 'unavailable') + '; maximum ' + (finite(f.temperature) ? this._number(f.temperature) + (attrs.temperature_unit ? ' ' + attrs.temperature_unit : '') : 'unavailable') + (!range ? '; range unavailable' : '');
+   const currentLabel = position !== null && i === currentIndex ? 'Current weather temperature ' + this._number(attrs.temperature) + ' ' + attrs.temperature_unit : '';
+   const marker = currentLabel ? '<span class="range-current" title="' + esc(currentLabel) + '" style="left:' + position + '%"></span>' : '';
+   const label = 'Minimum ' + (finite(f.templow) ? this._number(f.templow) + (attrs.temperature_unit ? ' ' + attrs.temperature_unit : '') : 'unavailable') + '; maximum ' + (finite(f.temperature) ? this._number(f.temperature) + (attrs.temperature_unit ? ' ' + attrs.temperature_unit : '') : 'unavailable') + (!range ? '; range unavailable' : '') + (currentLabel ? '; ' + currentLabel : '');
    const rain = finite(f.precipitation) && Number(f.precipitation) >= 0 ? this._value(f.precipitation, attrs.precipitation_unit) : '';
-   return '<div class="entry bar-entry"><div class="bar-day"><time datetime="' + esc(f.datetime) + '" title="' + esc(this._date(f.datetime)) + '">' + esc(this._formatDate(new Date(f.datetime), { weekday: 'short' })) + '</time><span class="bar-condition" title="' + esc(fc[0]) + '">' + icon(fc[1]) + '<span class="sr-only">' + esc(fc[0]) + '</span></span></div><div class="range-line" role="img" aria-label="' + esc(label) + '"><span class="range-low"><span class="range-label">Min</span><span class="range-value">' + low + '</span></span><span class="range-track' + (!range ? ' range-unavailable' : '') + '" aria-hidden="true">' + (range ? '<span class="range-fill' + (range.point ? ' range-point' : '') + '" style="left:' + range.left + '%;width:' + range.width + '%"></span>' : '') + '</span><span class="range-high"><span class="range-label">Max</span><span class="range-value">' + high + '</span></span></div>' + (rain ? '<div class="rain bar-rain">Rain ' + rain + '</div>' : '') + '</div>';
+   return '<div class="entry bar-entry"><div class="bar-day"><time datetime="' + esc(f.datetime) + '" title="' + esc(this._date(f.datetime)) + '">' + esc(this._formatDate(new Date(f.datetime), { weekday: 'short' })) + '</time><span class="bar-condition" title="' + esc(fc[0]) + '">' + icon(fc[1]) + '<span class="sr-only">' + esc(fc[0]) + '</span></span></div><div class="range-line" role="img" aria-label="' + esc(label) + '" title="' + esc(label) + '"><span class="range-low"><span class="range-label">Min</span><span class="range-value">' + low + '</span></span><span class="range-track' + (!range ? ' range-unavailable' : '') + '" aria-hidden="true">' + (range ? '<span class="range-fill' + (range.point ? ' range-point' : '') + '" style="left:' + range.left + '%;width:' + range.width + '%"></span>' : '') + marker + '</span><span class="range-high"><span class="range-label">Max</span><span class="range-value">' + high + '</span></span></div>' + (rain ? '<div class="rain bar-rain">Rain ' + rain + '</div>' : '') + '</div>';
   }).join('');
  }
  _outdoor() {
@@ -2691,7 +2707,7 @@ if (!window.customCards.some((card) => card.type === TYPE)) window.customCards.p
 window.customCards ||= [];
 for(const entry of window.customCards){const type=String(entry.type).startsWith("custom:")?entry.type.slice(7):entry.type;if(knownTypes.includes(type))entry.type=type;}
 if(!window.customCards.some(card=>card.type==="ha-weather-orbit-card"))window.customCards.push({type:"ha-weather-orbit-card",name:"Weather Orbit Card",description:"Included in Orbit Lovelace",preview:false});
-suite.components["ha-weather-orbit-card"]={version:"1.3.0",types:["ha-weather-orbit-card"]};
+suite.components["ha-weather-orbit-card"]={version:"1.4.0",types:["ha-weather-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"ha-weather-orbit-card",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","ha-weather-orbit-card",error);}
 /* ha-welcome-orbit-card @ 1.1.0 (a30e5cb31023f47df056738cd5dd9837ee9bac57) */
 try { (() => {

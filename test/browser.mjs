@@ -21,7 +21,7 @@ try{
  }
  assert.deepEqual(await page.evaluate(()=>calls),[]);assert.deepEqual(errors,[]);
  // Weather v1.1.0 clock/date must refresh in the final suite, not just standalone.
- assert.equal(await page.evaluate(()=>orbitLovelace.components['ha-weather-orbit-card'].version),'1.3.0');
+ assert.equal(await page.evaluate(()=>orbitLovelace.components['ha-weather-orbit-card'].version),'1.4.0');
  await page.evaluate(()=>{document.querySelector('#host').replaceChildren();window.card=document.createElement('ha-weather-orbit-card');card.setConfig({entity:'weather.example',show_forecast:false});card.hass={...hass,locale:{language:'ro',time_format:'24'},config:{...hass.config,time_zone:'Europe/Bucharest'},states:{'weather.example':{state:'sunny',attributes:{temperature:24.7,temperature_unit:'°C'}}}};document.querySelector('#host').append(card);window.weatherButton=card.shadowRoot.querySelector('.current');});
  const weather=page.locator('ha-weather-orbit-card');assert.equal(await weather.locator('.clock').innerText(),'23:59');assert.match(await weather.locator('.calendar').innerText(),/22 octombrie 2026/);
  const queriesBefore=await page.evaluate(()=>queries.length);await page.clock.fastForward(30000);assert.equal(await weather.locator('.clock').innerText(),'00:00');assert.match(await weather.locator('.calendar').innerText(),/23 octombrie 2026/);assert.equal(await page.evaluate(()=>weatherButton===card.shadowRoot.querySelector('.current')),true);assert.equal(await page.evaluate(()=>queries.length),queriesBefore);
