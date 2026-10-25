@@ -18,6 +18,17 @@ const FEATURE = Object.freeze({
   BROWSE_MEDIA: 131072,
 });
 
+const COMMANDS = {
+  turn_on: [FEATURE.TURN_ON, "Turn on"], turn_off: [FEATURE.TURN_OFF, "Turn off"],
+  media_play: [FEATURE.PLAY, "Play"], media_pause: [FEATURE.PAUSE, "Pause"],
+  media_previous_track: [FEATURE.PREVIOUS_TRACK, "Previous track"], media_next_track: [FEATURE.NEXT_TRACK, "Next track"],
+  media_stop: [FEATURE.STOP, "Stop"], volume_mute: [FEATURE.VOLUME_MUTE, "Mute"],
+  volume_set: [FEATURE.VOLUME_SET, "Volume"], media_seek: [FEATURE.SEEK, "Seek"],
+  select_source: [FEATURE.SELECT_SOURCE, "Source"], shuffle_set: [FEATURE.SHUFFLE_SET, "Shuffle"],
+  repeat_set: [FEATURE.REPEAT_SET, "Repeat"], play_media: [FEATURE.PLAY_MEDIA, "Play media"],
+};
+const COMMAND_ACTIONS = new Set(["power", "play", "pause", "previous", "next", "stop", "mute", "volume", "seek", "source", "shuffle", "repeat", "browser-item"]);
+
 const SCHEMA = [
   { name: "entity", required: true, selector: { entity: { domain: ["media_player"] } } },
   { name: "title", selector: { text: {} } },
@@ -26,6 +37,8 @@ const SCHEMA = [
 const LABELS = { entity: "Media player", title: "Card title", show_artwork: "Show artwork" };
 
 const STYLE = `
+  .action-feedback{display:flex;align-items:center;gap:7px;margin-top:10px;padding:9px 11px;border-radius:11px;background:color-mix(in srgb,var(--accent,#756ce5) 10%,var(--card-background-color,#fff));color:var(--primary-text-color);font-size:11px;line-height:1.5;overflow-wrap:anywhere}.action-feedback[hidden]{display:none}.action-feedback[data-kind="error"]{color:var(--error-color,#bd4e4e)}.action-feedback[data-kind="sent"]{border-left:3px solid var(--success-color,#168b7b)}.action-feedback[data-kind="pending"]:before{content:"";flex:none;width:10px;height:10px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:media-command-spin .8s linear infinite}@keyframes media-command-spin{to{transform:rotate(360deg)}}
+  button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}button:active:not(:disabled){filter:brightness(.88);transform:scale(.96)}.turn-on:focus-visible{outline:2px solid var(--accent,#756ce5);outline-offset:3px}.turn-on{min-height:44px}.turn-on:disabled{opacity:.7;cursor:wait}.turn-on[aria-busy="true"]{box-shadow:0 0 0 3px color-mix(in srgb,var(--accent,#756ce5) 25%,transparent)}
   :host{display:block;min-width:0;max-width:100%;color:var(--primary-text-color)}
   ha-card{box-sizing:border-box;width:100%;min-width:0;max-width:100%;container-type:inline-size;container-name:card;overflow:hidden;border:1px solid color-mix(in srgb,var(--divider-color) 55%,transparent);border-radius:26px;background:var(--ha-card-background,var(--card-background-color,#fff));box-shadow:var(--ha-card-box-shadow,0 14px 38px rgba(21,28,54,.13))}
   .shell{--accent:#8368ef;position:relative;isolation:isolate;overflow:hidden;padding:clamp(17px,3.6vw,25px);background:radial-gradient(ellipse at 0% 0%,rgba(127,106,255,.15),transparent 43%),radial-gradient(ellipse at 100% 100%,rgba(47,194,192,.13),transparent 48%),var(--ha-card-background,var(--card-background-color,#fff))}
@@ -40,7 +53,8 @@ const STYLE = `
   .off-state,.empty-state{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:20px;padding:15px;border:1px solid color-mix(in srgb,var(--divider-color) 55%,transparent);border-radius:18px;background:color-mix(in srgb,var(--card-background-color,#fff) 88%,var(--accent))}.off-copy{min-width:0}.off-title{font-size:14px;font-weight:760}.off-hint{margin-top:4px;color:var(--secondary-text-color);font-size:11px}.turn-on{display:flex;align-items:center;gap:7px;padding:10px 13px;border:0;border-radius:13px;background:linear-gradient(145deg,#8d78f5,#626fe3 70%,#42b5b9);box-shadow:0 5px 13px rgba(102,100,211,.22);color:#fff;font:inherit;font-size:11px;font-weight:800;white-space:nowrap;cursor:pointer}.turn-on ha-icon{--mdc-icon-size:17px}.error{margin-top:10px;color:var(--error-color,#bd4e4e);font-size:11px}.setup{padding:20px;color:var(--secondary-text-color);font:inherit;font-size:13px;font-weight:500}
   @container card (max-width: 480px){.shell{padding:14px}.topline{gap:8px}.brand{gap:8px}.brand-icon{width:37px;height:37px;border-radius:13px}.brand-icon ha-icon{--mdc-icon-size:20px}.player-name{font-size:16px}.state-pill{gap:5px;padding:6px 8px;font-size:8px}.now-playing{grid-template-columns:68px minmax(0,1fr);gap:11px;margin-top:16px}.artwork{border-radius:15px}.track-title{font-size:18px}.track-subtitle{font-size:12px}.progress-wrap{margin-top:14px}.controls{gap:8px}.control{width:36px;height:36px}.control.primary{width:44px;height:44px}.volume-row{gap:8px;padding:8px}.advanced{grid-template-columns:1fr 1fr;gap:7px;margin-top:10px}.browser-toggle{min-height:36px;padding:0 10px}.media-browser{padding:10px;border-radius:14px}.browser-items{grid-template-columns:minmax(0,1fr);gap:5px;max-height:220px}.browser-item{min-height:36px;padding:6px 8px}.off-state,.empty-state{gap:8px;margin-top:15px;padding:11px}.turn-on{padding:9px 10px}}
   @container card (max-width: 390px){.shell{padding:12px}.now-playing{grid-template-columns:62px minmax(0,1fr);gap:9px;margin-top:14px}.artwork{border-radius:13px}.track-title{font-size:16px}.track-subtitle{font-size:11px}.controls{gap:6px}.control{width:34px;height:34px}.control.primary{width:42px;height:42px}.volume-row{gap:6px;padding:7px}.advanced{gap:5px}.browser-items{max-height:190px}}
-  @media(hover:hover){.turn-on:hover{filter:brightness(1.06);transform:translateY(-1px)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+  @container card (max-width:260px){.off-state{flex-direction:column;align-items:stretch}.off-copy{width:100%;overflow-wrap:anywhere}.turn-on{width:100%;justify-content:center}}
+  @media(hover:hover){.turn-on:hover{filter:brightness(1.06);transform:translateY(-1px)}}@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 `;
 
 function escapeHtml(value) {
@@ -115,6 +129,9 @@ class MediaPlayerCard extends HTMLElement {
   setConfig(config) {
     if (!config || typeof config !== "object") throw new Error("Provide a valid Media Player Card configuration.");
     if (this._config?.entity !== config.entity) {
+      this._suppressGestureClick = Boolean(this._gesture);
+      this._endGesture(false);
+      this._cancelCommand();
       this._browserOpen = false;
       this._browserPath = [];
       this._browserItems = [];
@@ -126,9 +143,21 @@ class MediaPlayerCard extends HTMLElement {
     this._entitySignature = null;
     this._root ??= this.attachShadow({ mode: "open" });
     if (!this._listenersAttached) {
-      this._root.addEventListener("click", (event) => this._handleClick(event));
-      this._root.addEventListener("change", (event) => this._handleChange(event));
+      this._root.addEventListener("click", (event) => { this._endGesture(false); this._handleClick(event); this._flushRender(); });
+      this._root.addEventListener("change", (event) => { this._endGesture(false); this._handleChange(event); this._flushRender(); });
       this._root.addEventListener("input", (event) => this._handleInput(event));
+      this._root.addEventListener("pointerdown", (event) => {
+        if (event.button !== 0 || !event.composedPath().some(node => node instanceof HTMLElement && node.matches("button,input,select"))) return;
+        this._suppressGestureClick = false;
+        this._endGesture(false); this._gesture = true;
+      });
+      this._root.addEventListener("pointerup", () => { if (this._gesture) this._gestureTimer = setTimeout(() => this._endGesture(), 500); });
+      this._root.addEventListener("pointercancel", () => this._endGesture());
+      this._root.addEventListener("pointerout", (event) => {
+        // Touch emits pointerout after pointerup but before its compatibility click.
+        if (event.pointerType === "touch" || this._gestureTimer !== undefined) return;
+        if (!(event.relatedTarget instanceof Node) || !this._root.contains(event.relatedTarget)) this._endGesture();
+      });
       attachMoreInfoHold(this._root, this, () => this._config?.entity);
       this._listenersAttached = true;
     }
@@ -137,7 +166,7 @@ class MediaPlayerCard extends HTMLElement {
 
   set hass(hass) {
     this._hass = hass;
-    const signature = JSON.stringify(this.entity || null);
+    const signature = JSON.stringify(this.entity ? [this.entity.state, this.entity.attributes] : null);
     if (signature !== this._entitySignature) {
       this._entitySignature = signature;
       this.render();
@@ -149,21 +178,65 @@ class MediaPlayerCard extends HTMLElement {
 
   get entity() { return this._hass?.states?.[this._config?.entity]; }
 
+  _flushRender() { if (this._renderDeferred && !this._gesture) { this._renderDeferred = false; this.render(); } }
+  _endGesture(flush = true) { clearTimeout(this._gestureTimer); this._gestureTimer = undefined; this._gesture = false; if (flush) this._flushRender(); }
+  disconnectedCallback() { this._endGesture(false); this._cancelCommand(); }
+  connectedCallback() { if (this._root) this.render(); }
+  _cancelCommand() { this._pendingCommand?.cancel?.(); this._pendingCommand = undefined; this._feedback = null; }
+
+  _paintFeedback() {
+    const status = this._root?.querySelector(".action-feedback");
+    if (status) {
+      status.hidden = !this._feedback;
+      status.textContent = this._feedback?.text || "";
+      status.dataset.kind = this._feedback?.kind || "";
+      status.setAttribute("role", this._feedback?.kind === "error" ? "alert" : "status");
+      status.setAttribute("aria-live", this._feedback?.kind === "error" ? "assertive" : "polite");
+    }
+    for (const control of this._root?.querySelectorAll("button[data-action],input[data-action],select[data-action]") || []) {
+      if (!COMMAND_ACTIONS.has(control.dataset.action)) continue;
+      if (this._pendingCommand) {
+        if (!Object.hasOwn(control.dataset, "busyDisabled")) control.dataset.busyDisabled = String(control.disabled);
+        control.disabled = true; control.setAttribute("aria-busy", "true");
+      } else if (Object.hasOwn(control.dataset, "busyDisabled")) {
+        control.disabled = control.dataset.busyDisabled === "true"; delete control.dataset.busyDisabled; control.removeAttribute("aria-busy");
+      }
+    }
+    const powerLabel = this._root?.querySelector(".turn-on-label");
+    if (powerLabel) powerLabel.textContent = this._pendingCommand?.service === "turn_on" ? "Sending…" : "Turn on";
+  }
+
   async _call(service, data = {}) {
-    const entityId = this._config?.entity;
-    if (!entityId || !this._hass || this.entity?.state === "unavailable") return;
-    this._actionError = null;
+    const entityId = this._config?.entity, command = Object.hasOwn(COMMANDS, service) ? COMMANDS[service] : null;
+    if (!entityId || !this.entity || ["unknown", "unavailable"].includes(this.entity.state) || !command || !featureSupported(this.entity, command[0]) || typeof this._hass?.callService !== "function" || this._pendingCommand) return false;
+    const pending = { service }, label = command[1], hass = this._hass;
+    this._pendingCommand = pending;
+    this._feedback = { kind: "pending", text: "Sending " + label.toLowerCase() + " command…" };
+    this._paintFeedback();
+    let timer;
     try {
-      await this._hass.callService("media_player", service, { entity_id: entityId, ...data });
+      const deadline = new Promise((_, reject) => {
+        pending.cancel = () => reject(new Error("cancelled"));
+        timer = setTimeout(() => { pending.timedOut = true; reject(new Error("timeout")); }, 15000);
+      });
+      await Promise.race([Promise.resolve().then(() => this._pendingCommand === pending ? hass.callService("media_player", service, { entity_id: entityId, ...data }) : undefined), deadline]);
+      if (this._pendingCommand !== pending) return false;
+      this._feedback = { kind: "sent", text: label + " command sent. Device state is reported by Home Assistant." };
+      return true;
     } catch {
-      this._actionError = "Could not send the command. Check Home Assistant and this player.";
-      this.render();
+      if (this._pendingCommand !== pending) return false;
+      this._feedback = { kind: "error", text: pending.timedOut ? "No response from Home Assistant. The command result is unknown; check the player state before retrying." : "Could not send the command. Check Home Assistant and this player, then try again." };
+      return false;
+    } finally {
+      clearTimeout(timer);
+      if (this._pendingCommand === pending) { this._pendingCommand = undefined; this._paintFeedback(); }
     }
   }
 
   _handleClick(event) {
+    if (this._suppressGestureClick) { this._suppressGestureClick = false; return; }
     const button = event.target.closest("button[data-action]");
-    if (!button) return;
+    if (!button || button.disabled) return;
     const action = button.dataset.action;
     const entity = this.entity;
     if (action === "expand") {
@@ -194,12 +267,11 @@ class MediaPlayerCard extends HTMLElement {
     if (!entity) return;
     const attrs = entity.attributes || {};
     const actions = {
-      power: () => this._call(entity.state === "off" ? "turn_on" : "turn_off"),
+      power: () => this._call(button.dataset.service || (entity.state === "off" ? "turn_on" : "turn_off")),
       play: () => this._call("media_play"),
       pause: () => this._call("media_pause"),
       previous: () => this._call("media_previous_track"),
       next: () => this._call("media_next_track"),
-      stop: () => this._call("media_stop"),
       stop: () => this._call("media_stop"),
       mute: () => this._call("volume_mute", { is_volume_muted: !attrs.is_volume_muted }),
       shuffle: () => this._call("shuffle_set", { shuffle: !attrs.shuffle }),
@@ -250,7 +322,7 @@ class MediaPlayerCard extends HTMLElement {
   _button(action, icon, label, { primary = false, pressed = null, disabled = false } = {}) {
     const classes = `control${primary ? " primary" : ""}${action === "power" ? " power" : ""}`;
     const pressedAttr = pressed === null ? "" : ` aria-pressed="${pressed}"`;
-    return `<button class="${classes}" type="button" data-action="${action}" aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}"${pressedAttr}${disabled ? " disabled" : ""}><ha-icon icon="${escapeHtml(icon)}"></ha-icon></button>`;
+    return `<button class="${classes}" type="button" data-action="${action}"${action === "power" ? ' data-service="turn_off"' : ""} aria-label="${escapeHtml(label)}" title="${escapeHtml(label)}"${pressedAttr}${disabled ? " disabled" : ""}><ha-icon icon="${escapeHtml(icon)}"></ha-icon></button>`;
   }
 
   _timePosition(entity) {
@@ -314,20 +386,9 @@ class MediaPlayerCard extends HTMLElement {
     const mediaClass = String(item.media_class || "").toLowerCase();
     const isAppOrChannel = mediaClass === "app" || mediaClass === "channel";
     if (!this.entity || !featureSupported(this.entity, FEATURE.PLAY_MEDIA) || (!item.can_play && !isAppOrChannel)) return;
-    this._actionError = null;
-    try {
-      await this._hass.callService("media_player", "play_media", {
-        entity_id: this._config.entity,
-        media: {
-          media_content_id: item.media_content_id,
-          media_content_type: item.media_content_type,
-        },
-      });
-      this._browserMessage = `Opening ${item.title}…`;
-    } catch {
-      this._browserError = `Could not open ${item.title}.`;
-    }
-    this.render();
+    await this._call("play_media", {
+      media: { media_content_id: item.media_content_id, media_content_type: item.media_content_type },
+    });
   }
 
   _renderBrowser(supportsPlayMedia) {
@@ -363,6 +424,7 @@ class MediaPlayerCard extends HTMLElement {
   }
 
   render() {
+    if (this._gesture) { this._renderDeferred = true; return; }
     if (!this._root || !this._config) return;
     const entityId = this._config.entity;
     if (!entityId) {
@@ -394,7 +456,7 @@ class MediaPlayerCard extends HTMLElement {
     if (unavailable) {
       body = `<div class="empty-state"><div class="off-copy"><div class="off-title">Player unavailable</div><div class="off-hint">Home Assistant cannot currently reach this device.</div></div></div>`;
     } else if (off) {
-      const power = featureSupported(entity, FEATURE.TURN_ON) ? `<button class="turn-on" type="button" data-action="power"><ha-icon icon="mdi:power"></ha-icon>Turn on</button>` : "";
+      const power = featureSupported(entity, FEATURE.TURN_ON) ? `<button class="turn-on" type="button" data-action="power" data-service="turn_on"><ha-icon icon="mdi:power"></ha-icon><span class="turn-on-label">Turn on</span></button>` : "";
       body = `<div class="off-state"><div class="off-copy"><div class="off-title">${deviceClass === "tv" ? "Ready when you are" : "Player is off"}</div><div class="off-hint">${deviceClass === "tv" ? "Turn it on to see playback controls." : ""}</div></div>${power}</div>`;
     } else {
       const times = this._timePosition(entity);
@@ -417,7 +479,8 @@ class MediaPlayerCard extends HTMLElement {
       body = `<div class="now-playing${showArtwork ? "" : " no-artwork"}">${showArtwork ? `<div class="artwork">${art}</div>` : ""}<div class="track-copy"><div class="track-kicker">${escapeHtml(deviceClass)} · ${escapeHtml(stateText)}</div><div class="track-title">${escapeHtml(mediaTitle)}</div>${subtitle ? `<div class="track-subtitle">${escapeHtml(subtitle)}</div>` : ""}${album ? `<div class="album">${escapeHtml(album)}</div>` : ""}</div></div>${progressMarkup}${transport}${volume}${this._renderAdvanced(entity, unavailable)}${stop}`;
     }
     const stateToken = state === "playing" ? "playing" : state === "paused" ? "paused" : off ? "off" : unavailable ? "unavailable" : "";
-    this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="${playerClass}"><header class="topline"><div class="brand"><span class="brand-icon"><ha-icon icon="${deviceClass === "tv" ? "mdi:television-play" : "mdi:music-note-eighth"}"></ha-icon></span><div class="brand-copy"><div class="eyebrow">${isPlaying ? "Now playing" : "Media player"}</div><h2 class="player-name">${escapeHtml(cardTitle)}</h2></div></div><span class="state-pill ${stateToken}"><span class="state-dot"></span>${escapeHtml(statusClass)}</span></header>${body}${this._actionError ? `<div class="error" role="alert">${escapeHtml(this._actionError)}</div>` : ""}</div></ha-card>`;
+    this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="${playerClass}"><header class="topline"><div class="brand"><span class="brand-icon"><ha-icon icon="${deviceClass === "tv" ? "mdi:television-play" : "mdi:music-note-eighth"}"></ha-icon></span><div class="brand-copy"><div class="eyebrow">${isPlaying ? "Now playing" : "Media player"}</div><h2 class="player-name">${escapeHtml(cardTitle)}</h2></div></div><span class="state-pill ${stateToken}"><span class="state-dot"></span>${escapeHtml(statusClass)}</span></header>${body}<div class="action-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div></div></ha-card>`;
+    this._paintFeedback();
   }
 }
 
@@ -428,4 +491,4 @@ if (!window.customCards.some((card) => card.type === CARD_TYPE)) {
   window.customCards.push({ type: CARD_TYPE, name: "Media Player Card", description: "A colorful, capability-aware Home Assistant media player card.", preview: true, documentationURL: "https://github.com/Liionboy/media-player-card" });
 }
 
-console.info("%c MEDIA-PLAYER-CARD %c v1.1.0 ", "color:#fff;background:#756ce5;font-weight:bold", "color:#756ce5;background:#eef0ff;font-weight:bold");
+console.info("%c MEDIA-PLAYER-CARD %c v1.2.5 ", "color:#fff;background:#756ce5;font-weight:bold", "color:#756ce5;background:#eef0ff;font-weight:bold");

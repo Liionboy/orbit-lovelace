@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.8.0
+
+- Media Player v1.2.5: immediate pending/sent/error feedback for media commands, including Turn on, with duplicate pending-request suppression and a15s unknown-result timeout. No optimistic player-state changes or automatic retries.
+- Touch/click/slider targets survive HA state updates; explicit power intent, scroll/cancel behavior, minimum44px power button and reduced-motion-safe accessible feedback.
+- Adds28 media regression tests and mobile touch browser coverage. Other component pins, including Weather1.4.0, unchanged.
+
 ## 1.7.0
 
 - Weather Orbit v1.4.0: current-temperature dot on today’s daily bar, matched by full date in the card’s resolved zone. Uses weather temperature/unit, not the separate outdoor sensor.

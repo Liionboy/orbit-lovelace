@@ -1,9 +1,11 @@
 {
   "name": "media-player-card",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "type": "module",
   "private": false,
   "scripts": {
-    "check": "node --check dist/media-player-card.js"
+    "check": "node --check dist/media-player-card.js",
+    "test": "node --test --test-concurrency=1 test/card.test.mjs",
+    "test:browser": "node test/browser.mjs"
   }
 }

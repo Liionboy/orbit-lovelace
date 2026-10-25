@@ -29,7 +29,7 @@ The suite retains these exact types. Use the linked component README for card op
 | [Pi-hole Control Card](cards/lovelace-pihole-control-card/README.md) | [1.2.0](https://github.com/Liionboy/lovelace-pihole-control-card/releases/tag/v1.2.0) | `custom:pihole-control-card` |
 | [Sensor Meter Card](cards/lovelace-sensor-meter-card/README.md) | [1.0.2](https://github.com/Liionboy/lovelace-sensor-meter-card/releases/tag/v1.0.2) | `custom:sensor-meter-card` |
 | [Switch Control Card](cards/lovelace-switch-control-card/README.md) | [1.2.0](https://github.com/Liionboy/lovelace-switch-control-card/releases/tag/v1.2.0) | `custom:switch-control-card` |
-| [Media Player Card](cards/media-player-card/README.md) | [1.2.4](https://github.com/Liionboy/media-player-card/releases/tag/v1.2.4) | `custom:media-player-card` |
+| [Media Player Card](cards/media-player-card/README.md) | [1.2.5](https://github.com/Liionboy/media-player-card/releases/tag/v1.2.5) | `custom:media-player-card` |
 | [Temperature & Humidity Card](cards/temperature-humidity-card/README.md) | [1.2.6](https://github.com/Liionboy/temperature-humidity-card/releases/tag/v1.2.6) | `custom:temperature-humidity-card`, `custom:living-temperature-card` |
 
 `components.json` pins the source commit and SHA256 for each public upstream artifact. The release tag is authoritative where old package metadata differs.

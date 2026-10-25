@@ -12,6 +12,7 @@ A polished, responsive Lovelace card for Home Assistant `media_player` entities.
 - Browse and launch apps, channels, and other media when the player exposes `BROWSE_MEDIA` and `PLAY_MEDIA`; large catalogs have a built-in search field.
 - Responsive styling, keyboard-accessible controls, reduced-motion support, and a configurable artwork toggle.
 - Press and hold an empty area of the card for More Info; interactive controls are not affected.
+- Immediate command feedback on touch, mouse and keyboard: **Sending…**, then **command sent** or a visible error. Command controls are temporarily disabled while a request is pending to prevent duplicates.
 - No device IDs or entity names are hard-coded; configure any `media_player` entity in the card editor or YAML.
 
 ## Install with HACS
@@ -37,11 +38,24 @@ Replace the example entity with any of your own `media_player` entities. Control
 
 ## Development
 
+### Command feedback (v1.2.5)
+
+Tapping **Turn on** immediately changes the button to **Sending…** and shows a live status message. Power, playback, mute, volume, seek, source, shuffle/repeat and playable browser items share the same feedback path. A successful request means Home Assistant accepted the service call, not that the physical player has already changed state. The displayed player state always comes from HA. If HA does not respond within15 seconds, the result is explicitly **unknown**; check the device state before retrying. No automatic retries or optimistic power toggles are performed. Errors re-enable controls for an explicit retry.
+
+Selected-player timestamp-only and unrelated state updates no longer rebuild controls. Relevant updates during a touch/slider gesture are deferred until its click/change/cancel completes; a pressed Turn on retains that intent even if the player changes state meanwhile. Touch scrolling/cancellation does not send commands. The power target is at least44px high, with stacked copy/button on very narrow cards. Feedback respects reduced motion and is announced through a live region.
+
+Suite users: update **Orbit Lovelace** in HACS and fully reload the frontend/Companion WebView; do not add standalone Media Player alongside the suite.
+
 ```sh
 npm run check
+npm test
+# Configurable installed Playwright/Chromium paths; see test/browser.mjs
+npm run test:browser
 ```
 
 The HACS asset is `dist/media-player-card.js`.
+
+Tests use mocked Home Assistant services and stubbed HA components/icons. Mobile Chromium touch emulation is not physical-phone, native Companion or live-TV certification; no devices are operated by these tests.
 
 ## License
 

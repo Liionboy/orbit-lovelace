@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -455,18 +455,20 @@
       "id": "media-player-card",
       "name": "Media Player Card",
       "category": "Companion",
-      "version": "1.2.4",
-      "packageVersion": "1.2.4",
+      "version": "1.2.5",
+      "packageVersion": "1.2.5",
       "repository": "Liionboy/media-player-card",
-      "upstreamCommit": "6e1fdebd6e07be6fe933067d22710f46a133c331",
+      "upstreamCommit": "c817349b79d2a0708ca49b789d2edb8404d943ea",
       "upstreamAsset": "dist/media-player-card.js",
       "source": "cards/media-player-card/dist/media-player-card.js",
-      "sha256": "17a2cce8d37ff2d97021a6799f9c7f9ac1e50614a8cac5a0fb9712004649c484",
+      "sha256": "e3726fb55a8f28f56c4e7aa1ea836d2a7d5ea7ba1310d051e1467f8f13b28600",
       "types": [
         "media-player-card"
       ],
       "aliases": [],
-      "upstreamTests": []
+      "upstreamTests": [
+        "test/card.test.mjs"
+      ]
     },
     {
       "id": "temperature-humidity-card",

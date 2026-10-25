@@ -1,5 +1,15 @@
 # Verification records
 
+## v1.8.0 — Media Player mobile command feedback
+
+- Only Media Player updated to public v1.2.5 commit `c817349b79d2a0708ca49b789d2edb8404d943ea`, source SHA256 `e3726fb55a8f28f56c4e7aa1ea836d2a7d5ea7ba1310d051e1467f8f13b28600`. Selected docs/package/source/tests match the verified tag. Other pins, including Weather1.4.0, unchanged.
+- Deterministic build/syntax, 32 suite +417 upstream Node tests (449 total),2 smoke suites and synthetic Chromium28/28 passed sequentially. Added28 Media unit tests to the suite’s upstream regression list.
+- Full Media mobile Chromium regression ran against **dist/orbit-lovelace.js** through CARD_RESOURCE: immediate pending/sent/error feedback, duplicate pending suppression,15s unknown-result timeout/no auto retry, timestamp/unrelated and relevant HA updates during touch, captured power intent, cancellation, Enter/Space, volume/mute/source/browser payloads, reduced motion, removal/remount.
+- Real touch event sequence pointerup → pointerout → compatibility click verified: noninteractive deferred render waits until click/cancel/gesture completion, not touch pointerout. No command on touchstart or scroll/cancel. Feedback is service acknowledgment, never an optimistic player-state change.
+- Combined pending light/sent dark/error/narrow screenshots inspected; tested167/243/350px feedback layouts no overflow. Power target >=44px, five-state feedback readably wraps;350px pending193px/sent209px and167px sent297px fixture heights.
+- Standalone CI main/tag and public asset/raw/package/tag/latest/digest/notes verified first. Existing untracked climate/temperature assets in the standalone checkout were preserved, unstaged. Browser fixture encoding and ha-card display:block stub were corrected before geometry checks; stub icons are not native HA validation.
+- No live HA/dashboard/resources/TV operated. Physical phone, native Companion/editor/hardware remain unverified.
+
 ## v1.7.0 — Current-temperature dot on today’s daily bar
 
 - Only Weather updated to public v1.4.0 commit `e9ef5834fec155b9fb2cc03fe2edf19f54501f84`, source SHA256 `2307d27fdee7b3faa440b7a2b85825a283b4220416767c98fb65da3e7611f2a0`. Selected imports match that verified tag; all other pins unchanged.
