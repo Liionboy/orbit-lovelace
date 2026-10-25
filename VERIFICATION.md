@@ -1,5 +1,14 @@
 # Verification records
 
+## v1.4.0 — Room humidifier and fan support
+
+- Only Room Orbit updated to verified public v1.5.0 commit `59e6b3db0516af7ddb96ed592f6abf2af7856e17`, source SHA256 `788216015a48a478b073461cf4fca9458e9378c1c002584cd177ad6c72cc19d4`. All other component pins unchanged.
+- Reproducible build/syntax, 32 suite +351 upstream Node tests (383 total), 2 smoke suites passed sequentially. Full synthetic Chromium suite mounted all28 cards and retained Weather sensor/clock, Welcome compact, Person, alias/picker/duplicate/migration and existing mocked actions.
+- Complete Room browser regression ran against **dist/orbit-lovelace.js**, not just isolated sources: climate activity, humidifier action-only updates/More Info, exact fan keyboard toggle, current capability/read-only fallbacks, unrelated-update DOM stability, no routing cross-trigger, cover controls, temperature effects/motion and existing compact layouts. Run with CARD_RESOURCE=dist/orbit-lovelace.js node cards/ha-room-orbit-card/test/browser.mjs and the usual PLAYWRIGHT_MODULE/CHROMIUM_EXECUTABLE environment.
+- Humidifier+fan fixture126px high at243/440px,142px at164/200px; complete temperature/humidity/activity text. Narrow humidifier uses its own full-width bottom line. Light/dark screenshots from the combined artifact inspected.
+- Standalone Room39/39 tests and synthetic browser passed; CI main/tag and public release/raw asset/tag/digest verified before importing selected files from its tag.
+- HA components/icons are stubbed. Native HA editor/Companion/device validation remains unverified. No live HA/dashboard/resource/device was changed.
+
 ## v1.3.0 — Compact Welcome navigation
 
 - Only Welcome Orbit updated to verified public v1.1.0 commit `a30e5cb31023f47df056738cd5dd9837ee9bac57`, source SHA256 `a6ffbfd4744f6a20a0deea0d4661db744ade078f865a05fb2f0d75907fff35a8`. Other pins, including Weather v1.2.0, unchanged.
