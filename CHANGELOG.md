@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.10.0
+
+- Orbit Themes1.1.0 adds Desktop/Mobile/iOS Mobile profiles for Graphite/Fjord/Dune, light/dark:9 new selectable names,3 existing names preserved (24 modes total). Existing base colors and all27 component pins unchanged.
+- Optional card-mod root styling hides the ordinary dashboard header below768px only; native subview Back/title, edit controls and wider-screen navigation remain. Mobile profiles respect four safe-area insets, dynamic viewport height and scrolling; iOS additionally prefers system fonts and normalizes viewport transforms/margins. Unknown root markup fails open.
+- Adds real pinned card-mod4.2.1 integration tests, native Room/subview/back_path example and recovery guide. No automatic dependency/theme installation, dashboard modification or OS detection. HACS Dashboard updates still do not copy YAML. Native HA/Safari/Companion remain unverified.
+
 ## 1.9.1
 
 - Updates Person Orbit to1.1.1: compact extra readings share the same equal-width two-column grid as battery/travel, rather than each spanning a full row. Empty slots reserve no space; configured order preserved. Existing narrow (container ≤200px) single-column fallback and default labeled tiles are unchanged.

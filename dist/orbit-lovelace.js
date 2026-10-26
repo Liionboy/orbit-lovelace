@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.9.1 — MIT. */
+/* Orbit Lovelace v1.10.0 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.9.1",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.10.0",components:{},skipped:{},errors:[]};
 /* ha-alerts-orbit-card @ 1.0.0 (83df41182a3b9b4a8f2b02e806be9bbeeff36ecf) */
 try { (() => {
 const knownTypes=["ha-alerts-orbit-card"];

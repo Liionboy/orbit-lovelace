@@ -1,19 +1,19 @@
 # Orbit Themes
 
-Three complete Home Assistant theme families, each with native **light and dark modes**. Delivered with Orbit Lovelace v1.9.0; theme definitions v1.0.0.
+Three complete Home Assistant theme families, each with native **light and dark modes**. Added in suite1.9.0; current definitions **1.1.0** in suite **1.10.0** add selectable **Desktop, Mobile and iOS Mobile** profiles. Original names/styles remain. [Device profiles, card-mod, Room/Back navigation and recovery](docs/themes/DEVICE-PROFILES.md).
 
 - **Orbit Graphite** — architectural graphite neutrals and restrained indigo. Recommended starting point.
 - **Orbit Fjord** — deep petrol/soft cool surfaces with muted teal.
 - **Orbit Dune** — warm stone, sand and quiet bronze.
 
-Themes cover the dashboard canvas, HA header/sidebar, card surfaces, text, forms, sliders and dialog surfaces through native frontend variables, with legacy and newer semantic token mappings. No card-mod, injected global CSS, external fonts/images, JavaScript download or additional integration is required for the themes. HA frontend tokens outside primary/accent/state color are version-dependent; not every third-party card honors them.
+Themes cover the dashboard canvas, HA header/sidebar, card surfaces, text, forms, sliders and dialog surfaces through native frontend variables, with legacy and newer semantic token mappings. Original families and Desktop need no card-mod. Mobile/iOS Mobile use optional **card-mod** root CSS for phone header behavior. No external fonts/images or theme JavaScript downloads. HA frontend tokens outside primary/accent/state color are version-dependent; not every third-party card honors them.
 
 ## Important: two separate installation steps
 
 **Updating the Dashboard plugin in HACS installs the card JavaScript, not these theme YAML definitions.** Keep the one Orbit resource; do not install the same repository a second time as a Theme or add standalone cards alongside it. The YAML below is an optional manual companion download from this same repository. No separate repository was created.
 
-1. **Update Orbit Lovelace to v1.9.0 or later in HACS** and fully reload each frontend/Companion WebView. This enables the optional Orbit accent/surface bridge. Native HA theme colors also work without the bridge, but some old Orbit accents will remain.
-2. Back up your HA configuration and existing themes. Download [orbit-themes.yaml](https://github.com/Liionboy/orbit-lovelace/releases/download/v1.9.0/orbit-themes.yaml) and save the complete, unchanged file as **`/config/themes/orbit-themes.yaml`**. It contains all three named themes; do not paste it into a Lovelace card or JavaScript resource. Keep your other theme files.
+1. **Update Orbit Lovelace to v1.10.0 or later in HACS** and fully reload each frontend/Companion WebView. This enables the optional Orbit accent/surface bridge. Native HA theme colors also work without the bridge, but some old Orbit accents will remain.
+2. Back up your HA configuration and existing themes. Download [orbit-themes.yaml](https://github.com/Liionboy/orbit-lovelace/releases/download/v1.10.0/orbit-themes.yaml) and save the complete, unchanged file as **`/config/themes/orbit-themes.yaml`**. It contains all12 names/24 modes; replace the old Orbit file rather than adding a duplicate; do not paste it into a Lovelace card or JavaScript resource. Keep your other theme files.
 3. If you already use `themes: !include_dir_merge_named themes` under `frontend:`, no configuration edit is needed. Otherwise **merge** the theme inclusion into the existing frontend configuration, never add a duplicate `frontend:` section or replace its other settings:
 
 ```yaml

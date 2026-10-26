@@ -1,5 +1,14 @@
 # Verification records
 
+## v1.10.0 — Device-profile themes
+
+- Orbit Themes1.1.0:12 names/24 light-dark modes, including original3 names and9 Desktop/Mobile/iOS Mobile profiles. Original family tokens and all27 component pins exactly match v1.9.1; bundle runtime changes are suite-version metadata only.
+-507 Node tests (89 suite/theme+418 upstream),2 smoke, syntax/deterministic build and real YAML parser comparison passed sequentially. Quoted YAML/catalog agree, unique keys; mobile card-mod-theme names exact, scoped narrow/root CSS retains Back/editing, no device/network/runtime injection.
+-672 sequential card/theme mounts plus24 populated desktop/phone mode previews passed: original no-theme computed profiles against saved1.8.0, dialogs/mode-control identity/no extra queries, explicit/state overrides and exact mocked Media/More Info retained. Standard28-card browser passed from final artifact.
+- Real card-mod4.2.1 root patch/injection/removal tested with pinned runtime (SHA2565e7e71ad61796f59070f8c4621e69fa8e71a9864d0be0922bc4dbc72f990cd35; not shipped):24 theme modes at390/767/768/1280px; native Back/edit markers, safe-area47/34/11/13px, dynamic844→640px viewport, long-page bottom reachable, real bundled Room navigation and Back, Desktop rollback, unknown markup fail-open and absent-card-mod fallback passed. Zero services/queries; requests isolated.
+- Final mobile/iOS/Desktop/Back root screenshots and representative populated theme images visually inspected. Fixtures use inspected HA root markup, not actual installed HA. New profiles need optional card-mod; docs preserve/merge config/resource URLs and include profile recovery before hiding navigation. Themes do not install routes/dashboard layouts; generic profiles need no personal dashboard URL.
+- No live HA configuration/dashboard/resource/dependency/theme/device changed. Physical iOS/Safari/WebKit/Companion and native HA installation remain unverified.
+
 ## v1.9.1 — Person compact paired readings
 
 - Only Person pin changed to verified public1.1.1/6f2b43b143bdeeac309b7354549690c8b49e5aca; imported source/package/README/tests exactly match tag.26 other pins and Orbit Themes1.0.0/YAML/catalog/bridge contracts unchanged.

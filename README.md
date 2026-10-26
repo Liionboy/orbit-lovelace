@@ -19,6 +19,10 @@ The resource path is **/hacsfiles/orbit-lovelace/orbit-lovelace.js**. If you alr
 
 For manual installation, copy only `dist/orbit-lovelace.js` to `config/www/orbit-lovelace.js` and register `/local/orbit-lovelace.js` as a JavaScript module. Do not register files under `cards/` as additional resources.
 
+## Desktop / Mobile / iOS Mobile themes (v1.10.0)
+
+Graphite, Fjord and Dune each gain selectable **Desktop**, **Mobile** and **iOS Mobile** profiles, all light/dark. Mobile profiles use optional **card-mod** to hide the ordinary dashboard header below768px while preserving native subview Back and editing. iOS adds system-font/viewport normalization; both mobile profiles respect safe areas and scrolling. Original three theme names remain unchanged. **Theme YAML is a separate manual update**, not installed by HACS Dashboard updates. [Setup, Room/Back example and recovery](docs/themes/DEVICE-PROFILES.md). No live HA/dependency/dashboard changes.
+
 ## Person compact paired readings (v1.9.1)
 
 Person Orbit1.1.1 places all compact readings two per row, including extra sensors. Existing `metrics_layout: compact` configurations update automatically; labeled `tiles` remain unchanged. Very narrow cards (container ≤200px) retain the single-column fallback for readability. Update the suite in HACS and fully reload; do not add a standalone resource.

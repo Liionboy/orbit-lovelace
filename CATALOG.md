@@ -1,6 +1,6 @@
 # Included card catalog
 
-Suite v1.9.0 also includes optional [complete HA themes](THEMES.md). A guarded build-only CSS theme bridge adds fallback variables; pinned upstream assets/versions below are unchanged. Default styles remain when no theme is selected.
+Suite also includes optional [complete HA themes](THEMES.md); v1.10.0 adds [Desktop/Mobile/iOS Mobile profiles](docs/themes/DEVICE-PROFILES.md). A guarded build-only CSS theme bridge adds fallback variables; all27 pinned components below are unchanged from v1.9.1. Default styles remain when no theme is selected. Mobile header behavior needs optional card-mod; YAML installation is separate from HACS Dashboard updates.
 
 The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
 

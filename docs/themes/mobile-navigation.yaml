@@ -1,0 +1,21 @@
+# Example NEW dashboard, not configuration.yaml or theme YAML.
+# Replace /dashboard-example with your real dashboard URL prefix.
+# Select an Orbit Mobile/iOS Mobile theme in the phone profile.
+title: Orbit navigation example
+views:
+  - title: Home
+    path: home
+    cards:
+      - type: custom:ha-room-orbit-card
+        title: Living room
+        icon: mdi:sofa
+        navigation_path: /dashboard-example/living-room
+      - type: markdown
+        content: "[Appearance / restore header](/profile)"
+  - title: Living room
+    path: living-room
+    subview: true
+    back_path: /dashboard-example/home
+    cards:
+      - type: markdown
+        content: "Add your existing room cards here. Native Back returns Home."
