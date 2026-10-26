@@ -1,5 +1,12 @@
 # Verification records
 
+## v1.10.1 — Person paired readings in phone half-width cards
+
+- User phone screenshot exposed the retained ≤200px stacking fallback in Person1.1.1. Corrected Person1.1.2 compact-only spacing/icons under210/180px; two columns now retained at phone half-widths, extremely narrow ≤150px fallback only. Default tiles and all entities/values/actions untouched; no rounding/truncation.
+- Only Person pin changed to verified public937f123e5bdd31d7c0db94ae96664914cd090978 / SHA256d07697dd8544b312f22a62d4312ba93d2a491070c518923e1cbfffe5966bf1cd; source/package/README/tests imported exactly from tag1.1.2.26 other pins and all Themes1.1.0 files unchanged.
+- Syntax/deterministic build,507 Node tests (89 suite/theme+418 upstream),2 smoke, standard28-card browser,672 theme/card mounts and complete Person browser from final bundle passed sequentially.74 Person Node tests; actual two-person side-by-side phone grids at360/390/430px (164/183/203px cards), system fonts/light-dark, exact paired geometry, full single-line screenshot percentages/four-decimal km/altitude/activity checked.1–6 metrics at440/280/243/220/200/180/167px, long text visibility,140px tiny fallback, keyboard/exact More Info/no services or queries retained.
+- Standalone/final combined light/dark phone captures visually inspected. Synthetic HA components/icons only; native HA/Companion/physical phone unverified. No HA config/dashboard/resources/themes/devices changed.
+
 ## v1.10.0 — Device-profile themes
 
 - Orbit Themes1.1.0:12 names/24 light-dark modes, including original3 names and9 Desktop/Mobile/iOS Mobile profiles. Original family tokens and all27 component pins exactly match v1.9.1; bundle runtime changes are suite-version metadata only.

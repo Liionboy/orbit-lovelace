@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.10.1
+
+- Fixes Person compact readings stacking below200px on two-column phone dashboards (Person1.1.2). Compact-only spacing/icons adapt below210/180px; paired rows remain at164/183/203px phone card widths. Only extremely narrow containers≤150px stack. Full decimals/units/text retained; long values can wrap. Default tiles/entities/actions unchanged.
+- Adds actual side-by-side two-person regression at360/390/430px viewports, system fonts/light/dark, complete percentage/distance/altitude/activity and exact geometry. All26 other component pins and Themes1.1.0 unchanged. No live HA modifications.
+
 ## 1.10.0
 
 - Orbit Themes1.1.0 adds Desktop/Mobile/iOS Mobile profiles for Graphite/Fjord/Dune, light/dark:9 new selectable names,3 existing names preserved (24 modes total). Existing base colors and all27 component pins unchanged.

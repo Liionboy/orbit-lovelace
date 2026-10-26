@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.10.0 — MIT. */
+/* Orbit Lovelace v1.10.1 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.10.0",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.10.1",components:{},skipped:{},errors:[]};
 /* ha-alerts-orbit-card @ 1.0.0 (83df41182a3b9b4a8f2b02e806be9bbeeff36ecf) */
 try { (() => {
 const knownTypes=["ha-alerts-orbit-card"];
@@ -717,11 +717,11 @@ for(const entry of window.customCards){const type=String(entry.type).startsWith(
 if(!window.customCards.some(card=>card.type==="ha-nas-orbit-card"))window.customCards.push({type:"ha-nas-orbit-card",name:"NAS Orbit Card",description:"Included in Orbit Lovelace",preview:false});
 suite.components["ha-nas-orbit-card"]={version:"1.0.1",types:["ha-nas-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"ha-nas-orbit-card",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","ha-nas-orbit-card",error);}
-/* ha-person-orbit-card @ 1.1.1 (6f2b43b143bdeeac309b7354549690c8b49e5aca) */
+/* ha-person-orbit-card @ 1.1.2 (937f123e5bdd31d7c0db94ae96664914cd090978) */
 try { (() => {
 const knownTypes=["ha-person-orbit-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["ha-person-orbit-card"]="Already registered; remove old resources and reload to use the suite version.";return;}
-/* Person Orbit Card v1.1.1 — MIT */
+/* Person Orbit Card v1.1.2 — MIT */
 const TYPE = 'ha-person-orbit-card';
 const PALETTES = ['aurora', 'ocean', 'sunset', 'lavender'];
 const EXTRA_SLOTS = [1, 2, 3, 4];
@@ -741,9 +741,11 @@ ha-card[data-palette=ocean]{--accent:#1477c9;--accent2:#22a7c7}ha-card[data-pale
 .copy{min-width:0;flex:1}.name{display:block;font-size:15px;font-weight:700;line-height:21px;overflow-wrap:anywhere}.status{display:block;font-size:12px;line-height:18px;color:var(--secondary-text-color,#637080);overflow-wrap:anywhere}.metrics{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.metric{display:flex;align-items:center;gap:6px;min-width:0;max-width:100%;flex:1 1 95px;border:0;border-radius:10px;padding:7px 9px;text-align:left;background:color-mix(in srgb,var(--accent) 6%,transparent)}.metric ha-icon{flex:none;--mdc-icon-size:17px;color:var(--accent)}.metric.low ha-icon{color:var(--error-color,#c74343)}.metric-copy{min-width:0}.label{display:block;font-size:10px;line-height:14px;color:var(--secondary-text-color,#637080)}.value{display:block;font-size:12px;line-height:18px;font-weight:650;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}.hint{font-size:12px;line-height:18px;color:var(--secondary-text-color,#637080);overflow-wrap:anywhere}.hint strong{display:block;color:var(--primary-text-color,#202b3c);margin-bottom:4px}
 @container person (max-width:240px){.shell{padding:12px}.person{gap:9px}.avatar{width:40px;height:40px}.avatar ha-icon{--mdc-icon-size:23px}.name{font-size:14px}.metric{flex-basis:100%;padding:6px 8px}.metric-copy{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:1}.value{font-size:12px}}
 @container person (max-width:180px){.person{gap:8px}.avatar{width:36px;height:36px}.name{font-size:13px}.metric{gap:4px}.metric ha-icon{--mdc-icon-size:15px}.metric-copy{gap:4px}.label{font-size:9px}.value{font-size:11px}}
-/* Every compact reading shares the same two-column grid; narrow tiles stack safely. */
+/* Every compact reading shares the same two-column grid, including phone half-width tiles. */
 .metrics.compact{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 8px;margin-top:6px}.compact .metric{padding:1px 0;gap:4px;background:transparent;border-radius:5px}.compact .metric-copy{display:block;min-width:0;flex:1}.compact .label{display:none}.compact .value{font-size:12px;line-height:18px;font-weight:400;overflow-wrap:anywhere}.compact .metric ha-icon{--mdc-icon-size:15px}.metric.charging:not(.low) ha-icon{color:var(--warning-color,#d59a38)}
-@container person (max-width:200px){.metrics.compact{grid-template-columns:minmax(0,1fr)}.compact .metric{grid-column:1/-1}}
+@container person (max-width:210px){.shell:has(.metrics.compact){padding:8px}.metrics.compact{column-gap:4px}.compact .metric{gap:3px}.compact .metric ha-icon{--mdc-icon-size:13px}.compact .value{font-size:11px}}
+@container person (max-width:180px){.shell:has(.metrics.compact){padding:6px}.metrics.compact{column-gap:2px}.compact .metric{gap:2px}.compact .metric ha-icon{--mdc-icon-size:12px}}
+@container person (max-width:150px){.metrics.compact{grid-template-columns:minmax(0,1fr)}}
 `;
 class PersonOrbitCard extends HTMLElement {
  static getStubConfig() { return { ...DEFAULTS }; }
@@ -850,7 +852,7 @@ if (!window.customCards.some((card) => card.type === TYPE)) window.customCards.p
 window.customCards ||= [];
 for(const entry of window.customCards){const type=String(entry.type).startsWith("custom:")?entry.type.slice(7):entry.type;if(knownTypes.includes(type))entry.type=type;}
 if(!window.customCards.some(card=>card.type==="ha-person-orbit-card"))window.customCards.push({type:"ha-person-orbit-card",name:"Person Orbit Card",description:"Included in Orbit Lovelace",preview:false});
-suite.components["ha-person-orbit-card"]={version:"1.1.1",types:["ha-person-orbit-card"]};
+suite.components["ha-person-orbit-card"]={version:"1.1.2",types:["ha-person-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"ha-person-orbit-card",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","ha-person-orbit-card",error);}
 /* ha-room-orbit-card @ 1.6.0 (74588ce9eebe3c4edafa5f464f00929ae1fef4a2) */
 try { (() => {

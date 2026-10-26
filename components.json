@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -81,13 +81,13 @@
       "id": "ha-person-orbit-card",
       "name": "Person Orbit Card",
       "category": "Orbit",
-      "version": "1.1.1",
-      "packageVersion": "1.1.1",
+      "version": "1.1.2",
+      "packageVersion": "1.1.2",
       "repository": "Liionboy/ha-person-orbit-card",
-      "upstreamCommit": "6f2b43b143bdeeac309b7354549690c8b49e5aca",
+      "upstreamCommit": "937f123e5bdd31d7c0db94ae96664914cd090978",
       "upstreamAsset": "ha-person-orbit-card.js",
       "source": "cards/ha-person-orbit-card/ha-person-orbit-card.js",
-      "sha256": "eb41af75b3bef78fb84bff4df12df74e5db72543019438531891b0105286bb70",
+      "sha256": "d07697dd8544b312f22a62d4312ba93d2a491070c518923e1cbfffe5966bf1cd",
       "types": [
         "ha-person-orbit-card"
       ],
