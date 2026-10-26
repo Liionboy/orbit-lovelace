@@ -1,5 +1,14 @@
 # Verification records
 
+## v1.12.0-beta.1 — selectable Compact on30 cards
+
+-592 Node tests (174 suite/theme/native/compact +418 upstream),2 smoke; syntax/reproducible build and source/hash checks.27 imported pins/native Controls1.0.0 and all Themes1.1.0 files/contracts match1.11.0 exactly.
+-30 layout editors (native/legacy wrappers including previously instance-only UniFi editor and Vacuum native form),60 populated243/440px Normal/Compact comparisons with strictly smaller closed summaries and complete selected value bounds,1440 sequential populated card/layout/theme mounts and90 actual two-card360/390/430px phone grids. Forecast bars/history paths populated, not just loading states.
+- All30 populated omitted-layout computed geometry/fonts/colors/padding/display/grid hints/size match released1.11.0 under a fixed browser clock. Initial chart sample-count mismatch came from a boundary timestamp in the fixture, not a source regression; fixed fixture cutoff/frozen clock before rerun.
+- Disclosure Enter/Space, expansion through HA updates, late DOM replacement, disconnect/reconnect observer cleanup, no-constructable-stylesheet fallback, original editor config event forwarding and layout-only Weather control/subscription identity passed. Explicit compact Fan/Switch/Gate/Climate/Luma touch payloads, Scenes two-tap confirmation and Weather More Info passed.
+- Final-bundle Select/Number and Media interaction harnesses ran with test-only forced compact config: pointer/touch/keyboard/cancel, exact payloads, drafts/decimal/stale metadata, error/timeout/late outcomes, media browsing and teardown retained. Existing registration/legacy/duplicate/standalone-first and real card-mod profiles checked separately. Scripts/compact-test-resource.mjs reproduces the test fixture; it is never a live HA resource.
+- Captures inspected across all30 light layouts and paired phones, with detailed reviews of narrow Server/NAS/Speedtest/Printer/Graph/Temperature. No live HA/config/theme/dashboard/entity/device operation. Native editor/HA components/Safari/physical Companion remain unverified. This is a test prerelease, not a stable device certification. See docs/COMPACT.md and compact-measurements.json.
+
 ## v1.11.0 — Native Select and Number controls
 
 - Adds one suite-owned Controls1.0.0 source with two public types, no standalone repository/fake upstream commit. nativeComponents records origin/version/path/hash; componentSource validates its SHA and isolates registration. All27 upstream package entries exactly match1.10.1; themeYAML1.1.0/bridge contracts unchanged.28 packages/30 cards plus retained legacy alias.

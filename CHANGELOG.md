@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.12.0-beta.1 (prerelease)
+
+- Adds optional Normal/Compact editor/YAML layouts for all30 card types, with individual suite-owned profiles and preserved normal defaults. Welcome classic/compact and Person metrics_layout remain compatible; legacy Temperature alias inherits compact.
+- Reduces decoration/spacing, reorganizes telemetry/controls and adapts actual half-phone containers. Fan settings, Gate/Washer illustrations and UniFi topology/roster expand via accessible disclosures. Existing card-specific details/guards remain; other configured values/lists stay inline.
+- Original27 imported pins, native Controls1.0.0 and Themes1.1.0 unchanged. New suiteFeatures provenance/hashes and deterministic output identify the adapter/profiles.592 Node+2 smoke;1440 populated theme/layout mounts,90 phone grids and all30 normal-baseline comparisons, exact mocked compact commands and mobile Media/Controls regressions verified. No live HA/device change; native HA/physical Companion unverified.
+- Explicit test prerelease, not latest stable. See docs/COMPACT.md for HACS beta selection and rollback to1.11.0.
+
 ## 1.11.0
 
 - Adds first-party Select Orbit (`ha-select-orbit-card`) for select/input_select and Number Orbit (`ha-number-orbit-card`) for number/input_number, in the same resource and visual language. Native optional editor, Orbit palettes/themes, More Info, read-only,44px controls and narrow/mobile layouts.30 card types total:27 preserved upstream packages plus one suite-owned Controls1.0.0 package. No new repositories/resources/dependencies.

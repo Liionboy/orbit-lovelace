@@ -1,5 +1,7 @@
 # Included card catalog
 
+**Test release v1.12.0-beta.1:** every primary type below gains a suite-owned optional Normal/Compact presentation. [Beta instructions and exact scope](docs/COMPACT.md). The upstream release versions in this table remain unchanged; the compact adapter is traced separately under suiteFeatures, not attributed to upstream.
+
 Suite includes optional [complete HA themes](THEMES.md) and [Desktop/Mobile/iOS Mobile profiles](docs/themes/DEVICE-PROFILES.md). v1.11.0 adds two suite-owned controls; all27 upstream pins and Themes1.1.0 are unchanged from1.10.1. Default styles remain without an Orbit theme. Mobile header styling still needs optional card-mod; new controls do not. Theme YAML installation is separate from HACS Dashboard updates.
 
 The suite provides30 card types from27 unchanged upstream packages and one suite-owned Orbit Controls module. Native controls have source/version/hash in `nativeComponents`; their provenance is this suite release, not a separate upstream repository. The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.

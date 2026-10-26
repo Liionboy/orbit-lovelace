@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.12.0-beta.1 — suite-owned layout adaptation
+
+All27 immutable imported assets/pins and native Controls1.0.0 remain exactly as in1.11.0. The suite now decorates each public constructor before registration, using suite-owned src/orbit-compact.js and src/compact-profiles.json. suiteFeatures declares their origin/version/separate source hashes; bundle-lock records the combined compact digest. This is explicit suite adaptation, not an unchanged-upstream compact feature claim. Same28 packages/30 primary types and legacy alias. Default omitted-layout browser snapshots match1.11.0 for all30 cards; original component tests remain separate from the feature tests.
+
 ## v1.11.0 extension
 
 Select and Number are native suite-owned Controls1.0.0, not new upstream repositories. `nativeComponents` declares origin/source/version/SHA256; source provenance is the suite release commit/tag and root MIT license. Existing `components` retains all27 immutable upstream entries unchanged from1.10.1. Build isolates both origin classes, validates every source hash and reports28 packages/30 card types. First-party source already uses Orbit theme variables, so only imported components pass through the unchanged theme bridge. Native74-test suite and final-bundle interaction regression run separately from the unchanged sequential upstream test inventory. The original inventory below is a dated snapshot, not a claim that native controls have a separate published upstream.

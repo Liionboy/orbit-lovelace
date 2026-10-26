@@ -1,5 +1,7 @@
 # Licenses and third-party notices
 
+The optional Compact adapter and per-type profiles are first-party suite additions under the root MIT LICENSE. They do not replace imported input provenance or add third-party runtime dependencies. See components.json suiteFeatures for the source/version/hashes.
+
 Select Orbit and Number Orbit are suite-owned `src/orbit-controls.js` under the root MIT LICENSE, recorded separately in `components.json` nativeComponents. They add no third-party runtime/dependency and are not presented as copied standalone upstream packages.
 
 Orbit Lovelace packaging and first-party card work are distributed under the root MIT LICENSE. Individual published card license files are retained in cards/<package>/LICENSE. Server Orbit had no separate LICENSE in its original user-owned repository; its first-party source is included under this suite's MIT license rather than implying an upstream license file existed.

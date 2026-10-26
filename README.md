@@ -6,6 +6,10 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
+## Test release: v1.12.0-beta.1 — Compact on all30 cards
+
+Every included card now has an optional **Card layout → Normal / Compact** selector in the prerelease. Existing omitted-layout configurations retain their normal appearance; same single resource and unchanged theme YAML. This beta requires explicit version selection in HACS, not the ordinary stable update. [Install, examples, previews and rollback](docs/COMPACT.md).
+
 ## New in v1.11.0: Select and Number
 
 **Select Orbit Card** (`custom:ha-select-orbit-card`) supports `select`/`input_select`; **Number Orbit Card** (`custom:ha-number-orbit-card`) supports `number`/`input_number` with slider, ± and an explicit-Apply box. Matching Orbit design/themes, native visual editor, entity-reported options/limits/step/unit, read-only and truthful service feedback. [Options, examples and safety](docs/CONTROLS.md). Update the suite in HACS and fully reload, then add the cards from the picker; no extra resources or theme YAML update.
