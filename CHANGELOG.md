@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.11.0
+
+- Adds first-party Select Orbit (`ha-select-orbit-card`) for select/input_select and Number Orbit (`ha-number-orbit-card`) for number/input_number, in the same resource and visual language. Native optional editor, Orbit palettes/themes, More Info, read-only,44px controls and narrow/mobile layouts.30 card types total:27 preserved upstream packages plus one suite-owned Controls1.0.0 package. No new repositories/resources/dependencies.
+- Select uses only reported exact options. Number supports slider and ±, or a box with explicit Apply/Enter and Escape-to-discard; min/max/step/unit come from the entity. Exact decimal-grid arithmetic, stale-unit/range draft rejection, pointer-cancel/no command, no guessed metadata or silent snapping.
+- Both provide one-request pending/sent/error/15-second unknown feedback, duplicate guards and current capability/availability rechecks. Reported state never changes optimistically. No automatic retries, discovery or device verification commands. Source provenance/hash is explicit in nativeComponents; all27 upstream pins/themeYAML1.1.0 unchanged.
+
 ## 1.10.1
 
 - Fixes Person compact readings stacking below200px on two-column phone dashboards (Person1.1.2). Compact-only spacing/icons adapt below210/180px; paired rows remain at164/183/203px phone card widths. Only extremely narrow containers≤150px stack. Full decimals/units/text retained; long values can wrap. Default tiles/entities/actions unchanged.

@@ -1,10 +1,14 @@
 # Orbit Lovelace
 
-**One HACS custom repository. One JavaScript resource. 28 cards.**
+**One HACS custom repository. One JavaScript resource. 30 cards.**
 
 Orbit Lovelace packages the Orbit cards and the matching companion card collection into a single, self-contained Home Assistant Dashboard resource. Individual cards keep their existing names, Lovelace types, configurations and controls. This is a distribution suite, not a new all-in-one dashboard card.
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
+
+## New in v1.11.0: Select and Number
+
+**Select Orbit Card** (`custom:ha-select-orbit-card`) supports `select`/`input_select`; **Number Orbit Card** (`custom:ha-number-orbit-card`) supports `number`/`input_number` with slider, ± and an explicit-Apply box. Matching Orbit design/themes, native visual editor, entity-reported options/limits/step/unit, read-only and truthful service feedback. [Options, examples and safety](docs/CONTROLS.md). Update the suite in HACS and fully reload, then add the cards from the picker; no extra resources or theme YAML update.
 
 ## Installation
 
@@ -17,7 +21,7 @@ Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form A
 
 The resource path is **/hacsfiles/orbit-lovelace/orbit-lovelace.js**. If you already installed individual cards, follow [MIGRATION.md](MIGRATION.md) before loading the suite: old standalone resources must not remain enabled alongside it. This repository is a HACS custom repository; default catalog inclusion is not implied.
 
-For manual installation, copy only `dist/orbit-lovelace.js` to `config/www/orbit-lovelace.js` and register `/local/orbit-lovelace.js` as a JavaScript module. Do not register files under `cards/` as additional resources.
+For manual installation, copy only `dist/orbit-lovelace.js` to `config/www/orbit-lovelace.js` and register `/local/orbit-lovelace.js` as a JavaScript module. Do not register files under `cards/` or `src/` as additional resources.
 
 ## Person phone grid fix (v1.10.1)
 

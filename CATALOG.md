@@ -1,11 +1,13 @@
 # Included card catalog
 
-Suite also includes optional [complete HA themes](THEMES.md); v1.10.0 adds [Desktop/Mobile/iOS Mobile profiles](docs/themes/DEVICE-PROFILES.md). A guarded build-only CSS theme bridge adds fallback variables; the latest v1.10.1 patch updates only Person;26 other pins and Themes1.1.0 are unchanged from v1.10.0. Default styles remain when no theme is selected. Mobile header behavior needs optional card-mod; YAML installation is separate from HACS Dashboard updates.
+Suite includes optional [complete HA themes](THEMES.md) and [Desktop/Mobile/iOS Mobile profiles](docs/themes/DEVICE-PROFILES.md). v1.11.0 adds two suite-owned controls; all27 upstream pins and Themes1.1.0 are unchanged from1.10.1. Default styles remain without an Orbit theme. Mobile header styling still needs optional card-mod; new controls do not. Theme YAML installation is separate from HACS Dashboard updates.
 
-The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
+The suite provides30 card types from27 unchanged upstream packages and one suite-owned Orbit Controls module. Native controls have source/version/hash in `nativeComponents`; their provenance is this suite release, not a separate upstream repository. The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
 
 | Card / package | Included release | Existing Lovelace types |
 | --- | --- | --- |
+| [Select Orbit Card](docs/CONTROLS.md) | 1.0.0 (suite-owned) | `custom:ha-select-orbit-card` |
+| [Number Orbit Card](docs/CONTROLS.md) | 1.0.0 (suite-owned) | `custom:ha-number-orbit-card` |
 | [Alerts Orbit](cards/ha-alerts-orbit-card/README.md) | [1.0.0](https://github.com/Liionboy/ha-alerts-orbit-card/releases/tag/v1.0.0) | `custom:ha-alerts-orbit-card` |
 | [Battery Orbit](cards/ha-battery-orbit-card/README.md) | [1.0.0](https://github.com/Liionboy/ha-battery-orbit-card/releases/tag/v1.0.0) | `custom:ha-battery-orbit-card` |
 | [Fan Orbit Card](cards/ha-fan-orbit-card/README.md) | [1.0.0](https://github.com/Liionboy/ha-fan-orbit-card/releases/tag/v1.0.0) | `custom:ha-fan-orbit-card` |

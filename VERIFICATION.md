@@ -1,5 +1,13 @@
 # Verification records
 
+## v1.11.0 — Native Select and Number controls
+
+- Adds one suite-owned Controls1.0.0 source with two public types, no standalone repository/fake upstream commit. nativeComponents records origin/version/path/hash; componentSource validates its SHA and isolates registration. All27 upstream package entries exactly match1.10.1; themeYAML1.1.0/bridge contracts unchanged.28 packages/30 cards plus retained legacy alias.
+-582 Node tests (164 suite/theme/native-control+418 upstream),2 smoke, syntax/deterministic build passed sequentially.74 new native-control regressions cover all4 domains, editor/default consistency, explicit service targets/options, exact decimal steps and bounds (including negative/zero/scientific notation/non-aligned maximum), invalid metadata, missing/offline/read-only/service guards, duplicates, failure/retry, timeout/late result/config switch/removal and More Info.
+- Dedicated final-bundle browser tests exercise dropdown/keyboard/options changing during focus, stable controls on unrelated HA updates, Select exact services, pending/error/timeout and no optimistic state. Number actual keyboard/mouse/touch release, cancel without writes, box draft/Apply/Enter/Escape/no blur send, exact numeric payloads, stale limit/step/unit rejection, bounds, More Info and offline/invalid range checked.164/200/243/440px and two controls side by side at360/390/430px, light/dark/no clipping/incidental writes verified.
+- Full30-card registration/action/duplicate/standalone-first browser,720 sequential card/theme mounts (30×24 modes), populated desktop/phone previews/dialog/control identity/explicit state palette regressions and real card-mod profile regression passed from final artifact. Final native controls light/dark/slider/box/phone captures visually inspected.
+- All commands are mocked; no live HA integration/entity/dashboard/resource/config/theme/device changed. Native HA editor/components, physical iOS/Android Companion and device outcomes unverified. Docs explicitly separate service acknowledgment from actual state and describe safe manual entity configuration.
+
 ## v1.10.1 — Person paired readings in phone half-width cards
 
 - User phone screenshot exposed the retained ≤200px stacking fallback in Person1.1.1. Corrected Person1.1.2 compact-only spacing/icons under210/180px; two columns now retained at phone half-widths, extremely narrow ≤150px fallback only. Default tiles and all entities/values/actions untouched; no rounding/truncation.

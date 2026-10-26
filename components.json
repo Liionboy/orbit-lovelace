@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.10.1",
+  "version": "1.11.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -488,6 +488,21 @@
         "living-temperature-card"
       ],
       "upstreamTests": []
+    }
+  ],
+  "nativeComponents": [
+    {
+      "id": "orbit-controls",
+      "name": "Orbit Select and Number Controls",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "src/orbit-controls.js",
+      "types": [
+        "ha-select-orbit-card",
+        "ha-number-orbit-card"
+      ],
+      "aliases": [],
+      "sha256": "c11b24821f6e14c4d95cd72a1f5f7d3ba74013272d6b9d2a8ff1453b3b523ea6"
     }
   ]
 }

@@ -1,5 +1,7 @@
 # Licenses and third-party notices
 
+Select Orbit and Number Orbit are suite-owned `src/orbit-controls.js` under the root MIT LICENSE, recorded separately in `components.json` nativeComponents. They add no third-party runtime/dependency and are not presented as copied standalone upstream packages.
+
 Orbit Lovelace packaging and first-party card work are distributed under the root MIT LICENSE. Individual published card license files are retained in cards/<package>/LICENSE. Server Orbit had no separate LICENSE in its original user-owned repository; its first-party source is included under this suite's MIT license rather than implying an upstream license file existed.
 
 Vacuum Commander is imported from its already compiled public distribution, which includes Lit (lit, lit-html, lit-element and @lit/reactive-element) under BSD-3-Clause. Their full license notices are retained in licenses/ and embedded in the single JavaScript distributable so they accompany binary/source redistribution. Original first-party package licensing is also retained.

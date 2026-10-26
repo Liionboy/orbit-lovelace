@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.11.0 extension
+
+Select and Number are native suite-owned Controls1.0.0, not new upstream repositories. `nativeComponents` declares origin/source/version/SHA256; source provenance is the suite release commit/tag and root MIT license. Existing `components` retains all27 immutable upstream entries unchanged from1.10.1. Build isolates both origin classes, validates every source hash and reports28 packages/30 card types. First-party source already uses Orbit theme variables, so only imported components pass through the unchanged theme bridge. Native74-test suite and final-bundle interaction regression run separately from the unchanged sequential upstream test inventory. The original inventory below is a dated snapshot, not a claim that native controls have a separate published upstream.
+
 Reviewed local checkouts and public GitHub stable releases on 2026-10-22. Scope includes all 13 explicitly named Orbit repositories and 14 matching companion packages from the same collection, including Vacuum Commander. UniFi contributes two cards, for 28 card types from27 packages.
 
 All included local HEAD commits matched the corresponding public release commits at import time. JavaScript artifacts are pinned by commit/release and SHA256 in components.json. Vacuum Commander's distribution is a release-built artifact (not tracked in its source tree); its public release asset digest was verified before import. Original repository licenses/configuration references and available upstream regression sources are retained under cards/.
