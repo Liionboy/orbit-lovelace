@@ -1,11 +1,19 @@
-# Selectable Compact layouts — v1.12.0-beta.1
+# Selectable Compact layouts — v1.12.0-beta.2
 
 **Test prerelease, not the stable update.** All30 primary card types have a user-selected **Card layout → Normal / Compact**. Same Orbit resource/types/themes; no extra installation or automatic mobile activation. Native editor/device testing on real HA/Companion remains pending.
+
+## Smaller text and icons in beta.2
+
+The Compact option now also reduces typography and glyphs, not only spacing: most card headings are12–13px; primary readings use individual14–22px profiles; common decorative/header glyphs are14–16px in24–26px wrappers. Welcome retains an18px greeting, Person keeps complete11px paired readings and smaller existing metric icons; already-small metadata is not blindly scaled. Media artwork/track text, printer SVGs, Gate/Washer symbols and Number ± glyphs are handled explicitly. Media/native-control44px buttons and input interaction contracts are retained; a smaller glyph is not a smaller command target. This is not a universal44px/WCAG claim for all inherited controls.
+
+Measured against beta.1 at164/243/440px:90 matched compact samples have smaller text and glyphs, smaller decorative diameters where present, and no summary height growth.90 corresponding Normal snapshots are unchanged; the full30-card normal baseline still matches stable1.11.0. [Density measurements](compact-density-measurements.json). All data/services remain unchanged; no global zoom/transform scaling or theme YAML changes. Existing Compact cards adopt the new density after updating/reloading; no extra YAML option.
+
+![Compact beta.1 compared with beta.2; synthetic HA/icons](images/compact-density-preview.png)
 
 ## Install the beta in HACS
 
 1. Save a copy of the card/dashboard YAML and note the installed suite version.
-2. Open **HACS → Orbit Lovelace → ⋮ → Redownload**. Under **Need a different version?**, choose **v1.12.0-beta.1**. If not listed, refresh repository metadata and enable prereleases/beta visibility for this repository in your HACS version. It is intentionally not the stable/latest release.
+2. Open **HACS → Orbit Lovelace → ⋮ → Redownload**. Under **Need a different version?**, choose **v1.12.0-beta.2**. If not listed, refresh repository metadata and enable prereleases/beta visibility for this repository in your HACS version. It is intentionally not the stable/latest release.
 3. Download, then fully reload each browser and Companion frontend. No HA restart or theme YAML replacement is needed.
 4. Edit a card and select **Card layout → Compact**. Legacy editors retain their original controls below the common layout selector. The new Vacuum native form exposes common settings; existing room mappings stay in YAML.
 5. Start with a copied card or test view. Report the card type, actual dashboard/container width, YAML without private data, and screenshot if any layout is wrong. No real device command is necessary to inspect the layout.

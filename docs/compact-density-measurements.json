@@ -1,0 +1,1808 @@
+{
+  "baseline": "1.12.0-beta.1",
+  "version": "1.12.0-beta.2",
+  "syntheticHA": true,
+  "stubIcons": true,
+  "comparisons": [
+    {
+      "before": {
+        "type": "ha-alerts-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 204,
+        "font": 14,
+        "glyph": 20,
+        "wrap": 28
+      },
+      "after": {
+        "type": "ha-alerts-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 194,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-battery-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 180,
+        "font": 14,
+        "glyph": 20,
+        "wrap": 28
+      },
+      "after": {
+        "type": "ha-battery-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 169,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-fan-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 234,
+        "font": 13,
+        "glyph": 20,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-fan-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 217,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-nas-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 448,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-nas-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 375,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-person-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 120,
+        "font": 14,
+        "glyph": 23,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-person-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 82,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-room-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 120,
+        "font": 13,
+        "glyph": 23,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-room-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 120,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-scenes-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 253,
+        "font": 16,
+        "glyph": 24,
+        "wrap": null
+      },
+      "after": {
+        "type": "ha-scenes-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 159,
+        "font": 12,
+        "glyph": 16,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "ha-sensor-graph-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 267,
+        "font": 14,
+        "glyph": 19,
+        "wrap": null
+      },
+      "after": {
+        "type": "ha-sensor-graph-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 245,
+        "font": 12,
+        "glyph": 14,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "ha-server-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 396,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-server-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 339,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-speedtest-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 436.390625,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-speedtest-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 378,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "unifi-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 517.578125,
+        "font": 20,
+        "glyph": 24,
+        "wrap": null
+      },
+      "after": {
+        "type": "unifi-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 451,
+        "font": 13,
+        "glyph": 16,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "unifi-command-center-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 558.15625,
+        "font": 17,
+        "glyph": 20,
+        "wrap": 47
+      },
+      "after": {
+        "type": "unifi-command-center-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 513,
+        "font": 13,
+        "glyph": 14,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-vacuum-commander-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 204,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-vacuum-commander-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 178,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-weather-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 517.484375,
+        "font": 21,
+        "glyph": 28,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-weather-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 466.09375,
+        "font": 18,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-welcome-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 192.75,
+        "font": 21,
+        "glyph": 18,
+        "wrap": null
+      },
+      "after": {
+        "type": "ha-welcome-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 174,
+        "font": 18,
+        "glyph": 14,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "action-button-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 180.390625,
+        "font": 15,
+        "glyph": 23,
+        "wrap": 38
+      },
+      "after": {
+        "type": "action-button-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 167,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "alecoair-dehumidifier-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 338,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "alecoair-dehumidifier-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 279,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "animated-gate-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 309,
+        "font": 15,
+        "glyph": 18,
+        "wrap": 34
+      },
+      "after": {
+        "type": "animated-gate-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 271,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "climate-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 371,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 38
+      },
+      "after": {
+        "type": "climate-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 331,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "frigate-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 279,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "frigate-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 235.25,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "home-connect-washer-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 481.140625,
+        "font": 15,
+        "glyph": 20,
+        "wrap": 28
+      },
+      "after": {
+        "type": "home-connect-washer-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 380,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "hp-printer-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 393,
+        "font": 23,
+        "glyph": 26,
+        "wrap": 48
+      },
+      "after": {
+        "type": "hp-printer-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 332,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 26
+      }
+    },
+    {
+      "before": {
+        "type": "luma-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 145,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 38
+      },
+      "after": {
+        "type": "luma-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 96,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "pihole-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 439,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "pihole-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 372,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "sensor-meter-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 156.09375,
+        "font": 15,
+        "glyph": 23,
+        "wrap": 38
+      },
+      "after": {
+        "type": "sensor-meter-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 119,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "switch-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 317,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "switch-control-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 242,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "media-player-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 398.0625,
+        "font": 14,
+        "glyph": 22,
+        "wrap": 30
+      },
+      "after": {
+        "type": "media-player-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 344,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 26
+      }
+    },
+    {
+      "before": {
+        "type": "temperature-humidity-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 346.375,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 30
+      },
+      "after": {
+        "type": "temperature-humidity-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 308,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 26
+      }
+    },
+    {
+      "before": {
+        "type": "ha-select-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 239,
+        "font": 14,
+        "glyph": 21,
+        "wrap": 30
+      },
+      "after": {
+        "type": "ha-select-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 224,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-number-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 297,
+        "font": 14,
+        "glyph": 21,
+        "wrap": 30
+      },
+      "after": {
+        "type": "ha-number-orbit-card",
+        "width": 164,
+        "layout": "compact",
+        "height": 282,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-alerts-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 184,
+        "font": 15,
+        "glyph": 20,
+        "wrap": 28
+      },
+      "after": {
+        "type": "ha-alerts-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 174,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-battery-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 143,
+        "font": 15,
+        "glyph": 20,
+        "wrap": 28
+      },
+      "after": {
+        "type": "ha-battery-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 132,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-fan-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 189,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-fan-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 180,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-nas-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 307,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-nas-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 251,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-person-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 99,
+        "font": 14,
+        "glyph": 26,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-person-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 82,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-room-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 110,
+        "font": 14,
+        "glyph": 23,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-room-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 109,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-scenes-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 173,
+        "font": 16,
+        "glyph": 24,
+        "wrap": null
+      },
+      "after": {
+        "type": "ha-scenes-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 159,
+        "font": 12,
+        "glyph": 16,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "ha-sensor-graph-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 267,
+        "font": 14,
+        "glyph": 19,
+        "wrap": null
+      },
+      "after": {
+        "type": "ha-sensor-graph-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 245,
+        "font": 12,
+        "glyph": 14,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "ha-server-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 258,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-server-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 190,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-speedtest-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 358.59375,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-speedtest-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 312,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "unifi-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 399.71875,
+        "font": 20,
+        "glyph": 24,
+        "wrap": null
+      },
+      "after": {
+        "type": "unifi-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 319,
+        "font": 13,
+        "glyph": 16,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "unifi-command-center-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 451.15625,
+        "font": 17,
+        "glyph": 20,
+        "wrap": 47
+      },
+      "after": {
+        "type": "unifi-command-center-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 411,
+        "font": 13,
+        "glyph": 14,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-vacuum-commander-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 204,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-vacuum-commander-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 178,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-weather-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 475.484375,
+        "font": 21,
+        "glyph": 28,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-weather-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 422.5,
+        "font": 18,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-welcome-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 166.5,
+        "font": 21,
+        "glyph": 18,
+        "wrap": null
+      },
+      "after": {
+        "type": "ha-welcome-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 152,
+        "font": 18,
+        "glyph": 14,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "action-button-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 147.390625,
+        "font": 15,
+        "glyph": 23,
+        "wrap": 38
+      },
+      "after": {
+        "type": "action-button-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 136,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "alecoair-dehumidifier-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 281,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "alecoair-dehumidifier-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 259,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "animated-gate-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 221,
+        "font": 15,
+        "glyph": 18,
+        "wrap": 34
+      },
+      "after": {
+        "type": "animated-gate-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 203,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "climate-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 316,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 38
+      },
+      "after": {
+        "type": "climate-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 236,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "frigate-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 271.4375,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "frigate-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 232.984375,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "home-connect-washer-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 341.140625,
+        "font": 15,
+        "glyph": 20,
+        "wrap": 42
+      },
+      "after": {
+        "type": "home-connect-washer-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 303,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "hp-printer-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 362,
+        "font": 23,
+        "glyph": 26,
+        "wrap": 48
+      },
+      "after": {
+        "type": "hp-printer-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 276,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 26
+      }
+    },
+    {
+      "before": {
+        "type": "luma-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 110,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 38
+      },
+      "after": {
+        "type": "luma-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 96,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "pihole-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 301,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "pihole-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 259,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "sensor-meter-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 123.09375,
+        "font": 15,
+        "glyph": 23,
+        "wrap": 38
+      },
+      "after": {
+        "type": "sensor-meter-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 106,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "switch-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 238,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "switch-control-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 198,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "media-player-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 276.03125,
+        "font": 21,
+        "glyph": 22,
+        "wrap": 44
+      },
+      "after": {
+        "type": "media-player-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 239,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 26
+      }
+    },
+    {
+      "before": {
+        "type": "temperature-humidity-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 249.640625,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 48
+      },
+      "after": {
+        "type": "temperature-humidity-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 197,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 26
+      }
+    },
+    {
+      "before": {
+        "type": "ha-select-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 211,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 30
+      },
+      "after": {
+        "type": "ha-select-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 196,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-number-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 196,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 30
+      },
+      "after": {
+        "type": "ha-number-orbit-card",
+        "width": 243,
+        "layout": "compact",
+        "height": 181,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-alerts-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 184,
+        "font": 15,
+        "glyph": 20,
+        "wrap": 28
+      },
+      "after": {
+        "type": "ha-alerts-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 174,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-battery-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 143,
+        "font": 15,
+        "glyph": 20,
+        "wrap": 28
+      },
+      "after": {
+        "type": "ha-battery-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 132,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-fan-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 189,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-fan-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 180,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-nas-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 231,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-nas-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 204,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-person-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 99,
+        "font": 14,
+        "glyph": 26,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-person-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 82,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-room-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 110,
+        "font": 14,
+        "glyph": 23,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-room-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 109,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-scenes-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 119,
+        "font": 16,
+        "glyph": 24,
+        "wrap": null
+      },
+      "after": {
+        "type": "ha-scenes-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 108,
+        "font": 12,
+        "glyph": 16,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "ha-sensor-graph-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 250,
+        "font": 14,
+        "glyph": 19,
+        "wrap": null
+      },
+      "after": {
+        "type": "ha-sensor-graph-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 228,
+        "font": 12,
+        "glyph": 14,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "ha-server-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 153,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-server-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 130,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-speedtest-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 229.59375,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-speedtest-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 203,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "unifi-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 270.859375,
+        "font": 20,
+        "glyph": 24,
+        "wrap": null
+      },
+      "after": {
+        "type": "unifi-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 213,
+        "font": 13,
+        "glyph": 16,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "unifi-command-center-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 358.15625,
+        "font": 17,
+        "glyph": 20,
+        "wrap": 47
+      },
+      "after": {
+        "type": "unifi-command-center-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 340,
+        "font": 13,
+        "glyph": 14,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-vacuum-commander-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 171,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "ha-vacuum-commander-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 150,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "ha-weather-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 382.484375,
+        "font": 21,
+        "glyph": 28,
+        "wrap": 32
+      },
+      "after": {
+        "type": "ha-weather-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 353.5,
+        "font": 18,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-welcome-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 132.5,
+        "font": 21,
+        "glyph": 18,
+        "wrap": null
+      },
+      "after": {
+        "type": "ha-welcome-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 118,
+        "font": 18,
+        "glyph": 14,
+        "wrap": null
+      }
+    },
+    {
+      "before": {
+        "type": "action-button-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 147.390625,
+        "font": 15,
+        "glyph": 23,
+        "wrap": 38
+      },
+      "after": {
+        "type": "action-button-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 136,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "alecoair-dehumidifier-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 281,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "alecoair-dehumidifier-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 259,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "animated-gate-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 221,
+        "font": 15,
+        "glyph": 18,
+        "wrap": 34
+      },
+      "after": {
+        "type": "animated-gate-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 203,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "climate-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 227,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 38
+      },
+      "after": {
+        "type": "climate-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 214,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "frigate-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 275.984375,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "frigate-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 232.984375,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "home-connect-washer-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 316.140625,
+        "font": 15,
+        "glyph": 20,
+        "wrap": 42
+      },
+      "after": {
+        "type": "home-connect-washer-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 271,
+        "font": 12,
+        "glyph": 14,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "hp-printer-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 283,
+        "font": 23,
+        "glyph": 26,
+        "wrap": 48
+      },
+      "after": {
+        "type": "hp-printer-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 221,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 26
+      }
+    },
+    {
+      "before": {
+        "type": "luma-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 110,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 38
+      },
+      "after": {
+        "type": "luma-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 96,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "pihole-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 277,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "pihole-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 239,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "sensor-meter-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 123.09375,
+        "font": 15,
+        "glyph": 23,
+        "wrap": 38
+      },
+      "after": {
+        "type": "sensor-meter-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 106,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "switch-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 176,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 38
+      },
+      "after": {
+        "type": "switch-control-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 154,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 28
+      }
+    },
+    {
+      "before": {
+        "type": "media-player-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 276.03125,
+        "font": 21,
+        "glyph": 22,
+        "wrap": 44
+      },
+      "after": {
+        "type": "media-player-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 239,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 26
+      }
+    },
+    {
+      "before": {
+        "type": "temperature-humidity-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 212.640625,
+        "font": 15,
+        "glyph": 25,
+        "wrap": 48
+      },
+      "after": {
+        "type": "temperature-humidity-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 171,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 26
+      }
+    },
+    {
+      "before": {
+        "type": "ha-select-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 211,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 30
+      },
+      "after": {
+        "type": "ha-select-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 196,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    },
+    {
+      "before": {
+        "type": "ha-number-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 196,
+        "font": 15,
+        "glyph": 24,
+        "wrap": 30
+      },
+      "after": {
+        "type": "ha-number-orbit-card",
+        "width": 440,
+        "layout": "compact",
+        "height": 181,
+        "font": 12,
+        "glyph": 16,
+        "wrap": 24
+      }
+    }
+  ]
+}

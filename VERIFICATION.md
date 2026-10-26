@@ -1,5 +1,11 @@
 # Verification records
 
+## v1.12.0-beta.2 — smaller Compact text and icons
+
+-592 Node+2 smoke, syntax/reproducible build; unchanged27 upstream pins/native Controls1.0.0/Themes1.1.0. Compact0.2.0 has per-type density overrides, guarded behind the existing optional layout, ordered after narrow rules.
+-90 matched beta.1-to-beta.2 compact probes at164/243/440px verify smaller headings/glyphs/decorative diameters with no summary height growth;90 corresponding Normal samples unchanged. Full30-card computed omitted-layout baseline against stable1.11.0 still passes. See docs/compact-density-measurements.json. Probe diameter uses max(width,height), since the old narrow flex wrappers could be squeezed rather than truly smaller circles.
+-1440 sequential populated layout/theme mounts,60 Normal/Compact height/value comparisons,90 two-card phone grids, all30 editors, disclosures/fallback/cleanup and exact mocked touch commands pass. Final-bundle Compact Controls/Media input/touch/draft/error/timeout/browsing regressions, general registration/alias/duplicate/standalone-first and real card-mod24-mode profile regressions passed. All30 half-phone captures inspected. Service calls mocked; native HA/editor/Safari/physical Companion unverified. No live config/theme/dashboard/device changes.
+
 ## v1.12.0-beta.1 — selectable Compact on30 cards
 
 -592 Node tests (174 suite/theme/native/compact +418 upstream),2 smoke; syntax/reproducible build and source/hash checks.27 imported pins/native Controls1.0.0 and all Themes1.1.0 files/contracts match1.11.0 exactly.

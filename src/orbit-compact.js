@@ -1,4 +1,4 @@
-/* Suite-owned compact presentation adapter v0.1.0 — MIT. */
+/* Suite-owned compact presentation adapter v0.2.0 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
  const installed = new Set(),wrappedEditors=new WeakSet();
@@ -10,7 +10,7 @@ const orbitCompact = (() => {
  :host([data-orbit-layout="compact"]) :is(.power,.toggle,.step-button,.stepper,.confirm-button,.controls-toggle,.control-btn,.ctrl-btn,.action-btn){min-height:44px;min-width:44px}
  :host([data-orbit-layout="compact"]) :is(.title,.header-title,.metric-value,.reading-value,.info-value,.capacity,.state-value){white-space:normal;text-overflow:clip;overflow-wrap:anywhere;max-width:100%}
  @media(prefers-reduced-motion:reduce){:host([data-orbit-layout="compact"]) *{animation:none!important;transition:none!important}}`;
- function cssFor(profile){const scope=css=>css.replace(/(^|})([^{}]+){/g,(_,start,selectors)=>start+selectors.split(",").map(s=>":host([data-orbit-layout=compact]) "+s.trim()).join(",")+"{");return baseCSS+scope(profile.css)+(profile.narrowCSS?"@container orbit-compact (max-width:210px){"+scope(profile.narrowCSS)+"}":"");}
+ function cssFor(profile){const scope=css=>css.replace(/(^|})([^{}]+){/g,(_,start,selectors)=>start+selectors.split(",").map(s=>":host([data-orbit-layout=compact]) "+s.trim()).join(",")+"{");return baseCSS+scope(profile.css)+(profile.narrowCSS?"@container orbit-compact (max-width:210px){"+scope(profile.narrowCSS)+"}":"")+scope(profile.densityCSS||"");}
  function attachStyle(card,profile){
   const root=card.shadowRoot;if(!root||!card._orbitCompact)return;
   if(typeof CSSStyleSheet!=="undefined"&&CSSStyleSheet.prototype.replaceSync&&"adoptedStyleSheets" in root){

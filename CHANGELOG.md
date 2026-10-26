@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.0-beta.2 (prerelease)
+
+- Compact now reduces headings, main readings, icon glyphs and decorative wrappers on every primary card, rather than relying mainly on spacing. Profiles are suite-owned Compact0.2.0; source pins/Controls1.0.0/Themes1.1.0 unchanged.
+- Explicit treatment for printer SVGs, Gate/Washer symbols, Welcome shortcut circles, Media artwork/control glyphs and Number ±. Complete values/Person pairs, command targets/feedback and Normal defaults retained. No global zoom/transform.
+-90 beta.1-to-beta.2 compact font/glyph/diameter comparisons at164/243/440px and90 unchanged normal samples, plus the existing full normal1.11.0 baseline and1440 theme/layout mounts. HACS must explicitly select this beta and fully reload. No live HA changes.
+
 ## 1.12.0-beta.1 (prerelease)
 
 - Adds optional Normal/Compact editor/YAML layouts for all30 card types, with individual suite-owned profiles and preserved normal defaults. Welcome classic/compact and Person metrics_layout remain compatible; legacy Temperature alias inherits compact.

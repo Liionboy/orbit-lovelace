@@ -1,13 +1,15 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "profiles": {
     "ha-alerts-orbit-card": {
       "css": ".shell{padding:10px}.counts{margin-top:6px;gap:3px 8px}.list{gap:4px}.orbit{width:28px;height:28px}button{padding:5px 6px;min-height:44px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}h2{font-size:12px;line-height:16px}.orbit{width:24px;height:24px}.name{font-size:11px;line-height:15px}.counts{margin-top:4px}"
     },
     "ha-battery-orbit-card": {
       "css": ".shell{padding:10px}.counts{margin-top:6px;gap:3px 8px}.list{gap:4px}.orbit{width:28px;height:28px}button{padding:5px 6px;min-height:44px}.meter{height:3px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}h2{font-size:12px;line-height:16px}.orbit{width:24px;height:24px}.name{font-size:11px;line-height:15px}.counts{margin-top:4px}"
     },
     "ha-fan-orbit-card": {
       "css": ".shell{padding:10px}.head{gap:8px;flex-wrap:wrap}.info{gap:8px}.orbit{width:32px;height:32px}.controls{margin-top:8px;gap:8px}.power{padding:6px 9px}.message{margin-top:6px}select{min-height:44px;height:auto}input[type=range]{min-height:44px}",
@@ -15,44 +17,53 @@
         ".row:has(select)",
         ".oscillate"
       ],
-      "narrowCSS": ".head{display:grid;grid-template-columns:minmax(0,1fr)}.info{width:100%}.power{justify-self:start}"
+      "narrowCSS": ".head{display:grid;grid-template-columns:minmax(0,1fr)}.info{width:100%}.power{justify-self:start}",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.name{font-size:12px;line-height:16px}.orbit{width:24px;height:24px}.orbit ha-icon{--mdc-icon-size:16px}.head{gap:6px}.info{gap:6px}.controls{gap:5px;margin-top:5px}.power{font-size:11px}.status{line-height:15px}"
     },
     "ha-nas-orbit-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.overview{gap:8px;margin-top:8px;padding:8px;grid-template-columns:70px minmax(0,1fr)}.storage{width:70px;height:70px}.storage-core{width:58px;height:58px}.storage-value{font-size:16px}.capacity{font-size:20px}.metrics{gap:5px;margin-top:6px;grid-template-columns:repeat(auto-fit,minmax(min(100%,88px),1fr))}.metric{padding:6px}.metric-value{margin-top:4px;font-size:16px}.drives{gap:4px;grid-template-columns:repeat(auto-fit,minmax(min(100%,75px),1fr))}.drive{padding:6px}.bar{margin-top:6px;height:4px}",
       "details": [],
-      "narrowCSS": ".overview{grid-template-columns:minmax(0,1fr);gap:6px}.storage{width:48px;height:48px;margin:auto}.storage-core{width:40px;height:40px}.storage-icon{display:none}.capacity{font-size:18px;overflow-wrap:normal}.overview-copy{text-align:center}"
+      "narrowCSS": ".overview{grid-template-columns:minmax(0,1fr);gap:6px}.storage{width:48px;height:48px;margin:auto}.storage-core{width:40px;height:40px}.storage-icon{display:none}.capacity{font-size:18px;overflow-wrap:normal}.overview-copy{text-align:center}",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.capacity{font-size:16px;line-height:20px}.capacity span{font-size:11px}.metric-value{font-size:14px;margin-top:3px}.storage-value{font-size:14px}.storage-icon ha-icon{--mdc-icon-size:14px}.overview{padding:6px;gap:6px}.metric{padding:5px}.metric-head ha-icon{--mdc-icon-size:13px}.drive-icon ha-icon{--mdc-icon-size:14px}"
     },
     "ha-person-orbit-card": {
       "css": ".shell{padding:6px}.avatar{width:32px;height:32px}.person{gap:8px}.metrics.compact{margin-top:4px}.name{font-size:14px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.shell{padding:5px}.avatar{width:24px;height:24px}.avatar ha-icon{--mdc-icon-size:16px}.name{font-size:12px;line-height:16px}.status{font-size:11px;line-height:15px}.person{gap:6px}.compact .value{font-size:11px;line-height:15px}.compact .metric ha-icon{--mdc-icon-size:12px}.metrics.compact{margin-top:3px;gap:2px 4px}"
     },
     "ha-room-orbit-card": {
       "css": ".shell{padding:8px}.summary{gap:6px}.room-icon{width:32px;height:32px}.details{margin-top:6px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}h2{font-size:12px;line-height:15px}.room-icon{width:24px;height:24px}.room-icon ha-icon{--mdc-icon-size:16px}.quick ha-icon{--mdc-icon-size:16px}.quick.climate-shortcut ha-icon{--mdc-icon-size:14px}.summary{min-height:72px;gap:4px}.shortcuts{gap:3px}.tile-head ha-icon{--mdc-icon-size:14px}.reading ha-icon{--mdc-icon-size:11px}"
     },
     "ha-scenes-orbit-card": {
       "css": ".shell{padding:10px}.grid{gap:5px}.activate{min-height:44px;padding:7px;gap:6px}.info{min-width:44px;min-height:44px}.cancel{min-height:44px}.head{margin-bottom:8px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}h2{font-size:12px;line-height:16px}.header>ha-icon{--mdc-icon-size:16px}.activate>ha-icon{--mdc-icon-size:16px}.info ha-icon{--mdc-icon-size:14px}.name{font-size:11px;line-height:15px}.activate{gap:4px;padding:5px}.head{margin-bottom:5px}"
     },
     "ha-sensor-graph-orbit-card": {
       "css": ".shell{padding:10px}.chart{height:32px}.series{padding:4px 0;margin-top:4px}.head{gap:6px}.axis{gap:4px}.shell>header{display:grid;grid-template-columns:20px minmax(0,1fr);gap:4px}.shell>header h2{grid-column:2;margin:0;overflow-wrap:normal}.period{grid-column:2;margin:0;white-space:normal}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}h2{font-size:12px;line-height:16px}header ha-icon{--mdc-icon-size:14px}.reading{font-size:12px;line-height:16px}.info{font-size:11px;line-height:15px}.chart{height:28px}.head{gap:4px}.shell>header{grid-template-columns:16px minmax(0,1fr)}"
     },
     "ha-server-orbit-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.metrics{margin-top:8px;gap:5px;grid-template-columns:repeat(auto-fit,minmax(min(100%,100px),1fr))}.metric{padding:7px;gap:4px}.metric-value{font-size:18px}.bar{margin-top:6px;height:3px}.collapsed{padding:8px;margin-top:8px}.metric{display:block}.readout{margin-top:4px;gap:4px}.gauge{display:none}.metric-value{font-size:16px;overflow-wrap:normal}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.metric-value{font-size:14px;line-height:18px}.metric-head ha-icon{--mdc-icon-size:13px}.metric{padding:5px}.metrics{gap:4px;margin-top:6px}"
     },
     "ha-speedtest-orbit-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.hero{grid-template-columns:64px minmax(0,1fr);min-height:0;padding:8px;gap:8px;margin-top:8px}.radar{width:60px;height:60px}.radar-caption{display:none}.hero-value{font-size:26px;white-space:normal;overflow-wrap:anywhere}.metrics{gap:5px;grid-template-columns:repeat(auto-fit,minmax(min(100%,85px),1fr))}.metric{padding:6px}.metric-value{font-size:16px}.sparkline{height:15px}.metric{display:block}.sparkline{width:100%;height:15px;margin-top:4px}",
       "details": [],
-      "narrowCSS": ".hero{grid-template-columns:minmax(0,1fr);gap:6px}.radar{display:none}.hero-value{font-size:24px;overflow-wrap:normal}"
+      "narrowCSS": ".hero{grid-template-columns:minmax(0,1fr);gap:6px}.radar{display:none}.hero-value{font-size:24px;overflow-wrap:normal}",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.hero-value{font-size:20px;line-height:24px}.hero-unit{font-size:11px}.metric-value{font-size:14px;margin-top:3px}.metric-head ha-icon{--mdc-icon-size:13px}.radar-core ha-icon{--mdc-icon-size:16px}.metric{padding:5px}"
     },
     "unifi-orbit-card": {
       "css": ".header{padding:10px;gap:8px;flex-wrap:wrap}.summary{padding:6px 10px;gap:5px;grid-template-columns:repeat(auto-fit,minmax(min(100%,80px),1fr))}.stat{padding:6px}.stat-value{white-space:normal;overflow-wrap:anywhere}.stage{height:220px;margin:6px}.footer{padding:8px 10px;flex-wrap:wrap}.empty{min-height:80px;padding:12px}.details{grid-template-columns:minmax(0,1fr);padding:8px}.orbit-compact-disclosure{margin:8px!important}",
       "details": [
         ".stage"
       ],
-      "footer": "ha-card"
+      "footer": "ha-card",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}h2{font-size:13px;line-height:17px;margin-top:2px}.subtitle{font-size:11px;margin-top:3px}.eyebrow{font-size:10px}.stat-value{font-size:13px;margin-top:3px}.header{padding:8px}.summary{padding:4px 8px}.stat{padding:5px}.core-icon{font-size:16px}.node-icon{font-size:11px;width:18px;height:18px}.footer{padding:6px 8px}"
     },
     "unifi-command-center-card": {
       "css": ".cc-header{padding:10px;gap:8px;flex-wrap:wrap}.cc-title{font-size:17px;overflow-wrap:anywhere}.cc-layout{display:block;min-height:0}.cc-rail{padding:8px;border:0}.cc-health{width:68px;height:68px;margin:4px auto}.cc-health-inner{width:52px;height:52px}.cc-health-value{font-size:18px}.cc-stats{gap:4px}.cc-stat{padding:6px}.cc-center{padding:6px}.cc-topology{height:220px}.cc-roster{padding:8px;border:0}.cc-roster-list{max-height:none;grid-template-columns:minmax(0,1fr)}.cc-roster-row{min-height:44px}.cc-footer{padding:8px;flex-wrap:wrap}.cc-details{grid-template-columns:minmax(0,1fr);gap:8px}.cc-actions{flex-wrap:wrap}.cc-eyebrow{display:none}.cc-rail{display:grid;grid-template-columns:68px minmax(0,1fr);gap:6px}.cc-rail>.cc-label{grid-column:1/-1}.cc-health{grid-column:1;grid-row:2;align-self:center}.cc-stats{grid-column:2;grid-row:2}.cc-stat{display:flex;justify-content:space-between;gap:6px;flex-wrap:wrap;padding:4px}.cc-stat-value{margin-top:0;font-size:12px}.cc-rail-card{grid-column:1/-1;margin-top:6px;padding-top:6px}",
@@ -60,88 +71,107 @@
         ".cc-center",
         ".cc-roster"
       ],
-      "footer": "ha-card"
+      "footer": "ha-card",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.cc-title{font-size:13px;line-height:17px;margin-top:0}.cc-subtitle{font-size:11px;margin-top:3px}.cc-mark{width:26px;height:26px;border-radius:9px;font-size:14px;box-shadow:none;flex:none}.cc-mark::after{inset:4px}.cc-brand{gap:6px}.cc-header{padding:8px;gap:6px}.cc-health-value{font-size:16px}.cc-stat-value{font-size:11px}.cc-roster-icon{font-size:10px;width:18px;height:18px}.cc-node-icon{font-size:10px;width:18px;height:18px}.cc-brand>div:last-child{min-width:0}"
     },
     "ha-vacuum-commander-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.header-title{font-size:15px;white-space:normal}.subline{margin-left:0}.content{margin-top:8px}.controls{gap:5px;flex-wrap:wrap}.ctrl-btn{padding:6px;max-width:none;min-width:44px}.rooms{gap:4px;grid-template-columns:repeat(auto-fit,minmax(min(100%,90px),1fr))}.room-btn{padding:6px;min-height:44px}.room-btn span{white-space:normal;overflow-wrap:anywhere}.rooms-title{margin-bottom:6px}.header{gap:4px}.identity{gap:6px}.header-meta{gap:4px}.subline{margin:0}.content{margin-top:4px}.controls{margin-bottom:5px}.quick-clean{margin-top:4px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.header-title{font-size:12px;line-height:16px}.ctrl-btn ha-icon{--mdc-icon-size:16px}.room-btn ha-icon{--mdc-icon-size:14px}.quick-btn ha-icon{--mdc-icon-size:14px}.rooms-title{font-size:11px;margin-bottom:4px}.ctrl-btn span{font-size:10px}.room-btn{gap:4px}.battery{padding:4px 5px}"
     },
     "ha-weather-orbit-card": {
       "css": ".shell{padding:10px}.datetime{margin-top:5px;gap:6px}.clock{font-size:21px}.current{padding:6px 0;gap:8px}.orbit{width:32px;height:32px}.temperature{font-size:24px}.stats{margin-bottom:6px;gap:4px 10px}.outdoor{margin-top:6px;padding:6px 8px}.outdoor-value{font-size:18px}.forecast{margin-top:8px;padding-top:8px}.entry{padding:6px 4px}.forecast-heading{margin-bottom:5px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.clock{font-size:18px}.temperature{font-size:20px}.temperature small{font-size:12px}.orbit{width:24px;height:24px}.orbit ha-icon{--mdc-icon-size:16px}.condition{font-size:11px;line-height:15px}.stats{font-size:11px;gap:3px 8px}.calendar{font-size:11px}.outdoor-value{font-size:16px}.outdoor ha-icon{--mdc-icon-size:16px}.entry ha-icon{--mdc-icon-size:16px;margin:3px auto}.bar-day ha-icon{--mdc-icon-size:14px}.high{font-size:11px}.forecast{margin-top:5px;padding-top:5px}.datetime{margin-top:3px}.current{padding:4px 0;gap:6px}"
     },
     "ha-welcome-orbit-card": {
       "css": ".shell{padding:10px}.toolbar{margin-bottom:8px}.compact h1{font-size:21px}.compact .shortcuts{gap:6px;margin-top:8px}.compact .shortcut{min-height:64px;padding:6px 4px}.toolbar-control{width:44px;height:44px}.toolbar{grid-template-columns:44px minmax(0,1fr) 44px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.compact h1{font-size:18px;line-height:22px;margin-bottom:4px}.shortcut-icon{width:26px;height:26px}.shortcut-icon ha-icon{--mdc-icon-size:16px}.toolbar-control ha-icon{--mdc-icon-size:16px}.compact .weather>ha-icon{--mdc-icon-size:14px}.compact .shortcut{min-height:52px;gap:4px;padding:5px 3px;border-radius:16px}.compact .shortcuts{gap:4px;margin-top:6px}.compact .meta{font-size:11px;line-height:15px}.date-chip{font-size:11px;padding:4px 8px}.chip-date{font-size:11px}"
     },
     "action-button-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.action{min-height:44px}.action-area{margin-top:8px}.feedback{margin-top:5px}.confirm{grid-template-columns:minmax(0,1fr);gap:5px}.confirm-button{min-height:44px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.action{font-size:11px;gap:6px}.action ha-icon{--mdc-icon-size:16px}.subtitle{font-size:10px;line-height:14px}.action-area{margin-top:6px}"
     },
     "alecoair-dehumidifier-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.humidity-grid{margin-top:8px;gap:6px}.humidity-tile{padding:8px}.tile-value{font-size:26px}.slider-section{padding:8px;margin-top:8px}.range{min-height:44px;margin:0}.mode-select{min-height:44px;min-width:0;max-width:100%}.footer{gap:6px;flex-wrap:wrap}.power{min-width:70px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.tile-value{font-size:21px;line-height:25px;margin-top:4px}.tile-label ha-icon{--mdc-icon-size:13px}.humidity-tile{padding:6px}.humidity-grid{gap:4px;margin-top:6px}.section-title{font-size:11px}.power{font-size:11px}.power ha-icon{--mdc-icon-size:14px}.mode-select{font-size:11px}"
     },
     "animated-gate-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.scene{height:100px}.controls{gap:5px;grid-template-columns:repeat(auto-fit,minmax(min(100%,60px),1fr))}.control-btn{padding:5px;flex-wrap:wrap}.state-label{font-size:20px}.position-value{font-size:16px}",
       "details": [
         ".scene"
       ],
-      "narrowCSS": ".header{display:grid;grid-template-columns:minmax(0,1fr);gap:5px}"
+      "narrowCSS": ".header{display:grid;grid-template-columns:minmax(0,1fr);gap:5px}",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.mark{width:24px;height:24px;font-size:14px;border-radius:8px}.state-label{font-size:17px;line-height:21px}.position-value{font-size:14px}.control-btn{font-size:10px;gap:4px}.control-btn .icon{font-size:13px}.sub-label{font-size:10px}.mark{flex:none}"
     },
     "climate-control-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.temperatures{gap:6px;margin-top:8px}.temperature{padding:8px}.temperature-value{font-size:26px;flex-wrap:wrap}.temperature-hint{margin-top:4px}.target-row{margin-top:6px}.compact-control{margin-top:8px;gap:6px;flex-wrap:wrap}.actions{flex-wrap:wrap}.settings{padding:8px;margin-top:8px}.temperature{padding:6px}.icon-wrap{width:32px;height:32px}.temperature-hint{line-height:14px}.temperatures{margin-top:6px}.temperature-hint{margin-top:3px}.temperature-value{margin-top:3px}.compact-control{margin-top:4px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.temperature-value{font-size:21px;line-height:25px}.unit{font-size:12px}.temperature{padding:5px}.temperature-label{font-size:9px}.temperature-hint{font-size:10px;line-height:13px}.power{font-size:11px}.power ha-icon{--mdc-icon-size:14px}.step-button ha-icon{--mdc-icon-size:14px}.controls-toggle{font-size:11px}.temperatures{gap:4px;margin-top:5px}"
     },
     "frigate-control-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.camera-frame{margin-top:8px;max-height:130px}.snapshot{max-height:130px;object-fit:contain}.camera-open{width:100%;max-height:130px}.sensor-grid{gap:5px;margin-top:6px;grid-template-columns:repeat(auto-fit,minmax(min(100%,75px),1fr))}.sensor{padding:6px}.sensor-value{white-space:normal;overflow-wrap:anywhere}.footer{margin-top:6px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.sensor-value{font-size:12px;line-height:16px}.sensor ha-icon{--mdc-icon-size:14px}.empty-preview ha-icon{--mdc-icon-size:24px}.sensor{padding:5px}.camera-frame{margin-top:6px;max-height:110px}.snapshot{max-height:110px}.camera-open{max-height:110px}"
     },
     "home-connect-washer-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.hero{grid-template-columns:minmax(0,1fr);gap:0;margin-top:6px}.machine{min-height:100px;height:100px}.washer-art{height:100px;width:auto}.hero-info{padding:4px 0}.operation{font-size:23px}.program{margin-top:5px;white-space:normal}.progress-block{margin-top:8px}.info-grid{gap:5px;margin-top:8px;grid-template-columns:repeat(auto-fit,minmax(min(100%,90px),1fr))}.info{padding:7px}.extras{gap:8px;margin-top:8px;padding-top:8px}.footer{margin-top:8px;padding-top:8px}",
       "details": [
         ".machine"
       ],
-      "narrowCSS": ".header{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}h2{white-space:normal;overflow-wrap:normal}.brand-mark{width:28px;height:28px}.head{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}.brand{gap:6px}.state-pill{justify-self:start}"
+      "narrowCSS": ".header{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}h2{white-space:normal;overflow-wrap:normal}.brand-mark{width:28px;height:28px}.head{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}.brand{gap:6px}.state-pill{justify-self:start}",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.brand-mark{width:24px;height:24px;font-size:14px;border-radius:8px;flex:none}.brand{gap:6px}.operation{font-size:19px;line-height:23px;margin-top:3px}.program{font-size:12px;line-height:16px;margin-top:3px}.state-label{font-size:10px}.progress-meta{font-size:11px;gap:6px;margin-bottom:5px}.info-value{font-size:12px;margin-top:3px}.info{padding:5px}.info-grid{gap:4px;margin-top:6px}.state-pill{padding:4px 6px}"
     },
     "hp-printer-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.main{grid-template-columns:minmax(0,1fr);gap:10px;margin-top:8px}.ink{grid-template-columns:minmax(0,1fr) minmax(20px,1fr) 38px;gap:6px}.stats{gap:5px}.stat{padding:7px}.stat-value{font-size:17px}.footer{margin-top:8px;padding-top:8px;flex-wrap:wrap}.ink{grid-template-columns:minmax(0,1fr) 38px;gap:4px}.ink .track{grid-column:1/-1;grid-row:2}.ink-name{min-width:0;white-space:normal;text-overflow:clip;overflow-wrap:anywhere}.empty{padding:8px;font-size:11px;line-height:16px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}h2{font-size:12px;line-height:16px;margin-top:0;white-space:normal;overflow:visible;overflow-wrap:anywhere}.mark{width:26px;height:26px;border-radius:9px}.mark svg{width:16px;height:16px}.brand{gap:6px}.ink-name,.level{font-size:11px;line-height:15px}.stat-value{font-size:14px}.stat-label{font-size:10px}.section-title{font-size:10px;margin-bottom:7px}.status{font-size:10px;padding:4px 6px}.footer{font-size:10px}"
     },
     "luma-control-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.summary{margin-top:8px;gap:6px;flex-wrap:wrap}.summary-label{font-size:23px}.compact-control{margin-top:8px;gap:6px}.footer{margin-top:8px;padding-top:8px;gap:6px}.switch-panel{padding:8px;margin-top:8px;gap:6px}.section{margin-top:8px;padding-top:8px}.range{min-height:44px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.summary-label{font-size:19px;line-height:23px}.summary-meta{font-size:10px}.switch-name{font-size:12px}.power{font-size:11px}.power ha-icon{--mdc-icon-size:14px}.controls-toggle{font-size:11px}.light-compact .power{font-size:11px}.section-title{font-size:11px}"
     },
     "pihole-control-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.metrics{margin-top:8px;gap:5px}.metric{padding:7px}.metric-value{font-size:20px}.metrics-secondary{gap:5px;grid-template-columns:repeat(auto-fit,minmax(min(100%,95px),1fr))}.mini{padding:6px}.panel{padding:8px;margin-top:8px}.groups{gap:5px;grid-template-columns:minmax(0,1fr)}.group{padding:6px}.switch-row{gap:6px;flex-wrap:wrap}.toggle{min-width:70px}.pause{min-height:44px}",
       "details": [],
-      "narrowCSS": ".metrics{grid-template-columns:minmax(0,1fr)}.metric-value{font-size:18px;overflow-wrap:normal}"
+      "narrowCSS": ".metrics{grid-template-columns:minmax(0,1fr)}.metric-value{font-size:18px;overflow-wrap:normal}",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.metric-value{font-size:16px;line-height:20px;margin-top:4px}.mini ha-icon{--mdc-icon-size:14px}.mini-value{font-size:11px}.panel-title{font-size:11px}.metric{padding:5px}.metrics{gap:4px;margin-top:6px}"
     },
     "sensor-meter-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.meter-panel{margin-top:6px;padding:6px 8px;border-radius:10px}.track{height:4px}.range-limits{margin-top:4px}.reading-value{line-height:1.3}.reading{min-width:0}.header{display:grid;grid-template-columns:36px minmax(0,1fr);gap:3px 8px}.identity{display:contents}.icon-wrap{grid-column:1;grid-row:1/3}.identity-copy{grid-column:2}.reading{grid-column:2;text-align:left}.reading-label{display:none}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.reading-value{font-size:14px;line-height:18px}.header{grid-template-columns:26px minmax(0,1fr);gap:2px 6px}.meter-panel{padding:5px 6px;margin-top:4px}"
     },
     "switch-control-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.panel{margin-top:8px;padding:8px;gap:6px}.toggle{min-width:68px;padding:6px}.state-icon{width:28px;height:28px}.consumption{gap:5px;grid-template-columns:repeat(auto-fit,minmax(min(100%,100px),1fr))}.reading{padding:6px;gap:6px}.hint{margin-top:6px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.state-icon{width:22px;height:22px}.state-icon ha-icon{--mdc-icon-size:14px}.state-value{font-size:13px;line-height:17px}.reading ha-icon{--mdc-icon-size:14px}.reading-value{font-size:12px}.toggle{font-size:10px}.toggle ha-icon{--mdc-icon-size:14px}.panel{margin-top:6px;padding:6px;gap:5px}"
     },
     "media-player-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.now-playing{grid-template-columns:48px minmax(0,1fr);gap:8px;margin-top:8px}.now-playing.no-artwork{grid-template-columns:minmax(0,1fr)}.artwork{width:48px;height:48px}.track-title{font-size:17px;display:block;-webkit-line-clamp:unset;overflow-wrap:anywhere}.track-subtitle{margin-top:4px;white-space:normal}.album{white-space:normal}.controls{margin-top:8px;gap:6px;flex-wrap:wrap}.control{width:44px;height:44px}.control.primary{width:44px;height:44px}.progress-wrap{margin-top:8px}.volume-row{padding:6px;margin-top:8px;gap:6px}.volume-row .control{width:44px;height:44px}.more{min-height:44px}.more-row{margin-top:4px}.advanced{margin-top:8px;gap:6px}.action-feedback{margin-top:6px}",
       "details": [],
-      "narrowCSS": ".header{flex-wrap:wrap}.brand{min-width:0;max-width:100%}h2{white-space:normal;overflow-wrap:normal}.brand-copy{min-width:0}.topline{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}.brand{gap:6px}.brand-icon{width:28px;height:28px}.player-name{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:normal;font-size:14px}.state-pill{justify-self:start}"
+      "narrowCSS": ".header{flex-wrap:wrap}.brand{min-width:0;max-width:100%}h2{white-space:normal;overflow-wrap:normal}.brand-copy{min-width:0}.topline{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}.brand{gap:6px}.brand-icon{width:28px;height:28px}.player-name{white-space:normal;overflow:visible;text-overflow:clip;overflow-wrap:normal;font-size:14px}.state-pill{justify-self:start}",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.brand-icon{width:24px;height:24px;border-radius:8px;flex:none}.brand-icon ha-icon{--mdc-icon-size:16px}.brand{gap:6px}.player-name{font-size:12px;line-height:16px}.track-title{font-size:14px;line-height:18px}.track-subtitle{font-size:11px;line-height:15px;margin-top:3px}.album{font-size:10px;margin-top:3px}.now-playing{grid-template-columns:36px minmax(0,1fr);gap:6px;margin-top:6px}.artwork{width:36px;height:36px;border-radius:10px}.artwork ha-icon{--mdc-icon-size:20px}.control ha-icon{--mdc-icon-size:16px}.control.primary ha-icon{--mdc-icon-size:18px}.volume-row ha-icon{--mdc-icon-size:14px}.volume-row .control ha-icon{--mdc-icon-size:14px}.controls{gap:4px;margin-top:6px}.volume-row{padding:4px;margin-top:6px;gap:4px}"
     },
     "temperature-humidity-card": {
       "css": ".shell{padding:10px}.header{gap:8px;flex-wrap:wrap}.icon-wrap{width:36px;height:36px;flex-basis:36px}.eyebrow{display:none}.title{margin:0;font-size:15px;line-height:20px}.metrics{gap:6px;margin-top:8px}.metric{min-height:0;padding:8px;gap:6px}.metric-value{font-size:27px;padding-top:6px;white-space:normal;flex-wrap:wrap}.humidity .metric-value{font-size:27px}.metric-badge{width:22px;height:22px}.humidity-content{padding-top:6px;flex-wrap:wrap}.humidity-ring{width:28px;height:28px}.humidity-ring:before{width:20px;height:20px}.temperature-scale{padding-top:6px}.footer{margin-top:6px;flex-wrap:wrap}",
       "details": [],
-      "narrowCSS": ".metrics{grid-template-columns:minmax(0,1fr)}.metric-value{font-size:26px;white-space:nowrap;flex-wrap:nowrap}.humidity .metric-value{font-size:26px}.header{display:grid;grid-template-columns:minmax(0,1fr)}h2{white-space:normal;overflow-wrap:normal}.brand{gap:6px}.topline{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}.brand{display:flex;gap:6px;min-width:0}.brand-icon{width:28px;height:28px}.brand-copy{min-width:0;flex:1}.live{justify-self:start}.title{overflow-wrap:normal}"
+      "narrowCSS": ".metrics{grid-template-columns:minmax(0,1fr)}.metric-value{font-size:26px;white-space:nowrap;flex-wrap:nowrap}.humidity .metric-value{font-size:26px}.header{display:grid;grid-template-columns:minmax(0,1fr)}h2{white-space:normal;overflow-wrap:normal}.brand{gap:6px}.topline{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}.brand{display:flex;gap:6px;min-width:0}.brand-icon{width:28px;height:28px}.brand-copy{min-width:0;flex:1}.live{justify-self:start}.title{overflow-wrap:normal}",
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.brand-icon{width:24px;height:24px;border-radius:8px;flex:none}.brand-icon ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.brand{gap:6px}.metric-value{font-size:22px;line-height:26px;padding-top:4px}.humidity .metric-value{font-size:22px;line-height:26px}.unit{font-size:12px;padding-top:2px}.metric{padding:6px;gap:4px}.metric-label{font-size:9px;letter-spacing:.07em;gap:4px}.metric-label ha-icon{--mdc-icon-size:12px}.humidity-ring{width:22px;height:22px}.humidity-ring:before{width:16px;height:16px}.humidity-ring ha-icon{--mdc-icon-size:14px}.metric-badge{width:18px;height:18px}.metric-badge ha-icon{--mdc-icon-size:12px}.metrics{gap:4px;margin-top:6px}.footer-note ha-icon{--mdc-icon-size:12px}.metric-value.empty{font-size:18px!important;line-height:22px}"
     },
     "ha-select-orbit-card": {
       "css": ".shell{padding:10px}.eyebrow{display:none}.orbit{width:30px;height:30px}.info{gap:8px}.head{gap:6px}.readout{padding:6px 0;margin-top:6px;border:0;background:none}.value{font-size:20px}.controls{margin-top:6px}.meta{margin-top:5px}.feedback:empty{display:none}.hint{margin:5px 0}.field{padding:8px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.orbit{width:24px;height:24px}.orbit ha-icon{--mdc-icon-size:16px}.name{font-size:12px;line-height:16px}.value{font-size:17px;line-height:21px}.info{gap:6px}.readout{padding:4px 0;margin-top:4px}.field{font-size:11px;padding:6px}"
     },
     "ha-number-orbit-card": {
       "css": ".shell{padding:10px}.eyebrow{display:none}.orbit{width:30px;height:30px}.info{gap:8px}.head{gap:6px}.readout{padding:6px 0;margin-top:6px;border:0;background:none}.value{font-size:20px}.controls{margin-top:6px}.meta{margin-top:5px}.feedback:empty{display:none}.hint{margin:5px 0}.range-row{gap:5px}.apply{margin-top:5px}",
-      "details": []
+      "details": [],
+      "densityCSS": ".shell{padding:8px}ha-icon{--mdc-icon-size:14px}.icon-wrap{width:26px;height:26px;flex-basis:26px;border-radius:9px}.icon-wrap ha-icon{--mdc-icon-size:16px}.title{font-size:12px;line-height:16px}.header{gap:6px}.pill{gap:4px;padding:4px 6px}.orbit-compact-disclosure{font-size:11px;padding:6px;margin-top:6px}.orbit{width:24px;height:24px}.orbit ha-icon{--mdc-icon-size:16px}.name{font-size:12px;line-height:16px}.value{font-size:17px;line-height:21px}.info{gap:6px}.readout{padding:4px 0;margin-top:4px}.stepper ha-icon{--mdc-icon-size:14px}.meta{font-size:10px}.stepper{font-size:16px}"
     }
   }
 }

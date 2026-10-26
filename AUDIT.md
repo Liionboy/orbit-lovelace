@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.12.0-beta.2 — suite-owned density profiles
+
+Compact0.2.0 adds explicit per-card text/glyph/decoration dimensions after existing narrow rules, all scoped to layout compact. Original27 imported source hashes, native Controls1.0.0 and Themes1.1.0 stay unchanged. No service/config/state logic is changed. The adapter/profiles have updated suiteFeatures hashes; the suite release and public artifact identify the effective presentation. Normal is checked against both beta.1 samples and the full stable1.11.0 baseline.
+
 ## v1.12.0-beta.1 — suite-owned layout adaptation
 
 All27 immutable imported assets/pins and native Controls1.0.0 remain exactly as in1.11.0. The suite now decorates each public constructor before registration, using suite-owned src/orbit-compact.js and src/compact-profiles.json. suiteFeatures declares their origin/version/separate source hashes; bundle-lock records the combined compact digest. This is explicit suite adaptation, not an unchanged-upstream compact feature claim. Same28 packages/30 primary types and legacy alias. Default omitted-layout browser snapshots match1.11.0 for all30 cards; original component tests remain separate from the feature tests.

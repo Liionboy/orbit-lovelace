@@ -6,7 +6,7 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
-## Test release: v1.12.0-beta.1 — Compact on all30 cards
+## Test release: v1.12.0-beta.2 — Compact on all30 cards
 
 Every included card now has an optional **Card layout → Normal / Compact** selector in the prerelease. Existing omitted-layout configurations retain their normal appearance; same single resource and unchanged theme YAML. This beta requires explicit version selection in HACS, not the ordinary stable update. [Install, examples, previews and rollback](docs/COMPACT.md).
 
