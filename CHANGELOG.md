@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.12.0-beta.5 (prerelease)
+
+- Emphasize Welcome Normal date/time:24px bold clock (weight750) and16px semibold date (600), separate rows and primary theme text. Full localized values wrap instead of truncating. No option/YAML required; Compact unchanged.
+- Keeps original locale/time zone, minute refresh, show_date/show_time, Settings/room navigation and all device guards. All imported27 pins, Controls1.0.0 and Themes1.1.0 unchanged.
+
 ## 1.12.0-beta.4 (prerelease)
 
 - Fix Welcome Normal hiding Settings and the room disclosure. Normal/classic retains its full header/weather while gaining the original guarded toolbar and complete collapsible room list. Existing settings_path, room/scene paths and shortcuts_expanded are honored; no guessed routes or live dashboard changes.

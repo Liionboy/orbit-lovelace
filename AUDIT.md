@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.12.0-beta.5 — scoped Normal typography
+
+The existing suite-owned hashed Welcome adaptation adds an orbit-welcome-normal shell class only in the Normal toolbar mode and appends scoped date/clock CSS after inherited narrow rules. Compact has no such class and receives no new styling. No formatter/time/subscription/navigation/service implementation changes; immutable input hashes retained.
+
 ## v1.12.0-beta.4 — native Welcome toolbar in Normal
 
 Suite-owned scripts/welcome-normal-toolbar.mjs applies five exact guarded build replacements to the immutable Welcome input, permitting its original toolbar, collapse handler and configured Settings handler in Normal. src/orbit-compact.js enables this mode for explicit normal/classic or existing settings_path, rolls the flag back after validation failure, and leaves Compact and omitted-without-settings behavior intact. Runtime/profiles/adaptation hashes feed the combined feature digest; imported provenance is unchanged.

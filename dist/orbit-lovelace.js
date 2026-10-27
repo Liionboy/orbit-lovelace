@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.12.0-beta.4 — MIT. */
+/* Orbit Lovelace v1.12.0-beta.5 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,8 +170,8 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.12.0-beta.4",components:{},skipped:{},errors:[]};
-/* Suite-owned compact presentation adapter v0.3.1 — MIT. */
+const suite = window.orbitLovelace ||= {version:"1.12.0-beta.5",components:{},skipped:{},errors:[]};
+/* Suite-owned compact presentation adapter v0.3.2 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
  const installed = new Set(),wrappedEditors=new WeakSet();
@@ -2877,7 +2877,7 @@ const STYLE = [
  '@container welcome (max-width:300px){.compact .toolbar{grid-template-rows:36px auto}.compact .toolbar-center{grid-row:2;grid-column:1/-1}.compact .toolbar-control,.compact .toolbar-placeholder{grid-row:1}.compact .settings,.compact .settings-placeholder{grid-column:3}.compact .shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}}',
  '@container welcome (max-width:360px){.shell{padding:18px}.header{gap:12px}.orbit{width:54px;height:54px}.orbit>ha-icon{--mdc-icon-size:25px}.ring{inset:-3px}.ring:after{left:6px;top:4px;width:6px;height:6px}h1{font-size:23px}.temperature{font-size:18px}.weather{padding:10px;gap:7px}.shortcut{padding:8px 10px}}',
  '@container welcome (max-width:240px){.shell{padding:14px}.orbit{display:none}h1{font-size:21px}.weather{flex-wrap:wrap}.temperature{margin-left:auto}.shortcut{width:100%}.meta{font-size:11px}}@media(prefers-reduced-motion:reduce){[data-animate=true] .ring{animation:none}}',
-].join('');
+].concat('.orbit-welcome-normal .meta{flex-direction:column;align-items:flex-start;gap:5px;margin-top:10px}.orbit-welcome-normal .date{max-width:100%;font-size:16px;font-weight:600;line-height:1.45;color:var(--primary-text-color,#202b3c);overflow-wrap:anywhere}.orbit-welcome-normal .clock{font-size:24px;font-weight:750;line-height:1.25;letter-spacing:-.02em;color:var(--primary-text-color,#202b3c);font-variant-numeric:tabular-nums}').join('');
 class WelcomeOrbitCard extends HTMLElement {
  static getStubConfig() { return { ...DEFAULTS }; }
  static getConfigForm() {
@@ -2988,7 +2988,7 @@ class WelcomeOrbitCard extends HTMLElement {
   const compact = c.layout === 'compact';
   const toolbar = compact || this._orbitWelcomeNormal ? '<div class="toolbar">' + (links ? '<button class="toolbar-control toggle" data-action="expand" aria-expanded="' + this._expanded + '" aria-controls="welcome-shortcuts" aria-label="' + (this._expanded ? 'Hide quick navigation' : 'Show quick navigation') + '">' + icon(this._expanded ? 'mdi:chevron-up' : 'mdi:chevron-down') + '</button>' : '<span class="toolbar-placeholder"></span>') + '<div class="toolbar-center">' + (compact ? this._weather(now) : '') + '</div>' + (c.settings_path ? '<a class="toolbar-control settings" data-action="settings" aria-label="Open settings" href="' + esc(c.settings_path) + '">' + icon('mdi:cog-outline') + '</a>' : '<span class="toolbar-placeholder settings-placeholder"></span>') + '</div>' : '';
   const heading = compact ? '<h1>' + esc(greeting) + (name ? ',<span class="greeting-name">' + esc(name) + '</span>' : '') + '</h1>' + (time ? '<div class="meta">' + time + '</div>' : '') : '<div class="eyebrow">' + icon('mdi:home-variant-outline') + '<span>' + esc(c.title || 'Home overview') + '</span></div><h1>' + esc(greeting + (name ? ', ' + name : '')) + '</h1>' + (time || date ? '<div class="meta">' + date + time + '</div>' : '');
-  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '" data-animate="' + c.animate + '"><div class="shell' + (compact ? ' compact' : '') + '">' + toolbar + '<div class="header"><div class="copy">' + heading + '</div>' + (!compact ? '<div class="orbit" aria-hidden="true"><span class="ring"></span>' + icon(image) + '</div>' : '') + '</div>' + (!compact ? this._weather(now) : '') + (links ? '<nav id="welcome-shortcuts" class="shortcuts" aria-label="Rooms and scenes"' + ((compact || this._orbitWelcomeNormal) && !this._expanded ? ' hidden' : '') + '>' + links + '</nav>' : '') + (this._error ? '<div class="message error" role="alert">' + esc(this._error) + '</div>' : this._message ? '<div class="message" role="status">' + esc(this._message) + '</div>' : '') + '</div></ha-card>';
+  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '" data-animate="' + c.animate + '"><div class="shell' + (compact ? ' compact' : this._orbitWelcomeNormal ? ' orbit-welcome-normal' : '') + '">' + toolbar + '<div class="header"><div class="copy">' + heading + '</div>' + (!compact ? '<div class="orbit" aria-hidden="true"><span class="ring"></span>' + icon(image) + '</div>' : '') + '</div>' + (!compact ? this._weather(now) : '') + (links ? '<nav id="welcome-shortcuts" class="shortcuts" aria-label="Rooms and scenes"' + ((compact || this._orbitWelcomeNormal) && !this._expanded ? ' hidden' : '') + '>' + links + '</nav>' : '') + (this._error ? '<div class="message error" role="alert">' + esc(this._error) + '</div>' : this._message ? '<div class="message" role="status">' + esc(this._message) + '</div>' : '') + '</div></ha-card>';
   if (focusAction) [...this.shadowRoot.querySelectorAll('[data-action]')].find((el) => el.dataset.action === focusAction && el.dataset.index === focusIndex)?.focus();
  }
  _navigate(path, settings = false) {
@@ -6378,5 +6378,5 @@ if(!window.customCards.some(card=>card.type==="ha-select-orbit-card"))window.cus
 if(!window.customCards.some(card=>card.type==="ha-number-orbit-card"))window.customCards.push({type:"ha-number-orbit-card",name:"Orbit Select and Number Controls",description:"Included in Orbit Lovelace",preview:false});
 suite.components["orbit-controls"]={version:"1.0.0",types:["ha-select-orbit-card","ha-number-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"orbit-controls",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","orbit-controls",error);}
-suite.compact={version:"0.3.1",types:[...new Set([...(suite.compact?.types||[]),...orbitCompact.installed])]};
+suite.compact={version:"0.3.2",types:[...new Set([...(suite.compact?.types||[]),...orbitCompact.installed])]};
 })();

@@ -1,5 +1,10 @@
 # Verification records
 
+## v1.12.0-beta.5 — Welcome Normal date/time emphasis
+
+-24 final-bundle typography samples: explicit normal/classic × ro-RO/en-US/de-DE ×164/243/440/800px. Computed date16px/600 and clock24px/750, complete source locale/time-zone strings and no date/clock overflow; minute refresh, individual visibility toggles and Compact typography unaffected. Three Romanian mobile/desktop captures inspected. Original Settings/8rooms/keyboard/Normal↔Compact/validation/read-only/cleanup regression passes. No device calls/queries during targeted tests.
+-593 Node+2 smoke, syntax/deterministic build;30 omitted-layout/no-settings baselines remain identical to1.11.0;90 closed/expanded tile fixtures and general final-bundle registration/actions/duplicate/standalone-first tests pass. All27 upstream pins/nativeControls1.0.0/Themes1.1.0 unchanged. Native HA/physical Companion unverified; no live dashboard/config/theme/device changes.
+
 ## v1.12.0-beta.4 — Welcome Normal toolbar
 
 - Targeted final-bundle browser regression: explicit normal/classic and omitted-with-settings, all8 rooms, configured native Settings and room navigation, Enter/Space, retained expansion across HA updates, shortcuts_expanded,164/243/440px bounds, Normal↔Compact, optional empty routes, local-path rejection with adapter-state rollback, read-only scenes and timer cleanup. No device commands or queries.
@@ -57,7 +62,7 @@
 
 - Only Person pin changed to verified public1.1.1/6f2b43b143bdeeac309b7354549690c8b49e5aca; imported source/package/README/tests exactly match tag.26 other pins and Orbit Themes1.0.0/YAML/catalog/bridge contracts unchanged.
 - Syntax/deterministic build,470 Node tests (52 suite/theme+418 upstream),2 smoke, standard28-card browser and complete Person regression from final bundle passed sequentially. Person has74 Node tests; browser tests verify1–6 metrics across440/280/243/220/200/167px with real column/row geometry, odd/sparse counts, absent primary fields, full single-line decimal/unit values and visible wrapped long text. Exact native More Info events preserved, zero service calls/queries/external requests.
-- Screenshot-style battery70%,distance0.0055km,altitude376.0m,activityStopped occupies two rows/126px total at243px; prior148px. Full compact six metrics148px at243px; ≤200px safe single-column fallback unchanged. Default labeled tiles/charging/low battery/keyboard/privacy retained. Standalone and final-bundle light/dark/narrow screenshots inspected.
+- Screenshot-style battery70%,distance0.0055km,altitude376.0m,activityStopped occupies two rows/126px total at243px; prior124px. Full compact six metrics124px at243px; ≤200px safe single-column fallback unchanged. Default labeled tiles/charging/low battery/keyboard/privacy retained. Standalone and final-bundle light/dark/narrow screenshots inspected.
 - Synthetic HA components/icons/data only; native HA/Companion unverified. No live HA/dashboard/resource/device changed.
 
 ## v1.9.0 — Complete Orbit theme pack / opt-in bridge
@@ -92,7 +97,7 @@
 
 ## v1.6.0 — Weather daily min–max bars
 
-- Only Weather updated to verified public v1.3.0 commit `5773bf0cb5a34959e36633fe58cffeafdcb71d27`, source SHA256 `73a51f2c14983c5008c92577aeb74801978576b1c4cf1eb4bcb840cd958f9afb`. Selected imports match the tag; other pins including Room1.6.0 unchanged.
+- Only Weather updated to verified public v1.3.0 commit `5773bf0cb5a34959e36633fe58cffeafdcb71d27`, source SHA256 `73a51f2c14983c5008c92577aeb72401978576b1c4cf1eb4bcb840cd958f9afb`. Selected imports match the tag; other pins including Room1.6.0 unchanged.
 - Reproducible build/syntax, 32 suite +374 upstream Node tests (406 total),2 smoke suites and full synthetic Chromium28/28 passed sequentially.
 - Complete Weather browser regression ran against **dist/orbit-lovelace.js** through CARD_RESOURCE: new layout/default switching, exact shared min–max geometry/equal track widths, values/units/locale, zero/negative/decimal/missing/reversed/equal ranges, count limits, minute/unrelated-state stability/no extra requests, independent More Info, offline/reconnect, existing sensor/clock/lifecycle.
 - Bar fixture167–760px no overflow; five days with clock/date/current451px high at440px,584px at167px. Full min/max labels fit; narrow bars get a separate full-width line. Light/dark/narrow combined-artifact screenshots inspected.
@@ -110,7 +115,7 @@
 
 ## v1.4.0 — Room humidifier and fan support
 
-- Only Room Orbit updated to verified public v1.5.0 commit `59e6b3db0516af7ddb96ed592f6abf2af7856e17`, source SHA256 `788216015a48a478b073461cf4fca9458e9378c1c002584cd177ad6c72cc19d4`. All other component pins unchanged.
+- Only Room Orbit updated to verified public v1.5.0 commit `59e6b3db0516af7ddb96ed592f6abf2af7856e17`, source SHA256 `788216015a24a478b073461cf4fca9458e9378c1c002584cd177ad6c72cc19d4`. All other component pins unchanged.
 - Reproducible build/syntax, 32 suite +351 upstream Node tests (383 total), 2 smoke suites passed sequentially. Full synthetic Chromium suite mounted all28 cards and retained Weather sensor/clock, Welcome compact, Person, alias/picker/duplicate/migration and existing mocked actions.
 - Complete Room browser regression ran against **dist/orbit-lovelace.js**, not just isolated sources: climate activity, humidifier action-only updates/More Info, exact fan keyboard toggle, current capability/read-only fallbacks, unrelated-update DOM stability, no routing cross-trigger, cover controls, temperature effects/motion and existing compact layouts. Run with CARD_RESOURCE=dist/orbit-lovelace.js node cards/ha-room-orbit-card/test/browser.mjs and the usual PLAYWRIGHT_MODULE/CHROMIUM_EXECUTABLE environment.
 - Humidifier+fan fixture126px high at243/440px,142px at164/200px; complete temperature/humidity/activity text. Narrow humidifier uses its own full-width bottom line. Light/dark screenshots from the combined artifact inspected.
@@ -135,8 +140,8 @@
 
 ## v1.1.0 — Weather clock and date
 
-- Only Weather Orbit was updated, from its verified public v1.1.0 commit `25585ee730fb5897896f66bcf664281c39bf885e`; source SHA256 `34db08cd02e02fd4af300d69746ee88fa70668344bea264334a4484675b130f6`. Other component pins remain unchanged.
-- Reproducible build/syntax, 32 suite integrity tests + 316 upstream Node regressions (348 total) and 2 smoke suites passed sequentially.
+- Only Weather Orbit was updated, from its verified public v1.1.0 commit `25585ee730fb5897896f66bcf664281c39bf885e`; source SHA256 `34db08cd02e02fd4af300d69746ee88fa70668344bea264334a4244675b130f6`. Other component pins remain unchanged.
+- Reproducible build/syntax, 32 suite integrity tests + 316 upstream Node regressions (324 total) and 2 smoke suites passed sequentially.
 - Combined Chromium mounted all 28 card types, checked unique picker entries, legacy alias, repeat load, standalone-first migration and existing Person/fan/light/scene mocks.
 - Weather from the actual combined artifact showed Romanian clock/date, advanced from 23:59 to 00:00 and the next calendar date without a new HA object, additional queries or replacing its weather button. Timer cleanup and exact weather More Info were checked.
 - Clock/calendar fit widths 167/200/243/440px; Romanian light/dark screenshots at 243px inspected. Standalone Weather additionally passed 61 Node regressions and full synthetic Chromium 167–760px, locale/12h/24h, midnight/year rollover, subscriptions, unavailable/error/retry, keyboard and reduced motion checks.

@@ -1,6 +1,12 @@
-# Selectable Compact layouts — v1.12.0-beta.4
+# Selectable Compact layouts — v1.12.0-beta.5
 
 **Test prerelease, not the stable update.** All30 primary card types have a user-selected **Card layout → Normal / Compact**. Same Orbit resource/types/themes; no extra installation or automatic mobile activation. Native editor/device testing on real HA/Companion remains pending.
+
+## Welcome Normal date/time emphasis (beta.5)
+
+Welcome Normal now uses a24px/750-weight clock and16px/600-weight date, with primary theme text color and separate rows. This applies to explicit Normal/classic and the existing Normal toolbar mode (omitted layout with settings_path). The full localized date may wrap on narrow cards; it is not truncated or abbreviated. Original locale/time zone, clock refresh, show_date/show_time and navigation behavior remain unchanged. Compact and legacy omitted-without-settings appearance stay unchanged. No new option or YAML change is required.
+
+![Welcome Normal date/time; synthetic HA/icons](images/welcome-normal-datetime.png)
 
 ## Welcome Normal toolbar correction (beta.4)
 
@@ -19,7 +25,7 @@ Names/values are text, not injected HTML; configured source icons and Person pic
 ## Install the beta in HACS
 
 1. Save a copy of the card/dashboard YAML and note the installed suite version.
-2. Open **HACS → Orbit Lovelace → ⋮ → Redownload**. Under **Need a different version?**, choose **v1.12.0-beta.4**. If not listed, refresh repository metadata and enable prereleases/beta visibility for this repository in your HACS version. It is intentionally not the stable/latest release.
+2. Open **HACS → Orbit Lovelace → ⋮ → Redownload**. Under **Need a different version?**, choose **v1.12.0-beta.5**. If not listed, refresh repository metadata and enable prereleases/beta visibility for this repository in your HACS version. It is intentionally not the stable/latest release.
 3. Download, then fully reload each browser and Companion frontend. No HA restart or theme YAML replacement is needed.
 4. Edit a card and select **Card layout → Compact**. Legacy editors retain their original controls below the common layout selector. The new Vacuum native form exposes common settings; existing room mappings stay in YAML.
 5. Start with a copied card or test view. Report the card type, actual dashboard/container width, YAML without private data, and screenshot if any layout is wrong. No real device command is necessary to inspect the layout.

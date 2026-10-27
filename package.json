@@ -1,6 +1,6 @@
 {
   "name": "orbit-lovelace",
-  "version": "1.12.0-beta.4",
+  "version": "1.12.0-beta.5",
   "private": true,
   "type": "module",
   "description": "Orbit Lovelace and companion Home Assistant card suite",

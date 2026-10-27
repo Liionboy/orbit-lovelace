@@ -1,4 +1,4 @@
-/* Suite-owned compact presentation adapter v0.3.1 — MIT. */
+/* Suite-owned compact presentation adapter v0.3.2 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
  const installed = new Set(),wrappedEditors=new WeakSet();
