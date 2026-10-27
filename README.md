@@ -6,6 +6,10 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
+## New in v1.13.1 — Switch icon color follows state
+
+Switch Control Card uses its palette color for the identity icon only when HA reports **ON**. OFF/unknown/unavailable stay neutral, in Normal and Compact. No new YAML; commands, telemetry and the rest of the styling stay unchanged. [Preview and details](docs/SWITCH-STATE-ICON.md). Update Orbit in HACS and fully reload.
+
 ## New in v1.13.0 — Luma icon and palette per card
 
 Luma now provides optional **Icon** and **Orbit palette** in its native form/YAML, for lights/switches and Normal/Compact. Choose Auto/Aurora/Ocean/Sunset/Lavender; Auto and an empty icon retain old behavior. No color command or entity metadata change: real light RGB and semantic states remain intact. Update Orbit in HACS and fully reload; [configuration and preview](docs/LUMA-APPEARANCE.md).

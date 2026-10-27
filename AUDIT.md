@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.13.1 — Switch state icon adaptation
+
+Suite-owned scripts/switch-state-icon.mjs1.0.0 has guarded source contracts and a digest under suiteFeatures/bundle-lock. Adds one reported-isOn data attribute and targeted icon CSS only to Switch after the theme bridge; no new state tracker, service handler or cloned control. Imported27 pins/native Controls/presentation0.3.4/Welcome/Luma appearance1.0.0/theme YAML unchanged.
+
 ## v1.13.0 — Luma appearance adaptation
 
 Suite-owned scripts/luma-appearance.mjs1.0.0 is hashed under suiteFeatures and applied after the theme bridge only to Luma. Exact source contracts fail closed. Imported source is immutable. Native form icon/palette options, validated configuration and escaped icon priority are additive; palette inputs map only to fixed color constants. Appearance never dispatches services. Real light RGB and semantic states retained.27 imported pins/native Controls/Compact source/profile/Welcome adaptation/theme YAML unchanged.

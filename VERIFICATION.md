@@ -1,5 +1,9 @@
 # Verification records
 
+## v1.13.1 — Switch reported-state icon accent
+
+598Node+2smoke/syntax/deterministicbuild;120 Switch state/layout/palette/width fixtures and384 theme cases. ON accent vs non-ON neutral/transparent/shadowless, original icon override, native pending/ack/error/no-optimism/state updates, exact power calls and telemetry retained.90 all-card identity cases, Luma192appearance+192theme regressions and general30-card/alias/migration suite pass. Other29 Normal/Compact computed profiles equal1.13.0. Light/dark captures inspected. Synthetic HA/icons only; no live HA/device changes, native HA/physical Companion unverified. docs/SWITCH-STATE-ICON.md.
+
 ## v1.13.0 — Luma appearance
 
 596 Node +2 smoke, syntax/deterministic build;192 final-bundle appearance cases and192 explicit-palette theme cases;24 native Compact Luma regressions; general30-card registration/alias/actions/standalone-first browser suite. All30 default Normal and Compact computed profiles equal1.12.2. Native icon/palette form schemas, override/fallback/reset/escaping, per-card isolation, exact power/brightness, no optimistic state, unavailable/error guards and real RGB retained. Light/dark captures inspected. Synthetic HA/icons only; no live changes and no physical/native HA certification. See docs/LUMA-APPEARANCE.md.

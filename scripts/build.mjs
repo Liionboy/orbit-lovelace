@@ -6,6 +6,7 @@ import {themeBridge,bridgeVersion} from './theme-bridge.mjs';
 import {buildThemes,palettes} from './themes.mjs';
 import {welcomeNormalToolbar} from './welcome-normal-toolbar.mjs';
 import {lumaAppearance} from './luma-appearance.mjs';
+import {switchStateIcon} from './switch-state-icon.mjs';
 export const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 export const manifest=JSON.parse(readFileSync(resolve(root,'components.json'),'utf8'));
 export const components=[...manifest.components,...(manifest.nativeComponents||[])];
@@ -44,6 +45,11 @@ export function componentSource(c){
   if(!feature||createHash('sha256').update(readFileSync(resolve(root,feature.source))).digest('hex')!==feature.sha256)throw Error('Luma appearance provenance mismatch');
   return lumaAppearance(themed.source);
  }
+ if(c.id==='lovelace-switch-control-card'){
+  const feature=manifest.suiteFeatures.find(f=>f.id==='switch-state-icon');
+  if(!feature||createHash('sha256').update(readFileSync(resolve(root,feature.source))).digest('hex')!==feature.sha256)throw Error('Switch state icon provenance mismatch');
+  return switchStateIcon(themed.source);
+ }
  return themed.source;
 }
 export function build(){
@@ -60,6 +66,6 @@ export function build(){
   lines.push('suite.components['+JSON.stringify(c.id)+']={version:'+JSON.stringify(c.version)+',types:'+JSON.stringify(c.types)+'};','})() } catch(error){suite.errors.push({component:'+JSON.stringify(c.id)+',message:String(error?.message||error)});console.error("Orbit Lovelace: component failed",'+JSON.stringify(c.id)+',error);}');
  }
  lines.push('suite.compact={version:'+JSON.stringify(compact.version)+',types:[...new Set([...(suite.compact?.types||[]),...orbitCompact.installed])]};','})();','');const source=lines.join(NL);mkdirSync(resolve(root,'dist'),{recursive:true});writeFileSync(resolve(root,'dist/orbit-lovelace.js'),source);
- const info={version:manifest.version,packages:components.length,upstreamPackages:manifest.components.length,nativePackages:(manifest.nativeComponents||[]).length,cards:components.flatMap(c=>c.types).length,compactVersion:compact.version,compactSha256:compact.sha256,lumaAppearanceVersion:manifest.suiteFeatures.find(f=>f.id==='luma-appearance').version,lumaAppearanceSha256:manifest.suiteFeatures.find(f=>f.id==='luma-appearance').sha256,themeBridgeVersion:bridgeVersion,themesVersion:palettes.version,themeSha256:createHash('sha256').update(readFileSync(resolve(root,'themes/orbit-themes.yaml'))).digest('hex'),bytes:Buffer.byteLength(source),sha256:createHash('sha256').update(source).digest('hex')};writeFileSync(resolve(root,'bundle-lock.json'),JSON.stringify(info,null,2)+NL);console.log(JSON.stringify(info));return source;
+ const info={version:manifest.version,packages:components.length,upstreamPackages:manifest.components.length,nativePackages:(manifest.nativeComponents||[]).length,cards:components.flatMap(c=>c.types).length,compactVersion:compact.version,compactSha256:compact.sha256,lumaAppearanceVersion:manifest.suiteFeatures.find(f=>f.id==='luma-appearance').version,lumaAppearanceSha256:manifest.suiteFeatures.find(f=>f.id==='luma-appearance').sha256,switchStateIconVersion:manifest.suiteFeatures.find(f=>f.id==='switch-state-icon').version,switchStateIconSha256:manifest.suiteFeatures.find(f=>f.id==='switch-state-icon').sha256,themeBridgeVersion:bridgeVersion,themesVersion:palettes.version,themeSha256:createHash('sha256').update(readFileSync(resolve(root,'themes/orbit-themes.yaml'))).digest('hex'),bytes:Buffer.byteLength(source),sha256:createHash('sha256').update(source).digest('hex')};writeFileSync(resolve(root,'bundle-lock.json'),JSON.stringify(info,null,2)+NL);console.log(JSON.stringify(info));return source;
 }
 if(process.argv[1]===fileURLToPath(import.meta.url))build();

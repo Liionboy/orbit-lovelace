@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -525,6 +525,16 @@
       "sha256": "b2792f699279e7bbbd9fb01da722040482e7cd7ea4a45ae231d04aa94c1879c1",
       "types": [
         "luma-control-card"
+      ]
+    },
+    {
+      "id": "switch-state-icon",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "scripts/switch-state-icon.mjs",
+      "sha256": "ef8a573efdfdb75a01fc6dd051dd2ecfb33523eb72abc444014bd41dff33c286",
+      "types": [
+        "switch-control-card"
       ]
     }
   ]

@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.13.0 — MIT. */
+/* Orbit Lovelace v1.13.1 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.13.0",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.13.1",components:{},skipped:{},errors:[]};
 /* Suite-owned compact presentation adapter v0.3.4 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
@@ -5351,6 +5351,7 @@ const STYLE = `
   .consumption{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}.reading{display:flex;align-items:center;gap:9px;min-width:0;padding:10px 12px;border:1px solid color-mix(in srgb,var(--accent) 15%,var(--divider-color));border-radius:14px;background:color-mix(in srgb,var(--card-background-color,#fff) 91%,var(--accent))}.reading ha-icon{flex:none;color:var(--accent);--mdc-icon-size:19px}.reading-copy{min-width:0}.reading-label{color:var(--secondary-text-color);font-size:9px;font-weight:760;letter-spacing:.08em;text-transform:uppercase}.reading-value{overflow:hidden;margin-top:3px;font-size:14px;font-weight:800;font-variant-numeric:tabular-nums;text-overflow:ellipsis;white-space:nowrap}
   @container switch-card (max-width:480px){.shell{padding:15px}.identity{gap:9px}.icon-wrap{flex-basis:40px;width:40px;height:40px;border-radius:14px}.icon-wrap ha-icon{--mdc-icon-size:22px}.pill{gap:5px;padding:6px 8px;font-size:10px}.panel{gap:9px;margin-top:15px;padding:12px;border-radius:16px}.copy{gap:8px}.state-icon{width:34px;height:34px;border-radius:12px}.state-value{font-size:16px}.toggle{min-width:90px;min-height:39px;padding:0 10px}}
   @container switch-card (max-width:360px){.shell{padding:12px}.header{gap:7px}.identity{gap:7px}.icon-wrap{flex-basis:36px;width:36px;height:36px}.title{font-size:15px}.pill{padding:5px 7px;font-size:9px}.panel{gap:6px;padding:10px}.copy{gap:6px}.state-icon{width:30px;height:30px}.state-value{font-size:14px}.toggle{min-width:76px;padding:0 7px;font-size:11px}}
+ha-card .shell .identity .icon-wrap,ha-card .shell .panel .state-icon,ha-card .shell .orbit-tile .orbit-tile-icon{color:var(--secondary-text-color,#637080);background:transparent;border-color:var(--divider-color,#dfe5eb);box-shadow:none}ha-card[data-orbit-switch-on="true"] .shell .identity .icon-wrap,ha-card[data-orbit-switch-on="true"] .shell .panel .state-icon,ha-card[data-orbit-switch-on="true"] .shell .orbit-tile .orbit-tile-icon{color:var(--accent);background:color-mix(in srgb,var(--accent) 12%,transparent);border-color:color-mix(in srgb,var(--accent) 24%,transparent)}
   @media(prefers-reduced-motion:reduce){*,*:before,*:after{transition:none!important;scroll-behavior:auto!important}}
 `;
 
@@ -5497,7 +5498,7 @@ class SwitchControlCard extends HTMLElement {
     const consumptionHtml = consumption.length ? `<section class="consumption" aria-label="Power consumption">${consumption.map((item) => `<div class="reading"><ha-icon icon="${item.icon}"></ha-icon><div class="reading-copy"><div class="reading-label">${item.label}</div><div class="reading-value">${escapeHtml(this._formatSensor(item.state))}</div></div></div>`).join("")}</section>` : "";
     this.shadowRoot.innerHTML = `
       <style>${STYLE}</style>
-      <ha-card data-palette="${this._config.palette}">
+      <ha-card data-palette="${this._config.palette}" data-orbit-switch-on="${isOn}">
         <div class="shell">
           <header class="header">
             <div class="identity"><div class="icon-wrap"><ha-icon icon="${escapeHtml(icon)}"></ha-icon></div><div class="identity-copy"><div class="eyebrow">Switch Control</div><h2 class="title">${escapeHtml(title)}</h2></div></div>

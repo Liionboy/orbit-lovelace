@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.13.1
+
+- Switch identity/state icons use the existing palette accent only while reported ON; OFF/unknown/unavailable/missing stay neutral without tinted background/shadow, in Normal and Compact.
+- Preserve original power commands, reported-state semantics, telemetry, custom icons and all other cards. Suite-owned guarded Switch state icon adaptation1.0.0; no new YAML.
+
 ## 1.13.0
 
 - Add optional per-card Luma `icon` and `palette`, including native editor selectors, for light/switch and Normal/Compact. Palettes: Auto/Aurora/Ocean/Sunset/Lavender.
