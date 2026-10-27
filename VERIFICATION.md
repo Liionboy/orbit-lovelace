@@ -1,5 +1,9 @@
 # Verification records
 
+## v1.13.0 — Luma appearance
+
+596 Node +2 smoke, syntax/deterministic build;192 final-bundle appearance cases and192 explicit-palette theme cases;24 native Compact Luma regressions; general30-card registration/alias/actions/standalone-first browser suite. All30 default Normal and Compact computed profiles equal1.12.2. Native icon/palette form schemas, override/fallback/reset/escaping, per-card isolation, exact power/brightness, no optimistic state, unavailable/error guards and real RGB retained. Light/dark captures inspected. Synthetic HA/icons only; no live changes and no physical/native HA certification. See docs/LUMA-APPEARANCE.md.
+
 ## v1.12.2 —30-card expanded identity audit
 
 - Initial populated243px audit found repeated source identity on29 types (Luma was already fixed). Final90 fixtures (30×164/243/440px) assert one visible primary name, hidden source name, original control-node retention, readable values, keyboard disclosure and no incidental commands/queries. All30 expanded243px captures reviewed in five sheets.

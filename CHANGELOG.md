@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.13.0
+
+- Add optional per-card Luma `icon` and `palette`, including native editor selectors, for light/switch and Normal/Compact. Palettes: Auto/Aurora/Ocean/Sunset/Lavender.
+- Preserve original styling when omitted, icon metadata/default fallback, real light RGB and semantic colors. No entity writes from appearance settings.
+- Guard and hash the suite-owned build adaptation1.0.0;27 upstream pins, Controls1.0.0, Compact0.3.4 and Themes1.1.0 unchanged.
+
 ## 1.12.2
 
 - Fix duplicate Switch Compact identity/state above its native power button and Power/Energy/Voltage readings.

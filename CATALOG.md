@@ -1,6 +1,6 @@
 # Included card catalog
 
-**Stable v1.12.2:** all30 primary types retain optional Normal/Compact presentation with a single primary name in expanded Details. Switch telemetry, native More Info/Room details and unique notes remain available. [Installation and exact scope](docs/COMPACT.md). The upstream versions remain unchanged; suite-owned presentation changes are traced under suiteFeatures, not attributed to upstream.
+**Stable v1.13.0:** Luma gains optional per-card [icon/palette configuration](docs/LUMA-APPEARANCE.md), in Normal and Compact. All30 types retain the v1.12.2 single-primary-name behavior. [Compact scope](docs/COMPACT.md). Imported versions remain unchanged; suite-owned adaptations are traced under suiteFeatures, not attributed to upstream.
 
 Suite includes optional [complete HA themes](THEMES.md) and [Desktop/Mobile/iOS Mobile profiles](docs/themes/DEVICE-PROFILES.md). v1.11.0 adds two suite-owned controls; all27 upstream pins and Themes1.1.0 are unchanged from1.10.1. Default styles remain without an Orbit theme. Mobile header styling still needs optional card-mod; new controls do not. Theme YAML installation is separate from HACS Dashboard updates.
 

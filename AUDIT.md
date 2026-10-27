@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.13.0 — Luma appearance adaptation
+
+Suite-owned scripts/luma-appearance.mjs1.0.0 is hashed under suiteFeatures and applied after the theme bridge only to Luma. Exact source contracts fail closed. Imported source is immutable. Native form icon/palette options, validated configuration and escaped icon priority are additive; palette inputs map only to fixed color constants. Appearance never dispatches services. Real light RGB and semantic states retained.27 imported pins/native Controls/Compact source/profile/Welcome adaptation/theme YAML unchanged.
+
 ## v1.12.2 — explicit primary identity contracts
 
 All30 card profiles have an audited identity contract in docs/compact-identity-contracts.json. Per-type Compact CSS suppresses duplicate headings/decorative wrappers, retaining native button nodes with concise labels where headings were inside controls. Original markup remains the summary source. A small adapter rule marks an Action subtitle only when it exactly equals the primary title; a distinct note stays available. Source profiles/runtime are hashed as presentation0.3.4;27 immutable imported components/nativeControls/themeYAML/Welcome Normal build adaptation remain unchanged.

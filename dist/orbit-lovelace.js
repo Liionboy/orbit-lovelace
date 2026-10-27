@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.12.2 — MIT. */
+/* Orbit Lovelace v1.13.0 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.12.2",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.13.0",components:{},skipped:{},errors:[]};
 /* Suite-owned compact presentation adapter v0.3.4 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
@@ -4609,16 +4609,20 @@ const STYLE = `
   .switch-panel{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px;margin-top:20px;padding:15px;border:1px solid color-mix(in srgb,var(--divider-color) 65%,transparent);border-radius:17px;background:color-mix(in srgb,var(--card-background-color,#fff) 82%,var(--secondary-background-color))}.switch-copy{min-width:0}.switch-name{overflow:hidden;font-size:14px;font-weight:750;text-overflow:ellipsis;white-space:nowrap}.switch-detail{margin-top:4px;color:var(--secondary-text-color);font-size:11px}.switch-panel .power{min-width:104px}
   @container card (max-width: 480px){.shell{padding:15px}.header{gap:8px}.identity{gap:9px}.icon-wrap{width:40px;height:40px}.pill{gap:5px;padding:6px 8px;font-size:10px}.summary{gap:8px;margin-top:15px}.summary-label{font-size:clamp(22px,7cqi,29px)}.summary-meta{font-size:11px}.section{margin-top:15px;padding-top:13px}.switch-panel{padding:12px;gap:8px}.switch-panel .power{min-width:84px;padding:0 12px}.footer{gap:8px;margin-top:16px;padding-top:12px}.power{min-width:100px;padding:0 12px}}
   @container card (max-width: 380px){.shell{padding:12px}.header{gap:6px}.pill{gap:4px;padding:5px 6px;font-size:9px}.summary-label{font-size:24px}.summary-meta{font-size:10px}.compact-control.light-compact{grid-template-columns:minmax(0,1fr)}.switch-panel .power{min-width:0;padding:0 8px}.footer{grid-template-columns:minmax(0,1fr) auto;gap:6px}.power{min-width:0;padding:0 8px;font-size:12px}}
+.shell[data-luma-palette]{background:radial-gradient(ellipse at 8% 0%,color-mix(in srgb,var(--accent) 11%,transparent),transparent 48%)}.shell[data-luma-palette] .icon-wrap{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 22%,transparent);background:color-mix(in srgb,var(--accent) 12%,var(--card-background-color,#fff))}
   @media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
 `;
 
+const LUMA_PALETTES = {aurora:'#078f72',ocean:'#1477c9',sunset:'#cf573e',lavender:'#8059c7'};
 const SCHEMA = [
+ {name:'icon',selector:{icon:{}}},
+ {name:'palette',selector:{select:{options:[{value:'auto',label:'Auto (existing behavior)'},...Object.keys(LUMA_PALETTES).map(value=>({value,label:value[0].toUpperCase()+value.slice(1)}))],mode:'dropdown'}}},
   { name: "entity", required: true, selector: { entity: { domain: ["light", "switch"] } } },
   { name: "title", selector: { text: {} } },
   { name: "transition", selector: { number: { min: 0, max: 10, step: 0.1, mode: "slider", unit_of_measurement: "s" } } },
 ];
 
-const LABELS = { entity: "Light or switch", title: "Card title", transition: "Transition duration" };
+const LABELS = { icon: "Icon (optional)", palette: "Orbit palette", entity: "Light or switch", title: "Card title", transition: "Transition duration" };
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
@@ -4669,6 +4673,8 @@ class LumaControlCard extends HTMLElement {
   setConfig(config) {
     if (!config || typeof config !== "object") throw new Error("Provide a valid Luma Control Card configuration.");
     if (!config.entity) throw new Error("Choose a light or switch entity for the Luma Control Card.");
+    if (config.icon != null && typeof config.icon !== 'string') throw new Error('Icon must be text.');
+    if (config.palette != null && config.palette !== '' && config.palette !== 'auto' && !Object.hasOwn(LUMA_PALETTES, config.palette)) throw new Error('Choose auto, aurora, ocean, sunset or lavender.');
     this._config = { transition: 0.3, ...config };
     this._root ??= this.attachShadow({ mode: "open" });
     this.render();
@@ -4706,7 +4712,7 @@ class LumaControlCard extends HTMLElement {
   }
 
   icon() {
-    return this.attrs.icon || (this.domain === "switch" ? (this.isOn ? "mdi:toggle-switch" : "mdi:toggle-switch-off-outline") : (this.isOn ? "mdi:lightbulb-on" : "mdi:lightbulb-outline"));
+    return this._config.icon?.trim() || this.attrs.icon || (this.domain === "switch" ? (this.isOn ? "mdi:toggle-switch" : "mdi:toggle-switch-off-outline") : (this.isOn ? "mdi:lightbulb-on" : "mdi:lightbulb-outline"));
   }
 
   colorHex() {
@@ -4743,10 +4749,11 @@ class LumaControlCard extends HTMLElement {
       this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell"><strong>Luma Control Card</strong><p>Select a light or switch entity.</p></div></ha-card>`;
       return;
     }
-    const primaryColor = this.isOn ? (this.domain === "light" ? this.colorHex() : "var(--success-color,#38a987)") : "var(--primary-color)";
+    const paletteColor = LUMA_PALETTES[this._config.palette];
+    const primaryColor = this.isOn ? (this.domain === 'light' ? this.colorHex() : (paletteColor || 'var(--success-color,#38a987)')) : (paletteColor || 'var(--primary-color)');
     const rootStyle = `<style>${STYLE}</style>`;
     const header = `<header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="${escapeHtml(this.icon())}"></ha-icon></div><div class="identity-copy"><div class="eyebrow">${domain === "light" ? "Home Assistant · Light" : "Home Assistant · Switch"}</div><h2 class="title">${escapeHtml(this.title())}</h2></div></div><div class="pill ${this.unavailable ? "unavailable" : this.isOn ? "on" : ""}"><span class="dot"></span>${this.stateLabel()}</div></header>`;
-    const shellStyle = `style="--glow:${escapeHtml(primaryColor)}"`;
+    const shellStyle = `style="--glow:${escapeHtml(primaryColor)}${paletteColor ? ";--accent:" + paletteColor : ""}"${paletteColor ? ' data-luma-palette="' + this._config.palette + '"' : ""}`;
     let body = domain === "light" ? this.renderLight() : this.renderSwitch();
     this._root.innerHTML = `${rootStyle}<ha-card><div class="shell" ${shellStyle}>${header}${body}</div></ha-card>`;
     this.bindEvents();

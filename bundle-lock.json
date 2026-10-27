@@ -1,14 +1,16 @@
 {
-  "version": "1.12.2",
+  "version": "1.13.0",
   "packages": 28,
   "upstreamPackages": 27,
   "nativePackages": 1,
   "cards": 30,
   "compactVersion": "0.3.4",
   "compactSha256": "d0dc12938d6e9a5ecdc2534cf0540705019e30ee7e1a4466aa40b871b2f8b1c8",
+  "lumaAppearanceVersion": "1.0.0",
+  "lumaAppearanceSha256": "b2792f699279e7bbbd9fb01da722040482e7cd7ea4a45ae231d04aa94c1879c1",
   "themeBridgeVersion": 1,
   "themesVersion": "1.1.0",
   "themeSha256": "392b0e0863d85c572a92299923aec3df5d773361c6108e288aa86bfba5db55e2",
-  "bytes": 771005,
-  "sha256": "8ebc6cbe1db5d05f0e271c1cf0aad7b0e0e7357c23590e69f9d8a0fc56d4d3b4"
+  "bytes": 772289,
+  "sha256": "c9b9f3d372809748de87c8e7aec047bf17bcede598cc9a68b63020fc90b66b6b"
 }

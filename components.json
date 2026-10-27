@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.12.2",
+  "version": "1.13.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -516,6 +516,16 @@
       "profilesSha256": "cb56c8a711660930f98528a82cb6297fdadac66876ab649cbc322c44dc92c83e",
       "adaptation": "scripts/welcome-normal-toolbar.mjs",
       "adaptationSha256": "6e9be8d99c010b286ee75942082c6601626349fa54e4d619761d7048e3d296d7"
+    },
+    {
+      "id": "luma-appearance",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "scripts/luma-appearance.mjs",
+      "sha256": "b2792f699279e7bbbd9fb01da722040482e7cd7ea4a45ae231d04aa94c1879c1",
+      "types": [
+        "luma-control-card"
+      ]
     }
   ]
 }
