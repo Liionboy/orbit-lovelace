@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.12.0-beta.5 — MIT. */
+/* Orbit Lovelace v1.12.0 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.12.0-beta.5",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.12.0",components:{},skipped:{},errors:[]};
 /* Suite-owned compact presentation adapter v0.3.2 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;

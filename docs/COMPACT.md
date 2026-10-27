@@ -1,6 +1,6 @@
-# Selectable Compact layouts — v1.12.0-beta.5
+# Selectable Compact layouts — v1.12.0
 
-**Test prerelease, not the stable update.** All30 primary card types have a user-selected **Card layout → Normal / Compact**. Same Orbit resource/types/themes; no extra installation or automatic mobile activation. Native editor/device testing on real HA/Companion remains pending.
+**Stable release, promoted unchanged from v1.12.0-beta.5.** All30 primary card types have a user-selected **Card layout → Normal / Compact**. Same Orbit resource/types/themes; no extra installation or automatic mobile activation. The requester approved the last beta after use; automated verification remains synthetic, not a general native editor/device certification.
 
 ## Welcome Normal date/time emphasis (beta.5)
 
@@ -22,13 +22,13 @@ Names/values are text, not injected HTML; configured source icons and Person pic
 
 ![Orbit tile layout; synthetic HA/icons](images/compact-tile-preview.png)
 
-## Install the beta in HACS
+## Install or update in HACS
 
 1. Save a copy of the card/dashboard YAML and note the installed suite version.
-2. Open **HACS → Orbit Lovelace → ⋮ → Redownload**. Under **Need a different version?**, choose **v1.12.0-beta.5**. If not listed, refresh repository metadata and enable prereleases/beta visibility for this repository in your HACS version. It is intentionally not the stable/latest release.
+2. Open **HACS → Orbit Lovelace** and update to **v1.12.0**, the latest stable release. If changing from a beta or the update is not listed yet, refresh repository metadata or use **⋮ → Redownload → Need a different version? → v1.12.0**. Prerelease visibility is not required for this stable release.
 3. Download, then fully reload each browser and Companion frontend. No HA restart or theme YAML replacement is needed.
 4. Edit a card and select **Card layout → Compact**. Legacy editors retain their original controls below the common layout selector. The new Vacuum native form exposes common settings; existing room mappings stay in YAML.
-5. Start with a copied card or test view. Report the card type, actual dashboard/container width, YAML without private data, and screenshot if any layout is wrong. No real device command is necessary to inspect the layout.
+5. Existing beta.5 layouts and settings work unchanged; there is no automatic switch into Compact. When first trying Compact, use a copied card or test view. Report the card type, actual dashboard/container width, YAML without private data, and screenshot if any layout is wrong. No real device command is necessary to inspect the layout.
 
 The only resource remains `/hacsfiles/orbit-lovelace/orbit-lovelace.js`; do not add another resource or standalone card alongside it.
 
@@ -83,6 +83,6 @@ Actual distributed bundle with synthetic HA entities/icons, **not native HA scre
 
 For the previous denser-but-full presentation, HACS Redownload **v1.12.0-beta.2** and fully reload; same YAML.
 
-### Return to stable
+### Return to the previous stable v1.11.0
 
 Select Normal (or remove the new layout key), save your configuration, then HACS Redownload → **v1.11.0** and fully reload. Before downgrading, remove newly added `layout` keys on cards other than Welcome or restore your saved YAML. Welcome1.11.0 accepts only its existing classic/compact values, not the new normal alias. Original Person `metrics_layout` remains valid. Keep the same single resource; no theme or entity rollback is needed.

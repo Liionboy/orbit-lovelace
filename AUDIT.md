@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.12.0 — unchanged stable promotion
+
+Only suite version metadata and current release/installation documentation change from beta.5. All27 imported pins/nativeControls1.0.0/suiteFeatures0.3.2/themeYAML1.1.0 remain byte-identical. Stable resource equivalence is established after normalizing the two suite version strings; runtime safety/commands/navigation behavior is unchanged.
+
 ## v1.12.0-beta.5 — scoped Normal typography
 
 The existing suite-owned hashed Welcome adaptation adds an orbit-welcome-normal shell class only in the Normal toolbar mode and appends scoped date/clock CSS after inherited narrow rules. Compact has no such class and receives no new styling. No formatter/time/subscription/navigation/service implementation changes; immutable input hashes retained.

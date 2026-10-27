@@ -1,5 +1,11 @@
 # Verification records
 
+## v1.12.0 — stable promotion of beta.5
+
+- Release is explicitly authorized after the requester approved beta.5. Confirmed normalized final resource byte equality to the beta.5 tag (only suite version strings differ); full component/native/feature metadata and feature digests unchanged. No functional source, dependency or theme changes.
+- Stable final-bundle syntax/reproducibility,593 Node+2 smoke, Welcome typography/navigation, omitted-layout baselines,90 closed/expanded tiles,1440 populated theme/layout mounts/90 phone grids and general suite browser regressions passed again sequentially. Prior expanded Media/Controls/profile evidence is retained because executable behavior is byte-identical after version normalization.
+- Requester feedback is not universal physical device/native editor certification. No live HA/dashboard/theme/device/config change is part of this release.
+
 ## v1.12.0-beta.5 — Welcome Normal date/time emphasis
 
 -24 final-bundle typography samples: explicit normal/classic × ro-RO/en-US/de-DE ×164/243/440/800px. Computed date16px/600 and clock24px/750, complete source locale/time-zone strings and no date/clock overflow; minute refresh, individual visibility toggles and Compact typography unaffected. Three Romanian mobile/desktop captures inspected. Original Settings/8rooms/keyboard/Normal↔Compact/validation/read-only/cleanup regression passes. No device calls/queries during targeted tests.

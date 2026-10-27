@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.12.0
+
+- Promote the approved v1.12.0-beta.5 to stable without additional functional changes. The executable bundle differs only in its suite version metadata.
+- Optional Compact tiles on all30 card types: icon/name/reported state/selected reading, guarded native primary commands and expandable Details for secondary content.
+- Welcome Normal retains Settings and complete collapsible room navigation, with a24px bold clock and16px semibold full localized date.
+- Same resource, Lovelace types/configuration,27 imported pins, Controls1.0.0, suite adapter0.3.2 and Themes1.1.0. Existing beta.5 YAML works unchanged; HACS update and full frontend reload.
+
 ## 1.12.0-beta.5 (prerelease)
 
 - Emphasize Welcome Normal date/time:24px bold clock (weight750) and16px semibold date (600), separate rows and primary theme text. Full localized values wrap instead of truncating. No option/YAML required; Compact unchanged.
