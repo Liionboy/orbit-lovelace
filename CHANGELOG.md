@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.12.0-beta.4 (prerelease)
+
+- Fix Welcome Normal hiding Settings and the room disclosure. Normal/classic retains its full header/weather while gaining the original guarded toolbar and complete collapsible room list. Existing settings_path, room/scene paths and shortcuts_expanded are honored; no guessed routes or live dashboard changes.
+- Covers the native editor’s saved classic alias and omitted layout with configured settings; omitted layout without settings keeps the original appearance. Compact tiles and the other29 card types are unchanged. Suite-owned adaptation is independently hashed; all27 imported pins, Controls1.0.0 and Themes1.1.0 unchanged.
+
 ## 1.12.0-beta.3 (prerelease)
 
 - Reworks optional Compact into a tile on all30 primary types: icon/name/reported state/selected reading, primary commands and a keyboard Details chevron. Secondary source elements remain in place, with native listeners/guards. No global scaling, service rewrites or optimistic state.

@@ -1,4 +1,4 @@
-/* Suite-owned compact presentation adapter v0.3.0 — MIT. */
+/* Suite-owned compact presentation adapter v0.3.1 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
  const installed = new Set(),wrappedEditors=new WeakSet();
@@ -82,7 +82,10 @@ const orbitCompact = (() => {
    // A real config change still takes the original validation/invalidation path.
    let signature;try{signature=JSON.stringify(next);}catch{}
    const presentationOnly=signature!==undefined&&signature===this._orbitConfigSignature&&this._orbitCompact!==compact;
-   const result=presentationOnly?undefined:original.call(this,next);this._orbitConfigSignature=signature;stop(this);this._orbitProfile=profile;this._orbitCompact=compact;this._orbitDetailId||="orbit-compact-"+(++sequence);this.toggleAttribute("data-orbit-layout",compact);if(compact)this.setAttribute("data-orbit-layout","compact");else{this.shadowRoot?.querySelector(".orbit-compact-disclosure")?.remove();this.shadowRoot?.querySelector(".orbit-tile")?.remove();}this.removeAttribute("data-orbit-details-open");watch(this,profile);return result;
+   const previousWelcomeNormal=this._orbitWelcomeNormal;
+   if(welcome)this._orbitWelcomeNormal=!compact&&(config?.layout==="normal"||config?.layout==="classic"||Boolean(config?.settings_path));
+   let result;try{result=presentationOnly?undefined:original.call(this,next);}catch(error){this._orbitWelcomeNormal=previousWelcomeNormal;throw error;}
+   this._orbitConfigSignature=signature;stop(this);this._orbitProfile=profile;this._orbitCompact=compact;this._orbitDetailId||="orbit-compact-"+(++sequence);this.toggleAttribute("data-orbit-layout",compact);if(compact)this.setAttribute("data-orbit-layout","compact");else{this.shadowRoot?.querySelector(".orbit-compact-disclosure")?.remove();this.shadowRoot?.querySelector(".orbit-tile")?.remove();}this.removeAttribute("data-orbit-details-open");watch(this,profile);return result;
   };
   const connect=p.connectedCallback,disconnect=p.disconnectedCallback;
   p.connectedCallback=function(){const result=connect?.call(this);watch(this,profile);return result;};

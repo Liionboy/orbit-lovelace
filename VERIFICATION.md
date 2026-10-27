@@ -1,5 +1,11 @@
 # Verification records
 
+## v1.12.0-beta.4 — Welcome Normal toolbar
+
+- Targeted final-bundle browser regression: explicit normal/classic and omitted-with-settings, all8 rooms, configured native Settings and room navigation, Enter/Space, retained expansion across HA updates, shortcuts_expanded,164/243/440px bounds, Normal↔Compact, optional empty routes, local-path rejection with adapter-state rollback, read-only scenes and timer cleanup. No device commands or queries.
+-593 Node tests (175 suite +418 upstream),2 smoke, syntax/reproducible build; all30 omitted-layout/no-settings baselines match1.11.0.90 closed/expanded tile fixtures,1440 populated layout/theme mounts,90 phone grids and general final-suite browser interaction/registration/duplicate/standalone-first tests pass. Three targeted Normal phone/desktop captures inspected (164/243/440px); native HA/physical Companion unverified.
+- Intentionally adds the toolbar to configured Normal Welcome only. Omitted-layout/no-settings baseline, other29 cards, imported27 pins, native Controls and themes remain unchanged. Build-only adaptation has exact replacement guards and a manifest hash, separate from immutable imported provenance.
+
 ## v1.12.0-beta.3 — tile composition and expandable secondary content
 
 -592 Node+2 smoke, syntax/reproducible build, unchanged27 upstream pins/Controls1.0.0/Themes1.1.0. All30 omitted-layout computed baselines still match stable1.11.0;90 corresponding normal typography/geometry samples remain unchanged against beta.1. Tile summaries are measured rather than assuming scaling proves compactness.

@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.12.0-beta.3 — MIT. */
+/* Orbit Lovelace v1.12.0-beta.4 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,8 +170,8 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.12.0-beta.3",components:{},skipped:{},errors:[]};
-/* Suite-owned compact presentation adapter v0.3.0 — MIT. */
+const suite = window.orbitLovelace ||= {version:"1.12.0-beta.4",components:{},skipped:{},errors:[]};
+/* Suite-owned compact presentation adapter v0.3.1 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
  const installed = new Set(),wrappedEditors=new WeakSet();
@@ -255,7 +255,10 @@ const orbitCompact = (() => {
    // A real config change still takes the original validation/invalidation path.
    let signature;try{signature=JSON.stringify(next);}catch{}
    const presentationOnly=signature!==undefined&&signature===this._orbitConfigSignature&&this._orbitCompact!==compact;
-   const result=presentationOnly?undefined:original.call(this,next);this._orbitConfigSignature=signature;stop(this);this._orbitProfile=profile;this._orbitCompact=compact;this._orbitDetailId||="orbit-compact-"+(++sequence);this.toggleAttribute("data-orbit-layout",compact);if(compact)this.setAttribute("data-orbit-layout","compact");else{this.shadowRoot?.querySelector(".orbit-compact-disclosure")?.remove();this.shadowRoot?.querySelector(".orbit-tile")?.remove();}this.removeAttribute("data-orbit-details-open");watch(this,profile);return result;
+   const previousWelcomeNormal=this._orbitWelcomeNormal;
+   if(welcome)this._orbitWelcomeNormal=!compact&&(config?.layout==="normal"||config?.layout==="classic"||Boolean(config?.settings_path));
+   let result;try{result=presentationOnly?undefined:original.call(this,next);}catch(error){this._orbitWelcomeNormal=previousWelcomeNormal;throw error;}
+   this._orbitConfigSignature=signature;stop(this);this._orbitProfile=profile;this._orbitCompact=compact;this._orbitDetailId||="orbit-compact-"+(++sequence);this.toggleAttribute("data-orbit-layout",compact);if(compact)this.setAttribute("data-orbit-layout","compact");else{this.shadowRoot?.querySelector(".orbit-compact-disclosure")?.remove();this.shadowRoot?.querySelector(".orbit-tile")?.remove();}this.removeAttribute("data-orbit-details-open");watch(this,profile);return result;
   };
   const connect=p.connectedCallback,disconnect=p.disconnectedCallback;
   p.connectedCallback=function(){const result=connect?.call(this);watch(this,profile);return result;};
@@ -2983,9 +2986,9 @@ class WelcomeOrbitCard extends HTMLElement {
   }).join('');
   const focused = this.shadowRoot.activeElement, focusAction = focused?.dataset?.action, focusIndex = focused?.dataset?.index;
   const compact = c.layout === 'compact';
-  const toolbar = compact ? '<div class="toolbar">' + (links ? '<button class="toolbar-control toggle" data-action="expand" aria-expanded="' + this._expanded + '" aria-controls="welcome-shortcuts" aria-label="' + (this._expanded ? 'Hide quick navigation' : 'Show quick navigation') + '">' + icon(this._expanded ? 'mdi:chevron-up' : 'mdi:chevron-down') + '</button>' : '<span class="toolbar-placeholder"></span>') + '<div class="toolbar-center">' + this._weather(now) + '</div>' + (c.settings_path ? '<a class="toolbar-control settings" data-action="settings" aria-label="Open settings" href="' + esc(c.settings_path) + '">' + icon('mdi:cog-outline') + '</a>' : '<span class="toolbar-placeholder settings-placeholder"></span>') + '</div>' : '';
+  const toolbar = compact || this._orbitWelcomeNormal ? '<div class="toolbar">' + (links ? '<button class="toolbar-control toggle" data-action="expand" aria-expanded="' + this._expanded + '" aria-controls="welcome-shortcuts" aria-label="' + (this._expanded ? 'Hide quick navigation' : 'Show quick navigation') + '">' + icon(this._expanded ? 'mdi:chevron-up' : 'mdi:chevron-down') + '</button>' : '<span class="toolbar-placeholder"></span>') + '<div class="toolbar-center">' + (compact ? this._weather(now) : '') + '</div>' + (c.settings_path ? '<a class="toolbar-control settings" data-action="settings" aria-label="Open settings" href="' + esc(c.settings_path) + '">' + icon('mdi:cog-outline') + '</a>' : '<span class="toolbar-placeholder settings-placeholder"></span>') + '</div>' : '';
   const heading = compact ? '<h1>' + esc(greeting) + (name ? ',<span class="greeting-name">' + esc(name) + '</span>' : '') + '</h1>' + (time ? '<div class="meta">' + time + '</div>' : '') : '<div class="eyebrow">' + icon('mdi:home-variant-outline') + '<span>' + esc(c.title || 'Home overview') + '</span></div><h1>' + esc(greeting + (name ? ', ' + name : '')) + '</h1>' + (time || date ? '<div class="meta">' + date + time + '</div>' : '');
-  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '" data-animate="' + c.animate + '"><div class="shell' + (compact ? ' compact' : '') + '">' + toolbar + '<div class="header"><div class="copy">' + heading + '</div>' + (!compact ? '<div class="orbit" aria-hidden="true"><span class="ring"></span>' + icon(image) + '</div>' : '') + '</div>' + (!compact ? this._weather(now) : '') + (links ? '<nav id="welcome-shortcuts" class="shortcuts" aria-label="Rooms and scenes"' + (compact && !this._expanded ? ' hidden' : '') + '>' + links + '</nav>' : '') + (this._error ? '<div class="message error" role="alert">' + esc(this._error) + '</div>' : this._message ? '<div class="message" role="status">' + esc(this._message) + '</div>' : '') + '</div></ha-card>';
+  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '" data-animate="' + c.animate + '"><div class="shell' + (compact ? ' compact' : '') + '">' + toolbar + '<div class="header"><div class="copy">' + heading + '</div>' + (!compact ? '<div class="orbit" aria-hidden="true"><span class="ring"></span>' + icon(image) + '</div>' : '') + '</div>' + (!compact ? this._weather(now) : '') + (links ? '<nav id="welcome-shortcuts" class="shortcuts" aria-label="Rooms and scenes"' + ((compact || this._orbitWelcomeNormal) && !this._expanded ? ' hidden' : '') + '>' + links + '</nav>' : '') + (this._error ? '<div class="message error" role="alert">' + esc(this._error) + '</div>' : this._message ? '<div class="message" role="status">' + esc(this._message) + '</div>' : '') + '</div></ha-card>';
   if (focusAction) [...this.shadowRoot.querySelectorAll('[data-action]')].find((el) => el.dataset.action === focusAction && el.dataset.index === focusIndex)?.focus();
  }
  _navigate(path, settings = false) {
@@ -2996,11 +2999,11 @@ class WelcomeOrbitCard extends HTMLElement {
  }
  async _activate(action, index) {
   if (action === 'expand') {
-   if (this._config.layout === 'compact' && this._shortcuts().length) { this._expanded = !this._expanded; this._update(); }
+   if ((this._config.layout === 'compact' || this._orbitWelcomeNormal) && this._shortcuts().length) { this._expanded = !this._expanded; this._update(); }
    return;
   }
   if (action === 'settings') {
-   if (this._config.layout === 'compact' && this._config.settings_path) this._navigate(this._config.settings_path, true);
+   if ((this._config.layout === 'compact' || this._orbitWelcomeNormal) && this._config.settings_path) this._navigate(this._config.settings_path, true);
    return;
   }
   if (action === 'weather') {
@@ -6375,5 +6378,5 @@ if(!window.customCards.some(card=>card.type==="ha-select-orbit-card"))window.cus
 if(!window.customCards.some(card=>card.type==="ha-number-orbit-card"))window.customCards.push({type:"ha-number-orbit-card",name:"Orbit Select and Number Controls",description:"Included in Orbit Lovelace",preview:false});
 suite.components["orbit-controls"]={version:"1.0.0",types:["ha-select-orbit-card","ha-number-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"orbit-controls",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","orbit-controls",error);}
-suite.compact={version:"0.3.0",types:[...new Set([...(suite.compact?.types||[]),...orbitCompact.installed])]};
+suite.compact={version:"0.3.1",types:[...new Set([...(suite.compact?.types||[]),...orbitCompact.installed])]};
 })();

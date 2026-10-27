@@ -1,6 +1,12 @@
-# Selectable Compact layouts — v1.12.0-beta.3
+# Selectable Compact layouts — v1.12.0-beta.4
 
 **Test prerelease, not the stable update.** All30 primary card types have a user-selected **Card layout → Normal / Compact**. Same Orbit resource/types/themes; no extra installation or automatic mobile activation. Native editor/device testing on real HA/Companion remains pending.
+
+## Welcome Normal toolbar correction (beta.4)
+
+Welcome **Normal** (including the editor’s saved `layout: classic` alias) now shows the native room disclosure and configured Settings link, keeping its full classic header, decoration and weather. Existing paths/labels/scenes are preserved; all configured shortcuts (up to8) remain in the expandable row. `shortcuts_expanded` controls its initial state. Settings appears only with a nonempty valid `settings_path`; no route is guessed. The arrow appears only when shortcuts exist. Omitted layout with an existing settings_path also gains this toolbar; omitted layout without settings_path keeps its original appearance.
+
+No YAML change is required for affected Normal cards. This intentionally corrects the earlier unchanged-Normal claim: beta.3 mapped Normal to classic, whose upstream implementation did not render these controls. Original navigation, modifier-key handling, local-path validation, read-only scenes and native events remain in use. Compact tiles and all other card layouts are unchanged.
 
 ## Compact now means a tile, not a scaled full card
 
@@ -13,7 +19,7 @@ Names/values are text, not injected HTML; configured source icons and Person pic
 ## Install the beta in HACS
 
 1. Save a copy of the card/dashboard YAML and note the installed suite version.
-2. Open **HACS → Orbit Lovelace → ⋮ → Redownload**. Under **Need a different version?**, choose **v1.12.0-beta.3**. If not listed, refresh repository metadata and enable prereleases/beta visibility for this repository in your HACS version. It is intentionally not the stable/latest release.
+2. Open **HACS → Orbit Lovelace → ⋮ → Redownload**. Under **Need a different version?**, choose **v1.12.0-beta.4**. If not listed, refresh repository metadata and enable prereleases/beta visibility for this repository in your HACS version. It is intentionally not the stable/latest release.
 3. Download, then fully reload each browser and Companion frontend. No HA restart or theme YAML replacement is needed.
 4. Edit a card and select **Card layout → Compact**. Legacy editors retain their original controls below the common layout selector. The new Vacuum native form exposes common settings; existing room mappings stay in YAML.
 5. Start with a copied card or test view. Report the card type, actual dashboard/container width, YAML without private data, and screenshot if any layout is wrong. No real device command is necessary to inspect the layout.
@@ -36,7 +42,7 @@ No other key changes: forecast layout/count/type, Number slider/box mode, precis
 
 ## What ships in this beta
 
-- **All30 primary types:** tile summary and keyboard-operable Details chevron; expanded content uses the original elements/listeners, not cloned device controls. Default Normal and Welcome classic remain unchanged. Opening Details itself sends no services or new queries; existing subscriptions/data requests continue normally while closed.
+- **All30 primary types:** tile summary and keyboard-operable Details chevron; expanded content uses the original elements/listeners, not cloned device controls. Other Normal cards remain unchanged; Welcome Normal gains its toolbar as documented above. Opening Details itself sends no services or new queries; existing subscriptions/data requests continue normally while closed.
 - **Light/Switch/Fan/Dehumidifier/Climate:** native power command stays in the tile; speed/presets/targets/modes/measurements and other settings move into Details. Existing native Adjust controls panels remain inside Details where applicable.
 - **Media:** native play/pause and mute stay visible when supported; off players retain the guarded Turn on button. Artwork, seek, volume slider, previous/next/power and advanced browsing/source controls are in Details, with the source's own More/browse mechanisms retained. Pending/sent/error/unknown feedback is not replaced by optimistic device state.
 - **Gate:** all three guarded Open/Close/Stop commands stay visible for safety; state/position are in the tile, illustration and supporting telemetry in Details. **Vacuum:** native main controls stay; room maps/quick-clean and additional information are in Details.
@@ -61,7 +67,7 @@ Actual distributed bundle with synthetic HA entities/icons, **not native HA scre
 
 -90 closed/expanded tile samples at164/243/440px: title/state, readable bounds, keyboard Details, original control identity, no service/query from disclosure, hostile text escaping, source icon attribute updates, hidden warning mirroring and primary Room local navigation. Closed Media playback/mute/power and native Select/Number exact commands verified separately from expanded regressions. [Tile measurements](compact-tile-measurements.json). Fixture height budgets are tests, not a universal maximum.
 
--592 Node tests (174 suite/theme/native/compact +418 unchanged upstream),2 smoke suites, syntax and deterministic build. Upstream27 package pins, native Controls1.0.0 source and Themes1.1.0 definitions/contracts unchanged; suiteFeatures explicitly hashes the new adapter/profiles.
+-593 Node tests (175 suite/theme/native/compact +418 unchanged upstream),2 smoke suites, syntax and deterministic build. Upstream27 package pins, native Controls1.0.0 source and Themes1.1.0 definitions/contracts unchanged; suiteFeatures explicitly hashes the adapter/profiles and Welcome build adaptation.
 -30 editor selectors,60 populated Normal/Compact geometry comparisons at243/440px,1440 sequential populated theme/layout mounts (30×2×24 modes),90 actual two-card phone grids at360/390/430px. Complete selected value bounds, exact Person paired geometry, disclosure keyboard/state retention, observer cleanup/reconnect, legacy editor config events and fallback without constructable stylesheets checked. Forecast bars and chart histories use populated fixtures, not only loading placeholders.
 - All30 populated omitted-layout cards match released1.11.0 computed geometry/fonts/colors/padding/display and grid/size hints in a deterministic baseline browser comparison.
 - Final-bundle Select/Number regressions exercised with compact and Details expanded in the test configuration, including actual dropdown/keyboard, drafts/Apply/Escape, exact decimals, slider mouse/touch release/cancellation, stale metadata, errors/timeouts and More Info. Media mobile Chromium touch/gesture/command feedback/browse-media regression likewise exercised in Compact with Details expanded; closed primary controls are covered separately. Explicit compact touch dispatch tested for Fan/Switch/Gate/Climate/Luma, Scenes confirmation and weather More Info. All service calls mocked.

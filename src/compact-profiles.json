@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.3.1",
   "profiles": {
     "ha-alerts-orbit-card": {
       "css": ".shell{padding:10px}.counts{margin-top:6px;gap:3px 8px}.list{gap:4px}.orbit{width:28px;height:28px}button{padding:5px 6px;min-height:44px}",

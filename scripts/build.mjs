@@ -4,6 +4,7 @@ import {fileURLToPath} from 'node:url';
 import {resolve,dirname} from 'node:path';
 import {themeBridge,bridgeVersion} from './theme-bridge.mjs';
 import {buildThemes,palettes} from './themes.mjs';
+import {welcomeNormalToolbar} from './welcome-normal-toolbar.mjs';
 export const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 export const manifest=JSON.parse(readFileSync(resolve(root,'components.json'),'utf8'));
 export const components=[...manifest.components,...(manifest.nativeComponents||[])];
@@ -18,7 +19,9 @@ export function compactFeature(){
  if(JSON.stringify(Object.keys(profiles).sort())!==JSON.stringify(types))throw Error('Compact type coverage mismatch');
  if(version!==feature.version)throw Error('Compact version mismatch');
  for(const c of components){const original=readFileSync(resolve(root,c.source),'utf8');for(const type of c.types)for(const selector of profiles[type].details)if(!original.includes(selector.match(/[.#]([a-zA-Z_-]+)/)?.[1]||selector))throw Error('Compact detail contract changed: '+type+' '+selector);}
- return{runtime,profiles,version,sha256:createHash('sha256').update(runtime+profilesSource).digest('hex')};
+ const adaptation=readFileSync(resolve(root,feature.adaptation),'utf8');
+ if(createHash('sha256').update(adaptation).digest('hex')!==feature.adaptationSha256)throw Error('Compact adaptation digest mismatch');
+ return{runtime,profiles,version,sha256:createHash('sha256').update(runtime+profilesSource+adaptation).digest('hex')};
 }
 export function componentSource(c){
  let source=readFileSync(resolve(root,c.source),'utf8');
@@ -32,6 +35,7 @@ export function componentSource(c){
   replaceOnce('const VERSION = "1.2.5";','const VERSION = "1.2.6";');
  }
  if(source.split(NL).some(line=>line.startsWith('import ')||line.startsWith('export ')))throw Error('Unexpected module dependency: '+c.id);
+ if(c.id==='ha-welcome-orbit-card')source=welcomeNormalToolbar(source);
  const themed=themeBridge(source,c.id);
  if(JSON.stringify(themed.hooks)!==JSON.stringify(themeContracts[c.id]))throw Error('Theme hook contract changed: '+c.id);
  return themed.source;
