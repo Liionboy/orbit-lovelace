@@ -1,6 +1,12 @@
-# Selectable Compact layouts — v1.12.0
+# Selectable Compact layouts — v1.12.1
 
-**Stable release, promoted unchanged from v1.12.0-beta.5.** All30 primary card types have a user-selected **Card layout → Normal / Compact**. Same Orbit resource/types/themes; no extra installation or automatic mobile activation. The requester approved the last beta after use; automated verification remains synthetic, not a general native editor/device certification.
+**Stable release.** v1.12.0 promoted the approved beta.5; v1.12.1 narrowly fixes the Luma Compact header duplication described below. All30 primary card types retain **Card layout → Normal / Compact**, the same resource/types/themes and opt-in behavior. Automated verification remains synthetic, not universal native editor/device certification.
+
+## Compact Light/switch identity fix (v1.12.1)
+
+The Luma Control Card profile keeps the original source header hidden in both closed and expanded Compact, preventing a second name/icon/state row under the persistent tile. Hidden source text/icons still drive the reported summary; no native control is deleted, cloned or rebound. The header is no longer a Details target, so off, unavailable, power-only and switch configurations with no secondary controls do not have an empty disclosure arrow. Available advanced light controls remain in Details, with original power/brightness commands and feedback. Normal and the other29 profiles are unchanged; this is not a claim that every card's source header has been redesigned.
+
+![Compact Light with Details; synthetic HA/icons](images/compact-light-details.png)
 
 ## Welcome Normal date/time emphasis (beta.5)
 
@@ -25,7 +31,7 @@ Names/values are text, not injected HTML; configured source icons and Person pic
 ## Install or update in HACS
 
 1. Save a copy of the card/dashboard YAML and note the installed suite version.
-2. Open **HACS → Orbit Lovelace** and update to **v1.12.0**, the latest stable release. If changing from a beta or the update is not listed yet, refresh repository metadata or use **⋮ → Redownload → Need a different version? → v1.12.0**. Prerelease visibility is not required for this stable release.
+2. Open **HACS → Orbit Lovelace** and update to **v1.12.1**, the latest stable release. If changing from a beta or the update is not listed yet, refresh repository metadata or use **⋮ → Redownload → Need a different version? → v1.12.1**. Prerelease visibility is not required for this stable release.
 3. Download, then fully reload each browser and Companion frontend. No HA restart or theme YAML replacement is needed.
 4. Edit a card and select **Card layout → Compact**. Legacy editors retain their original controls below the common layout selector. The new Vacuum native form exposes common settings; existing room mappings stay in YAML.
 5. Existing beta.5 layouts and settings work unchanged; there is no automatic switch into Compact. When first trying Compact, use a copied card or test view. Report the card type, actual dashboard/container width, YAML without private data, and screenshot if any layout is wrong. No real device command is necessary to inspect the layout.

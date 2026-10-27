@@ -1,6 +1,6 @@
 {
   "name": "orbit-lovelace",
-  "version": "1.12.0",
+  "version": "1.12.1",
   "private": true,
   "type": "module",
   "description": "Orbit Lovelace and companion Home Assistant card suite",
@@ -19,6 +19,7 @@
     "test:compact:baseline": "node test/compact-baseline.browser.mjs",
     "test:compact:density": "node test/compact-density.browser.mjs",
     "test:compact:tile": "node test/compact-tile.browser.mjs",
-    "test:welcome:browser": "node test/welcome-normal.browser.mjs"
+    "test:welcome:browser": "node test/welcome-normal.browser.mjs",
+    "test:compact:luma": "node test/compact-luma.browser.mjs"
   }
 }

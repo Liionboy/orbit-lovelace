@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.12.1 — Luma Compact identity suppression
+
+Suite-owned presentation profile0.3.3 adds a Compact-scoped .header display:none override for luma-control-card and removes .header from its Details target list. Its source header contains identity/state only, not native commands; hidden text/icon/state remain the original summary source. No imported file, service code, other profile or Normal styling changes. Runtime changes only its feature banner; feature/profile digests and bundle lock are regenerated.
+
 ## v1.12.0 — unchanged stable promotion
 
 Only suite version metadata and current release/installation documentation change from beta.5. All27 imported pins/nativeControls1.0.0/suiteFeatures0.3.2/themeYAML1.1.0 remain byte-identical. Stable resource equivalence is established after normalizing the two suite version strings; runtime safety/commands/navigation behavior is unchanged.

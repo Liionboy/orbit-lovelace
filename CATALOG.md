@@ -1,6 +1,6 @@
 # Included card catalog
 
-**Stable v1.12.0:** every primary type below has a suite-owned optional Normal/Compact presentation, identical in behavior to beta.5. [Installation and exact scope](docs/COMPACT.md). The upstream release versions in this table remain unchanged; the adapter is traced separately under suiteFeatures, not attributed to upstream.
+**Stable v1.12.1:** all primary types retain optional Normal/Compact presentation; the Luma Control Card profile fixes duplicate identity in expanded Compact Details. [Installation and exact scope](docs/COMPACT.md). The upstream release versions in this table remain unchanged; the adapter is traced separately under suiteFeatures, not attributed to upstream.
 
 Suite includes optional [complete HA themes](THEMES.md) and [Desktop/Mobile/iOS Mobile profiles](docs/themes/DEVICE-PROFILES.md). v1.11.0 adds two suite-owned controls; all27 upstream pins and Themes1.1.0 are unchanged from1.10.1. Default styles remain without an Orbit theme. Mobile header styling still needs optional card-mod; new controls do not. Theme YAML installation is separate from HACS Dashboard updates.
 

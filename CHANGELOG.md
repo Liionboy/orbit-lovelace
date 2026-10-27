@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.1
+
+- Fix Luma Control Card Compact Details revealing the original header beneath the persistent tile: name, icon and state now appear once. Source header remains hidden but available to the summary; no native commands are removed.
+- Remove the source header from disclosure targets, avoiding an empty arrow for off/unavailable/power-only lights and switches without secondary content. Advanced light settings and original feedback remain available.
+- Scope is the Luma presentation profile only. Normal, the other29 profiles,27 imported pins, Controls1.0.0 and Themes1.1.0 are unchanged. HACS update and full reload; no YAML/theme changes.
+
 ## 1.12.0
 
 - Promote the approved v1.12.0-beta.5 to stable without additional functional changes. The executable bundle differs only in its suite version metadata.

@@ -6,6 +6,10 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
+## Fixed in v1.12.1 — Compact Light identity
+
+Luma Control Card (light/switch) now shows its name/icon/reported state only once in Compact, including expanded Details. The original redundant header stays hidden, while native controls and feedback remain intact. Cards without secondary content no longer show an empty Details arrow. Normal and all other card profiles are unchanged. Update in HACS and fully reload; no YAML or theme change.
+
 ## New in v1.12.0 — Compact tiles and clearer Welcome
 
 **Stable promotion of v1.12.0-beta.5, with no additional functional changes.** Every included card has an optional **Card layout → Normal / Compact** selector. Compact is a small tile with expandable Details and native primary commands, not merely reduced fonts. Welcome Normal keeps Settings and collapsible rooms and adds a24px bold clock and16px semibold date. Configured routes and other omitted-layout appearances are retained. Update Orbit Lovelace to **v1.12.0** in HACS and fully reload the frontend; same single resource, no YAML or theme update required. Existing beta.5 configurations work unchanged. [Install, examples, previews and rollback](docs/COMPACT.md).

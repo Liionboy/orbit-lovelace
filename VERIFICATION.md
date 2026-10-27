@@ -1,5 +1,10 @@
 # Verification records
 
+## v1.12.1 — Compact Luma duplicate identity
+
+- A dedicated expanded-identity regression first failed on1.12.0 (two visible names), then passed with the profile fix. Counts visible name/icon groups rather than retained hidden DOM.24 cases: light/switch × on/off/unavailable/unknown ×164/243/440px, single reported state, empty-disclosure removal and disabled unavailable controls. Keyboard disclosure, exact original power/brightness payloads, failure feedback, no optimistic state, Normal restoration, rename and reconnect pass. Off440px and expanded light captures inspected.
+-593 Node+2smoke/syntax/deterministic build, Welcome24 typography/navigation cases, all30 omitted-layout baselines,90 closed/expanded tile fixtures,1440 layout/theme mounts/90 phone grids, general registration/actions/duplicate/standalone-first browser tests passed sequentially. Commands are mocked; no live HA/config/dashboard/theme/device operations. Native HA/physical Companion unverified.
+
 ## v1.12.0 — stable promotion of beta.5
 
 - Release is explicitly authorized after the requester approved beta.5. Confirmed normalized final resource byte equality to the beta.5 tag (only suite version strings differ); full component/native/feature metadata and feature digests unchanged. No functional source, dependency or theme changes.
