@@ -1,0 +1,726 @@
+{
+  "version": "1.12.2",
+  "syntheticHA": true,
+  "rows": [
+    {
+      "type": "action-button-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "alecoair-dehumidifier-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "animated-gate-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "climate-control-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "frigate-control-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-alerts-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-battery-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-fan-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-nas-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-number-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-person-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-room-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-scenes-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-select-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-sensor-graph-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-server-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-speedtest-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-vacuum-commander-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-weather-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-welcome-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "home-connect-washer-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "hp-printer-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "luma-control-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "media-player-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "pihole-control-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "sensor-meter-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "switch-control-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "temperature-humidity-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "unifi-command-center-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "unifi-orbit-card",
+      "width": 164,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "action-button-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "alecoair-dehumidifier-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "animated-gate-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "climate-control-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "frigate-control-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-alerts-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-battery-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-fan-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-nas-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-number-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-person-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-room-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-scenes-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-select-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-sensor-graph-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-server-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-speedtest-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-vacuum-commander-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-weather-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-welcome-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "home-connect-washer-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "hp-printer-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "luma-control-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "media-player-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "pihole-control-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "sensor-meter-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "switch-control-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "temperature-humidity-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "unifi-command-center-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "unifi-orbit-card",
+      "width": 243,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "action-button-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "alecoair-dehumidifier-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "animated-gate-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "climate-control-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "frigate-control-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-alerts-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-battery-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-fan-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-nas-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-number-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-person-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-room-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-scenes-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-select-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-sensor-graph-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-server-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-speedtest-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-vacuum-commander-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-weather-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "ha-welcome-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "home-connect-washer-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "hp-printer-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "luma-control-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "media-player-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "pihole-control-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "sensor-meter-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "switch-control-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "temperature-humidity-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "unifi-command-center-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    },
+    {
+      "type": "unifi-orbit-card",
+      "width": 440,
+      "sourceNames": [],
+      "tileCount": 1,
+      "allNativeNodesPreserved": true,
+      "overflow": []
+    }
+  ]
+}

@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.12.2 — explicit primary identity contracts
+
+All30 card profiles have an audited identity contract in docs/compact-identity-contracts.json. Per-type Compact CSS suppresses duplicate headings/decorative wrappers, retaining native button nodes with concise labels where headings were inside controls. Original markup remains the summary source. A small adapter rule marks an Action subtitle only when it exactly equals the primary title; a distinct note stays available. Source profiles/runtime are hashed as presentation0.3.4;27 immutable imported components/nativeControls/themeYAML/Welcome Normal build adaptation remain unchanged.
+
 ## v1.12.1 — Luma Compact identity suppression
 
 Suite-owned presentation profile0.3.3 adds a Compact-scoped .header display:none override for luma-control-card and removes .header from its Details target list. Its source header contains identity/state only, not native commands; hidden text/icon/state remain the original summary source. No imported file, service code, other profile or Normal styling changes. Runtime changes only its feature banner; feature/profile digests and bundle lock are regenerated.

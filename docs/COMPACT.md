@@ -1,6 +1,16 @@
-# Selectable Compact layouts — v1.12.1
+# Selectable Compact layouts — v1.12.2
 
-**Stable release.** v1.12.0 promoted the approved beta.5; v1.12.1 narrowly fixes the Luma Compact header duplication described below. All30 primary card types retain **Card layout → Normal / Compact**, the same resource/types/themes and opt-in behavior. Automated verification remains synthetic, not universal native editor/device certification.
+**Stable release.** v1.12.0 promoted beta.5;1.12.1 fixed Luma;1.12.2 completes a30-type expanded-identity audit. The same resource/types/themes and opt-in **Normal / Compact** selector remain. Automated verification is synthetic, not universal native editor/device certification.
+
+## Single primary identity across all30 cards (v1.12.2)
+
+The persistent Compact tile is now the only primary name heading when Details opens. Switch Control also hides its redundant native state-copy row while retaining the power button and complete Power/Energy/Voltage telemetry. Other identity-only source headers are suppressed per card, not with a global header rule.
+
+Headers containing useful controls or information are treated separately: Fan/Person/Select/Number keep their original native buttons with a concise **More info** label; Room keeps native **Room details**, metric buttons and configured navigation. Sensor history retains the period, Vacuum its status/battery, Welcome its clock/toolbar/rooms, and Action its distinct description. An Action description that exactly repeats the primary name is suppressed; a custom note remains in Details. Graphs, forecasts, secondary readings, native dialogs and command/error feedback are retained. Detailed values may repeat summary values where they provide context; this is a single-primary-name policy, not removal of all repeated measurements.
+
+Original source nodes remain available to summary extraction, observers and event handlers; no control is cloned or service dispatcher replaced. Normal, upstream inputs and theme YAML are unchanged. The30 explicit [identity contracts](compact-identity-contracts.json) and90 observed [fixture cases](compact-identity-measurements.json) record scope; already-fixed Luma remains covered.
+
+![Switch Compact with native telemetry; synthetic HA/icons](images/compact-switch-details.png)
 
 ## Compact Light/switch identity fix (v1.12.1)
 
@@ -31,7 +41,7 @@ Names/values are text, not injected HTML; configured source icons and Person pic
 ## Install or update in HACS
 
 1. Save a copy of the card/dashboard YAML and note the installed suite version.
-2. Open **HACS → Orbit Lovelace** and update to **v1.12.1**, the latest stable release. If changing from a beta or the update is not listed yet, refresh repository metadata or use **⋮ → Redownload → Need a different version? → v1.12.1**. Prerelease visibility is not required for this stable release.
+2. Open **HACS → Orbit Lovelace** and update to **v1.12.2**, the latest stable release. If changing from a beta or the update is not listed yet, refresh repository metadata or use **⋮ → Redownload → Need a different version? → v1.12.2**. Prerelease visibility is not required for this stable release.
 3. Download, then fully reload each browser and Companion frontend. No HA restart or theme YAML replacement is needed.
 4. Edit a card and select **Card layout → Compact**. Legacy editors retain their original controls below the common layout selector. The new Vacuum native form exposes common settings; existing room mappings stay in YAML.
 5. Existing beta.5 layouts and settings work unchanged; there is no automatic switch into Compact. When first trying Compact, use a copied card or test view. Report the card type, actual dashboard/container width, YAML without private data, and screenshot if any layout is wrong. No real device command is necessary to inspect the layout.

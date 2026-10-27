@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.2
+
+- Fix duplicate Switch Compact identity/state above its native power button and Power/Energy/Voltage readings.
+- Audit all30 expanded Compact types and suppress repeated primary titles using explicit per-card contracts. Keep native More Info/Room details actions and unique header information; hide identity-only wrappers rather than all headers globally.
+- Preserve Action custom descriptions while suppressing an exact repeated-name description. Keep original source nodes for summaries/listeners, with no command/service changes. Normal,27 imported inputs, Controls1.0.0 and Themes1.1.0 unchanged; suite presentation0.3.4.
+
 ## 1.12.1
 
 - Fix Luma Control Card Compact Details revealing the original header beneath the persistent tile: name, icon and state now appear once. Source header remains hidden but available to the summary; no native commands are removed.

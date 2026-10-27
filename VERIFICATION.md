@@ -1,5 +1,12 @@
 # Verification records
 
+## v1.12.2 —30-card expanded identity audit
+
+- Initial populated243px audit found repeated source identity on29 types (Luma was already fixed). Final90 fixtures (30×164/243/440px) assert one visible primary name, hidden source name, original control-node retention, readable values, keyboard disclosure and no incidental commands/queries. All30 expanded243px captures reviewed in five sheets.
+- Native More Info for Fan/Person/Select/Number and Room details/navigation verified; distinct Action notes retained without repeating default identity. Switch verifies23W/1425.55kWh/131V complete displayed values, exact native on/off payloads, unavailable guards, reported-vs-command separation, empty-disclosure removal and original Normal identity.
+-593 Node+2smoke/syntax/reproducible build,24 Luma cases,24 Welcome typography/navigation cases, all30 omitted-layout baselines,90 closed/expanded tiles,1440 populated layout/theme mounts/90 phone grids/general suite browser checks, expanded final-bundle Controls and Media touch/input/error/timeout/browse/More Info suites, and real card-mod24-mode regressions pass sequentially.
+- Transparent suite-only Media harness uses the visible .orbit-tile-name for its original native long-press test instead of hidden .player-name; original pinned tests/source are not edited. No live HA/config/dashboard/theme/device changes. Native HA/physical Companion unverified.
+
 ## v1.12.1 — Compact Luma duplicate identity
 
 - A dedicated expanded-identity regression first failed on1.12.0 (two visible names), then passed with the profile fix. Counts visible name/icon groups rather than retained hidden DOM.24 cases: light/switch × on/off/unavailable/unknown ×164/243/440px, single reported state, empty-disclosure removal and disabled unavailable controls. Keyboard disclosure, exact original power/brightness payloads, failure feedback, no optimistic state, Normal restoration, rename and reconnect pass. Off440px and expanded light captures inspected.

@@ -6,6 +6,10 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
+## Fixed in v1.12.2 — one Compact identity across the suite
+
+Switch Control Card no longer repeats its name/state header above its power button and telemetry. The expanded-identity audit now covers all30 card types: redundant source titles stay hidden, while native More Info/Room details controls and unique readings/notes remain accessible. Normal, commands, configuration and themes are unchanged. Update Orbit in HACS and fully reload; no YAML changes. [Scope and preview](docs/COMPACT.md).
+
 ## Fixed in v1.12.1 — Compact Light identity
 
 Luma Control Card (light/switch) now shows its name/icon/reported state only once in Compact, including expanded Details. The original redundant header stays hidden, while native controls and feedback remain intact. Cards without secondary content no longer show an empty Details arrow. Normal and all other card profiles are unchanged. Update in HACS and fully reload; no YAML or theme change.

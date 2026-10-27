@@ -1,0 +1,244 @@
+{
+  "version": "1.12.2",
+  "scope": "Identity-only presentation; retained hidden source DOM drives tile summary.",
+  "profiles": {
+    "ha-nas-orbit-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "ha-server-orbit-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "ha-speedtest-orbit-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "ha-scenes-orbit-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "unifi-orbit-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "alecoair-dehumidifier-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "climate-control-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "frigate-control-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "hp-printer-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "pihole-control-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "sensor-meter-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "removedDetails": [
+        ".header"
+      ]
+    },
+    "ha-alerts-orbit-card": {
+      "hiddenIdentity": [
+        ".shell>header"
+      ],
+      "removedDetails": [
+        ".shell>header"
+      ]
+    },
+    "ha-battery-orbit-card": {
+      "hiddenIdentity": [
+        ".shell>header"
+      ],
+      "removedDetails": [
+        ".shell>header"
+      ]
+    },
+    "animated-gate-card": {
+      "hiddenIdentity": [
+        ".head"
+      ],
+      "removedDetails": [
+        ".head"
+      ]
+    },
+    "home-connect-washer-card": {
+      "hiddenIdentity": [
+        ".head"
+      ],
+      "removedDetails": [
+        ".head"
+      ]
+    },
+    "unifi-command-center-card": {
+      "hiddenIdentity": [
+        ".cc-header"
+      ],
+      "removedDetails": [
+        ".cc-header"
+      ]
+    },
+    "media-player-card": {
+      "hiddenIdentity": [
+        ".topline"
+      ],
+      "removedDetails": [
+        ".topline"
+      ]
+    },
+    "temperature-humidity-card": {
+      "hiddenIdentity": [
+        ".topline .brand"
+      ],
+      "removedDetails": []
+    },
+    "ha-vacuum-commander-card": {
+      "hiddenIdentity": [
+        ".header .identity"
+      ],
+      "removedDetails": []
+    },
+    "ha-sensor-graph-orbit-card": {
+      "hiddenIdentity": [
+        ".shell>header h2",
+        ".shell>header>ha-icon"
+      ],
+      "removedDetails": []
+    },
+    "ha-weather-orbit-card": {
+      "hiddenIdentity": [
+        ".eyebrow"
+      ],
+      "removedDetails": [
+        ".eyebrow"
+      ]
+    },
+    "ha-welcome-orbit-card": {
+      "hiddenIdentity": [
+        "h1"
+      ],
+      "removedDetails": [],
+      "replacementDetails": {
+        ".header": ".header .meta"
+      }
+    },
+    "action-button-card": {
+      "hiddenIdentity": [
+        ".header .icon-wrap",
+        ".header .title",
+        ".header .eyebrow",
+        ".header .status"
+      ],
+      "removedDetails": [],
+      "conditionalDuplicateDescription": ".header .subtitle equals primary title",
+      "preservedNote": ".header .subtitle:not([data-orbit-duplicate-identity])"
+    },
+    "switch-control-card": {
+      "hiddenIdentity": [
+        ".header",
+        ".panel .copy"
+      ],
+      "removedDetails": [
+        ".header",
+        ".panel .copy"
+      ]
+    },
+    "ha-room-orbit-card": {
+      "hiddenIdentity": [
+        ".identity>h2",
+        ".room-icon>ha-icon"
+      ],
+      "removedDetails": []
+    },
+    "ha-fan-orbit-card": {
+      "hiddenIdentity": [
+        ".info .copy",
+        ".info .orbit"
+      ],
+      "removedDetails": [],
+      "preservedAction": ".info"
+    },
+    "ha-select-orbit-card": {
+      "hiddenIdentity": [
+        ".info .copy",
+        ".info .orbit"
+      ],
+      "removedDetails": [],
+      "preservedAction": ".info"
+    },
+    "ha-number-orbit-card": {
+      "hiddenIdentity": [
+        ".info .copy",
+        ".info .orbit"
+      ],
+      "removedDetails": [],
+      "preservedAction": ".info"
+    },
+    "ha-person-orbit-card": {
+      "hiddenIdentity": [
+        ".person .copy",
+        ".person .avatar"
+      ],
+      "removedDetails": [],
+      "preservedAction": ".person"
+    },
+    "luma-control-card": {
+      "hiddenIdentity": [
+        ".header"
+      ],
+      "alreadyFixed": "1.12.1"
+    }
+  }
+}

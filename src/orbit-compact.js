@@ -1,4 +1,4 @@
-/* Suite-owned compact presentation adapter v0.3.3 — MIT. */
+/* Suite-owned compact presentation adapter v0.3.4 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
  const installed = new Set(),wrappedEditors=new WeakSet();
@@ -20,6 +20,7 @@ const orbitCompact = (() => {
   if(!header){header=document.createElement("div");header.className="orbit-tile";header.innerHTML='<span class="orbit-tile-icon"><ha-icon></ha-icon></span><span class="orbit-tile-copy"><span class="orbit-tile-name"></span><span class="orbit-tile-state"><span class="orbit-tile-state-text"></span><span class="orbit-tile-mobile-badge"></span></span></span><span class="orbit-tile-side"><span class="orbit-tile-badge"></span></span><span class="orbit-tile-message" role="status" aria-live="polite"></span>';parent.prepend(header);}
   const assign=(selector,value)=>{const node=header.querySelector(selector);if(node.textContent!==value)node.textContent=value;};
   assign(".orbit-tile-name",textAt(root,spec.title)||spec.fallback);
+  for(const selector of spec.duplicateText||[])for(const node of root.querySelectorAll(selector))node.toggleAttribute("data-orbit-duplicate-identity",tileText(node)===header.querySelector(".orbit-tile-name").textContent);
   const navigation=spec.navigation&&root.querySelector(spec.navigation);let copy=header.querySelector(".orbit-tile-copy");
   if(Boolean(navigation)!==(copy.localName==="a")){const replacement=document.createElement(navigation?"a":"span");replacement.className="orbit-tile-copy";replacement.append(...copy.childNodes);copy.replaceWith(replacement);copy=replacement;}
   if(navigation){copy.setAttribute("href",navigation.getAttribute("href"));copy.setAttribute("data-action","navigate");copy.setAttribute("data-entity","");copy.setAttribute("aria-label",navigation.getAttribute("aria-label")||"Open room view");}
