@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.12.0-beta.3 (prerelease)
+
+- Reworks optional Compact into a tile on all30 primary types: icon/name/reported state/selected reading, primary commands and a keyboard Details chevron. Secondary source elements remain in place, with native listeners/guards. No global scaling, service rewrites or optimistic state.
+- Preserves native light/switch/power, Media play/mute/off power, Gate safety controls, Vacuum controls, first Scene action/Room shortcuts, paired Person readings and Select/Number controls. Room title retains configured guarded local navigation. Graphs/forecasts/illustrations/long lists/secondary panels move into Details; source-specific panels remain available there.
+- Plain-text summaries update with source text/icon/avatar changes. Hidden warnings remain visible, long values wrap without rounding/truncation. Same YAML/resource; upstream27 pins, Controls1.0.0 and Themes1.1.0 unchanged.592 Node+2 smoke,90 closed/expanded tile samples,1440 sequential layout/theme mounts and90 phone grids verified. No live HA/device changes; native HA/physical Companion unverified.
+
 ## 1.12.0-beta.2 (prerelease)
 
 - Compact now reduces headings, main readings, icon glyphs and decorative wrappers on every primary card, rather than relying mainly on spacing. Profiles are suite-owned Compact0.2.0; source pins/Controls1.0.0/Themes1.1.0 unchanged.

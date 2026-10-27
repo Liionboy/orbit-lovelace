@@ -1,430 +1,430 @@
 {
-  "version": "1.12.0-beta.2",
+  "version": "1.12.0-beta.3",
   "syntheticHA": true,
   "stubIcons": true,
   "nativeHA": false,
   "fixtures": "test/compact-fixtures.mjs",
-  "scope": "Matched populated243/440px configurations; not a guarantee for arbitrary entity names/capabilities.",
+  "scope": "Matched populated243/440px Normal/tile fixtures; secondary content stays accessible in Details. Not a universal height guarantee.",
   "mounts": 1440,
   "measurements": [
     {
       "type": "action-button-card",
       "width": 243,
       "normal": 174.390625,
-      "compact": 133,
+      "compact": 141,
       "overflow": []
     },
     {
       "type": "action-button-card",
       "width": 440,
       "normal": 178.390625,
-      "compact": 133,
+      "compact": 141,
       "overflow": []
     },
     {
       "type": "alecoair-dehumidifier-card",
       "width": 243,
       "normal": 291,
-      "compact": 256,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "alecoair-dehumidifier-card",
       "width": 440,
       "normal": 314,
-      "compact": 256,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "animated-gate-card",
       "width": 243,
       "normal": 379.390625,
-      "compact": 203,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "animated-gate-card",
       "width": 440,
       "normal": 359.390625,
-      "compact": 203,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "climate-control-card",
       "width": 243,
       "normal": 264,
-      "compact": 236,
+      "compact": 124,
       "overflow": []
     },
     {
       "type": "climate-control-card",
       "width": 440,
       "normal": 266,
-      "compact": 214,
+      "compact": 124,
       "overflow": []
     },
     {
       "type": "frigate-control-card",
       "width": 243,
       "normal": 284.1875,
-      "compact": 229.984375,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "frigate-control-card",
       "width": 440,
       "normal": 404.625,
-      "compact": 230.984375,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "ha-alerts-orbit-card",
       "width": 243,
       "normal": 204,
-      "compact": 174,
+      "compact": 64,
       "overflow": []
     },
     {
       "type": "ha-alerts-orbit-card",
       "width": 440,
       "normal": 204,
-      "compact": 174,
+      "compact": 64,
       "overflow": []
     },
     {
       "type": "ha-battery-orbit-card",
       "width": 243,
       "normal": 180,
-      "compact": 132,
+      "compact": 66,
       "overflow": []
     },
     {
       "type": "ha-battery-orbit-card",
       "width": 440,
       "normal": 159,
-      "compact": 132,
+      "compact": 64,
       "overflow": []
     },
     {
       "type": "ha-fan-orbit-card",
       "width": 243,
       "normal": 330,
-      "compact": 180,
+      "compact": 110,
       "overflow": []
     },
     {
       "type": "ha-fan-orbit-card",
       "width": 440,
       "normal": 317,
-      "compact": 180,
+      "compact": 110,
       "overflow": []
     },
     {
       "type": "ha-nas-orbit-card",
       "width": 243,
       "normal": 514,
-      "compact": 257,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "ha-nas-orbit-card",
       "width": 440,
       "normal": 360,
-      "compact": 204,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "ha-number-orbit-card",
       "width": 243,
       "normal": 272.1875,
-      "compact": 181,
+      "compact": 110,
       "overflow": []
     },
     {
       "type": "ha-number-orbit-card",
       "width": 440,
       "normal": 272.1875,
-      "compact": 181,
+      "compact": 110,
       "overflow": []
     },
     {
       "type": "ha-person-orbit-card",
       "width": 243,
       "normal": 204,
-      "compact": 82,
+      "compact": 102,
       "overflow": []
     },
     {
       "type": "ha-person-orbit-card",
       "width": 440,
       "normal": 166,
-      "compact": 82,
+      "compact": 102,
       "overflow": []
     },
     {
       "type": "ha-room-orbit-card",
       "width": 243,
       "normal": 126,
-      "compact": 109,
+      "compact": 106,
       "overflow": []
     },
     {
       "type": "ha-room-orbit-card",
       "width": 440,
       "normal": 126,
-      "compact": 109,
+      "compact": 106,
       "overflow": []
     },
     {
       "type": "ha-scenes-orbit-card",
       "width": 243,
       "normal": 195,
-      "compact": 159,
+      "compact": 112,
       "overflow": []
     },
     {
       "type": "ha-scenes-orbit-card",
       "width": 440,
       "normal": 146,
-      "compact": 108,
+      "compact": 112,
       "overflow": []
     },
     {
       "type": "ha-select-orbit-card",
       "width": 243,
       "normal": 287.1875,
-      "compact": 196,
+      "compact": 110,
       "overflow": []
     },
     {
       "type": "ha-select-orbit-card",
       "width": 440,
       "normal": 287.1875,
-      "compact": 196,
+      "compact": 110,
       "overflow": []
     },
     {
       "type": "ha-sensor-graph-orbit-card",
       "width": 243,
       "normal": 328,
-      "compact": 245,
+      "compact": 64,
       "overflow": []
     },
     {
       "type": "ha-sensor-graph-orbit-card",
       "width": 440,
       "normal": 291,
-      "compact": 228,
+      "compact": 64,
       "overflow": []
     },
     {
       "type": "ha-server-orbit-card",
       "width": 243,
       "normal": 387,
-      "compact": 190,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "ha-server-orbit-card",
       "width": 440,
       "normal": 367,
-      "compact": 130,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "ha-speedtest-orbit-card",
       "width": 243,
       "normal": 491.6875,
-      "compact": 309,
+      "compact": 62,
       "overflow": []
     },
     {
       "type": "ha-speedtest-orbit-card",
       "width": 440,
       "normal": 405,
-      "compact": 203,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "ha-vacuum-commander-card",
       "width": 243,
       "normal": 200,
-      "compact": 148,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "ha-vacuum-commander-card",
       "width": 440,
       "normal": 208,
-      "compact": 150,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "ha-weather-orbit-card",
       "width": 243,
       "normal": 541.484375,
-      "compact": 422.5,
+      "compact": 62,
       "overflow": []
     },
     {
       "type": "ha-weather-orbit-card",
       "width": 440,
       "normal": 451.484375,
-      "compact": 353.5,
+      "compact": 62,
       "overflow": []
     },
     {
       "type": "ha-welcome-orbit-card",
       "width": 243,
       "normal": 321.375,
-      "compact": 152,
+      "compact": 65,
       "overflow": []
     },
     {
       "type": "ha-welcome-orbit-card",
       "width": 440,
       "normal": 249,
-      "compact": 118,
+      "compact": 62,
       "overflow": []
     },
     {
       "type": "home-connect-washer-card",
       "width": 243,
       "normal": 512,
-      "compact": 303,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "home-connect-washer-card",
       "width": 440,
       "normal": 470,
-      "compact": 271,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "hp-printer-card",
       "width": 243,
       "normal": 514.5,
-      "compact": 276,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "hp-printer-card",
       "width": 440,
       "normal": 337.5,
-      "compact": 221,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "luma-control-card",
       "width": 243,
       "normal": 179,
-      "compact": 146,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "luma-control-card",
       "width": 440,
       "normal": 126,
-      "compact": 96,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "media-player-card",
       "width": 243,
       "normal": 301.90625,
-      "compact": 239,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "media-player-card",
       "width": 440,
       "normal": 305.15625,
-      "compact": 239,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "pihole-control-card",
       "width": 243,
       "normal": 306,
-      "compact": 256,
+      "compact": 72,
       "overflow": []
     },
     {
       "type": "pihole-control-card",
       "width": 440,
       "normal": 329,
-      "compact": 238,
+      "compact": 72,
       "overflow": []
     },
     {
       "type": "sensor-meter-card",
       "width": 243,
       "normal": 137.5,
-      "compact": 104,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "sensor-meter-card",
       "width": 440,
       "normal": 151,
-      "compact": 106,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "switch-control-card",
       "width": 243,
       "normal": 251,
-      "compact": 198,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "switch-control-card",
       "width": 440,
       "normal": 265,
-      "compact": 154,
+      "compact": 108,
       "overflow": []
     },
     {
       "type": "temperature-humidity-card",
       "width": 243,
       "normal": 250,
-      "compact": 176,
+      "compact": 63,
       "overflow": []
     },
     {
       "type": "temperature-humidity-card",
       "width": 440,
       "normal": 275,
-      "compact": 170,
+      "compact": 60,
       "overflow": []
     },
     {
       "type": "unifi-command-center-card",
       "width": 243,
       "normal": 757.15625,
-      "compact": 411,
+      "compact": 62,
       "overflow": []
     },
     {
       "type": "unifi-command-center-card",
       "width": 440,
       "normal": 687.15625,
-      "compact": 340,
+      "compact": 62,
       "overflow": []
     },
     {
       "type": "unifi-orbit-card",
       "width": 243,
       "normal": 681.578125,
-      "compact": 319,
+      "compact": 76,
       "overflow": []
     },
     {
       "type": "unifi-orbit-card",
       "width": 440,
       "normal": 592.859375,
-      "compact": 213,
+      "compact": 76,
       "overflow": []
     }
   ],

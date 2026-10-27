@@ -1,4 +1,4 @@
-/* Suite-owned compact presentation adapter v0.2.0 — MIT. */
+/* Suite-owned compact presentation adapter v0.3.0 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
  const installed = new Set(),wrappedEditors=new WeakSet();
@@ -10,7 +10,30 @@ const orbitCompact = (() => {
  :host([data-orbit-layout="compact"]) :is(.power,.toggle,.step-button,.stepper,.confirm-button,.controls-toggle,.control-btn,.ctrl-btn,.action-btn){min-height:44px;min-width:44px}
  :host([data-orbit-layout="compact"]) :is(.title,.header-title,.metric-value,.reading-value,.info-value,.capacity,.state-value){white-space:normal;text-overflow:clip;overflow-wrap:anywhere;max-width:100%}
  @media(prefers-reduced-motion:reduce){:host([data-orbit-layout="compact"]) *{animation:none!important;transition:none!important}}`;
- function cssFor(profile){const scope=css=>css.replace(/(^|})([^{}]+){/g,(_,start,selectors)=>start+selectors.split(",").map(s=>":host([data-orbit-layout=compact]) "+s.trim()).join(",")+"{");return baseCSS+scope(profile.css)+(profile.narrowCSS?"@container orbit-compact (max-width:210px){"+scope(profile.narrowCSS)+"}":"")+scope(profile.densityCSS||"");}
+ function cssFor(profile){const scope=(css,condition="")=>css.replace(/(^|})([^{}]+){/g,(_,start,selectors)=>start+selectors.split(",").map(s=>":host([data-orbit-layout=compact]"+condition+") "+s.trim()).join(",")+"{");return baseCSS+scope(profile.css)+(profile.narrowCSS?"@container orbit-compact (max-width:210px){"+scope(profile.narrowCSS)+"}":"")+scope(profile.densityCSS||"")+scope(profile.tileCSS||"")+scope(profile.closedCSS||"",":not([data-orbit-details-open])")+(profile.tile?"@container orbit-compact (max-width:210px){"+scope(".orbit-tile-side>.orbit-tile-badge{display:none}.orbit-tile-mobile-badge{display:inline}")+"}":"");}
+ function tileText(node){const walk=n=>n.nodeType===3?n.textContent:n.nodeType===1&&n.matches("ha-icon,svg,.sr-only,[aria-hidden=true]")?"":Array.from(n.childNodes||[]).map(walk).join(" ");return walk(node).trim().replace(/\s+/g," ");}
+ const textAt=(root,selectors=[],hiddenOnly=false)=>[...new Set(selectors.flatMap(s=>[...root.querySelectorAll(s)].filter(n=>!hiddenOnly||!n.getClientRects().length).map(tileText)).filter(Boolean))].join(" · ");
+ function tileHeader(card,profile){
+  const spec=profile.tile,root=card.shadowRoot;if(!spec||!root)return null;
+  const parent=root.querySelector(spec.parent||".shell")||root.querySelector("ha-card");if(!parent)return null;
+  let header=root.querySelector(".orbit-tile");
+  if(!header){header=document.createElement("div");header.className="orbit-tile";header.innerHTML='<span class="orbit-tile-icon"><ha-icon></ha-icon></span><span class="orbit-tile-copy"><span class="orbit-tile-name"></span><span class="orbit-tile-state"><span class="orbit-tile-state-text"></span><span class="orbit-tile-mobile-badge"></span></span></span><span class="orbit-tile-side"><span class="orbit-tile-badge"></span></span><span class="orbit-tile-message" role="status" aria-live="polite"></span>';parent.prepend(header);}
+  const assign=(selector,value)=>{const node=header.querySelector(selector);if(node.textContent!==value)node.textContent=value;};
+  assign(".orbit-tile-name",textAt(root,spec.title)||spec.fallback);
+  const navigation=spec.navigation&&root.querySelector(spec.navigation);let copy=header.querySelector(".orbit-tile-copy");
+  if(Boolean(navigation)!==(copy.localName==="a")){const replacement=document.createElement(navigation?"a":"span");replacement.className="orbit-tile-copy";replacement.append(...copy.childNodes);copy.replaceWith(replacement);copy=replacement;}
+  if(navigation){copy.setAttribute("href",navigation.getAttribute("href"));copy.setAttribute("data-action","navigate");copy.setAttribute("data-entity","");copy.setAttribute("aria-label",navigation.getAttribute("aria-label")||"Open room view");}
+  assign(".orbit-tile-state-text",textAt(root,spec.state)||"—");
+  assign(".orbit-tile-badge",textAt(root,spec.badge));
+  const badge=textAt(root,spec.badge);assign(".orbit-tile-mobile-badge",badge?" · "+badge:"");
+  assign(".orbit-tile-message",textAt(root,spec.alert,true));
+  const error=(spec.alert||[]).some(s=>[...root.querySelectorAll(s)].some(n=>n.textContent.trim()&&(n.dataset.kind==="error"||n.getAttribute("role")==="alert"||n.classList.contains("error")||n.classList.contains("action-error"))));const message=header.querySelector(".orbit-tile-message");message.toggleAttribute("data-error",error);message.setAttribute("role",error?"alert":"status");message.setAttribute("aria-live",error?"assertive":"polite");
+  const icon=header.querySelector("ha-icon"),name=(spec.iconSelector&&root.querySelector(spec.iconSelector)?.getAttribute("icon"))||spec.icon;
+  if(icon.getAttribute("icon")!==name)icon.setAttribute("icon",name);
+  let image=header.querySelector("img");const src=spec.image&&root.querySelector(spec.image)?.getAttribute("src");
+  if(src){if(!image){image=document.createElement("img");image.alt="";header.querySelector(".orbit-tile-icon").append(image);}if(image.getAttribute("src")!==src)image.setAttribute("src",src);icon.hidden=true;}else{image?.remove();icon.hidden=false;}
+  return header.querySelector(".orbit-tile-side");
+ }
  function attachStyle(card,profile){
   const root=card.shadowRoot;if(!root||!card._orbitCompact)return;
   if(typeof CSSStyleSheet!=="undefined"&&CSSStyleSheet.prototype.replaceSync&&"adoptedStyleSheets" in root){
@@ -20,21 +43,22 @@ const orbitCompact = (() => {
  }
  function synchronize(card,profile){
   profile=card._orbitProfile||profile;
-  if(!card._orbitCompact||!card.isConnected)return;attachStyle(card,profile);
+  if(!card._orbitCompact||!card.isConnected)return;attachStyle(card,profile);const tile=tileHeader(card,profile);
   if(!profile.details?.length)return;const root=card.shadowRoot;if(!root)return;
   const targets=profile.details.flatMap(s=>[...root.querySelectorAll(s)]);
   for(let i=0;i<targets.length;i++){const target=targets[i];if(!target.hasAttribute("data-orbit-detail"))target.setAttribute("data-orbit-detail","");if(!target.id)target.id=card._orbitDetailId+"-"+i;}
   let button=root.querySelector(".orbit-compact-disclosure");if(!targets.length){button?.remove();return;}
-  if(!button){button=document.createElement("button");button.type="button";button.className="orbit-compact-disclosure";button.addEventListener("click",event=>{event.stopPropagation();card.toggleAttribute("data-orbit-details-open");synchronize(card,profile);});(root.querySelector(profile.footer||".shell")||root.querySelector("ha-card")||root).append(button);}
-  const expanded=card.hasAttribute("data-orbit-details-open"),text=expanded?"Hide details":"Show details";
+  if(!button){button=document.createElement("button");button.type="button";button.className="orbit-compact-disclosure";button.addEventListener("click",event=>{event.stopPropagation();card.toggleAttribute("data-orbit-details-open");synchronize(card,profile);});(tile||root.querySelector(profile.footer||".shell")||root.querySelector("ha-card")||root).append(button);}
+  const expanded=card.hasAttribute("data-orbit-details-open"),label=expanded?"Hide details":"Show details",text=tile?(expanded?"⌃":"⌄"):label;
   if(button.textContent!==text)button.textContent=text;
+  if(button.getAttribute("aria-label")!==label)button.setAttribute("aria-label",label);
   if(button.getAttribute("aria-expanded")!==String(expanded))button.setAttribute("aria-expanded",String(expanded));
   const ids=targets.map(n=>n.id).join(" ");if(button.getAttribute("aria-controls")!==ids)button.setAttribute("aria-controls",ids);
  }
  function watch(card,profile){
   profile=card._orbitProfile||profile;
   if(!card._orbitCompact||!card.shadowRoot)return;synchronize(card,profile);
-  if(!card._orbitObserver){card._orbitObserver=new MutationObserver(()=>synchronize(card,profile));card._orbitObserver.observe(card.shadowRoot,{childList:true,subtree:true});}
+  if(!card._orbitObserver){card._orbitObserver=new MutationObserver(records=>{if(records.some(record=>!record.target.closest?.(".orbit-tile")))synchronize(card,profile);});card._orbitObserver.observe(card.shadowRoot,{childList:true,subtree:true,attributes:true,attributeFilter:["icon","src","hidden","data-kind"]});}
  }
  function stop(card){card._orbitObserver?.disconnect();card._orbitObserver=null;}
  class CompactEditor extends HTMLElement{
@@ -58,7 +82,7 @@ const orbitCompact = (() => {
    // A real config change still takes the original validation/invalidation path.
    let signature;try{signature=JSON.stringify(next);}catch{}
    const presentationOnly=signature!==undefined&&signature===this._orbitConfigSignature&&this._orbitCompact!==compact;
-   const result=presentationOnly?undefined:original.call(this,next);this._orbitConfigSignature=signature;stop(this);this._orbitProfile=profile;this._orbitCompact=compact;this._orbitDetailId||="orbit-compact-"+(++sequence);this.toggleAttribute("data-orbit-layout",compact);if(compact)this.setAttribute("data-orbit-layout","compact");else this.shadowRoot?.querySelector(".orbit-compact-disclosure")?.remove();this.removeAttribute("data-orbit-details-open");watch(this,profile);return result;
+   const result=presentationOnly?undefined:original.call(this,next);this._orbitConfigSignature=signature;stop(this);this._orbitProfile=profile;this._orbitCompact=compact;this._orbitDetailId||="orbit-compact-"+(++sequence);this.toggleAttribute("data-orbit-layout",compact);if(compact)this.setAttribute("data-orbit-layout","compact");else{this.shadowRoot?.querySelector(".orbit-compact-disclosure")?.remove();this.shadowRoot?.querySelector(".orbit-tile")?.remove();}this.removeAttribute("data-orbit-details-open");watch(this,profile);return result;
   };
   const connect=p.connectedCallback,disconnect=p.disconnectedCallback;
   p.connectedCallback=function(){const result=connect?.call(this);watch(this,profile);return result;};

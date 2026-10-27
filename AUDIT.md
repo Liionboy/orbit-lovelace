@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.12.0-beta.3 — tile presentation adapter
+
+Suite-owned Compact0.3.0 derives a plain-text summary from explicit per-type source DOM contracts, preserving all original device-control nodes/listeners/validation. It adds only presentation DOM and a guarded disclosure; configured Room navigation is passed to the original route handler. Data/commands remain source-owned. Every primary type has a traced tile profile; immutable27 imports/native Controls1.0.0/theme definitions remain unchanged. Attribute-aware observers ignore their own tile mutations and are cleaned up/reconnected. New hashes identify runtime/profiles in suiteFeatures and the final resource in bundle-lock.
+
 ## v1.12.0-beta.2 — suite-owned density profiles
 
 Compact0.2.0 adds explicit per-card text/glyph/decoration dimensions after existing narrow rules, all scoped to layout compact. Original27 imported source hashes, native Controls1.0.0 and Themes1.1.0 stay unchanged. No service/config/state logic is changed. The adapter/profiles have updated suiteFeatures hashes; the suite release and public artifact identify the effective presentation. Normal is checked against both beta.1 samples and the full stable1.11.0 baseline.

@@ -1,5 +1,13 @@
 # Verification records
 
+## v1.12.0-beta.3 — tile composition and expandable secondary content
+
+-592 Node+2 smoke, syntax/reproducible build, unchanged27 upstream pins/Controls1.0.0/Themes1.1.0. All30 omitted-layout computed baselines still match stable1.11.0;90 corresponding normal typography/geometry samples remain unchanged against beta.1. Tile summaries are measured rather than assuming scaling proves compactness.
+-90 closed/expanded samples at164/243/440px check title/reported state/readable bounds, all marked secondary panels hidden when closed, keyboard disclosure, original control identity and no disclosure service/query. Source text remains escaped; attribute-only icon updates and hidden error mirroring verified. Configured Room title navigation uses the original guarded local handler without device writes.
+-1440 sequential populated layout/theme mounts,60 strictly smaller Normal/tile243/440px comparisons,90 actual two-card360/390/430px phone grids,30 editors and fallback/reconnect/cleanup passed. All30 closed phone captures inspected; selected expanded captures and all90 expanded value bounds checked. Forecast/history fixtures populated, not only loading shells.
+-Closed Media play/pause/mute/off turn-on and Number/Select exact mocked services/no optimistic report verified. Expanded Compact final-bundle Controls and Media full input/touch/keyboard/cancel/draft/metadata/error/timeout/browse regressions passed; Fan/Switch/Gate/Climate/Luma exact payloads, Scenes confirmation and Weather More Info retained. General registration/alias/duplicate/standalone-first and card-mod24-mode root regressions passed. Welcome native compact shortcut/weather/settings/navigation now tested inside tile Details; its original hidden toggle is not forced open.
+-All services mocked; native HA/editor/Safari/physical Companion unverified. No live HA/config/dashboard/theme/device changed. docs/COMPACT.md documents exact primary/secondary scope, installation and rollback. Prior beta.2 density receipts remain historical evidence, not current tile composition measurements.
+
 ## v1.12.0-beta.2 — smaller Compact text and icons
 
 -592 Node+2 smoke, syntax/reproducible build; unchanged27 upstream pins/native Controls1.0.0/Themes1.1.0. Compact0.2.0 has per-type density overrides, guarded behind the existing optional layout, ordered after narrow rules.
