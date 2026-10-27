@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.14.0
+
+- Replace the static Frigate camera image with persistent playback: native HA live (default), native auto-refresh snapshot, or explicit go2rtc MP4 WebSocket previews through the signed HA integration proxy.
+- Keep the stream/player across motion/count updates; unload when off-screen, tab-hidden, Compact collapsed, unavailable or detached. Add visible go2rtc error/no-frame timeout, bounded retry and manual Retry.
+- Preserve More Info, reported states, original motion/count sensors and Orbit styling. Native provider selection/view in the editor; go2rtc camera mapping in YAML. MP4 keyframe previews are not full-frame-rate HLS/WebRTC video.
+- Suite-owned guarded/hashed playback runtime1.0.0; immutable upstream inputs and prior appearance/theme features retained.
+
 ## 1.13.1
 
 - Switch identity/state icons use the existing palette accent only while reported ON; OFF/unknown/unavailable/missing stay neutral without tinted background/shadow, in Normal and Compact.

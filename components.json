@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.13.1",
+  "version": "1.14.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -535,6 +535,18 @@
       "sha256": "ef8a573efdfdb75a01fc6dd051dd2ecfb33523eb72abc444014bd41dff33c286",
       "types": [
         "switch-control-card"
+      ]
+    },
+    {
+      "id": "frigate-live",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "src/orbit-frigate-live.js",
+      "sha256": "dbb3ffb25097a6554ea8512b9992de53903ac2031b056660beddcfc1e162a57c",
+      "adaptation": "scripts/frigate-live.mjs",
+      "adaptationSha256": "db205226500a03a0be300e440c80289164096b56b91ca46c992199adee02c975",
+      "types": [
+        "frigate-control-card"
       ]
     }
   ]

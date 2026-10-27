@@ -1,5 +1,5 @@
 {
-  "version": "1.13.1",
+  "version": "1.14.0",
   "packages": 28,
   "upstreamPackages": 27,
   "nativePackages": 1,
@@ -10,9 +10,12 @@
   "lumaAppearanceSha256": "b2792f699279e7bbbd9fb01da722040482e7cd7ea4a45ae231d04aa94c1879c1",
   "switchStateIconVersion": "1.0.0",
   "switchStateIconSha256": "ef8a573efdfdb75a01fc6dd051dd2ecfb33523eb72abc444014bd41dff33c286",
+  "frigateLiveVersion": "1.0.0",
+  "frigateLiveSha256": "dbb3ffb25097a6554ea8512b9992de53903ac2031b056660beddcfc1e162a57c",
+  "frigateLiveAdaptationSha256": "db205226500a03a0be300e440c80289164096b56b91ca46c992199adee02c975",
   "themeBridgeVersion": 1,
   "themesVersion": "1.1.0",
   "themeSha256": "392b0e0863d85c572a92299923aec3df5d773361c6108e288aa86bfba5db55e2",
-  "bytes": 772901,
-  "sha256": "f72f57b3c4f03fa64eb8fca9970effc37bea552312f9565f04b87f468ebcf3b9"
+  "bytes": 786043,
+  "sha256": "8a3fd8f5665c567eb92c6a4b72cfb677aee174a9f6fe398f9eec5f49e01e2bb7"
 }

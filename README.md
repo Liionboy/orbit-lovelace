@@ -6,6 +6,10 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
+## New in v1.14.0 — Frigate camera playback
+
+Frigate Control Card no longer leaves a static snapshot frozen until page reload. Choose native HA live playback (default), auto-refreshed snapshot, or go2rtc MP4 preview through the authenticated Frigate integration proxy. Preview survives sensor updates and unloads when hidden/Compact closed. [Configuration, transport limits and migration](docs/FRIGATE-LIVE.md). Same resource; update Orbit in HACS and fully reload.
+
 ## New in v1.13.1 — Switch icon color follows state
 
 Switch Control Card uses its palette color for the identity icon only when HA reports **ON**. OFF/unknown/unavailable stay neutral, in Normal and Compact. No new YAML; commands, telemetry and the rest of the styling stay unchanged. [Preview and details](docs/SWITCH-STATE-ICON.md). Update Orbit in HACS and fully reload.

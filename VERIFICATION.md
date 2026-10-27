@@ -1,5 +1,9 @@
 # Verification records
 
+## v1.14.0 — Frigate camera playback
+
+600Node+2smoke/syntax/deterministic build; real encoded H.264 red→blue MP4 frames through mocked go2rtc WebSocket decoded to changing canvas pixels. Signed proxy/codec negotiation, retained stream under motion/count/unrelated hass updates, More Info, six Normal/Compact width cases, visibility/Compact/unavailable/disconnect cleanup/reconnect, error/Retry,15s timeout and late-sign cancellation pass. Native HA live/auto-refresh properties/lazy loader are stub-tested, not native transport certified.90 all-card identity, general30-card alias/migration, Switch120+384theme and Luma192+192theme pass; other29 Normal/Compact computed profiles equal1.13.1. Synthetic screenshots inspected. No live camera/server/HA/device changes; actual HA/Frigate/Companion/Safari unverified. docs/FRIGATE-LIVE.md.
+
 ## v1.13.1 — Switch reported-state icon accent
 
 598Node+2smoke/syntax/deterministicbuild;120 Switch state/layout/palette/width fixtures and384 theme cases. ON accent vs non-ON neutral/transparent/shadowless, original icon override, native pending/ack/error/no-optimism/state updates, exact power calls and telemetry retained.90 all-card identity cases, Luma192appearance+192theme regressions and general30-card/alias/migration suite pass. Other29 Normal/Compact computed profiles equal1.13.0. Light/dark captures inspected. Synthetic HA/icons only; no live HA/device changes, native HA/physical Companion unverified. docs/SWITCH-STATE-ICON.md.

@@ -1,5 +1,9 @@
 # Inventory, provenance and packaging audit
 
+## v1.14.0 — Frigate playback runtime
+
+Suite-owned src/orbit-frigate-live.js1.0.0 and guarded scripts/frigate-live.mjs have exact hashes in suiteFeatures/bundle-lock. Source markup commit keeps the preview node attached while replacing only original header/sensor/footer metadata. Lifecycle is installed before custom-element registration/Compact preparation. Native hui-image is lazy-loaded from HA, not bundled; explicit go2rtc MP4 implements only the researched narrow WebSocket protocol with HA-signed local endpoints, no embedded credentials/player dependency. All27 imported inputs/native Controls/Compact/Welcome/Luma/Switch/themeYAML unchanged.
+
 ## v1.13.1 — Switch state icon adaptation
 
 Suite-owned scripts/switch-state-icon.mjs1.0.0 has guarded source contracts and a digest under suiteFeatures/bundle-lock. Adds one reported-isOn data attribute and targeted icon CSS only to Switch after the theme bridge; no new state tracker, service handler or cloned control. Imported27 pins/native Controls/presentation0.3.4/Welcome/Luma appearance1.0.0/theme YAML unchanged.
