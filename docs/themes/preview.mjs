@@ -31,7 +31,15 @@ window.demoConfigs=[
  ['media','media-player-card',{entity:'media_player.example',title:'Living room audio',show_artwork:false}],
  ['metrics','temperature-humidity-card',{title:'Indoor comfort',temperature_entity:'sensor.indoor_temperature',humidity_entity:'sensor.humidity'}],
 ];
+const prismGallery=new URL(location.href).searchParams.get('gallery')==='prism';
+if(prismGallery){
+ demoConfigs[1][2].palette='ocean';demoConfigs[2][2].palette='sunset';demoConfigs[4][2].palette='lavender';
+ demoHass.states['sensor.fan_rpm']=state('sensor.fan_rpm','1840',{friendly_name:'Heat pump fan',unit_of_measurement:'rpm'});
+ demoConfigs.push(['instrument','ha-gauge-orbit-card',{entity:'sensor.fan_rpm',name:'Heat pump fan',icon:'mdi:fan',min:0,max:3000,decimals:0,palette:'ocean'}],['instrument','ha-select-orbit-card',{entity:'select.example',name:'Operating profile',palette:'lavender'}],['instrument','ha-number-orbit-card',{entity:'number.example',name:'Comfort target',palette:'sunset'}]);
+ document.querySelector('h1').textContent='Color, with purpose.';
+ document.querySelector('footer').prepend('Prism gallery: synthetic entities and illustrative RPM limits, not equipment specifications. ');
+}
 window.mountDemo=async()=>{const host=document.querySelector('#cards');host.replaceChildren();for(const[kind,type,config]of demoConfigs){const card=document.createElement(type);card.className='demo demo-'+kind;card.dataset.demo=kind;card.setConfig(config);card.hass=demoHass;host.append(card);if(card.updateComplete)await card.updateComplete;}await new Promise(r=>setTimeout(r,0));};
 window.applyTheme=(name,mode)=>{document.documentElement.removeAttribute('style');if(name){const theme=themeCatalog.themes[name],vars={...theme,...theme.modes[mode]};delete vars.modes;for(const[k,v]of Object.entries(vars))document.documentElement.style.setProperty('--'+k,v);document.documentElement.style.colorScheme=mode;}document.querySelector('#family').value=name||Object.keys(themeCatalog.themes)[0];document.querySelector('#mode').value=mode||'light';};
 const family=document.querySelector('#family'),mode=document.querySelector('#mode');for(const name of Object.keys(themeCatalog.themes))family.add(new Option(name,name));family.addEventListener('change',()=>applyTheme(family.value,mode.value));mode.addEventListener('change',()=>applyTheme(family.value,mode.value));document.querySelector('#appearance').onclick=()=>document.querySelector('#dialog').showModal();document.querySelector('#close-dialog').onclick=()=>document.querySelector('#dialog').close();document.addEventListener('hass-more-info',e=>infos.push(e.detail));
-await mountDemo();applyTheme('Orbit Graphite','light');window.previewReady=true;
+await mountDemo();applyTheme(prismGallery?'Orbit Prism':'Orbit Graphite',prismGallery?'dark':'light');window.previewReady=true;

@@ -1,0 +1,26 @@
+{
+  "suiteVersion": "1.17.0",
+  "themesVersion": "1.2.0",
+  "names": 16,
+  "nativeModes": 32,
+  "syntheticHA": true,
+  "nativeHA": false,
+  "nodeTests": 740,
+  "upstreamSmokeSuites": 2,
+  "themeCardMounts": 1024,
+  "themeLayoutMounts": 2048,
+  "twoCardPhoneGrids": 96,
+  "prismProfileModes": 8,
+  "prismViewports": [
+    1440,
+    768,
+    390
+  ],
+  "realCardMod": "4.2.1",
+  "legacyThemeDefinitionsExact": 12,
+  "existing32CardRuntime": "byte-identical to v1.16.0 excluding two suite version strings",
+  "bundleSha256": "2e3a43647c81ce1b66320befbcbf078c47a5d7cd832cd56d8922c4d29dc60176",
+  "themeSha256": "984a2ced43adb87efe7e2414c87a0f49ecd6cae68a5a1a1279dfe431cd80378e",
+  "noLiveChanges": true,
+  "screenshotsInspected": true
+}

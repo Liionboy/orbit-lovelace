@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "homeassistant": "2026.6.0",
   "components": [
     {

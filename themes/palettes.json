@@ -1,6 +1,33 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "families": [
+    {
+      "name": "Orbit Prism",
+      "description": "Expressive native card colors, precise violet/cyan accents and layered ink surfaces.",
+      "decoration": "native",
+      "light": {
+        "bg": "#eef0fa",
+        "surface": "#ffffff",
+        "raised": "#e4e8f7",
+        "text": "#1b2240",
+        "muted": "#505e7d",
+        "line": "#c6cfe7",
+        "accent": "#6344c9",
+        "accent2": "#096f8c",
+        "button": "#593ab8"
+      },
+      "dark": {
+        "bg": "#0b1020",
+        "surface": "#171f35",
+        "raised": "#222e49",
+        "text": "#eff2ff",
+        "muted": "#b1bfdc",
+        "line": "#405579",
+        "accent": "#baabff",
+        "accent2": "#66dfef",
+        "button": "#6547c4"
+      }
+    },
     {
       "name": "Orbit Graphite",
       "description": "Architectural neutrals with a restrained indigo accent.",

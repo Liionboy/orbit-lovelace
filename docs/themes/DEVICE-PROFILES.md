@@ -1,6 +1,6 @@
 # Orbit device profiles
 
-Suite **1.10.0** / Orbit Themes **1.1.0**. Graphite, Fjord and Dune each gain selectable **Desktop**, **Mobile** and **iOS Mobile**, all light/dark. Original family names/styles remain:12 names/24 modes in one YAML. Example names: **Orbit Graphite Desktop**, **Orbit Graphite Mobile**, **Orbit Graphite iOS Mobile**; replace Graphite with Fjord or Dune for the other families.
+Suite **1.17.0** / Orbit Themes **1.2.0**. Prism, Graphite, Fjord and Dune offer selectable **Desktop**, **Mobile** and **iOS Mobile**, all light/dark:16 names/32 modes in one YAML. Original family names/styles and navigation behavior remain unchanged. Example names: **Orbit Prism Desktop**, **Orbit Prism Mobile**, **Orbit Prism iOS Mobile**; replace Prism with Graphite, Fjord or Dune for the other families.
 
 - **Desktop:** native HA header/navigation at every width; same colors as the original family. No card-mod required.
 - **Mobile:** below768 CSS pixels hides the ordinary dashboard header/view selector. Navigate from your Room Cards. Native subview Back/title remain visible; edit mode restores the header. At768px or wider the header remains, including wide phone/tablet landscape.
@@ -10,9 +10,9 @@ Suite **1.10.0** / Orbit Themes **1.1.0**. Graphite, Fjord and Dune each gain se
 
 1. Update Orbit Lovelace in HACS and reload the frontend. **This does not install theme YAML.**
 2. For Mobile/iOS Mobile, install/update **card-mod** from HACS using its [official instructions](https://github.com/thomasloven/lovelace-card-mod). Tested with4.2.1. Orbit does not bundle, install, configure or download it at runtime. Without it the palette still works but the native header remains.
-3. Follow [THEMES.md](../../THEMES.md): back up and replace **only** your existing Orbit YAML with [orbit-themes.yaml](https://github.com/Liionboy/orbit-lovelace/releases/download/v1.10.0/orbit-themes.yaml), normally `/config/themes/orbit-themes.yaml`. Do not keep an old duplicate Orbit YAML in the merged directory. Preserve all other themes/frontend settings/includes.
+3. Follow [THEMES.md](../../THEMES.md): back up and replace **only** your existing Orbit YAML with [orbit-themes.yaml](https://github.com/Liionboy/orbit-lovelace/releases/download/v1.17.0/orbit-themes.yaml), normally `/config/themes/orbit-themes.yaml`. Do not keep an old duplicate Orbit YAML in the merged directory. Preserve all other themes/frontend settings/includes.
 4. Run `frontend.reload_themes` if themes are already enabled; fully reload phone/Companion. First-time theme enablement/frontend config changes need configuration validation and a restart you schedule.
-5. On the phone: **Profile → Appearance → Theme → Orbit Graphite Mobile** (or iOS Mobile/Fjord/Dune), then Light/Dark/Auto. Choose Desktop or the original family on desktop. Existing view-specific theme overrides take precedence; review them if selecting a profile seems ineffective. Do not call global `frontend.set_theme` just to select one phone theme.
+5. On the phone: **Profile → Appearance → Theme → Orbit Prism Mobile** (or iOS Mobile/Graphite/Fjord/Dune), then Light/Dark/Auto. Choose Desktop or the original family on desktop. Existing view-specific theme overrides take precedence; review them if selecting a profile seems ineffective. Do not call global `frontend.set_theme` just to select one phone theme.
 
 Card-mod recommends early loading with `frontend.extra_module_url` for theme styling. If adopting this optional setup, **merge** into your existing frontend/list using the exact resource URL including your real HACS cache tag from Dashboard resources; do not invent a tag. Follow upstream instructions to keep the HACS-managed resource and synchronize its URL on updates, avoiding duplicate/old patch versions. Config changes need validation/restart. Our isolated test uses normal Dashboard-resource loading. No live dependency/configuration is changed by this project.
 

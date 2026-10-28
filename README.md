@@ -6,6 +6,10 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
+## New in v1.17.0 — Orbit Prism theme
+
+**Orbit Prism** adds expressive native card gradients, violet/cyan accents, ink-blue dark surfaces and crisp light surfaces, while preserving explicit palettes and semantic state colors. Light/dark and Desktop/Mobile/iOS Mobile; original Graphite/Fjord/Dune definitions unchanged. **Theme YAML is updated separately from HACS Dashboard JavaScript.** [Installation and previews](THEMES.md#orbit-prism). No live HA changes.
+
 ## New in v1.16.0 — Gauge Orbit Card
 
 A dedicated **semicircular gauge** for numeric sensors, including RPM: fine tick marks, endpoint indicator, large actual reading, explicit scale and source, native visual editor, Orbit palettes and Normal/Compact. No guessed RPM limits, alarm zones, device commands or polling. [Configuration and previews](docs/GAUGE.md). Update the existing suite in HACS and fully reload; same resource.

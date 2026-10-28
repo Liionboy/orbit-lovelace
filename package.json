@@ -1,6 +1,6 @@
 {
   "name": "orbit-lovelace",
-  "version": "1.16.0",
+  "version": "1.17.0",
   "private": true,
   "type": "module",
   "description": "Orbit Lovelace and companion Home Assistant card suite",
@@ -27,6 +27,7 @@
     "test:switch:icon": "node test/switch-state-icon.browser.mjs",
     "test:frigate:live": "node test/frigate-live.browser.mjs",
     "test:temperature:browser": "node test/temperature.browser.mjs",
-    "test:gauge:browser": "node test/gauge.browser.mjs"
+    "test:gauge:browser": "node test/gauge.browser.mjs",
+    "test:prism:browser": "node test/prism.browser.mjs"
   }
 }
