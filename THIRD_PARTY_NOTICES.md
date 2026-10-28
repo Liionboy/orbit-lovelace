@@ -1,5 +1,7 @@
 # Licenses and third-party notices
 
+Suite-owned Temperature Orbit (`src/orbit-temperature.js`, v1.0.0) is first-party MIT-licensed source traced in nativeComponents. It does not import the legacy Temperature & Humidity implementation or an additional runtime dependency.
+
 The optional Compact adapter and per-type profiles are first-party suite additions under the root MIT LICENSE. They do not replace imported input provenance or add third-party runtime dependencies. See components.json suiteFeatures for the source/version/hashes.
 
 Select Orbit and Number Orbit are suite-owned `src/orbit-controls.js` under the root MIT LICENSE, recorded separately in `components.json` nativeComponents. They add no third-party runtime/dependency and are not presented as copied standalone upstream packages.

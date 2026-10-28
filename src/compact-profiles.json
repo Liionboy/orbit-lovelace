@@ -791,6 +791,29 @@
         "iconSelector": ".info ha-icon"
       },
       "tileCSS": ".shell{padding:8px}.orbit-tile{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:6px;min-height:44px;margin:0}.orbit-tile-icon{display:grid;place-items:center;width:28px;height:28px;flex:none;border-radius:10px;color:var(--accent,var(--primary-color,#6575dc));background:color-mix(in srgb,var(--accent,var(--primary-color,#6575dc)) 12%,transparent)}.orbit-tile-icon ha-icon{--mdc-icon-size:18px}.orbit-tile-icon img{width:28px;height:28px;object-fit:cover;border-radius:10px}.orbit-tile [hidden]{display:none!important}.orbit-tile-copy{display:block;min-width:0}.orbit-tile-name{display:block;font-size:12px;line-height:16px;font-weight:650;overflow-wrap:anywhere;color:var(--primary-text-color,#202b3c)}.orbit-tile-state{display:block;font-size:11px;line-height:15px;font-weight:400;overflow-wrap:anywhere;color:var(--secondary-text-color,#637080)}.orbit-tile-side{display:flex;align-items:center;gap:2px;max-width:82px}.orbit-tile-badge{font-size:10px;line-height:14px;font-weight:650;overflow-wrap:anywhere;min-width:0}.orbit-tile-badge:empty{display:none}.orbit-tile .orbit-compact-disclosure{width:24px;min-width:24px;height:44px;min-height:44px;margin:0;padding:0;border:0;background:none;font-size:18px;color:var(--secondary-text-color,#637080);flex:none}.orbit-tile-message{grid-column:1/-1;display:block;min-width:0;font-size:11px;line-height:15px;overflow-wrap:anywhere;color:var(--secondary-text-color,#637080)}.orbit-tile-message:empty{display:none}.controls{margin-top:4px}.range-row{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:4px}.range-row .slider{grid-column:2;grid-row:1}.range-row .stepper{grid-row:1}.range-row .stepper:first-child{grid-column:1}.range-row .stepper:last-child{grid-column:3}.draft:empty{display:none}.orbit-tile-mobile-badge{display:none}.orbit-tile-message[data-error]{color:var(--error-color,#b33444)}.orbit-tile-copy{text-decoration:none}.orbit-tile-copy:focus-visible{outline:2px solid var(--primary-color,#6575dc);outline-offset:2px;border-radius:4px}.info .copy,.info .orbit{display:none}.info::after{content:\"More info\";font-size:11px;line-height:16px}.info{min-height:44px}"
+    },
+    "ha-temperature-orbit-card": {
+      "css": ".shell{padding:10px}.eyebrow{display:none}.orbit{width:30px;height:30px}.info{gap:8px}.readout{margin-top:8px}.reading{font-size:24px}.unit{font-size:14px}.history{margin-top:10px}",
+      "details": [
+        ".head",
+        ".history"
+      ],
+      "densityCSS": ".shell{padding:8px}.name{font-size:12px;line-height:16px}.reading{font-size:20px}.orbit ha-icon{--mdc-icon-size:16px}.metric strong{font-size:12px}",
+      "tile": {
+        "title": [
+          ".name"
+        ],
+        "state": [
+          ".readout",
+          ".state"
+        ],
+        "badge": [],
+        "icon": "mdi:thermometer",
+        "iconSelector": ".info ha-icon",
+        "fallback": "Temperature",
+        "alert": []
+      },
+      "tileCSS": ".shell{padding:8px}.orbit-tile{display:grid;grid-template-columns:28px minmax(0,1fr) auto;align-items:center;gap:6px;min-height:44px;margin:0}.orbit-tile-icon{display:grid;place-items:center;width:28px;height:28px;flex:none;border-radius:10px;color:var(--accent,var(--primary-color,#6575dc));background:color-mix(in srgb,var(--accent,var(--primary-color,#6575dc)) 12%,transparent)}.orbit-tile-icon ha-icon{--mdc-icon-size:18px}.orbit-tile-icon img{width:28px;height:28px;object-fit:cover;border-radius:10px}.orbit-tile [hidden]{display:none!important}.orbit-tile-copy{display:block;min-width:0}.orbit-tile-name{display:block;font-size:12px;line-height:16px;font-weight:650;overflow-wrap:anywhere;color:var(--primary-text-color,#202b3c)}.orbit-tile-state{display:block;font-size:11px;line-height:15px;font-weight:400;overflow-wrap:anywhere;color:var(--secondary-text-color,#637080)}.orbit-tile-side{display:flex;align-items:center;gap:2px;max-width:82px}.orbit-tile-badge{font-size:10px;line-height:14px;font-weight:650;overflow-wrap:anywhere;min-width:0}.orbit-tile-badge:empty{display:none}.orbit-tile .orbit-compact-disclosure{width:24px;min-width:24px;height:44px;min-height:44px;margin:0;padding:0;border:0;background:none;font-size:18px;color:var(--secondary-text-color,#637080);flex:none}.orbit-tile-message{grid-column:1/-1;display:block;min-width:0;font-size:11px;line-height:15px;overflow-wrap:anywhere;color:var(--secondary-text-color,#637080)}.orbit-tile-message:empty{display:none}.orbit-tile-mobile-badge{display:none}.orbit-tile-message[data-error]{color:var(--error-color,#b33444)}.orbit-tile-copy{text-decoration:none}.orbit-tile-copy:focus-visible{outline:2px solid var(--primary-color,#6575dc);outline-offset:2px;border-radius:4px}.info .copy,.info .orbit{display:none}.info::after{content:\"More info\";font-size:11px;line-height:16px}.info{min-height:44px}.readout,.state{display:none!important}.orbit-tile-state-text{font-variant-numeric:tabular-nums}.history{margin-top:8px}"
     }
   }
 }

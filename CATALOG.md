@@ -1,13 +1,14 @@
 # Included card catalog
 
-**Stable v1.14.0:** Frigate gains [persistent HA/go2rtc playback](docs/FRIGATE-LIVE.md); Switch now has a [reported-state icon accent](docs/SWITCH-STATE-ICON.md) (ON colored, otherwise neutral); Luma gains optional per-card [icon/palette configuration](docs/LUMA-APPEARANCE.md), in Normal and Compact. All30 types retain the v1.12.2 single-primary-name behavior. [Compact scope](docs/COMPACT.md). Imported versions remain unchanged; suite-owned adaptations are traced under suiteFeatures, not attributed to upstream.
+**Stable v1.15.0:** adds the [Temperature Orbit Card](docs/TEMPERATURE.md). Prior camera support is retained: Frigate gains [persistent HA/go2rtc playback](docs/FRIGATE-LIVE.md); Switch now has a [reported-state icon accent](docs/SWITCH-STATE-ICON.md) (ON colored, otherwise neutral); Luma gains optional per-card [icon/palette configuration](docs/LUMA-APPEARANCE.md), in Normal and Compact. All30 types retain the v1.12.2 single-primary-name behavior. [Compact scope](docs/COMPACT.md). Imported versions remain unchanged; suite-owned adaptations are traced under suiteFeatures, not attributed to upstream.
 
 Suite includes optional [complete HA themes](THEMES.md) and [Desktop/Mobile/iOS Mobile profiles](docs/themes/DEVICE-PROFILES.md). v1.11.0 adds two suite-owned controls; all27 upstream pins and Themes1.1.0 are unchanged from1.10.1. Default styles remain without an Orbit theme. Mobile header styling still needs optional card-mod; new controls do not. Theme YAML installation is separate from HACS Dashboard updates.
 
-The suite provides30 card types from27 unchanged upstream packages and one suite-owned Orbit Controls module. Native controls have source/version/hash in `nativeComponents`; their provenance is this suite release, not a separate upstream repository. The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
+The suite provides31 card types from27 unchanged upstream packages and two suite-owned modules: Orbit Controls and Temperature Orbit. Native cards have source/version/hash in `nativeComponents`; their provenance is this suite release, not a separate upstream repository. The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
 
 | Card / package | Included release | Existing Lovelace types |
 | --- | --- | --- |
+| [Temperature Orbit Card](docs/TEMPERATURE.md) | 1.0.0 (suite-owned) | `custom:ha-temperature-orbit-card` |
 | [Select Orbit Card](docs/CONTROLS.md) | 1.0.0 (suite-owned) | `custom:ha-select-orbit-card` |
 | [Number Orbit Card](docs/CONTROLS.md) | 1.0.0 (suite-owned) | `custom:ha-number-orbit-card` |
 | [Alerts Orbit](cards/ha-alerts-orbit-card/README.md) | [1.0.0](https://github.com/Liionboy/ha-alerts-orbit-card/releases/tag/v1.0.0) | `custom:ha-alerts-orbit-card` |

@@ -1,5 +1,5 @@
 {
-  "version": "1.12.2",
+  "version": "1.15.0",
   "scope": "Identity-only presentation; retained hidden source DOM drives tile summary.",
   "profiles": {
     "ha-nas-orbit-card": {
@@ -239,6 +239,18 @@
         ".header"
       ],
       "alreadyFixed": "1.12.1"
+    },
+    "ha-temperature-orbit-card": {
+      "hiddenIdentity": [
+        ".info .copy",
+        ".info .orbit",
+        ".readout",
+        ".state"
+      ],
+      "preserved": [
+        ".info native More Info via relabeled button in Details",
+        ".history recorded temperature samples/min/max"
+      ]
     }
   }
 }

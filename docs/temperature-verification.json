@@ -1,0 +1,18 @@
+{
+  "version": "1.15.0",
+  "syntheticHA": true,
+  "nativeHA": false,
+  "nodeTests": 656,
+  "temperatureTests": 55,
+  "upstreamSmokeSuites": 2,
+  "temperatureThemePaletteLayoutMounts": 192,
+  "temperaturePhoneGrids": 12,
+  "suiteThemeLayoutMounts": 1488,
+  "suitePhoneGrids": 93,
+  "compactIdentityCases": 93,
+  "existing30CardExecutableByteIdenticalTo": "v1.14.0 excluding2suiteVersionStrings",
+  "bundleSha256": "fcbf81531639553eab8a55fbf7e777e30a32ea4eca48b5edab45b85c4641cf37",
+  "unchangedUpstreamPackages": 27,
+  "unchangedThemesVersion": "1.1.0",
+  "screenshotsInspected": true
+}

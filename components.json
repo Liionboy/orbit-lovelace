@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -503,6 +503,18 @@
       ],
       "aliases": [],
       "sha256": "c11b24821f6e14c4d95cd72a1f5f7d3ba74013272d6b9d2a8ff1453b3b523ea6"
+    },
+    {
+      "id": "orbit-temperature",
+      "name": "Temperature Orbit Card",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "src/orbit-temperature.js",
+      "types": [
+        "ha-temperature-orbit-card"
+      ],
+      "aliases": [],
+      "sha256": "90f5919edf736fb75a4944c9e7b358d412755192f6a05e10b75f76fcd1bc858f"
     }
   ],
   "suiteFeatures": [
@@ -513,7 +525,7 @@
       "source": "src/orbit-compact.js",
       "sha256": "b610506b7545fcdfb43da6a8425ed464839a1d0e8e2491874685552168843ee5",
       "profiles": "src/compact-profiles.json",
-      "profilesSha256": "cb56c8a711660930f98528a82cb6297fdadac66876ab649cbc322c44dc92c83e",
+      "profilesSha256": "d1641a918eea6fe8e8372abc11dca9e83258e47a4c926b8dfdf68c235602f210",
       "adaptation": "scripts/welcome-normal-toolbar.mjs",
       "adaptationSha256": "6e9be8d99c010b286ee75942082c6601626349fa54e4d619761d7048e3d296d7"
     },
