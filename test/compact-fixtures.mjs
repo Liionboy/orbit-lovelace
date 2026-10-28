@@ -34,6 +34,6 @@ export function compactFixtures(){
  'hp-printer-card':{status_entity:'sensor.printer',ink_entities:['sensor.ink_black','sensor.ink_color']},'luma-control-card':entity('light.example'),
  'pihole-control-card':{mode:'manual',entity:'switch.example',status_entity:'binary_sensor.online',queries_entity:'sensor.queries',blocked_entity:'sensor.blocked',blocked_percentage_entity:'sensor.blocked_percentage'},
  'sensor-meter-card':{entity:'sensor.temperature',min:0,max:40,decimals:1},'switch-control-card':{entity:'switch.example',power_entity:'sensor.power',energy_entity:'sensor.energy',voltage_entity:'sensor.voltage'},
- 'media-player-card':entity('media_player.example'),'temperature-humidity-card':{temperature_entity:'sensor.temperature',humidity_entity:'sensor.humidity'},'ha-select-orbit-card':entity('select.example'),'ha-number-orbit-card':entity('number.example'),'ha-temperature-orbit-card':entity('sensor.temperature')};
+ 'media-player-card':entity('media_player.example'),'temperature-humidity-card':{temperature_entity:'sensor.temperature',humidity_entity:'sensor.humidity'},'ha-select-orbit-card':entity('select.example'),'ha-number-orbit-card':entity('number.example'),'ha-temperature-orbit-card':entity('sensor.temperature'),'ha-gauge-orbit-card':{entity:'sensor.power',min:0,max:100,decimals:2}};
  window.compactHass=hass;window.compactConfigs=configs;document.addEventListener('hass-more-info',e=>infos.push(e.detail));
 }

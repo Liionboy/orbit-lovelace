@@ -13,7 +13,7 @@ try{
  const types=[...manifest.components,...manifest.nativeComponents].flatMap(c=>c.types);
  assert.deepEqual(await page.evaluate(ts=>ts.filter(t=>!customElements.get(t)),types),[]);
  console.log('Picker',JSON.stringify(await page.evaluate(()=>customCards.map(c=>({type:c.type,name:c.name})))));
- assert.equal(await page.evaluate(()=>customCards.length),31);assert.equal(await page.evaluate(()=>new Set(customCards.map(c=>c.type)).size),31);
+ assert.equal(await page.evaluate(()=>customCards.length),types.length);assert.equal(await page.evaluate(()=>new Set(customCards.map(c=>c.type)).size),types.length);
  assert.ok(await page.evaluate(()=>customElements.get('living-temperature-card').prototype instanceof customElements.get('temperature-humidity-card')));
  for(const type of types){
  const result=await page.evaluate(async type=>{document.querySelector('#host').replaceChildren();const C=customElements.get(type),el=document.createElement(type),config=C.getStubConfig?.()||{};try{el.setConfig(config);el.hass=window.hass;document.querySelector('#host').append(el);if(el.updateComplete)await el.updateComplete;window.card=el;const r=el.getBoundingClientRect();return{type,ok:true,width:r.width,height:r.height,editor:typeof C.getConfigForm==='function'||typeof C.getConfigElement==='function'};}catch(e){return{type,ok:false,error:e.message};}},type);
@@ -64,9 +64,9 @@ try{
  await page.evaluate(()=>{card.remove();window.card=document.createElement('ha-scenes-orbit-card');card.setConfig({entities:['scene.example']});hass.states['scene.example']={state:'unknown',attributes:{friendly_name:'Example scene'}};hass.services={scene:{turn_on:{}}};card.hass=hass;document.querySelector('#host').append(card);});
  await page.locator('ha-scenes-orbit-card .activate').click();assert.equal(await page.evaluate(()=>calls.length),2);await page.locator('ha-scenes-orbit-card .activate').click();assert.equal(await page.evaluate(()=>calls.length),3);assert.equal(await page.evaluate(()=>calls.at(-1)[0]),'scene');assert.equal(await page.evaluate(()=>calls.at(-1)[1]),'turn_on');
  // Same resource evaluated again: no duplicate constructors/picker entries.
- await page.evaluate(()=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.type='module';s.src='/orbit-lovelace.js?repeat=1';s.onload=resolve;s.onerror=reject;document.head.append(s);}));assert.deepEqual(await page.evaluate(()=>orbitLovelace.errors),[]);assert.equal(await page.evaluate(()=>customCards.length),31);
+ await page.evaluate(()=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.type='module';s.src='/orbit-lovelace.js?repeat=1';s.onload=resolve;s.onerror=reject;document.head.append(s);}));assert.deepEqual(await page.evaluate(()=>orbitLovelace.errors),[]);assert.equal(await page.evaluate(()=>customCards.length),types.length);
  // Legacy resource first is detected, never overwritten. Clean frontend after navigation.
- await page.goto('http://orbit.test/?legacy=1');await page.waitForFunction(()=>window.orbitLovelace);assert.deepEqual(await page.evaluate(()=>orbitLovelace.errors),[]);assert.ok(await page.evaluate(()=>orbitLovelace.skipped['lovelace-luma-control-card']));assert.equal(await page.evaluate(()=>customCards.length),31);assert.deepEqual(errors,[]);
- assert.ok(requests.every(url=>url.startsWith('http://orbit.test/')));console.log('PASS: 31 cards registered/mounted sequentially, legacy alias, Person readings, explicit fan/light/scene mocks, duplicate load and standalone-first migration. No live HA.');
+ await page.goto('http://orbit.test/?legacy=1');await page.waitForFunction(()=>window.orbitLovelace);assert.deepEqual(await page.evaluate(()=>orbitLovelace.errors),[]);assert.ok(await page.evaluate(()=>orbitLovelace.skipped['lovelace-luma-control-card']));assert.equal(await page.evaluate(()=>customCards.length),types.length);assert.deepEqual(errors,[]);
+ assert.ok(requests.every(url=>url.startsWith('http://orbit.test/')));console.log('PASS: 32 cards registered/mounted sequentially, legacy alias, Person readings, explicit fan/light/scene mocks, duplicate load and standalone-first migration. No live HA.');
  if(out)await writeFile(out+'/suite-browser.json',JSON.stringify({measurements,requests,errors},null,2));
 }finally{await browser.close();}

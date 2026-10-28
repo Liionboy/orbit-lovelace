@@ -1,10 +1,14 @@
 # Orbit Lovelace
 
-**One HACS custom repository. One JavaScript resource. 31 cards.**
+**One HACS custom repository. One JavaScript resource. 32 cards.**
 
 Orbit Lovelace packages the Orbit cards and the matching companion card collection into a single, self-contained Home Assistant Dashboard resource. Individual cards keep their existing names, Lovelace types, configurations and controls. This is a distribution suite, not a new all-in-one dashboard card.
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
+
+## New in v1.16.0 — Gauge Orbit Card
+
+A dedicated **semicircular gauge** for numeric sensors, including RPM: fine tick marks, endpoint indicator, large actual reading, explicit scale and source, native visual editor, Orbit palettes and Normal/Compact. No guessed RPM limits, alarm zones, device commands or polling. [Configuration and previews](docs/GAUGE.md). Update the existing suite in HACS and fully reload; same resource.
 
 ## New in v1.15.0 — Temperature Orbit Card
 
@@ -90,7 +94,7 @@ Room Orbit v1.6.0 accepts **any entity domain** in the four shortcut slots, incl
 - **Orbit:** Alerts, Battery, Fan, NAS, Person, Room, Scenes, Sensor Graph, Server, Speedtest, UniFi Orbit + UniFi Command Center, Weather and Welcome.
 - **Companion collection:** Action Button, AlecoAir Dehumidifier, Animated Gate, Climate Control, Frigate Control, Home Connect Washer, HP Printer, Luma Control, Pi-hole Control, Sensor Meter, Switch Control, Media Player, Temperature & Humidity and Vacuum Commander.
 
-The **27 imported source packages provide 28 original cards**; two suite-owned modules add Select, Number and Temperature, for **31 card types / 29 packages**, plus the legacy `living-temperature-card` alias. NAS remains a separate UGREEN-oriented card; Server remains independently configurable. Imported inputs remain pinned; suite additions and adaptations have separate provenance.
+The **27 imported source packages provide 28 original cards**; three suite-owned modules add Select, Number, Temperature and Gauge, for **32 card types / 30 packages**, plus the legacy `living-temperature-card` alias. NAS remains a separate UGREEN-oriented card; Server remains independently configurable. Imported inputs remain pinned; suite additions and adaptations have separate provenance.
 
 See [CATALOG.md](CATALOG.md) for exact included versions, existing Lovelace types and each card's configuration reference. For example, your existing `type: custom:ha-person-orbit-card` remains unchanged, including the v1.1.0 optional readings/compact layout.
 

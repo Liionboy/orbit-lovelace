@@ -1,5 +1,5 @@
 {
-  "version": "1.15.0",
+  "version": "1.16.0",
   "scope": "Identity-only presentation; retained hidden source DOM drives tile summary.",
   "profiles": {
     "ha-nas-orbit-card": {
@@ -250,6 +250,19 @@
       "preserved": [
         ".info native More Info via relabeled button in Details",
         ".history recorded temperature samples/min/max"
+      ]
+    },
+    "ha-gauge-orbit-card": {
+      "hiddenIdentity": [
+        ".info .copy",
+        ".info .orbit"
+      ],
+      "preserved": [
+        ".info native More Info in Details",
+        ".dial semicircular gauge and actual value",
+        ".scale endpoints",
+        ".caption scale source",
+        ".status and .scale-hint mirrored in tile"
       ]
     }
   }

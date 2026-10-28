@@ -1,0 +1,23 @@
+{
+  "version": "1.16.0",
+  "syntheticHA": true,
+  "nativeHA": false,
+  "nodeTests": 722,
+  "gaugeTests": 65,
+  "upstreamSmokeSuites": 2,
+  "gaugeThemePaletteLayoutMounts": 192,
+  "gaugePhoneGrids": 12,
+  "suiteThemeLayoutMounts": 1536,
+  "suitePhoneGrids": 96,
+  "compactIdentityCases": 96,
+  "existing31CardExecutableByteIdenticalTo": "v1.15.0 excluding2suiteVersionStrings",
+  "bundleSha256": "8467d7b9855bb14410394c5257f4d88e88e2f980f84414b5252d490492e85e28",
+  "unchangedUpstreamPackages": 27,
+  "unchangedNativeModules": [
+    "orbit-controls",
+    "orbit-temperature"
+  ],
+  "unchangedThemesVersion": "1.1.0",
+  "screenshotsInspected": true,
+  "noQueriesOrDeviceServices": true
+}

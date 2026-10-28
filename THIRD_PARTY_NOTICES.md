@@ -1,5 +1,7 @@
 # Licenses and third-party notices
 
+Gauge Orbit (`src/orbit-gauge.js`, v1.0.0) is first-party MIT-licensed suite source traced in nativeComponents; no additional library or runtime dependency is imported.
+
 Suite-owned Temperature Orbit (`src/orbit-temperature.js`, v1.0.0) is first-party MIT-licensed source traced in nativeComponents. It does not import the legacy Temperature & Humidity implementation or an additional runtime dependency.
 
 The optional Compact adapter and per-type profiles are first-party suite additions under the root MIT LICENSE. They do not replace imported input provenance or add third-party runtime dependencies. See components.json suiteFeatures for the source/version/hashes.

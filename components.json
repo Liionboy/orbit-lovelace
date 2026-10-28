@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.15.0",
+  "version": "1.16.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -515,6 +515,18 @@
       ],
       "aliases": [],
       "sha256": "90f5919edf736fb75a4944c9e7b358d412755192f6a05e10b75f76fcd1bc858f"
+    },
+    {
+      "id": "orbit-gauge",
+      "name": "Gauge Orbit Card",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "src/orbit-gauge.js",
+      "types": [
+        "ha-gauge-orbit-card"
+      ],
+      "aliases": [],
+      "sha256": "88a43dfa9966dc3c2cd950e48e89917ed58ffad1d0638c26dbad5708018576e5"
     }
   ],
   "suiteFeatures": [
@@ -525,7 +537,7 @@
       "source": "src/orbit-compact.js",
       "sha256": "b610506b7545fcdfb43da6a8425ed464839a1d0e8e2491874685552168843ee5",
       "profiles": "src/compact-profiles.json",
-      "profilesSha256": "d1641a918eea6fe8e8372abc11dca9e83258e47a4c926b8dfdf68c235602f210",
+      "profilesSha256": "8182329a2b62c10e2c5e510f726869242f5c8afcc82fdbb7a3fcbdfcf651eddf",
       "adaptation": "scripts/welcome-normal-toolbar.mjs",
       "adaptationSha256": "6e9be8d99c010b286ee75942082c6601626349fa54e4d619761d7048e3d296d7"
     },
