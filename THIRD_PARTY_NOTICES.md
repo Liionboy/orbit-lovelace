@@ -1,6 +1,6 @@
 # Licenses and third-party notices
 
-Orbit Chips (`src/orbit-chips.js`, v1.1.0) is first-party MIT-licensed suite source traced in nativeComponents. The collection/editor and Alarm presentation introduce no additional library, runtime dependency or standalone upstream package.
+Orbit Chips (`src/orbit-chips.js`, v1.1.1) is first-party MIT-licensed suite source traced in nativeComponents. The collection/editor, responsive sizing and Alarm presentation introduce no additional library, runtime dependency or standalone upstream package.
 
 Gauge Orbit (`src/orbit-gauge.js`, v1.0.0) is first-party MIT-licensed suite source traced in nativeComponents; no additional library or runtime dependency is imported.
 

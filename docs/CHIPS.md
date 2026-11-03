@@ -1,12 +1,32 @@
 # Chips Orbit Card
 
-First-party **Orbit Chips1.1.0** in **Orbit Lovelace1.19.0+** as `custom:ha-chips-orbit-card` (generic Chips first shipped in1.18.0). The same single HACS Dashboard resource; no separate repository, dependency, theme YAML update or backend integration.
+First-party **Orbit Chips1.1.1** in **Orbit Lovelace1.19.1+** as `custom:ha-chips-orbit-card` (generic Chips first shipped in1.18.0; Alarm in1.19.0). The same single HACS Dashboard resource; no separate repository, dependency, theme YAML update or backend integration.
 
 ## Design and install
 
 Update Orbit Lovelace in HACS, fully reload each browser/Companion frontend, then choose **Chips Orbit Card** in Add card. Add/reorder/remove chips in the visual editor and choose your actual entities. The empty picker stub selects nothing automatically.
 
-Capsule-style chips have a local accent, icon, optional name and reported state. They wrap naturally instead of hiding chips offscreen. Collection alignment can be start/center/end. The collection has **no large outer card frame**. Each interactive chip keeps a minimum44px hit area. Normal uses48px pills; Compact keeps44px pills with smaller labels/icons and gaps. Unlike a single-entity card, a collection **does not collapse into an aggregate tile or Details arrow**: every configured chip remains visible. Long labels/readings wrap safely rather than clipping units. No layout installs or changes dashboard routes.
+Capsule-style chips have a local accent, icon, optional name and reported state. They wrap as whole units instead of hiding chips offscreen or compressing words into fragments. Collection alignment can be start/center/end. The collection has **no large outer card frame**. Each interactive chip keeps a minimum44px hit area. Normal uses48px pills; Compact keeps44px pills with smaller labels/icons and gaps. Unlike a single-entity card, a collection **does not collapse into an aggregate tile or Details arrow**: every configured chip remains visible. No layout installs or changes dashboard routes.
+
+## Mobile sizing
+
+Version1.19.1 fixes the narrow-parent case missed by the original164px-and-up fixtures: several separate single-chip cards in a phone horizontal stack/grid may receive only about65–100px each. Normal and Compact now keep short labels/states on unbroken lines. Below130px card width, smaller16px icons and compact spacing leave room for up to two short text rows while preserving44px targets; Compact-specific density rules cannot restore oversized wrappers. A full-width collection instead wraps whole capsules to the next row.
+
+No YAML change is required for the fix. For the most natural chip layout, place all entries in **one Chips Orbit Card** in a full-width dashboard slot rather than forcing each capsule into a separate equal-width card. The card cannot rearrange siblings outside its own parent. Extremely long labels/readings in physically insufficient space use ellipsis, never letter-by-letter wrapping or reduced text below11px; the full text remains in DOM, accessible label and title, and native More Info remains available. Transient command feedback can wrap below the label instead of being hidden.
+
+Before (synthetic reproduction of the reported phone layout):
+
+![Phone chips before fix](images/chips-mobile-before.png)
+
+After, with the same separate narrow cards and Compact settings:
+
+![Phone chips after fix](images/chips-mobile-after.png)
+
+Alternative full-width collection, which wraps whole capsules:
+
+![Phone chip collection](images/chips-mobile-collection.png)
+
+[Mobile regression evidence](chips-mobile-verification.json): same-build Chromium checks for360/390/430px viewports, Normal/Compact, light/dark and separate/collection parents. No native iPhone/Safari/Companion certification or live dashboard edit is implied. The labels in the390px screenshot fixture fit without clipping; very narrow360px separate-card slots may ellipsize a long name, while the short reported states remain complete.
 
 Default Aurora follows Orbit themes, including Prism. Explicit Ocean/Sunset/Lavender keep their local palette. Sensor chips use the accent; on/off entities color only reported ON, with neutral OFF/unknown/unavailable/offline states. Common hazardous binary device classes (smoke, gas, carbon monoxide, moisture, problem and safety) use the semantic error color when ON, not a decorative palette. Actual sensor values/units and light RGB metadata are never changed or converted. Alarm entities have the special presentation below; native HA still owns their controls.
 

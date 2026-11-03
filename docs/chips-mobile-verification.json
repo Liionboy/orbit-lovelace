@@ -1,0 +1,2335 @@
+{
+  "suiteVersion": "1.19.1",
+  "chipsVersion": "1.1.1",
+  "cases": 24,
+  "broken": 0,
+  "rows": [
+    {
+      "mode": "light",
+      "layout": "normal",
+      "width": 360,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 69.421875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": true,
+              "sw": 50,
+              "cw": 45,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "normal",
+      "width": 360,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 111.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 49,
+              "cw": 49,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 144.921875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 54,
+              "cw": 54,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 121.703125,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 31,
+              "cw": 31,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 132.84375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 70,
+              "cw": 70,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "normal",
+      "width": 390,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 73.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "normal",
+      "width": 390,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 111.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 49,
+              "cw": 49,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 144.921875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 54,
+              "cw": 54,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 121.703125,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 31,
+              "cw": 31,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 132.84375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 70,
+              "cw": 70,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "normal",
+      "width": 430,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 73.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "normal",
+      "width": 430,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 111.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 49,
+              "cw": 49,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 144.921875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 54,
+              "cw": 54,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 121.703125,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 31,
+              "cw": 31,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 132.84375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 70,
+              "cw": 70,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "compact",
+      "width": 360,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 69.421875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": true,
+              "sw": 50,
+              "cw": 45,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "compact",
+      "width": 360,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 100.046875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 130.71875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 109.4375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 119.46875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 64,
+              "cw": 64,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "compact",
+      "width": 390,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 73.796875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "compact",
+      "width": 390,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 100.046875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 130.71875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 109.4375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 119.46875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 64,
+              "cw": 64,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "compact",
+      "width": 430,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 73.796875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "light",
+      "layout": "compact",
+      "width": 430,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 100.046875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 130.71875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 109.4375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 119.46875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 64,
+              "cw": 64,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "normal",
+      "width": 360,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 69.421875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": true,
+              "sw": 50,
+              "cw": 45,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "normal",
+      "width": 360,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 111.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 49,
+              "cw": 49,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 144.921875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 54,
+              "cw": 54,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 121.703125,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 31,
+              "cw": 31,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 132.84375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 70,
+              "cw": 70,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "normal",
+      "width": 390,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 73.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "normal",
+      "width": 390,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 111.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 49,
+              "cw": 49,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 144.921875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 54,
+              "cw": 54,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 121.703125,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 31,
+              "cw": 31,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 132.84375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 70,
+              "cw": 70,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "normal",
+      "width": 430,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 73.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "normal",
+      "width": 430,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 111.796875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 49,
+              "cw": 49,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 144.921875,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 54,
+              "cw": 54,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 121.703125,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 31,
+              "cw": 31,
+              "font": "550 12px / 17px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 22,
+              "cw": 22,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 132.84375,
+          "height": 48,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 70,
+              "cw": 70,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "compact",
+      "width": 360,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 69.421875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": true,
+              "sw": 50,
+              "cw": 45,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "compact",
+      "width": 360,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 100.046875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 130.71875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 109.4375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 119.46875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 64,
+              "cw": 64,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "compact",
+      "width": 390,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 73.796875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "compact",
+      "width": 390,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 100.046875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 130.71875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 109.4375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 119.46875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 64,
+              "cw": 64,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "compact",
+      "width": 430,
+      "kind": "separate",
+      "metrics": [
+        {
+          "width": 65.296875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 41,
+              "cw": 41,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 73.796875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 52.515625,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 14px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 83.09375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 59,
+              "cw": 59,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "dark",
+      "layout": "compact",
+      "width": 430,
+      "kind": "collection",
+      "metrics": [
+        {
+          "width": 100.046875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Closed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 45,
+              "cw": 45,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 130.71875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Vacanță",
+              "lines": 1,
+              "scroll": false,
+              "sw": 50,
+              "cw": 50,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 109.4375,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-name",
+              "text": "Step",
+              "lines": 1,
+              "scroll": false,
+              "sw": 29,
+              "cw": 29,
+              "font": "550 11px / 15px system-ui",
+              "whiteSpace": "nowrap"
+            },
+            {
+              "kind": "chip-state",
+              "text": "Off",
+              "lines": 1,
+              "scroll": false,
+              "sw": 20,
+              "cw": 20,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        },
+        {
+          "width": 119.46875,
+          "height": 44,
+          "overflow": false,
+          "labels": [
+            {
+              "kind": "chip-state",
+              "text": "Disarmed",
+              "lines": 1,
+              "scroll": false,
+              "sw": 64,
+              "cw": 64,
+              "font": "",
+              "whiteSpace": "nowrap"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "syntheticHA": true,
+  "nativePhone": false,
+  "nodeTests": 843,
+  "smokeSuites": 2,
+  "originalFailingParentCases": 12,
+  "originalCases": 24,
+  "layoutOnlyChange": true,
+  "actionsModelEditorUnchanged": true,
+  "other32RuntimeUnchanged": true,
+  "upstreamPinsUnchanged": 27,
+  "themeVersionUnchanged": "1.2.0",
+  "chipsBrowserMounts": 192,
+  "alarmMounts": 192,
+  "alarmStateSamples": 2304,
+  "themeMounts": 1056,
+  "suiteLayoutMounts": 2112,
+  "phoneGrids": 99,
+  "identityCases": 99,
+  "nativeHA": false,
+  "nativeSafariCompanion": false,
+  "noLiveChanges": true,
+  "screenshotsInspected": true,
+  "bundleSha256": "4c7ed41878e6d57c1ecdfdf33a6749505ca7110a956d08dec626004edd041bbd"
+}

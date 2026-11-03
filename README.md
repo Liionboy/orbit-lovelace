@@ -6,7 +6,11 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
-## New in v1.19.0 — Alarm chips
+## Fixed in v1.19.1 — Phone-sized chips
+
+Fixes chips breaking `Closed`, helper names and alarm states into vertical fragments in narrow phone columns, including Compact. Whole pills wrap as units in a collection; separate narrow cards adapt their icon/spacing and use at most two unbroken label rows. At least44px touch targets, unchanged actions and Alarm safeguards. Update HACS and fully reload the phone frontend; existing YAML works. [Before/after and sizing](docs/CHIPS.md#mobile-sizing).
+
+## Added in v1.19.0 — Alarm chips
 
 Chips Orbit now includes a dedicated **Alarm chip**: state-aware shield icons, neutral Disarmed, blue Armed modes, amber Arming/Disarming/Entry delay and red Triggered with a subtle reduced-motion-aware pulse. **Add alarm chip** in the Chips visual editor filters the entity picker to `alarm_control_panel`. Tap opens native HA controls and any required code prompt; the chip does not arm/disarm directly, store a PIN or invent a countdown. Existing alarm entities gain the state presentation automatically. [Example and safety boundaries](docs/CHIPS.md#alarm-chip). Update the same HACS suite and fully reload; no new resource/theme YAML or HA restart.
 

@@ -1,6 +1,6 @@
 {
   "name": "orbit-lovelace",
-  "version": "1.19.0",
+  "version": "1.19.1",
   "private": true,
   "type": "module",
   "description": "Orbit Lovelace and companion Home Assistant card suite",
@@ -30,6 +30,7 @@
     "test:gauge:browser": "node test/gauge.browser.mjs",
     "test:prism:browser": "node test/prism.browser.mjs",
     "test:chips:browser": "node test/chips.browser.mjs",
-    "test:alarm-chips:browser": "node test/alarm-chips.browser.mjs"
+    "test:alarm-chips:browser": "node test/alarm-chips.browser.mjs",
+    "test:chips:mobile": "node test/chips-mobile.browser.mjs"
   }
 }

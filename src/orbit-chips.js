@@ -1,4 +1,4 @@
-// Orbit Chips 1.1.0 — suite-owned, MIT. No external dependencies or automatic queries.
+// Orbit Chips 1.1.1 — suite-owned, MIT. No external dependencies or automatic queries.
 const CHIP_ALARM_STATES={
  disarmed:['neutral','mdi:shield-off-outline','Disarmed'],
  armed_home:['armed','mdi:shield-home','Armed home'],
@@ -47,6 +47,24 @@ function chipConfig(config){
  return {title:config.title||'',palette:config.palette||'aurora',alignment:config.alignment||'start',read_only:config.read_only??false,chips};
 }
 const CHIP_CSS=":host{display:block;min-width:0}*{box-sizing:border-box}ha-card{display:block;min-width:0;background:transparent!important;border:0!important;box-shadow:none!important;--accent:var(--orbit-theme-accent,#078f72);--accent2:var(--orbit-theme-accent-2,#27b7b0)}.shell{padding:8px 4px}.collection-title{font-size:14px;font-weight:650;line-height:20px;color:var(--primary-text-color,#202b3c);margin:0 0 10px}.chips{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;min-width:0}.chips[data-alignment=center]{justify-content:center}.chips[data-alignment=end]{justify-content:flex-end}.chip{--chip-accent:var(--accent);display:inline-flex;align-items:center;gap:9px;position:relative;min-width:44px;min-height:48px;max-width:100%;padding:9px 14px 9px 10px;border-radius:26px;border:1px solid color-mix(in srgb,var(--chip-accent) 28%,var(--divider-color,#dfe5eb));background:linear-gradient(125deg,color-mix(in srgb,var(--chip-accent) 9%,transparent),transparent),var(--card-background-color,#fff);box-shadow:0 2px 6px #101c2f0a;color:var(--primary-text-color,#202b3c);font:inherit;text-align:start;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.chip[data-palette=ocean]{--chip-accent:#1477c9}.chip[data-palette=sunset]{--chip-accent:#c54c30}.chip[data-palette=lavender]{--chip-accent:#8552c7}.chip[data-active=false]{--chip-accent:var(--secondary-text-color,#637080);background:var(--card-background-color,#fff);border-color:var(--divider-color,#dfe5eb)}.chip[data-alarm=true]{--chip-accent:var(--error-color,#b33444)}.chip[data-availability=unavailable],.chip[data-availability=offline]{--chip-accent:var(--secondary-text-color,#637080)}.chip:disabled{opacity:1;cursor:default}.chip:focus-visible{outline:2px solid var(--primary-color,#078f72);outline-offset:3px}.chip:not(:disabled):hover{border-color:var(--chip-accent)}div.chip{cursor:default}.chip-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;--mdc-icon-size:19px;width:28px;height:28px;border-radius:50%;color:var(--chip-accent);background:color-mix(in srgb,var(--chip-accent) 12%,transparent)}.chip-copy{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px;min-width:0}.chip-name{font-size:12px;line-height:17px;font-weight:550;overflow-wrap:anywhere;color:var(--secondary-text-color,#637080);min-width:0}.chip-state{font-size:13px;line-height:18px;font-weight:700;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;min-width:0}.chip-feedback{flex-basis:100%;font-size:11px;line-height:16px;color:var(--secondary-text-color,#637080);overflow-wrap:anywhere;min-width:0}.chip-feedback[data-kind=error]{color:var(--error-color,#b33444)}.chip-feedback[data-kind=success]{color:var(--success-color,#13765c)}.icon-only{width:48px;padding:0;justify-content:center}.icon-only .chip-copy:has(.chip-feedback[hidden]){display:none}.icon-only:has(.chip-feedback:not([hidden])){width:auto;padding:9px 12px}.setup{font-size:12px;line-height:18px;color:var(--secondary-text-color,#637080);padding:12px;border:1px dashed var(--divider-color,#dfe5eb);border-radius:14px}[hidden]{display:none!important}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}";
+// Wrap whole capsules; never let a flex/grid parent turn labels into vertical fragments.
+const CHIP_LAYOUT_CSS=`
+:host{container-type:inline-size}
+.chip{flex:0 0 auto}
+.chip-copy{display:grid;grid-template-columns:minmax(0,auto) minmax(0,auto);gap:0 6px}
+.chip-copy:has(.chip-name[hidden]),.chip-copy:has(.chip-state[hidden]){grid-template-columns:minmax(0,1fr);column-gap:0}
+.chip-name,.chip-state{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;word-break:normal}
+.chip-feedback{grid-column:1/-1;white-space:normal;overflow-wrap:anywhere}
+@container (max-width:130px){
+ .shell.shell,:host([data-orbit-layout=compact]) .shell.shell{padding:2px 0}
+ .chip.chip,:host([data-orbit-layout=compact]) .chip.chip{gap:2px;padding:5px 2px;border-radius:24px}
+ .chip .chip-icon,:host([data-orbit-layout=compact]) .chip .chip-icon{width:16px;height:16px;--mdc-icon-size:16px}
+ .chip .chip-copy{grid-template-columns:minmax(0,1fr);gap:0}
+ .chip .chip-name,:host([data-orbit-layout=compact]) .chip .chip-name{font-size:11px;line-height:14px}
+ .chip .chip-state,:host([data-orbit-layout=compact]) .chip .chip-state{font-size:11px;line-height:16px}
+ .chip.icon-only,:host([data-orbit-layout=compact]) .chip.icon-only{width:44px;padding:0}
+ .chip.icon-only:has(.chip-feedback:not([hidden])){width:auto;padding:5px 4px}
+}`;
 class OrbitChipsCard extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this._epoch=0;this._detached=false;this._ack=new Map();this._states=new Map();this._feedback=new Map();this._nodes=[];}
  static getStubConfig(){return{chips:[]};}
@@ -75,7 +93,7 @@ class OrbitChipsCard extends HTMLElement{
   return {c,s,name,state,icon:c.icon||chipIcon(a.icon)||(isAlarm?(known&&online&&alarmInfo?alarmInfo[1]:'mdi:shield-off-outline'):fallback),active,alarm,alarmKind,known,online,domain,service,enabled,reason};
  }
  _build(){
-  const root=this.shadowRoot;root.replaceChildren();const style=document.createElement('style');style.textContent=CHIP_CSS+CHIP_ALARM_CSS;root.append(style);
+  const root=this.shadowRoot;root.replaceChildren();const style=document.createElement('style');style.textContent=CHIP_CSS+CHIP_LAYOUT_CSS+CHIP_ALARM_CSS;root.append(style);
   const card=document.createElement('ha-card'),shell=document.createElement('div');shell.className='shell';card.append(shell);root.append(card);
   const title=document.createElement('div');title.className='collection-title';title.textContent=this._config.title;title.hidden=!this._config.title;shell.append(title);
   const list=document.createElement('div');list.className='chips';list.setAttribute('role','group');list.setAttribute('aria-label',this._config.title||'Orbit chips');list.dataset.alignment=this._config.alignment;shell.append(list);this._nodes=[];
