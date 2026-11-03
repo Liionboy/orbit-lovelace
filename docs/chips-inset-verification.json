@@ -1,0 +1,5117 @@
+{
+  "suiteVersion": "1.20.1",
+  "chipsVersion": "1.1.3",
+  "cases": 64,
+  "rows": [
+    {
+      "width": 360,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 8.109375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 21.09375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 6.734375,
+          "rightSpace": 12.390625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 93.71875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 11.140625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 17.921875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 6.734375,
+          "rightSpace": 37.921875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 93.71875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 88.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 96.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12.671875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.28125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 78.5,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 127.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 8.109375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 21.09375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 6.734375,
+          "rightSpace": 12.390625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 93.71875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 11.140625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 17.921875,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 6.734375,
+          "rightSpace": 37.921875,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 93.71875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 86.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 94.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 73.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 83.28125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.5,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 125.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 8.109375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 21.09375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 6.734375,
+          "rightSpace": 12.390625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 93.71875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 11.140625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 17.921875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 69.421875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 6.734375,
+          "rightSpace": 37.921875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 93.71875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 88.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 96.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12.671875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.28125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 78.5,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 127.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 8.109375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 21.09375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 6.734375,
+          "rightSpace": 12.390625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 93.71875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 11.140625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 17.921875,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 69.421875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 6.734375,
+          "rightSpace": 37.921875,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 93.71875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 86.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 94.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 73.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 360,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 83.28125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.5,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 125.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 15,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 7.078125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.328125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 27.984375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 8.609375,
+          "rightSpace": 19.84375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 103.046875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 18.03125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 24.828125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.328125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 8.609375,
+          "rightSpace": 45.375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 103.046875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 88.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 96.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12.671875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.28125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 78.5,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 127.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 15,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 7.078125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 27.984375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 8.609375,
+          "rightSpace": 19.84375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.046875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 18.03125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 24.828125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 8.609375,
+          "rightSpace": 45.375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.046875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 86.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 94.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 73.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 83.28125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.5,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 125.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 15,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 7.078125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.328125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 27.984375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 8.609375,
+          "rightSpace": 19.84375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 103.046875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 18.03125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 24.828125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.328125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 8.609375,
+          "rightSpace": 45.375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 103.046875,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 88.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 96.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12.671875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.28125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 78.5,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 127.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 15,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 7.078125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 27.984375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 8.609375,
+          "rightSpace": 19.84375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.046875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 4,
+          "rightSpace": 18.03125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 24.828125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 4,
+          "rightSpace": 4,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 8.609375,
+          "rightSpace": 45.375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.046875,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 86.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 94.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 73.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 390,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 83.28125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.5,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 125.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 5.09375,
+          "rightSpace": 23.109375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 15.171875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 36.09375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 11.078125,
+          "rightSpace": 29.78125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 115.453125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 5.09375,
+          "rightSpace": 26.140625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 32.921875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 5.09375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 11.078125,
+          "rightSpace": 55.3125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 115.453125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 88.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 96.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12.671875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.28125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 78.5,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 127.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 5.09375,
+          "rightSpace": 23.109375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 15.171875,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 36.09375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 11.078125,
+          "rightSpace": 29.78125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 115.453125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 5.09375,
+          "rightSpace": 26.140625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 32.921875,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 5.09375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 11.078125,
+          "rightSpace": 55.3125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 115.453125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 86.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 94.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 73.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 83.28125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.5,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 125.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 5.09375,
+          "rightSpace": 23.109375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 15.171875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 36.09375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 11.078125,
+          "rightSpace": 29.78125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 115.453125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 5.09375,
+          "rightSpace": 26.140625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 32.921875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 5.09375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.515625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 11.078125,
+          "rightSpace": 55.3125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 115.453125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 88.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 96.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12.671875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.28125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 78.5,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 127.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 5.09375,
+          "rightSpace": 23.109375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 15.171875,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 36.09375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 11.078125,
+          "rightSpace": 29.78125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 115.453125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 5.09375,
+          "rightSpace": 26.140625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 32.921875,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 5.09375,
+          "rightSpace": 5.09375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 85.515625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 11.078125,
+          "rightSpace": 55.3125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 115.453125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 86.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 94.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 73.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 430,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 83.28125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.5,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 125.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 10.84375,
+          "rightSpace": 46.09375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 38.15625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 59.078125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 10.84375,
+          "rightSpace": 49.125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 55.90625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 10.84375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 88.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 96.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12.671875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "light",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.28125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 78.5,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 127.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 10.84375,
+          "rightSpace": 46.09375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 38.15625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 59.078125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 10.84375,
+          "rightSpace": 49.125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 55.90625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 10.84375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 86.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 94.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 73.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "light",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 83.28125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.5,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 125.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 10.84375,
+          "rightSpace": 46.09375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 38.15625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 59.078125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 10.84375,
+          "rightSpace": 49.125,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 55.90625,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 10.84375,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 114.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 88.3125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 96.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12.671875,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 76,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 105.59375,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "dark",
+      "layout": "normal",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 85.28125,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 78.5,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 127.25,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 48,
+          "width": 80.0625,
+          "visual": 40,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 10.84375,
+          "rightSpace": 46.09375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 38.15625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 59.078125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "separate",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 10.84375,
+          "rightSpace": 49.125,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 55.90625,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 10.84375,
+          "rightSpace": 10.84375,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 114.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": true
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "actual",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 86.3125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Closed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 94.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Vacanță",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 73.328125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Step",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 103.59375,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Disarmed",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "width": 555,
+      "mode": "dark",
+      "layout": "compact",
+      "kind": "collection",
+      "example": "reference",
+      "metrics": [
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 83.28125,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "8.4 °C",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 76.5,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "84 %",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 125.25,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "(1) Lights ON",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        },
+        {
+          "inset": 12,
+          "rightSpace": 12,
+          "alignment": "flex-start",
+          "target": 44,
+          "width": 78.0625,
+          "visual": 36,
+          "iconBackground": "rgba(0, 0, 0, 0)",
+          "labels": [
+            {
+              "text": "Open",
+              "font": 12,
+              "lines": 1,
+              "clipped": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "syntheticHA": true,
+  "nativeHA": false,
+  "nativeSafariCompanion": false,
+  "beforeOwnerRow": {
+    "width": 555,
+    "mode": "light",
+    "layout": "compact",
+    "kind": "separate",
+    "example": "actual",
+    "metrics": [
+      {
+        "inset": 2,
+        "rightSpace": 54.9375,
+        "alignment": "normal",
+        "target": 44,
+        "width": 114.25,
+        "visual": 36,
+        "iconBackground": "rgba(0, 0, 0, 0)",
+        "labels": [
+          {
+            "text": "Closed",
+            "font": 12,
+            "lines": 1,
+            "clipped": false
+          }
+        ]
+      },
+      {
+        "inset": 2,
+        "rightSpace": 47,
+        "alignment": "normal",
+        "target": 44,
+        "width": 114.25,
+        "visual": 36,
+        "iconBackground": "rgba(0, 0, 0, 0)",
+        "labels": [
+          {
+            "text": "Vacanță",
+            "font": 12,
+            "lines": 1,
+            "clipped": false
+          }
+        ]
+      },
+      {
+        "inset": 2,
+        "rightSpace": 67.921875,
+        "alignment": "normal",
+        "target": 44,
+        "width": 114.25,
+        "visual": 36,
+        "iconBackground": "rgba(0, 0, 0, 0)",
+        "labels": [
+          {
+            "text": "Step",
+            "font": 12,
+            "lines": 1,
+            "clipped": false
+          }
+        ]
+      },
+      {
+        "inset": 8,
+        "rightSpace": 8,
+        "alignment": "normal",
+        "target": 44,
+        "width": 95.59375,
+        "visual": 36,
+        "iconBackground": "rgba(0, 0, 0, 0)",
+        "labels": [
+          {
+            "text": "Disarmed",
+            "font": 12,
+            "lines": 1,
+            "clipped": false
+          }
+        ]
+      }
+    ]
+  },
+  "afterOwnerRow": {
+    "width": 555,
+    "mode": "light",
+    "layout": "compact",
+    "kind": "separate",
+    "example": "actual",
+    "metrics": [
+      {
+        "inset": 10.84375,
+        "rightSpace": 46.09375,
+        "alignment": "flex-start",
+        "target": 44,
+        "width": 114.25,
+        "visual": 36,
+        "iconBackground": "rgba(0, 0, 0, 0)",
+        "labels": [
+          {
+            "text": "Closed",
+            "font": 12,
+            "lines": 1,
+            "clipped": false
+          }
+        ]
+      },
+      {
+        "inset": 10.84375,
+        "rightSpace": 38.15625,
+        "alignment": "flex-start",
+        "target": 44,
+        "width": 114.25,
+        "visual": 36,
+        "iconBackground": "rgba(0, 0, 0, 0)",
+        "labels": [
+          {
+            "text": "Vacanță",
+            "font": 12,
+            "lines": 1,
+            "clipped": false
+          }
+        ]
+      },
+      {
+        "inset": 10.84375,
+        "rightSpace": 59.078125,
+        "alignment": "flex-start",
+        "target": 44,
+        "width": 114.25,
+        "visual": 36,
+        "iconBackground": "rgba(0, 0, 0, 0)",
+        "labels": [
+          {
+            "text": "Step",
+            "font": 12,
+            "lines": 1,
+            "clipped": false
+          }
+        ]
+      },
+      {
+        "inset": 12,
+        "rightSpace": 12,
+        "alignment": "flex-start",
+        "target": 44,
+        "width": 103.59375,
+        "visual": 36,
+        "iconBackground": "rgba(0, 0, 0, 0)",
+        "labels": [
+          {
+            "text": "Disarmed",
+            "font": 12,
+            "lines": 1,
+            "clipped": false
+          }
+        ]
+      }
+    ]
+  },
+  "previousBaseline": "v1.20.0",
+  "padding": "12px ordinary; clamp(4px,20cqi - 12px,12px) in <=130px hosts",
+  "startAligned": true,
+  "paintedCapsuleUnchanged": "36px Compact / 40px Normal",
+  "minimumTouchTargets": "44/48px",
+  "fontUnchanged": "12px/500; never shrink text to fit",
+  "previousRuntimeUnchangedExceptCSSBanner": true,
+  "other33ExecutableByteIdenticalAfterSuiteVersions": true,
+  "upstreamPinsUnchanged": 27,
+  "nativeModulesUnchanged": 4,
+  "allCompactProfilesAndAdaptersUnchanged": true,
+  "themesUnchanged": "1.2.0",
+  "nodeTests": 887,
+  "smokeSuites": 2,
+  "mobileCases": 24,
+  "genericChipsMounts": 192,
+  "alarmMounts": 192,
+  "alarmStates": 2304,
+  "titleCases": 768,
+  "themeMounts": 1088,
+  "layoutMounts": 2176,
+  "phoneGrids": 102,
+  "identityCases": 102,
+  "screenshotsInspected": true,
+  "noLiveChanges": true
+}

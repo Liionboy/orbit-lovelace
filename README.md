@@ -6,7 +6,11 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
-## New in v1.20.0 — Title Orbit Card
+## Fixed in v1.20.1 — Chip content breathing room
+
+Chips keep their left/start alignment, slim capsules and12px text, but the icon/text no longer hug the left border. Normal/Compact use12px horizontal padding; narrow separate cards adapt from4px to12px instead of the previous2px, preserving space for readable labels. No centering, visibility/action changes or HA configuration changes. [Spacing evidence and previews](docs/CHIPS.md#content-inset). Same HACS resource; update + full frontend reload.
+
+## Added in v1.20.0 — Title Orbit Card
 
 **Title Orbit Card** (`custom:ha-title-orbit-card`) is a lightweight section heading: title, optional subtitle/plain icon, Orbit palettes, logical alignment, optional subtle divider and semantic heading level. Transparent/unframed, native visual form and Normal/Compact; no entities, services or queries. [Configuration and phone previews](docs/TITLE.md). Same HACS resource; update + full reload, no theme YAML update or HA restart. The suite now contains34 cards from32 packages, including five suite-owned modules.
 

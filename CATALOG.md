@@ -1,6 +1,8 @@
 # Included card catalog
 
-**Stable v1.20.0:** adds [Title Orbit Card](docs/TITLE.md), a lightweight static section heading with optional subtitle/icon, palettes, alignment, semantic level and Normal/Compact. Existing33 card implementations, including slim Chips1.1.2, all27 upstream pins and optional [Prism Themes1.2.0](THEMES.md) remain unchanged.
+**Stable v1.20.1:** [Chips content inset](docs/CHIPS.md#content-inset) adds comfortable start-aligned icon/text padding without centering or changing the slim capsule/font/visibility/actions. Chips1.1.3 is CSS-only; other33 card implementations,27 upstream pins, prior adapters/profiles and Themes1.2.0 remain unchanged.
+
+**Added in v1.20.0:** adds [Title Orbit Card](docs/TITLE.md), a lightweight static section heading with optional subtitle/icon, palettes, alignment, semantic level and Normal/Compact. Existing33 card implementations, including slim Chips, all27 upstream pins and optional [Prism Themes1.2.0](THEMES.md) remain unchanged.
 
 **Stable v1.16.0:** adds [Gauge Orbit Card](docs/GAUGE.md), a read-only numeric/RPM gauge with explicit scale. v1.15.0 adds the [Temperature Orbit Card](docs/TEMPERATURE.md). Prior camera support is retained: Frigate gains [persistent HA/go2rtc playback](docs/FRIGATE-LIVE.md); Switch now has a [reported-state icon accent](docs/SWITCH-STATE-ICON.md) (ON colored, otherwise neutral); Luma gains optional per-card [icon/palette configuration](docs/LUMA-APPEARANCE.md), in Normal and Compact. All30 types retain the v1.12.2 single-primary-name behavior. [Compact scope](docs/COMPACT.md). Imported versions remain unchanged; suite-owned adaptations are traced under suiteFeatures, not attributed to upstream.
 
@@ -11,7 +13,7 @@ The suite provides34 card types from27 unchanged upstream packages and five suit
 | Card / package | Included release | Existing Lovelace types |
 | --- | --- | --- |
 | [Title Orbit Card](docs/TITLE.md) | Suite-owned1.0.0 | `custom:ha-title-orbit-card` |
-| [Chips Orbit Card](docs/CHIPS.md) | Suite-owned1.1.2 | `custom:ha-chips-orbit-card` |
+| [Chips Orbit Card](docs/CHIPS.md) | Suite-owned1.1.3 | `custom:ha-chips-orbit-card` |
 | [Gauge Orbit Card](docs/GAUGE.md) | 1.0.0 (suite-owned) | `custom:ha-gauge-orbit-card` |
 | [Temperature Orbit Card](docs/TEMPERATURE.md) | 1.0.0 (suite-owned) | `custom:ha-temperature-orbit-card` |
 | [Select Orbit Card](docs/CONTROLS.md) | 1.0.0 (suite-owned) | `custom:ha-select-orbit-card` |

@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.20.0 — MIT. */
+/* Orbit Lovelace v1.20.1 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.20.0",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.20.1",components:{},skipped:{},errors:[]};
 /* Suite-owned compact presentation adapter v0.3.4 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
@@ -6656,13 +6656,13 @@ for(const entry of window.customCards){const type=String(entry.type).startsWith(
 if(!window.customCards.some(card=>card.type==="ha-gauge-orbit-card"))window.customCards.push({type:"ha-gauge-orbit-card",name:"Gauge Orbit Card",description:"Included in Orbit Lovelace",preview:false});
 suite.components["orbit-gauge"]={version:"1.0.0",types:["ha-gauge-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"orbit-gauge",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","orbit-gauge",error);}
-/* orbit-chips @ 1.1.2 (suite-owned source) */
+/* orbit-chips @ 1.1.3 (suite-owned source) */
 try { (() => {
 const compactProfiles={"ha-chips-orbit-card":{"collection":"chips","css":".shell{padding:4px 2px}.chips{gap:6px}.chip{min-height:44px;padding:6px 10px 6px 8px;border-radius:24px}.icon-only{width:44px;padding:0}.collection-title{font-size:12px;margin-bottom:6px}","details":[],"densityCSS":".chip-name{font-size:11px;line-height:15px}.chip-state{font-size:12px;line-height:16px}.chip-icon{--mdc-icon-size:17px;width:26px;height:26px}"}};
 const customElements={get:name=>window.customElements.get(name),define:(name,C,options)=>window.customElements.define(name,compactProfiles[name]?orbitCompact.prepare(name,C,compactProfiles[name]):C,options)};
 const knownTypes=["ha-chips-orbit-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["orbit-chips"]="Already registered; remove old resources and reload to use the suite version.";return;}
-// Orbit Chips 1.1.2 — suite-owned, MIT. No external dependencies or automatic queries.
+// Orbit Chips 1.1.3 — suite-owned, MIT. No external dependencies or automatic queries.
 const CHIP_ALARM_STATES={
  disarmed:['neutral','mdi:shield-off-outline','Disarmed'],
  armed_home:['armed','mdi:shield-home','Armed home'],
@@ -6716,9 +6716,9 @@ const CHIP_LAYOUT_CSS=`
 :host{container-type:inline-size}
 :host .shell.shell,:host([data-orbit-layout=compact]) .shell.shell{padding:2px 0}
 :host .chips.chips{gap:6px}
-:host .chip.chip{isolation:isolate;flex:0 0 auto;position:relative;min-width:min(76px,100%);min-height:48px;padding:8px 10px;gap:6px;border:0;background:transparent;box-shadow:none;border-radius:24px}
+:host .chip.chip{isolation:isolate;flex:0 0 auto;position:relative;min-width:min(76px,100%);min-height:48px;padding:8px 12px;gap:6px;justify-content:flex-start;border:0;background:transparent;box-shadow:none;border-radius:24px}
 :host .chip.chip::before{content:'';position:absolute;inset:4px 0;z-index:-1;pointer-events:none;border-radius:999px;border:1px solid color-mix(in srgb,var(--primary-color,#6575dc) 18%,var(--divider-color,#dfe5eb));background:var(--card-background-color,#fff);box-shadow:0 1px 3px #17213a08}
-:host([data-orbit-layout=compact]) .chip.chip{min-height:44px;min-width:min(68px,100%);padding:6px 8px}
+:host([data-orbit-layout=compact]) .chip.chip{min-height:44px;min-width:min(68px,100%);padding:6px 12px}
 :host .chip.chip .chip-icon{width:18px;height:18px;--mdc-icon-size:18px;border-radius:0;background:transparent}
 :host([data-orbit-layout=compact]) .chip.chip .chip-icon{width:16px;height:16px;--mdc-icon-size:16px}
 :host .chip.chip .chip-name,:host .chip.chip .chip-state{font-size:12px;line-height:18px;font-weight:500;color:var(--primary-text-color,#202b3c)}
@@ -6730,10 +6730,10 @@ const CHIP_LAYOUT_CSS=`
 :host .chip.chip.icon-only{min-width:44px;width:44px;padding:0;justify-content:center}
 :host .chip.chip.icon-only:has(.chip-feedback:not([hidden])){min-width:44px;width:auto;padding:6px 10px}
 @container (max-width:130px){
- :host .chip.chip,:host([data-orbit-layout=compact]) .chip.chip{width:100%;min-width:min(72px,100%);padding-inline:2px;gap:3px}
+ :host .chip.chip,:host([data-orbit-layout=compact]) .chip.chip{width:100%;min-width:min(72px,100%);padding-inline:clamp(4px,calc(20cqi - 12px),12px);gap:3px}
  :host .chip.chip .chip-icon,:host([data-orbit-layout=compact]) .chip.chip .chip-icon{width:14px;height:14px;--mdc-icon-size:14px}
  :host .chip.chip.icon-only{width:44px;min-width:44px;padding:0}
- :host .chip.chip.icon-only:has(.chip-feedback:not([hidden])){width:auto;padding:6px 2px}
+ :host .chip.chip.icon-only:has(.chip-feedback:not([hidden])){width:auto;padding:6px 8px}
 }`;
 class OrbitChipsCard extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this._epoch=0;this._detached=false;this._ack=new Map();this._states=new Map();this._feedback=new Map();this._nodes=[];}
@@ -6836,7 +6836,7 @@ window.customCards=window.customCards||[];window.customCards.push({type:'ha-chip
 window.customCards ||= [];
 for(const entry of window.customCards){const type=String(entry.type).startsWith("custom:")?entry.type.slice(7):entry.type;if(knownTypes.includes(type))entry.type=type;}
 if(!window.customCards.some(card=>card.type==="ha-chips-orbit-card"))window.customCards.push({type:"ha-chips-orbit-card",name:"Chips Orbit Card",description:"Included in Orbit Lovelace",preview:false});
-suite.components["orbit-chips"]={version:"1.1.2",types:["ha-chips-orbit-card"]};
+suite.components["orbit-chips"]={version:"1.1.3",types:["ha-chips-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"orbit-chips",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","orbit-chips",error);}
 /* orbit-title @ 1.0.0 (suite-owned source) */
 try { (() => {

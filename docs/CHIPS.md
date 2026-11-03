@@ -1,12 +1,23 @@
 # Chips Orbit Card
 
-First-party **Orbit Chips1.1.2** in **Orbit Lovelace1.19.2+** as `custom:ha-chips-orbit-card` (generic Chips first shipped in1.18.0; Alarm in1.19.0). The same single HACS Dashboard resource; no separate repository, dependency, theme YAML update or backend integration.
+First-party **Orbit Chips1.1.3** in **Orbit Lovelace1.20.1+** as `custom:ha-chips-orbit-card` (generic Chips first shipped in1.18.0; Alarm in1.19.0). The same single HACS Dashboard resource; no separate repository, dependency, theme YAML update or backend integration.
 
 ## Design and install
 
 Update Orbit Lovelace in HACS, fully reload each browser/Companion frontend, then choose **Chips Orbit Card** in Add card. Add/reorder/remove chips in the visual editor and choose your actual entities. The empty picker stub selects nothing automatically.
 
 Capsule-style chips have a local accent, icon, optional name and reported state. They wrap as whole units instead of hiding chips offscreen or compressing words into fragments. Collection alignment can be start/center/end. The collection has **no large outer card frame**. Each interactive chip keeps a minimum44px hit area. Normal paints a40px capsule inside a48px button; Compact paints36px inside44px. Both use12px single-line text and plain icons. Unlike a single-entity card, a collection **does not collapse into an aggregate tile or Details arrow**: every configured chip remains visible. No layout installs or changes dashboard routes.
+
+## Content inset
+
+Version1.20.1 fixes icon/text hugging the capsule’s starting edge in separate narrow card columns. Labelled chips stay start-aligned, never centered:12px horizontal padding in ordinary Normal/Compact cards, and responsive4–12px inside hosts at most130px wide (`clamp(4px,20cqi - 12px,12px)`). Around116px, that is about11px instead of2px. The smallest quarter-phone slots retain a4px minimum so the font does not have to shrink. Icon-only buttons remain centered.
+
+The36/40px painted capsules,44/48px targets,12px single-line text, caller visibility, parent columns, reported states and actions are unchanged. Long labels may still ellipsize in genuinely constrained external columns; a full-width collection naturally wraps whole pills. This does not modify a live dashboard.
+
+![Chip content inset before](images/chips-inset-before.png)
+![Chip content inset after](images/chips-inset-after.png)
+
+[Spacing measurements](chips-inset-verification.json) extend the previous phone fixtures to555px, reproducing the owner-like narrow-column issue, and check actual icon-to-capsule inset as well as the painted shell and touch target. Synthetic HA/Chromium previews only; native HA/Safari/Companion remain unverified.
 
 ## Slim capsule design
 

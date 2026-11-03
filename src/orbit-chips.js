@@ -1,4 +1,4 @@
-// Orbit Chips 1.1.2 — suite-owned, MIT. No external dependencies or automatic queries.
+// Orbit Chips 1.1.3 — suite-owned, MIT. No external dependencies or automatic queries.
 const CHIP_ALARM_STATES={
  disarmed:['neutral','mdi:shield-off-outline','Disarmed'],
  armed_home:['armed','mdi:shield-home','Armed home'],
@@ -52,9 +52,9 @@ const CHIP_LAYOUT_CSS=`
 :host{container-type:inline-size}
 :host .shell.shell,:host([data-orbit-layout=compact]) .shell.shell{padding:2px 0}
 :host .chips.chips{gap:6px}
-:host .chip.chip{isolation:isolate;flex:0 0 auto;position:relative;min-width:min(76px,100%);min-height:48px;padding:8px 10px;gap:6px;border:0;background:transparent;box-shadow:none;border-radius:24px}
+:host .chip.chip{isolation:isolate;flex:0 0 auto;position:relative;min-width:min(76px,100%);min-height:48px;padding:8px 12px;gap:6px;justify-content:flex-start;border:0;background:transparent;box-shadow:none;border-radius:24px}
 :host .chip.chip::before{content:'';position:absolute;inset:4px 0;z-index:-1;pointer-events:none;border-radius:999px;border:1px solid color-mix(in srgb,var(--primary-color,#6575dc) 18%,var(--divider-color,#dfe5eb));background:var(--card-background-color,#fff);box-shadow:0 1px 3px #17213a08}
-:host([data-orbit-layout=compact]) .chip.chip{min-height:44px;min-width:min(68px,100%);padding:6px 8px}
+:host([data-orbit-layout=compact]) .chip.chip{min-height:44px;min-width:min(68px,100%);padding:6px 12px}
 :host .chip.chip .chip-icon{width:18px;height:18px;--mdc-icon-size:18px;border-radius:0;background:transparent}
 :host([data-orbit-layout=compact]) .chip.chip .chip-icon{width:16px;height:16px;--mdc-icon-size:16px}
 :host .chip.chip .chip-name,:host .chip.chip .chip-state{font-size:12px;line-height:18px;font-weight:500;color:var(--primary-text-color,#202b3c)}
@@ -66,10 +66,10 @@ const CHIP_LAYOUT_CSS=`
 :host .chip.chip.icon-only{min-width:44px;width:44px;padding:0;justify-content:center}
 :host .chip.chip.icon-only:has(.chip-feedback:not([hidden])){min-width:44px;width:auto;padding:6px 10px}
 @container (max-width:130px){
- :host .chip.chip,:host([data-orbit-layout=compact]) .chip.chip{width:100%;min-width:min(72px,100%);padding-inline:2px;gap:3px}
+ :host .chip.chip,:host([data-orbit-layout=compact]) .chip.chip{width:100%;min-width:min(72px,100%);padding-inline:clamp(4px,calc(20cqi - 12px),12px);gap:3px}
  :host .chip.chip .chip-icon,:host([data-orbit-layout=compact]) .chip.chip .chip-icon{width:14px;height:14px;--mdc-icon-size:14px}
  :host .chip.chip.icon-only{width:44px;min-width:44px;padding:0}
- :host .chip.chip.icon-only:has(.chip-feedback:not([hidden])){width:auto;padding:6px 2px}
+ :host .chip.chip.icon-only:has(.chip-feedback:not([hidden])){width:auto;padding:6px 8px}
 }`;
 class OrbitChipsCard extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this._epoch=0;this._detached=false;this._ack=new Map();this._states=new Map();this._feedback=new Map();this._nodes=[];}
