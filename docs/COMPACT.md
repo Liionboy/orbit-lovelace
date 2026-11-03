@@ -1,5 +1,9 @@
 # Selectable Compact layouts — v1.14.0
 
+## Chips collection (suite1.18.0+)
+
+Chips Orbit is already a collection of small pills. Its Compact profile reduces spacing/text/icons while retaining44px touch targets and every configured chip; it deliberately has no aggregate title/state tile or Details disclosure. Each chip keeps its own one-name/state identity and native action. Existing32 card profiles and runtime are unchanged. [Chips configuration and scope](CHIPS.md).
+
 **Stable release v1.14.0.** Frigate [camera playback](FRIGATE-LIVE.md) unloads while Details is closed. Switch identity now has a [reported-state accent](SWITCH-STATE-ICON.md). Luma now also supports optional [per-card icon/palette](LUMA-APPEARANCE.md); existing Compact behavior is retained. v1.12.0 promoted beta.5;1.12.1 fixed Luma;1.12.2 completes a30-type expanded-identity audit. The same resource/types/themes and opt-in **Normal / Compact** selector remain. Automated verification is synthetic, not universal native editor/device certification.
 
 ## Single primary identity across all30 cards (v1.12.2)

@@ -1,0 +1,28 @@
+{
+  "version": "1.18.0",
+  "nativeVersion": "1.0.0",
+  "syntheticHA": true,
+  "nativeHA": false,
+  "tests": 810,
+  "chipsNodeTests": 69,
+  "upstreamSmokeSuites": 2,
+  "chipsThemeLayoutWidthMounts": 192,
+  "themeCardMounts": 1056,
+  "suiteThemeLayoutMounts": 2112,
+  "twoCardPhoneGrids": 99,
+  "compactIdentityCases": 99,
+  "collectionIdentity": "one name/state per chip, no aggregate tile/disclosure",
+  "unchanged32CardExecutable": "v1.17.0 excluding two suite version strings and appended Chips module",
+  "unchangedUpstreamPackages": 27,
+  "unchangedNativeModules": [
+    "orbit-controls",
+    "orbit-temperature",
+    "orbit-gauge"
+  ],
+  "unchangedThemes": "1.2.0",
+  "minHitAreaPx": 44,
+  "noAutomaticQueries": true,
+  "noLiveChanges": true,
+  "screenshotsInspected": true,
+  "bundleSha256": "d4fadcb6a999e1ff64631343ae3528595a7f285c538a99ef77c5d5297924dec7"
+}

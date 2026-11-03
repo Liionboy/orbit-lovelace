@@ -1,5 +1,7 @@
 # Licenses and third-party notices
 
+Orbit Chips (`src/orbit-chips.js`, v1.0.0) is first-party MIT-licensed suite source traced in nativeComponents. The collection/editor introduces no additional library, runtime dependency or standalone upstream package.
+
 Gauge Orbit (`src/orbit-gauge.js`, v1.0.0) is first-party MIT-licensed suite source traced in nativeComponents; no additional library or runtime dependency is imported.
 
 Suite-owned Temperature Orbit (`src/orbit-temperature.js`, v1.0.0) is first-party MIT-licensed source traced in nativeComponents. It does not import the legacy Temperature & Humidity implementation or an additional runtime dependency.

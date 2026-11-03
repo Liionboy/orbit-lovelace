@@ -1,10 +1,14 @@
 # Orbit Lovelace
 
-**One HACS custom repository. One JavaScript resource. 32 cards.**
+**One HACS custom repository. One JavaScript resource. 33 cards.**
 
 Orbit Lovelace packages the Orbit cards and the matching companion card collection into a single, self-contained Home Assistant Dashboard resource. Individual cards keep their existing names, Lovelace types, configurations and controls. This is a distribution suite, not a new all-in-one dashboard card.
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
+
+## New in v1.18.0 — Chips Orbit Card
+
+**Chips Orbit Card** (`custom:ha-chips-orbit-card`) is a wrapping row of small Orbit pills: reported states/sensor values, native More Info, explicit light/switch/input_boolean power controls and local navigation. Per-chip icon/name/palette, optional icon-only display, alignment and read-only; visual add/remove/reorder editor, Normal/Compact and44px minimum targets. No outer card frame, aggregate tile or hidden chip list. [Configuration, previews and safety](docs/CHIPS.md). Same suite/resource; HACS update + full reload, no theme YAML update or live HA changes.
 
 ## New in v1.17.0 — Orbit Prism theme
 

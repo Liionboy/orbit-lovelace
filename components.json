@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -527,6 +527,18 @@
       ],
       "aliases": [],
       "sha256": "88a43dfa9966dc3c2cd950e48e89917ed58ffad1d0638c26dbad5708018576e5"
+    },
+    {
+      "id": "orbit-chips",
+      "name": "Chips Orbit Card",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "src/orbit-chips.js",
+      "types": [
+        "ha-chips-orbit-card"
+      ],
+      "aliases": [],
+      "sha256": "7fcd39bbe6a421d9b0bb78481cf3794ed4f4d4efe834abf06d763763d0d62e39"
     }
   ],
   "suiteFeatures": [
@@ -537,7 +549,7 @@
       "source": "src/orbit-compact.js",
       "sha256": "b610506b7545fcdfb43da6a8425ed464839a1d0e8e2491874685552168843ee5",
       "profiles": "src/compact-profiles.json",
-      "profilesSha256": "8182329a2b62c10e2c5e510f726869242f5c8afcc82fdbb7a3fcbdfcf651eddf",
+      "profilesSha256": "d7a0364931c05d896d4eab037f9ddeaddf5b53df54e5be3b4dddd18e6351dacc",
       "adaptation": "scripts/welcome-normal-toolbar.mjs",
       "adaptationSha256": "6e9be8d99c010b286ee75942082c6601626349fa54e4d619761d7048e3d296d7"
     },

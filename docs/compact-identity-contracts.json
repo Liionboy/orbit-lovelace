@@ -264,6 +264,10 @@
         ".caption scale source",
         ".status and .scale-hint mirrored in tile"
       ]
+    },
+    "ha-chips-orbit-card": {
+      "collection": "chips",
+      "contract": "One name and reported state per chip; no aggregate tile or disclosure; controls retained."
     }
   }
 }

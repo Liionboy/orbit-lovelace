@@ -67,6 +67,6 @@ try{
  await page.evaluate(()=>new Promise((resolve,reject)=>{const s=document.createElement('script');s.type='module';s.src='/orbit-lovelace.js?repeat=1';s.onload=resolve;s.onerror=reject;document.head.append(s);}));assert.deepEqual(await page.evaluate(()=>orbitLovelace.errors),[]);assert.equal(await page.evaluate(()=>customCards.length),types.length);
  // Legacy resource first is detected, never overwritten. Clean frontend after navigation.
  await page.goto('http://orbit.test/?legacy=1');await page.waitForFunction(()=>window.orbitLovelace);assert.deepEqual(await page.evaluate(()=>orbitLovelace.errors),[]);assert.ok(await page.evaluate(()=>orbitLovelace.skipped['lovelace-luma-control-card']));assert.equal(await page.evaluate(()=>customCards.length),types.length);assert.deepEqual(errors,[]);
- assert.ok(requests.every(url=>url.startsWith('http://orbit.test/')));console.log('PASS: 32 cards registered/mounted sequentially, legacy alias, Person readings, explicit fan/light/scene mocks, duplicate load and standalone-first migration. No live HA.');
+ assert.ok(requests.every(url=>url.startsWith('http://orbit.test/')));console.log('PASS: '+types.length+' cards registered/mounted sequentially, legacy alias, Person readings, explicit fan/light/scene mocks, duplicate load and standalone-first migration. No live HA.');
  if(out)await writeFile(out+'/suite-browser.json',JSON.stringify({measurements,requests,errors},null,2));
 }finally{await browser.close();}
