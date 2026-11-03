@@ -1,12 +1,16 @@
 # Orbit Lovelace
 
-**One HACS custom repository. One JavaScript resource. 33 cards.**
+**One HACS custom repository. One JavaScript resource. 34 cards.**
 
 Orbit Lovelace packages the Orbit cards and the matching companion card collection into a single, self-contained Home Assistant Dashboard resource. Individual cards keep their existing names, Lovelace types, configurations and controls. This is a distribution suite, not a new all-in-one dashboard card.
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
-## New in v1.19.2 — Slim capsule design
+## New in v1.20.0 — Title Orbit Card
+
+**Title Orbit Card** (`custom:ha-title-orbit-card`) is a lightweight section heading: title, optional subtitle/plain icon, Orbit palettes, logical alignment, optional subtle divider and semantic heading level. Transparent/unframed, native visual form and Normal/Compact; no entities, services or queries. [Configuration and phone previews](docs/TITLE.md). Same HACS resource; update + full reload, no theme YAML update or HA restart. The suite now contains34 cards from32 packages, including five suite-owned modules.
+
+## Added in v1.19.2 — Slim capsule design
 
 Chips now use a slim **36px visible capsule in Compact** (40px Normal), plain icons without a colored disc,12px single-line text and a light border. The actual button remains at least44px tall for touch. Existing name/state visibility choices are retained; `show_state: false` still hides helper On/Off text. [Preview and configuration](docs/CHIPS.md#slim-capsule-design). Same HACS resource; update and fully reload. No HA/dashboard/theme changes.
 

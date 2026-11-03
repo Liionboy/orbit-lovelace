@@ -1,15 +1,16 @@
 # Included card catalog
 
-**Stable v1.19.2:** introduces [slim capsule styling](docs/CHIPS.md#slim-capsule-design) in Chips Orbit1.1.2:36/40px visible pills inside44/48px touch targets, plain icons and12px single-line labels. Configured visibility and [Alarm safeguards](docs/CHIPS.md#alarm-chip) are unchanged. Optional [Prism Themes1.2.0](THEMES.md), other32 card implementations and all27 upstream pins remain unchanged.
+**Stable v1.20.0:** adds [Title Orbit Card](docs/TITLE.md), a lightweight static section heading with optional subtitle/icon, palettes, alignment, semantic level and Normal/Compact. Existing33 card implementations, including slim Chips1.1.2, all27 upstream pins and optional [Prism Themes1.2.0](THEMES.md) remain unchanged.
 
 **Stable v1.16.0:** adds [Gauge Orbit Card](docs/GAUGE.md), a read-only numeric/RPM gauge with explicit scale. v1.15.0 adds the [Temperature Orbit Card](docs/TEMPERATURE.md). Prior camera support is retained: Frigate gains [persistent HA/go2rtc playback](docs/FRIGATE-LIVE.md); Switch now has a [reported-state icon accent](docs/SWITCH-STATE-ICON.md) (ON colored, otherwise neutral); Luma gains optional per-card [icon/palette configuration](docs/LUMA-APPEARANCE.md), in Normal and Compact. All30 types retain the v1.12.2 single-primary-name behavior. [Compact scope](docs/COMPACT.md). Imported versions remain unchanged; suite-owned adaptations are traced under suiteFeatures, not attributed to upstream.
 
 Suite includes optional [complete HA themes](THEMES.md) and [Desktop/Mobile/iOS Mobile profiles](docs/themes/DEVICE-PROFILES.md). v1.11.0 adds two suite-owned controls; all27 upstream pins and Themes1.1.0 are unchanged from1.10.1. Default styles remain without an Orbit theme. Mobile header styling still needs optional card-mod; new controls do not. Theme YAML installation is separate from HACS Dashboard updates.
 
-The suite provides33 card types from27 unchanged upstream packages and four suite-owned modules: Orbit Controls, Temperature Orbit, Gauge Orbit and Orbit Chips. Native cards have source/version/hash in `nativeComponents`; their provenance is this suite release, not a separate upstream repository. The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
+The suite provides34 card types from27 unchanged upstream packages and five suite-owned modules: Orbit Controls, Temperature Orbit, Gauge Orbit, Orbit Chips and Title Orbit. Native cards have source/version/hash in `nativeComponents`; their provenance is this suite release, not a separate upstream repository. The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
 
 | Card / package | Included release | Existing Lovelace types |
 | --- | --- | --- |
+| [Title Orbit Card](docs/TITLE.md) | Suite-owned1.0.0 | `custom:ha-title-orbit-card` |
 | [Chips Orbit Card](docs/CHIPS.md) | Suite-owned1.1.2 | `custom:ha-chips-orbit-card` |
 | [Gauge Orbit Card](docs/GAUGE.md) | 1.0.0 (suite-owned) | `custom:ha-gauge-orbit-card` |
 | [Temperature Orbit Card](docs/TEMPERATURE.md) | 1.0.0 (suite-owned) | `custom:ha-temperature-orbit-card` |

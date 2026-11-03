@@ -1,5 +1,7 @@
 # Licenses and third-party notices
 
+Title Orbit (`src/orbit-title.js`, v1.0.0) is first-party MIT-licensed suite source traced in nativeComponents. It adds a static heading/native configuration form, not a runtime library, upstream repository or external dependency.
+
 Orbit Chips (`src/orbit-chips.js`, v1.1.2) is first-party MIT-licensed suite source traced in nativeComponents. The collection/editor, responsive sizing and Alarm presentation introduce no additional library, runtime dependency or standalone upstream package.
 
 Eight unmodified Material Design Icons SVG paths from Pictogrammers/Templarian MaterialDesign are used only in `test/fixtures/chips-icons.json` for accurate previews. Their source/license notice and Apache2.0 license are in `test/fixtures/chips-icons-LICENSE.txt`. These test glyphs are not bundled in the runtime, which continues to use native HA `ha-icon`.

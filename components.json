@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.19.2",
+  "version": "1.20.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -539,6 +539,18 @@
       ],
       "aliases": [],
       "sha256": "371bf9799e6e825ea49ebec26fc06c17da313050571123173734613330a38135"
+    },
+    {
+      "id": "orbit-title",
+      "name": "Title Orbit Card",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "src/orbit-title.js",
+      "types": [
+        "ha-title-orbit-card"
+      ],
+      "aliases": [],
+      "sha256": "a356f5bf1bf34835781b204568181201602390bb5a0ec98d38d2caee2f29dbb6"
     }
   ],
   "suiteFeatures": [
@@ -549,7 +561,7 @@
       "source": "src/orbit-compact.js",
       "sha256": "b610506b7545fcdfb43da6a8425ed464839a1d0e8e2491874685552168843ee5",
       "profiles": "src/compact-profiles.json",
-      "profilesSha256": "d7a0364931c05d896d4eab037f9ddeaddf5b53df54e5be3b4dddd18e6351dacc",
+      "profilesSha256": "8a7c524fcdfb2f1b0b16e2d2a3ec3e4085639eb39ddfcb46fab9bd92b0e633a4",
       "adaptation": "scripts/welcome-normal-toolbar.mjs",
       "adaptationSha256": "6e9be8d99c010b286ee75942082c6601626349fa54e4d619761d7048e3d296d7"
     },

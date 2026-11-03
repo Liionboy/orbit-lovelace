@@ -1,5 +1,9 @@
 # Selectable Compact layouts — v1.14.0
 
+## Title heading (suite1.20.0+)
+
+Title Orbit is already a static semantic section heading. Its dedicated Compact profile keeps title/subtitle/icon visible with smaller typography and spacing; it has no entity state, aggregate tile, Details disclosure or commands. Heading level and alignment are retained. This adds one traced profile without changing the previous33 profiles or adapter runtime. [Title configuration and previews](TITLE.md).
+
 ## Chips collection (suite1.18.0+)
 
 Chips Orbit is already a collection of small pills. Its Compact profile reduces spacing/text/icons while retaining44px touch targets and every configured chip; it deliberately has no aggregate title/state tile or Details disclosure. Each chip keeps its own one-name/state identity and native action. Existing32 card profiles and runtime are unchanged. [Chips configuration and scope](CHIPS.md).
