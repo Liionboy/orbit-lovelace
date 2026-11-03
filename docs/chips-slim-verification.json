@@ -1,0 +1,63 @@
+{
+  "suiteVersion": "1.19.2",
+  "chipsVersion": "1.1.2",
+  "syntheticHA": true,
+  "nativeHA": false,
+  "nativeSafariCompanion": false,
+  "slimCases": 48,
+  "mobileCases": 24,
+  "viewports": [
+    360,
+    390,
+    430
+  ],
+  "layouts": [
+    "normal",
+    "compact"
+  ],
+  "modes": [
+    "light",
+    "dark"
+  ],
+  "parents": [
+    "separate",
+    "collection"
+  ],
+  "examples": [
+    "reported owner-like labels with show_state:false helpers",
+    "reference-like sensor/light/door"
+  ],
+  "compact": {
+    "paintedHeight": 36,
+    "minTouchHeight": 44,
+    "fontSize": 12
+  },
+  "normal": {
+    "paintedHeight": 40,
+    "minTouchHeight": 48,
+    "fontSize": 12
+  },
+  "plainIconWithoutDisc": true,
+  "oneLineLabels": true,
+  "wholeCapsuleWrap": true,
+  "visibilityUnchanged": true,
+  "modelActionsEditorCleanupUnchanged": true,
+  "nodeTests": 843,
+  "smokeSuites": 2,
+  "genericChipMounts": 192,
+  "alarmMounts": 192,
+  "alarmStatePresentations": 2304,
+  "suiteThemeMounts": 1056,
+  "suiteLayoutMounts": 2112,
+  "phoneGrids": 99,
+  "identityCases": 99,
+  "other32ExecutableUnchanged": true,
+  "upstreamPinsUnchanged": 27,
+  "otherNativeModulesUnchanged": 3,
+  "compactProfilesPriorAdaptersUnchanged": true,
+  "themesUnchanged": "1.2.0",
+  "screenshotIcons": "Eight actual MDI SVG paths, test-only fixtures; native HA icons not certified",
+  "screenshotsInspected": true,
+  "noLiveChanges": true,
+  "bundleSha256": "cfb2876dbffe4efc3baa2e64e31bbe3dd0c02932a449bf8800d5bda3b11781f6"
+}

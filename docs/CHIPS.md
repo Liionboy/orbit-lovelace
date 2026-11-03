@@ -1,32 +1,43 @@
 # Chips Orbit Card
 
-First-party **Orbit Chips1.1.1** in **Orbit Lovelace1.19.1+** as `custom:ha-chips-orbit-card` (generic Chips first shipped in1.18.0; Alarm in1.19.0). The same single HACS Dashboard resource; no separate repository, dependency, theme YAML update or backend integration.
+First-party **Orbit Chips1.1.2** in **Orbit Lovelace1.19.2+** as `custom:ha-chips-orbit-card` (generic Chips first shipped in1.18.0; Alarm in1.19.0). The same single HACS Dashboard resource; no separate repository, dependency, theme YAML update or backend integration.
 
 ## Design and install
 
 Update Orbit Lovelace in HACS, fully reload each browser/Companion frontend, then choose **Chips Orbit Card** in Add card. Add/reorder/remove chips in the visual editor and choose your actual entities. The empty picker stub selects nothing automatically.
 
-Capsule-style chips have a local accent, icon, optional name and reported state. They wrap as whole units instead of hiding chips offscreen or compressing words into fragments. Collection alignment can be start/center/end. The collection has **no large outer card frame**. Each interactive chip keeps a minimum44px hit area. Normal uses48px pills; Compact keeps44px pills with smaller labels/icons and gaps. Unlike a single-entity card, a collection **does not collapse into an aggregate tile or Details arrow**: every configured chip remains visible. No layout installs or changes dashboard routes.
+Capsule-style chips have a local accent, icon, optional name and reported state. They wrap as whole units instead of hiding chips offscreen or compressing words into fragments. Collection alignment can be start/center/end. The collection has **no large outer card frame**. Each interactive chip keeps a minimum44px hit area. Normal paints a40px capsule inside a48px button; Compact paints36px inside44px. Both use12px single-line text and plain icons. Unlike a single-entity card, a collection **does not collapse into an aggregate tile or Details arrow**: every configured chip remains visible. No layout installs or changes dashboard routes.
+
+## Slim capsule design
+
+Version1.19.2 replaces the bulky/two-line phone appearance with a **single-line capsule**:12px medium-weight labels, plain icons (no circular tinted disc), thin border and subtle shadow, no decorative gradient. Compact paints a36px pill within a44px button; Normal paints40px within48px. The transparent4px top/bottom area is intentional: a slimmer appearance does not mean a smaller tap target. The pseudo-element does not intercept input; original buttons, anchors, listeners and service guards remain.
+
+Four-slot phone fixture with synthetic entities and actual MDI glyph paths:
+
+![Slim four-slot chips](images/chips-slim-phone.png)
+
+Reference-like sensor/light/door collection:
+
+![Slim reference-like chips](images/chips-slim-reference.png)
+
+The old1.19.1 layout remains only as historical evidence in [mobile verification](chips-mobile-verification.json), not the current design. [Slim geometry and interaction evidence](chips-slim-verification.json) checks48 phone configurations at360/390/430px, both layouts/modes and separate/collection parents. Previews use synthetic HA and form stubs, not native HA/Safari/Companion certification. No live dashboard/theme/device was changed.
+
+### Visible content
+
+This release **does not guess which states to remove**. It preserves existing `show_name` / `show_state` choices. For a helper such as Vacation or Step where only icon + name is wanted, uncheck **Show reported state** in that chip editor:
+
+```yaml
+# Apply to the existing chip entry; retain its real entity and action.
+show_state: false
+```
+
+Temperature, humidity, door and alarm chips can keep meaningful reported values/states. Hiding state text does not change reported-state icon colors or commands. Alarm Triggered retains semantic red and reduced-motion-aware feedback.
 
 ## Mobile sizing
 
-Version1.19.1 fixes the narrow-parent case missed by the original164px-and-up fixtures: several separate single-chip cards in a phone horizontal stack/grid may receive only about65–100px each. Normal and Compact now keep short labels/states on unbroken lines. Below130px card width, smaller16px icons and compact spacing leave room for up to two short text rows while preserving44px targets; Compact-specific density rules cannot restore oversized wrappers. A full-width collection instead wraps whole capsules to the next row.
+For natural spacing, use **one Chips Orbit Card** containing all entries in a full-width dashboard slot. Capsules use their content width and wrap whole when they do not fit. Separate cards remain constrained by their external horizontal-stack/grid columns; this card cannot move siblings or change that parent. Narrow separate cards retain12px writing on one line, use a14px plain icon and fit the local slot rather than returning to tiny fonts/two-line labels. Long content in physically insufficient space may ellipsize; full text remains in DOM, accessible label/title and native More Info. Command feedback may wrap below labels so errors are not hidden.
 
-No YAML change is required for the fix. For the most natural chip layout, place all entries in **one Chips Orbit Card** in a full-width dashboard slot rather than forcing each capsule into a separate equal-width card. The card cannot rearrange siblings outside its own parent. Extremely long labels/readings in physically insufficient space use ellipsis, never letter-by-letter wrapping or reduced text below11px; the full text remains in DOM, accessible label and title, and native More Info remains available. Transient command feedback can wrap below the label instead of being hidden.
-
-Before (synthetic reproduction of the reported phone layout):
-
-![Phone chips before fix](images/chips-mobile-before.png)
-
-After, with the same separate narrow cards and Compact settings:
-
-![Phone chips after fix](images/chips-mobile-after.png)
-
-Alternative full-width collection, which wraps whole capsules:
-
-![Phone chip collection](images/chips-mobile-collection.png)
-
-[Mobile regression evidence](chips-mobile-verification.json): same-build Chromium checks for360/390/430px viewports, Normal/Compact, light/dark and separate/collection parents. No native iPhone/Safari/Companion certification or live dashboard edit is implied. The labels in the390px screenshot fixture fit without clipping; very narrow360px separate-card slots may ellipsize a long name, while the short reported states remain complete.
+No YAML change is required for the design or existing visibility choices. Update HACS and fully reload each frontend. If a long label is clipped by a forced column, moving entries into one collection is the layout solution, not further shrinking the text. Rollback1.19.1 preserves YAML/actions but restores its older appearance.
 
 Default Aurora follows Orbit themes, including Prism. Explicit Ocean/Sunset/Lavender keep their local palette. Sensor chips use the accent; on/off entities color only reported ON, with neutral OFF/unknown/unavailable/offline states. Common hazardous binary device classes (smoke, gas, carbon monoxide, moisture, problem and safety) use the semantic error color when ON, not a decorative palette. Actual sensor values/units and light RGB metadata are never changed or converted. Alarm entities have the special presentation below; native HA still owns their controls.
 

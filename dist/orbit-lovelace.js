@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.19.1 — MIT. */
+/* Orbit Lovelace v1.19.2 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.19.1",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.19.2",components:{},skipped:{},errors:[]};
 /* Suite-owned compact presentation adapter v0.3.4 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
@@ -6656,13 +6656,13 @@ for(const entry of window.customCards){const type=String(entry.type).startsWith(
 if(!window.customCards.some(card=>card.type==="ha-gauge-orbit-card"))window.customCards.push({type:"ha-gauge-orbit-card",name:"Gauge Orbit Card",description:"Included in Orbit Lovelace",preview:false});
 suite.components["orbit-gauge"]={version:"1.0.0",types:["ha-gauge-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"orbit-gauge",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","orbit-gauge",error);}
-/* orbit-chips @ 1.1.1 (suite-owned source) */
+/* orbit-chips @ 1.1.2 (suite-owned source) */
 try { (() => {
 const compactProfiles={"ha-chips-orbit-card":{"collection":"chips","css":".shell{padding:4px 2px}.chips{gap:6px}.chip{min-height:44px;padding:6px 10px 6px 8px;border-radius:24px}.icon-only{width:44px;padding:0}.collection-title{font-size:12px;margin-bottom:6px}","details":[],"densityCSS":".chip-name{font-size:11px;line-height:15px}.chip-state{font-size:12px;line-height:16px}.chip-icon{--mdc-icon-size:17px;width:26px;height:26px}"}};
 const customElements={get:name=>window.customElements.get(name),define:(name,C,options)=>window.customElements.define(name,compactProfiles[name]?orbitCompact.prepare(name,C,compactProfiles[name]):C,options)};
 const knownTypes=["ha-chips-orbit-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["orbit-chips"]="Already registered; remove old resources and reload to use the suite version.";return;}
-// Orbit Chips 1.1.1 — suite-owned, MIT. No external dependencies or automatic queries.
+// Orbit Chips 1.1.2 — suite-owned, MIT. No external dependencies or automatic queries.
 const CHIP_ALARM_STATES={
  disarmed:['neutral','mdi:shield-off-outline','Disarmed'],
  armed_home:['armed','mdi:shield-home','Armed home'],
@@ -6711,23 +6711,29 @@ function chipConfig(config){
  return {title:config.title||'',palette:config.palette||'aurora',alignment:config.alignment||'start',read_only:config.read_only??false,chips};
 }
 const CHIP_CSS=":host{display:block;min-width:0}*{box-sizing:border-box}ha-card{display:block;min-width:0;background:transparent!important;border:0!important;box-shadow:none!important;--accent:var(--orbit-theme-accent,#078f72);--accent2:var(--orbit-theme-accent-2,#27b7b0)}.shell{padding:8px 4px}.collection-title{font-size:14px;font-weight:650;line-height:20px;color:var(--primary-text-color,#202b3c);margin:0 0 10px}.chips{display:flex;flex-wrap:wrap;align-items:flex-start;gap:8px;min-width:0}.chips[data-alignment=center]{justify-content:center}.chips[data-alignment=end]{justify-content:flex-end}.chip{--chip-accent:var(--accent);display:inline-flex;align-items:center;gap:9px;position:relative;min-width:44px;min-height:48px;max-width:100%;padding:9px 14px 9px 10px;border-radius:26px;border:1px solid color-mix(in srgb,var(--chip-accent) 28%,var(--divider-color,#dfe5eb));background:linear-gradient(125deg,color-mix(in srgb,var(--chip-accent) 9%,transparent),transparent),var(--card-background-color,#fff);box-shadow:0 2px 6px #101c2f0a;color:var(--primary-text-color,#202b3c);font:inherit;text-align:start;text-decoration:none;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}.chip[data-palette=ocean]{--chip-accent:#1477c9}.chip[data-palette=sunset]{--chip-accent:#c54c30}.chip[data-palette=lavender]{--chip-accent:#8552c7}.chip[data-active=false]{--chip-accent:var(--secondary-text-color,#637080);background:var(--card-background-color,#fff);border-color:var(--divider-color,#dfe5eb)}.chip[data-alarm=true]{--chip-accent:var(--error-color,#b33444)}.chip[data-availability=unavailable],.chip[data-availability=offline]{--chip-accent:var(--secondary-text-color,#637080)}.chip:disabled{opacity:1;cursor:default}.chip:focus-visible{outline:2px solid var(--primary-color,#078f72);outline-offset:3px}.chip:not(:disabled):hover{border-color:var(--chip-accent)}div.chip{cursor:default}.chip-icon{display:inline-flex;align-items:center;justify-content:center;flex:none;--mdc-icon-size:19px;width:28px;height:28px;border-radius:50%;color:var(--chip-accent);background:color-mix(in srgb,var(--chip-accent) 12%,transparent)}.chip-copy{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 6px;min-width:0}.chip-name{font-size:12px;line-height:17px;font-weight:550;overflow-wrap:anywhere;color:var(--secondary-text-color,#637080);min-width:0}.chip-state{font-size:13px;line-height:18px;font-weight:700;overflow-wrap:anywhere;font-variant-numeric:tabular-nums;min-width:0}.chip-feedback{flex-basis:100%;font-size:11px;line-height:16px;color:var(--secondary-text-color,#637080);overflow-wrap:anywhere;min-width:0}.chip-feedback[data-kind=error]{color:var(--error-color,#b33444)}.chip-feedback[data-kind=success]{color:var(--success-color,#13765c)}.icon-only{width:48px;padding:0;justify-content:center}.icon-only .chip-copy:has(.chip-feedback[hidden]){display:none}.icon-only:has(.chip-feedback:not([hidden])){width:auto;padding:9px 12px}.setup{font-size:12px;line-height:18px;color:var(--secondary-text-color,#637080);padding:12px;border:1px dashed var(--divider-color,#dfe5eb);border-radius:14px}[hidden]{display:none!important}@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}";
-// Wrap whole capsules; never let a flex/grid parent turn labels into vertical fragments.
+// A slim painted capsule inside a full-size touch target; never shrink the writing.
 const CHIP_LAYOUT_CSS=`
 :host{container-type:inline-size}
-.chip{flex:0 0 auto}
-.chip-copy{display:grid;grid-template-columns:minmax(0,auto) minmax(0,auto);gap:0 6px}
+:host .shell.shell,:host([data-orbit-layout=compact]) .shell.shell{padding:2px 0}
+:host .chips.chips{gap:6px}
+:host .chip.chip{isolation:isolate;flex:0 0 auto;position:relative;min-width:min(76px,100%);min-height:48px;padding:8px 10px;gap:6px;border:0;background:transparent;box-shadow:none;border-radius:24px}
+:host .chip.chip::before{content:'';position:absolute;inset:4px 0;z-index:-1;pointer-events:none;border-radius:999px;border:1px solid color-mix(in srgb,var(--primary-color,#6575dc) 18%,var(--divider-color,#dfe5eb));background:var(--card-background-color,#fff);box-shadow:0 1px 3px #17213a08}
+:host([data-orbit-layout=compact]) .chip.chip{min-height:44px;min-width:min(68px,100%);padding:6px 8px}
+:host .chip.chip .chip-icon{width:18px;height:18px;--mdc-icon-size:18px;border-radius:0;background:transparent}
+:host([data-orbit-layout=compact]) .chip.chip .chip-icon{width:16px;height:16px;--mdc-icon-size:16px}
+:host .chip.chip .chip-name,:host .chip.chip .chip-state{font-size:12px;line-height:18px;font-weight:500;color:var(--primary-text-color,#202b3c)}
+:host .chip.chip[data-alarm-kind=triggered] .chip-state{color:var(--error-color,#b33444)}
+.chip-copy{display:grid;grid-template-columns:minmax(0,auto) minmax(0,auto);gap:0 5px}
 .chip-copy:has(.chip-name[hidden]),.chip-copy:has(.chip-state[hidden]){grid-template-columns:minmax(0,1fr);column-gap:0}
 .chip-name,.chip-state{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;overflow-wrap:normal;word-break:normal}
 .chip-feedback{grid-column:1/-1;white-space:normal;overflow-wrap:anywhere}
+:host .chip.chip.icon-only{min-width:44px;width:44px;padding:0;justify-content:center}
+:host .chip.chip.icon-only:has(.chip-feedback:not([hidden])){min-width:44px;width:auto;padding:6px 10px}
 @container (max-width:130px){
- .shell.shell,:host([data-orbit-layout=compact]) .shell.shell{padding:2px 0}
- .chip.chip,:host([data-orbit-layout=compact]) .chip.chip{gap:2px;padding:5px 2px;border-radius:24px}
- .chip .chip-icon,:host([data-orbit-layout=compact]) .chip .chip-icon{width:16px;height:16px;--mdc-icon-size:16px}
- .chip .chip-copy{grid-template-columns:minmax(0,1fr);gap:0}
- .chip .chip-name,:host([data-orbit-layout=compact]) .chip .chip-name{font-size:11px;line-height:14px}
- .chip .chip-state,:host([data-orbit-layout=compact]) .chip .chip-state{font-size:11px;line-height:16px}
- .chip.icon-only,:host([data-orbit-layout=compact]) .chip.icon-only{width:44px;padding:0}
- .chip.icon-only:has(.chip-feedback:not([hidden])){width:auto;padding:5px 4px}
+ :host .chip.chip,:host([data-orbit-layout=compact]) .chip.chip{width:100%;min-width:min(72px,100%);padding-inline:2px;gap:3px}
+ :host .chip.chip .chip-icon,:host([data-orbit-layout=compact]) .chip.chip .chip-icon{width:14px;height:14px;--mdc-icon-size:14px}
+ :host .chip.chip.icon-only{width:44px;min-width:44px;padding:0}
+ :host .chip.chip.icon-only:has(.chip-feedback:not([hidden])){width:auto;padding:6px 2px}
 }`;
 class OrbitChipsCard extends HTMLElement{
  constructor(){super();this.attachShadow({mode:'open'});this._epoch=0;this._detached=false;this._ack=new Map();this._states=new Map();this._feedback=new Map();this._nodes=[];}
@@ -6830,7 +6836,7 @@ window.customCards=window.customCards||[];window.customCards.push({type:'ha-chip
 window.customCards ||= [];
 for(const entry of window.customCards){const type=String(entry.type).startsWith("custom:")?entry.type.slice(7):entry.type;if(knownTypes.includes(type))entry.type=type;}
 if(!window.customCards.some(card=>card.type==="ha-chips-orbit-card"))window.customCards.push({type:"ha-chips-orbit-card",name:"Chips Orbit Card",description:"Included in Orbit Lovelace",preview:false});
-suite.components["orbit-chips"]={version:"1.1.1",types:["ha-chips-orbit-card"]};
+suite.components["orbit-chips"]={version:"1.1.2",types:["ha-chips-orbit-card"]};
 })() } catch(error){suite.errors.push({component:"orbit-chips",message:String(error?.message||error)});console.error("Orbit Lovelace: component failed","orbit-chips",error);}
 suite.compact={version:"0.3.4",types:[...new Set([...(suite.compact?.types||[]),...orbitCompact.installed])]};
 })();

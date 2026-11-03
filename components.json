@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.19.1",
+  "version": "1.19.2",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -532,13 +532,13 @@
       "id": "orbit-chips",
       "name": "Chips Orbit Card",
       "origin": "suite",
-      "version": "1.1.1",
+      "version": "1.1.2",
       "source": "src/orbit-chips.js",
       "types": [
         "ha-chips-orbit-card"
       ],
       "aliases": [],
-      "sha256": "669e10f421ba090a1139e8f3b5af5aad8b1fc9c270df6a646651215cc7fb4b94"
+      "sha256": "371bf9799e6e825ea49ebec26fc06c17da313050571123173734613330a38135"
     }
   ],
   "suiteFeatures": [

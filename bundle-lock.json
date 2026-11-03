@@ -1,5 +1,5 @@
 {
-  "version": "1.19.1",
+  "version": "1.19.2",
   "packages": 31,
   "upstreamPackages": 27,
   "nativePackages": 4,
@@ -16,6 +16,6 @@
   "themeBridgeVersion": 1,
   "themesVersion": "1.2.0",
   "themeSha256": "984a2ced43adb87efe7e2414c87a0f49ecd6cae68a5a1a1279dfe431cd80378e",
-  "bytes": 851278,
-  "sha256": "4c7ed41878e6d57c1ecdfdf33a6749505ca7110a956d08dec626004edd041bbd"
+  "bytes": 852283,
+  "sha256": "cfb2876dbffe4efc3baa2e64e31bbe3dd0c02932a449bf8800d5bda3b11781f6"
 }

@@ -6,6 +6,10 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
+## New in v1.19.2 — Slim capsule design
+
+Chips now use a slim **36px visible capsule in Compact** (40px Normal), plain icons without a colored disc,12px single-line text and a light border. The actual button remains at least44px tall for touch. Existing name/state visibility choices are retained; `show_state: false` still hides helper On/Off text. [Preview and configuration](docs/CHIPS.md#slim-capsule-design). Same HACS resource; update and fully reload. No HA/dashboard/theme changes.
+
 ## Fixed in v1.19.1 — Phone-sized chips
 
 Fixes chips breaking `Closed`, helper names and alarm states into vertical fragments in narrow phone columns, including Compact. Whole pills wrap as units in a collection; separate narrow cards adapt their icon/spacing and use at most two unbroken label rows. At least44px touch targets, unchanged actions and Alarm safeguards. Update HACS and fully reload the phone frontend; existing YAML works. [Before/after and sizing](docs/CHIPS.md#mobile-sizing).
