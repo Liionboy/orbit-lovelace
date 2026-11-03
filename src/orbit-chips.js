@@ -1,4 +1,17 @@
-// Orbit Chips 1.0.0 — suite-owned, MIT. No external dependencies or automatic queries.
+// Orbit Chips 1.1.0 — suite-owned, MIT. No external dependencies or automatic queries.
+const CHIP_ALARM_STATES={
+ disarmed:['neutral','mdi:shield-off-outline','Disarmed'],
+ armed_home:['armed','mdi:shield-home','Armed home'],
+ armed_away:['armed','mdi:shield-lock','Armed away'],
+ armed_night:['armed','mdi:shield-moon','Armed night'],
+ armed_vacation:['armed','mdi:shield-airplane','Armed vacation'],
+ armed_custom_bypass:['armed','mdi:shield-check','Armed custom bypass'],
+ arming:['transition','mdi:shield-sync','Arming'],
+ disarming:['transition','mdi:shield-sync','Disarming'],
+ pending:['transition','mdi:shield-alert-outline','Entry delay'],
+ triggered:['triggered','mdi:shield-alert','Alarm triggered']
+};
+const CHIP_ALARM_CSS='.chip[data-alarm-kind=armed]{--chip-accent:var(--info-color,#1477c9)}.chip[data-alarm-kind=transition]{--chip-accent:var(--warning-color,#b87900)}.chip[data-alarm-kind=triggered]{--chip-accent:var(--error-color,#b33444)}.chip[data-alarm-kind=neutral]{--chip-accent:var(--secondary-text-color,#637080);background:var(--card-background-color,#fff);border-color:var(--divider-color,#dfe5eb)}.chip[data-alarm-kind=triggered] .chip-icon{animation:orbit-alarm-pulse 1.5s ease-in-out infinite}.chip[data-alarm-kind=triggered] .chip-state{color:var(--error-color,#b33444)}@keyframes orbit-alarm-pulse{50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--chip-accent) 16%,transparent)}}@media(prefers-reduced-motion:reduce){.chip .chip-icon{animation:none!important}}';
 const CHIP_PALETTES=['aurora','ocean','sunset','lavender'];
 const CHIP_ACTIONS=['more-info','toggle','navigate','none'];
 const CHIP_TOGGLE_DOMAINS=['light','switch','input_boolean'];
@@ -17,6 +30,8 @@ function chipConfig(config){
  if(config.chips!=null&&(!Array.isArray(config.chips)||config.chips.length>24))throw Error('Configure up to 24 chips.');
  const chips=(config.chips||[]).map(c=>{
   if(!c||typeof c!=='object'||Array.isArray(c))throw Error('Each chip must be an object.');
+  if(c.type!=null&&!['entity','alarm'].includes(c.type))throw Error('Chip type must be entity or alarm.');
+  if(c.type==='alarm'&&c.entity&&!c.entity.startsWith?.('alarm_control_panel.'))throw Error('Alarm chips require alarm_control_panel entities.');
   for(const key of ['entity','name','icon','palette'])if(c[key]!=null&&typeof c[key]!=='string')throw Error('Invalid chip '+key+'.');
   for(const key of ['show_name','show_state'])if(c[key]!=null&&typeof c[key]!=='boolean')throw Error('Invalid '+key+'.');
   if(c.entity&&!/^[a-z_][a-z0-9_]*[.][a-z0-9_]+$/.test(c.entity))throw Error('Invalid chip entity.');
@@ -26,7 +41,8 @@ function chipConfig(config){
   if(a.action==='navigate'&&!chipPath(a.navigation_path))throw Error('Navigation requires a local absolute path.');
   if(a.action!=='navigate'&&a.navigation_path!=null)throw Error('navigation_path requires navigate.');
   if(a.action==='toggle'&&c.entity&&!CHIP_TOGGLE_DOMAINS.includes(c.entity.split('.')[0]))throw Error('Toggle supports light, switch and input_boolean only.');
-  return {entity:c.entity||'',name:c.name||'',icon:chipIcon(c.icon),palette:c.palette||config.palette||'aurora',show_name:c.show_name??true,show_state:c.show_state??true,tap_action:{...a}};
+  if(c.type==='alarm'&&a.action==='toggle')throw Error('Alarm chips use native More Info, not direct power actions.');
+  return {type:c.type||'entity',entity:c.entity||'',name:c.name||'',icon:chipIcon(c.icon),palette:c.palette||config.palette||'aurora',show_name:c.show_name??true,show_state:c.show_state??true,tap_action:{...a}};
  });
  return {title:config.title||'',palette:config.palette||'aurora',alignment:config.alignment||'start',read_only:config.read_only??false,chips};
 }
@@ -44,21 +60,22 @@ class OrbitChipsCard extends HTMLElement{
  _invalidate(){this._epoch++;clearTimeout(this._timer);this._timer=null;if(this._pending)this._feedback.set(this._pending.index,{text:'Request no longer tracked. Check the reported state.',kind:'info'});this._pending=null;}
  _model(index){
   const c=this._config.chips[index],s=this._hass?.states?.[c.entity],a=s?.attributes||{},domain=c.entity.split('.')[0],known=!!s&&!['unknown','unavailable',''].includes(s.state)&&s.state!=null,online=this._hass?.connection?.connected!==false;
+  const isAlarm=domain==='alarm_control_panel'||c.type==='alarm',alarmInfo=Object.prototype.hasOwnProperty.call(CHIP_ALARM_STATES,s?.state)?CHIP_ALARM_STATES[s.state]:null,alarmKind=isAlarm?(known&&online&&alarmInfo?alarmInfo[0]:'neutral'):'';
   let name=c.name||a.friendly_name||c.entity||(c.tap_action.action==='navigate'?'Navigation':'Choose an entity');
   let state=!c.entity?'':!s?'Entity not found':s.state==='unavailable'?'Unavailable':s.state==='unknown'||s.state==null||s.state===''?'Unknown':String(s.state);
-  if(known){try{const native=this._hass?.formatEntityState?.(s);if(typeof native==='string'&&native.trim())state=native;else state=String(s.state)+(a.unit_of_measurement?' '+a.unit_of_measurement:'');}catch{state=String(s.state)+(a.unit_of_measurement?' '+a.unit_of_measurement:'');}}
+  if(known){const fallback=isAlarm&&alarmInfo?alarmInfo[2]:String(s.state)+(a.unit_of_measurement?' '+a.unit_of_measurement:'');try{const native=this._hass?.formatEntityState?.(s);state=typeof native==='string'&&native.trim()?native:fallback;}catch{state=fallback;}}
   if(!online&&c.entity)state+=' · Offline';
-  const on=s?.state==='on',binary=['light','switch','input_boolean','binary_sensor'].includes(domain),active=c.tap_action.action==='navigate'||known&&online&&(binary?on:domain==='person'?s.state==='home':true);
+  const on=s?.state==='on',binary=['light','switch','input_boolean','binary_sensor'].includes(domain),active=isAlarm?alarmKind!=='neutral':c.tap_action.action==='navigate'||known&&online&&(binary?on:domain==='person'?s.state==='home':true);
   const alarm=known&&on&&domain==='binary_sensor'&&['smoke','gas','carbon_monoxide','moisture','problem','safety'].includes(a.device_class);
   const fallback=domain==='light'?(on?'mdi:lightbulb':'mdi:lightbulb-outline'):domain==='switch'?'mdi:power-plug':domain==='input_boolean'?'mdi:toggle-switch':domain==='binary_sensor'?(on?'mdi:checkbox-marked-circle':'mdi:checkbox-blank-circle-outline'):domain==='person'?'mdi:account':a.device_class==='temperature'?'mdi:thermometer':a.device_class==='humidity'?'mdi:water-percent':c.tap_action.action==='navigate'?'mdi:arrow-right':'mdi:information-outline';
   const service=on?'turn_off':'turn_on',registered=!!this._hass?.services?.[domain]&&Object.prototype.hasOwnProperty.call(this._hass.services[domain],service)&&typeof this._hass?.callService==='function';
   const toggle=CHIP_TOGGLE_DOMAINS.includes(domain)&&['on','off'].includes(s?.state),duplicate=this._ack.get(c.entity)===s?.state;
   const enabled=c.tap_action.action==='navigate'?true:c.tap_action.action==='more-info'?!!s:c.tap_action.action==='toggle'?toggle&&known&&online&&registered&&!this._config.read_only&&!this._pending&&!duplicate&&!this._detached:false;
  const reason=c.tap_action.action!=='toggle'?'':!online?'Offline':this._config.read_only?'Read only':!toggle?'Toggle unavailable':!registered?'Service unavailable':duplicate?'Command sent. Waiting for reported state.':'';
-  return {c,s,name,state,icon:c.icon||chipIcon(a.icon)||fallback,active,alarm,known,online,domain,service,enabled,reason};
+  return {c,s,name,state,icon:c.icon||chipIcon(a.icon)||(isAlarm?(known&&online&&alarmInfo?alarmInfo[1]:'mdi:shield-off-outline'):fallback),active,alarm,alarmKind,known,online,domain,service,enabled,reason};
  }
  _build(){
-  const root=this.shadowRoot;root.replaceChildren();const style=document.createElement('style');style.textContent=CHIP_CSS;root.append(style);
+  const root=this.shadowRoot;root.replaceChildren();const style=document.createElement('style');style.textContent=CHIP_CSS+CHIP_ALARM_CSS;root.append(style);
   const card=document.createElement('ha-card'),shell=document.createElement('div');shell.className='shell';card.append(shell);root.append(card);
   const title=document.createElement('div');title.className='collection-title';title.textContent=this._config.title;title.hidden=!this._config.title;shell.append(title);
   const list=document.createElement('div');list.className='chips';list.setAttribute('role','group');list.setAttribute('aria-label',this._config.title||'Orbit chips');list.dataset.alignment=this._config.alignment;shell.append(list);this._nodes=[];
@@ -73,6 +90,7 @@ class OrbitChipsCard extends HTMLElement{
   for(const [i,n]of this._nodes.entries()){
    const m=this._model(i),previous=this._states.get(m.c.entity);if(previous!==m.s?.state){this._ack.delete(m.c.entity);this._states.set(m.c.entity,m.s?.state);}
    const fresh=this._model(i),f=this._feedback.get(i);n.icon.setAttribute('icon',m.icon);n.node.dataset.active=String(m.active);n.node.dataset.alarm=String(m.alarm);n.node.dataset.availability=!m.online?'offline':!m.known&&m.c.entity?'unavailable':'known';
+   n.node.dataset.alarmKind=m.alarmKind;
    const set=(node,text)=>{if(node.textContent!==text)node.textContent=text;};set(n.name,m.name);n.name.hidden=!m.c.show_name;set(n.state,m.state);n.state.hidden=!m.c.show_state||!m.state;set(n.feedback,f?.text||'');n.feedback.hidden=!f?.text;n.feedback.dataset.kind=f?.kind||'';
    n.icon.hidden=false;if(!m.c.show_name&&!m.c.show_state)n.node.classList.add('icon-only');else n.node.classList.remove('icon-only');
    const action=m.c.tap_action.action;n.node.setAttribute('aria-label',[m.name,m.state,action==='toggle'?'Power control':action==='navigate'?'Navigate':'',fresh.reason].filter(Boolean).join(' · '));n.node.title=[m.name,m.state,f?.text,fresh.reason].filter(Boolean).join(' · ');
@@ -112,13 +130,15 @@ class OrbitChipsEditor extends HTMLElement{
   const top=this._form([{name:'title',selector:{text:{}}},option('palette',CHIP_PALETTES),option('alignment',['start','center','end']),{name:'read_only',selector:{boolean:{}}}],{palette:'aurora',alignment:'start',read_only:false,...this._config},v=>this._emit({...this._config,...v,chips:this._config.chips}));root.append(top);this._forms.push(top);
   const help=document.createElement('p');help.textContent='Up to 24 chips. More Info is the default. Toggle is limited to light, switch and input_boolean. Navigation uses a local /path. No arbitrary services or templates.';root.append(help);
   this._config.chips.forEach((chip,index)=>{
-   const row=document.createElement('section');row.className='row';const tools=document.createElement('div');tools.className='tools';const name=document.createElement('strong');name.textContent='Chip '+(index+1);tools.append(name);
+   const row=document.createElement('section');row.className='row';const tools=document.createElement('div');tools.className='tools';const name=document.createElement('strong');name.textContent=(chip.type==='alarm'?'Alarm chip ':'Chip ')+(index+1);tools.append(name);
    for(const[label,operation,disabled]of [['Move up',()=>{const a=[...this._config.chips];[a[index-1],a[index]]=[a[index],a[index-1]];this._emit({...this._config,chips:a},true);},index===0],['Move down',()=>{const a=[...this._config.chips];[a[index+1],a[index]]=[a[index],a[index+1]];this._emit({...this._config,chips:a},true);},index===this._config.chips.length-1],['Remove',()=>this._emit({...this._config,chips:this._config.chips.filter((_,i)=>i!==index)},true),false]]){const b=document.createElement('button');b.type='button';b.textContent=label;b.setAttribute('aria-label',label+' chip '+(index+1));b.disabled=disabled;b.addEventListener('click',operation);tools.append(b);}
    const data={show_name:true,show_state:true,palette:this._config.palette||'aurora',...chip,action:chip.tap_action?.action||'more-info',navigation_path:chip.tap_action?.navigation_path||''};
-   const schema=[{name:'entity',selector:{entity:{}}},{name:'name',selector:{text:{}}},{name:'icon',selector:{icon:{}}},option('palette',CHIP_PALETTES),{name:'show_name',selector:{boolean:{}}},{name:'show_state',selector:{boolean:{}}},option('action',CHIP_ACTIONS),{name:'navigation_path',selector:{text:{}}}];
+   const schema=[{name:'entity',selector:{entity:chip.type==='alarm'?{domain:'alarm_control_panel'}:{}}},{name:'name',selector:{text:{}}},{name:'icon',selector:{icon:{}}},option('palette',CHIP_PALETTES),{name:'show_name',selector:{boolean:{}}},{name:'show_state',selector:{boolean:{}}},option('action',chip.type==='alarm'?CHIP_ACTIONS.filter(a=>a!=='toggle'):CHIP_ACTIONS),{name:'navigation_path',selector:{text:{}}}];
    const form=this._form(schema,data,v=>{const {action,navigation_path,...fields}=v;delete fields.tap_action;const chips=[...this._config.chips];chips[index]={...fields,tap_action:{action:action||'more-info',...(action==='navigate'?{navigation_path:navigation_path||''}:{})}};this._emit({...this._config,chips});});form._chipIndex=index;this._forms.push(form);row.append(tools,form);root.append(row);
   });
   const add=document.createElement('button');add.type='button';add.textContent='Add chip';add.disabled=this._config.chips.length>=24;add.addEventListener('click',()=>this._emit({...this._config,chips:[...this._config.chips,{entity:'',tap_action:{action:'more-info'}}]},true));root.append(add);
+  const addAlarm=document.createElement('button');addAlarm.type='button';addAlarm.textContent='Add alarm chip';addAlarm.disabled=this._config.chips.length>=24;addAlarm.addEventListener('click',()=>this._emit({...this._config,chips:[...this._config.chips,{type:'alarm',entity:'',tap_action:{action:'more-info'}}]},true));root.append(addAlarm);
+  const alarmHelp=document.createElement('p');alarmHelp.textContent='Alarm chips show reported disarmed/armed/delay/triggered states. Tap for native HA modes and any required code. No direct arm/disarm, stored PIN, countdown or alarm service calls.';root.append(alarmHelp);
  }
 }
 if(!customElements.get('ha-orbit-chips-editor'))customElements.define('ha-orbit-chips-editor',OrbitChipsEditor);

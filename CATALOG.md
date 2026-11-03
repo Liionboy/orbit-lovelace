@@ -1,6 +1,6 @@
 # Included card catalog
 
-**Stable v1.18.0:** adds [Chips Orbit Card](docs/CHIPS.md), a suite-owned collection of wrapping entity/readout/power/navigation pills with a visual list editor. Optional [Prism Themes1.2.0](THEMES.md) from1.17.0 are unchanged; theme YAML is installed separately from HACS Dashboard updates. Existing32 card implementations and all27 upstream pins remain unchanged.
+**Stable v1.19.0:** adds a dedicated [Alarm chip](docs/CHIPS.md#alarm-chip) inside Chips Orbit1.1.0, with reported-state shield icons/colors and native HA More Info, never direct arm/disarm. Optional [Prism Themes1.2.0](THEMES.md) are unchanged; theme YAML is installed separately from HACS Dashboard updates. Other32 card implementations and all27 upstream pins remain unchanged.
 
 **Stable v1.16.0:** adds [Gauge Orbit Card](docs/GAUGE.md), a read-only numeric/RPM gauge with explicit scale. v1.15.0 adds the [Temperature Orbit Card](docs/TEMPERATURE.md). Prior camera support is retained: Frigate gains [persistent HA/go2rtc playback](docs/FRIGATE-LIVE.md); Switch now has a [reported-state icon accent](docs/SWITCH-STATE-ICON.md) (ON colored, otherwise neutral); Luma gains optional per-card [icon/palette configuration](docs/LUMA-APPEARANCE.md), in Normal and Compact. All30 types retain the v1.12.2 single-primary-name behavior. [Compact scope](docs/COMPACT.md). Imported versions remain unchanged; suite-owned adaptations are traced under suiteFeatures, not attributed to upstream.
 
@@ -10,7 +10,7 @@ The suite provides33 card types from27 unchanged upstream packages and four suit
 
 | Card / package | Included release | Existing Lovelace types |
 | --- | --- | --- |
-| [Chips Orbit Card](docs/CHIPS.md) | Suite-owned1.0.0 | `custom:ha-chips-orbit-card` |
+| [Chips Orbit Card](docs/CHIPS.md) | Suite-owned1.1.0 | `custom:ha-chips-orbit-card` |
 | [Gauge Orbit Card](docs/GAUGE.md) | 1.0.0 (suite-owned) | `custom:ha-gauge-orbit-card` |
 | [Temperature Orbit Card](docs/TEMPERATURE.md) | 1.0.0 (suite-owned) | `custom:ha-temperature-orbit-card` |
 | [Select Orbit Card](docs/CONTROLS.md) | 1.0.0 (suite-owned) | `custom:ha-select-orbit-card` |
