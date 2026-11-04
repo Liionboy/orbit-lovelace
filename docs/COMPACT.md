@@ -1,5 +1,9 @@
 # Selectable Compact layouts — v1.14.0
 
+## Bambu cards (suite1.21.0+)
+
+Print/Camera use a reported-state summary with native More Info and secondary telemetry/media in Details. HMS/print errors remain outside the collapsed panels. Native media is removed when Compact Details closes, not merely hidden behind CSS. AMS is a collection: all configured slots remain visible, with no aggregate tile or Details arrow; only typography/spacing reduces. The34 previous profiles/runtime are unchanged. [Configuration and dashboard](BAMBU.md).
+
 ## Title heading (suite1.20.0+)
 
 Title Orbit is already a static semantic section heading. Its dedicated Compact profile keeps title/subtitle/icon visible with smaller typography and spacing; it has no entity state, aggregate tile, Details disclosure or commands. Heading level and alignment are retained. This adds one traced profile without changing the previous33 profiles or adapter runtime. [Title configuration and previews](TITLE.md).

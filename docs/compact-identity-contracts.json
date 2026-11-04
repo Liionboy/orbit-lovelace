@@ -272,6 +272,28 @@
     "ha-title-orbit-card": {
       "heading": true,
       "contract": "One static semantic section heading, optional subtitle/icon; no aggregate tile, disclosure or commands."
+    },
+    "ha-bambu-print-orbit-card": {
+      "hiddenIdentity": [
+        ".identity"
+      ],
+      "preserved": [
+        "native More Info and reported telemetry",
+        "alerts remain visible in Compact; media only when Details visible"
+      ]
+    },
+    "ha-bambu-camera-orbit-card": {
+      "hiddenIdentity": [
+        ".identity"
+      ],
+      "preserved": [
+        "native More Info and reported telemetry",
+        "alerts remain visible in Compact; media only when Details visible"
+      ]
+    },
+    "ha-bambu-ams-orbit-card": {
+      "collection": "bambu-ams",
+      "contract": "One heading plus four visible slot identities; no aggregate tile/disclosure; reported material/colors and native More Info preserved."
     }
   }
 }

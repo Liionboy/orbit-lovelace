@@ -1,5 +1,7 @@
 # Licenses and third-party notices
 
+Bambu Orbit (`src/orbit-bambu.js`, v1.0.0) is first-party MIT-licensed source providing Print/AMS/Camera cards, with suite-owned provenance. Home Assistant media components are used from the host frontend, not copied into this distribution. Test-only MDI paths are attributed under test/fixtures/bambu-icons-NOTICE.md and the retained Apache license.
+
 Title Orbit (`src/orbit-title.js`, v1.0.0) is first-party MIT-licensed suite source traced in nativeComponents. It adds a static heading/native configuration form, not a runtime library, upstream repository or external dependency.
 
 Orbit Chips (`src/orbit-chips.js`, v1.1.2) is first-party MIT-licensed suite source traced in nativeComponents. The collection/editor, responsive sizing and Alarm presentation introduce no additional library, runtime dependency or standalone upstream package.

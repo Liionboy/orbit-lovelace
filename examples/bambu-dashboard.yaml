@@ -1,0 +1,219 @@
+{
+  "title": "Bambu Lab",
+  "views": [
+    {
+      "title": "Bambu Lab",
+      "path": "bambu",
+      "type": "sections",
+      "max_columns": 2,
+      "sections": [
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:ha-title-orbit-card",
+              "title": "Bambu Lab",
+              "layout": "compact"
+            },
+            {
+              "type": "custom:ha-chips-orbit-card",
+              "chips": [
+                {
+                  "entity": "binary_sensor.my_bambu_online",
+                  "name": "Printer"
+                },
+                {
+                  "entity": "binary_sensor.my_bambu_door",
+                  "name": "Door"
+                },
+                {
+                  "entity": "light.my_bambu_chamber_light",
+                  "name": "Light",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "toggle"
+                  }
+                },
+                {
+                  "entity": "switch.my_bambu_camera",
+                  "name": "Camera",
+                  "show_state": false,
+                  "tap_action": {
+                    "action": "toggle"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "custom:ha-bambu-camera-orbit-card",
+              "entity": "camera.my_bambu_camera",
+              "title": "Print camera",
+              "palette": "lavender"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:ha-title-orbit-card",
+              "title": "Current job",
+              "layout": "compact"
+            },
+            {
+              "type": "custom:ha-bambu-print-orbit-card",
+              "entity": "sensor.my_bambu_print_status",
+              "title": "Current print",
+              "palette": "lavender"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "column_span": 2,
+          "cards": [
+            {
+              "type": "custom:ha-title-orbit-card",
+              "title": "Filaments",
+              "layout": "compact"
+            },
+            {
+              "type": "custom:ha-bambu-ams-orbit-card",
+              "title": "AMS 2 Pro",
+              "tray_entities": [
+                "sensor.my_bambu_ams_1_tray_1",
+                "sensor.my_bambu_ams_1_tray_2",
+                "sensor.my_bambu_ams_1_tray_3",
+                "sensor.my_bambu_ams_1_tray_4"
+              ],
+              "external_spool_entities": [
+                "sensor.my_bambu_externalspool_external_spool",
+                "sensor.my_bambu_externalspool2_external_spool"
+              ],
+              "palette": "lavender"
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:ha-title-orbit-card",
+              "title": "Temperatures",
+              "layout": "compact"
+            },
+            {
+              "type": "grid",
+              "columns": 2,
+              "square": false,
+              "cards": [
+                {
+                  "type": "custom:ha-temperature-orbit-card",
+                  "entity": "sensor.my_bambu_left_nozzle_temperature",
+                  "name": "Left nozzle",
+                  "hours": 4
+                },
+                {
+                  "type": "custom:ha-temperature-orbit-card",
+                  "entity": "sensor.my_bambu_right_nozzle_temperature",
+                  "name": "Right nozzle",
+                  "hours": 4
+                },
+                {
+                  "type": "custom:ha-temperature-orbit-card",
+                  "entity": "sensor.my_bambu_bed_temperature",
+                  "name": "Print bed",
+                  "hours": 4
+                },
+                {
+                  "type": "custom:ha-temperature-orbit-card",
+                  "entity": "sensor.my_bambu_chamber_temperature",
+                  "name": "Chamber",
+                  "hours": 4
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "grid",
+          "cards": [
+            {
+              "type": "custom:ha-title-orbit-card",
+              "title": "Cooling",
+              "layout": "compact"
+            },
+            {
+              "type": "grid",
+              "columns": 2,
+              "square": false,
+              "cards": [
+                {
+                  "type": "custom:ha-gauge-orbit-card",
+                  "entity": "sensor.my_bambu_aux_fan_speed",
+                  "name": "Aux fan",
+                  "min": 0,
+                  "max": 100
+                },
+                {
+                  "type": "custom:ha-gauge-orbit-card",
+                  "entity": "sensor.my_bambu_chamber_fan_speed",
+                  "name": "Chamber fan",
+                  "min": 0,
+                  "max": 100
+                },
+                {
+                  "type": "custom:ha-gauge-orbit-card",
+                  "entity": "sensor.my_bambu_cooling_fan_speed",
+                  "name": "Cooling fan",
+                  "min": 0,
+                  "max": 100
+                },
+                {
+                  "type": "custom:ha-gauge-orbit-card",
+                  "entity": "sensor.my_bambu_heatbreak_fan_speed",
+                  "name": "Heatbreak fan",
+                  "min": 0,
+                  "max": 100
+                },
+                {
+                  "type": "custom:ha-gauge-orbit-card",
+                  "entity": "sensor.my_bambu_secondary_aux_fan_speed",
+                  "name": "Secondary aux",
+                  "min": 0,
+                  "max": 100
+                }
+              ]
+            },
+            {
+              "type": "custom:ha-chips-orbit-card",
+              "read_only": true,
+              "chips": [
+                {
+                  "entity": "binary_sensor.my_bambu_hms_errors",
+                  "name": "HMS"
+                },
+                {
+                  "entity": "binary_sensor.my_bambu_print_error",
+                  "name": "Print error"
+                },
+                {
+                  "entity": "binary_sensor.my_bambu_extruder_filament",
+                  "name": "Filament"
+                },
+                {
+                  "entity": "sensor.my_bambu_wi_fi_signal",
+                  "name": "Wi-Fi"
+                },
+                {
+                  "entity": "sensor.my_bambu_sd_card_status",
+                  "name": "SD card"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.20.1",
+  "version": "1.21.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -551,6 +551,20 @@
       ],
       "aliases": [],
       "sha256": "a356f5bf1bf34835781b204568181201602390bb5a0ec98d38d2caee2f29dbb6"
+    },
+    {
+      "id": "orbit-bambu",
+      "name": "Bambu Orbit Cards",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "src/orbit-bambu.js",
+      "types": [
+        "ha-bambu-print-orbit-card",
+        "ha-bambu-ams-orbit-card",
+        "ha-bambu-camera-orbit-card"
+      ],
+      "aliases": [],
+      "sha256": "57518e4cf2c74af944bb410a461b401960c46e9e0c1c97cb6bf3367c5cd2957f"
     }
   ],
   "suiteFeatures": [
@@ -561,7 +575,7 @@
       "source": "src/orbit-compact.js",
       "sha256": "b610506b7545fcdfb43da6a8425ed464839a1d0e8e2491874685552168843ee5",
       "profiles": "src/compact-profiles.json",
-      "profilesSha256": "8a7c524fcdfb2f1b0b16e2d2a3ec3e4085639eb39ddfcb46fab9bd92b0e633a4",
+      "profilesSha256": "cc409831c89e4c2485b50084a97f79ee85e45575e450f065ebd5ab58b0638795",
       "adaptation": "scripts/welcome-normal-toolbar.mjs",
       "adaptationSha256": "6e9be8d99c010b286ee75942082c6601626349fa54e4d619761d7048e3d296d7"
     },

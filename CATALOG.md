@@ -1,5 +1,7 @@
 # Included card catalog
 
+**Stable v1.21.0:** adds [Bambu Print/AMS/Camera Orbit](docs/BAMBU.md) plus a [complete responsive dashboard template](examples/bambu-dashboard.yaml). Three new types in one suite-owned Bambu module; existing34 card implementations,27 upstream pins, previous Compact profiles/adapters and Themes1.2.0 unchanged.
+
 **Stable v1.20.1:** [Chips content inset](docs/CHIPS.md#content-inset) adds comfortable start-aligned icon/text padding without centering or changing the slim capsule/font/visibility/actions. Chips1.1.3 is CSS-only; other33 card implementations,27 upstream pins, prior adapters/profiles and Themes1.2.0 remain unchanged.
 
 **Added in v1.20.0:** adds [Title Orbit Card](docs/TITLE.md), a lightweight static section heading with optional subtitle/icon, palettes, alignment, semantic level and Normal/Compact. Existing33 card implementations, including slim Chips, all27 upstream pins and optional [Prism Themes1.2.0](THEMES.md) remain unchanged.
@@ -8,10 +10,13 @@
 
 Suite includes optional [complete HA themes](THEMES.md) and [Desktop/Mobile/iOS Mobile profiles](docs/themes/DEVICE-PROFILES.md). v1.11.0 adds two suite-owned controls; all27 upstream pins and Themes1.1.0 are unchanged from1.10.1. Default styles remain without an Orbit theme. Mobile header styling still needs optional card-mod; new controls do not. Theme YAML installation is separate from HACS Dashboard updates.
 
-The suite provides34 card types from27 unchanged upstream packages and five suite-owned modules: Orbit Controls, Temperature Orbit, Gauge Orbit, Orbit Chips and Title Orbit. Native cards have source/version/hash in `nativeComponents`; their provenance is this suite release, not a separate upstream repository. The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
+The suite provides37 card types from27 unchanged upstream packages and six suite-owned modules: Orbit Controls, Temperature Orbit, Gauge Orbit, Orbit Chips, Title Orbit and Bambu Orbit. Native cards have source/version/hash in `nativeComponents`; their provenance is this suite release, not a separate upstream repository. The suite retains these exact types. Use the linked component README for card options, but use the suite installation instructions instead of its standalone installation/resource paths.
 
 | Card / package | Included release | Existing Lovelace types |
 | --- | --- | --- |
+| [Bambu Print Orbit](docs/BAMBU.md) | Suite-owned1.0.0 | `custom:ha-bambu-print-orbit-card` |
+| [Bambu AMS Orbit](docs/BAMBU.md) | Suite-owned1.0.0 | `custom:ha-bambu-ams-orbit-card` |
+| [Bambu Camera Orbit](docs/BAMBU.md) | Suite-owned1.0.0 | `custom:ha-bambu-camera-orbit-card` |
 | [Title Orbit Card](docs/TITLE.md) | Suite-owned1.0.0 | `custom:ha-title-orbit-card` |
 | [Chips Orbit Card](docs/CHIPS.md) | Suite-owned1.1.3 | `custom:ha-chips-orbit-card` |
 | [Gauge Orbit Card](docs/GAUGE.md) | 1.0.0 (suite-owned) | `custom:ha-gauge-orbit-card` |

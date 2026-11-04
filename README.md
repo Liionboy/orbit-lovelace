@@ -1,10 +1,14 @@
 # Orbit Lovelace
 
-**One HACS custom repository. One JavaScript resource. 34 cards.**
+**One HACS custom repository. One JavaScript resource. 37 cards.**
 
 Orbit Lovelace packages the Orbit cards and the matching companion card collection into a single, self-contained Home Assistant Dashboard resource. Individual cards keep their existing names, Lovelace types, configurations and controls. This is a distribution suite, not a new all-in-one dashboard card.
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
+
+## New in v1.21.0 — Bambu Orbit cards and dashboard
+
+Three suite-owned cards: **Bambu Print**, **Bambu AMS** and **Bambu Camera**, with the Orbit palettes, native visual forms and Normal/Compact. Reported job/progress/layers/ETA, actual/target dual-nozzle/bed/chamber temperatures, visible HMS alerts, four AMS trays and native HA camera/model previews. [Full configuration and limits](docs/BAMBU.md) · [Complete responsive dashboard YAML](examples/bambu-dashboard.yaml). Existing Temperature/Gauge/Chips supply history, cooling percentages and light/camera controls. Monitoring-first: no printer movement/G-code/start/pause commands. Same HACS resource; update + reload, no new backend/dependency/theme update/restart.37 cards/33 packages; previous34 implementations and Themes1.2.0 unchanged.
 
 ## Fixed in v1.20.1 — Chip content breathing room
 
