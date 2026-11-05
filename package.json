@@ -1,6 +1,6 @@
 {
   "name": "orbit-lovelace",
-  "version": "1.21.0",
+  "version": "1.21.1",
   "private": true,
   "type": "module",
   "description": "Orbit Lovelace and companion Home Assistant card suite",
@@ -34,6 +34,7 @@
     "test:chips:mobile": "node test/chips-mobile.browser.mjs",
     "test:chips:slim": "node test/chips-slim.browser.mjs",
     "test:title:browser": "node test/title.browser.mjs",
-    "test:bambu:browser": "node test/bambu.browser.mjs"
+    "test:bambu:browser": "node test/bambu.browser.mjs",
+    "test:bambu:scroll": "node test/bambu-scroll.browser.mjs"
   }
 }

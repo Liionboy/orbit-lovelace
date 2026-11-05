@@ -1,6 +1,6 @@
 # Bambu Orbit cards and dashboard
 
-Suite-owned **Bambu Orbit1.0.0**, included in **Orbit Lovelace1.21.0+**. Three cards in the same HACS resource:
+Suite-owned **Bambu Orbit1.0.1**, included in **Orbit Lovelace1.21.1+** (original cards introduced in1.21.0). Three cards in the same HACS resource:
 
 - `custom:ha-bambu-print-orbit-card` — reported job/progress/layers/remaining/ETA, current and target temperatures, model preview, visible HMS/print-error warnings and expandable diagnostics.
 - `custom:ha-bambu-ams-orbit-card` — up to four AMS trays and two optional external spools, reported material/RGBA color/active/remaining percentage, humidity/temperature/drying status.
@@ -27,6 +27,16 @@ Create a **new** empty dashboard in Home Assistant, open its Raw configuration e
 Only the Light and Camera chips have explicit native power actions, guarded by existing Chips availability/read-only/service/pending protections. Status/alert chips open More Info. Set `read_only: true` on the control Chips collection or remove its toggle actions if you want a monitoring-only dashboard. Read-only UI controls do not revoke permissions in native HA dialogs.
 
 No optional Orbit theme or third-party layout dependency is required. Prism is optional and installed separately as documented in THEMES.md. The generated template does not select a theme or alter existing resources.
+
+## Mobile scroll stability
+
+Orbit1.21.1 fixes a confirmed layout shift: releasing the model/camera player when it left the viewport previously collapsed its frame. The Print preview lost approximately194px and Camera54px in a390px synthetic phone fixture. The player is still released when offscreen, disconnected, tab-hidden or Compact Details-closed; it is not kept streaming as a workaround.
+
+Configured preview frames now reserve16:9 space independently of media lifetime, with bounded minimum status-message space. A closed Compact Details panel or explicitly empty Print `preview_entity` reserves no preview space. Retry/error feedback remains accessible; an explicit Retry may intentionally remove its error button.
+
+No YAML/dashboard import, dependency, theme change or restart is required. Update Orbit Lovelace in HACS to1.21.1+ and fully reload the phone frontend. Applies to both the public Sections example and a native Sidebar dashboard.
+
+The regression verifies final-resource geometry during visibility/tab/offline/error/retry transitions and scrolling in synthetic Sidebar/Sections with document and nested scroll roots. This fixes the measured layout instability, not a claim that the owner's exact repeated bottom-lock was reproduced on physical Safari/Companion; native phone/media validation remains outstanding. [Evidence](bambu-scroll-verification.json).
 
 ## Print card
 

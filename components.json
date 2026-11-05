@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.21.0",
+  "version": "1.21.1",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -556,7 +556,7 @@
       "id": "orbit-bambu",
       "name": "Bambu Orbit Cards",
       "origin": "suite",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "source": "src/orbit-bambu.js",
       "types": [
         "ha-bambu-print-orbit-card",
@@ -564,7 +564,7 @@
         "ha-bambu-camera-orbit-card"
       ],
       "aliases": [],
-      "sha256": "57518e4cf2c74af944bb410a461b401960c46e9e0c1c97cb6bf3367c5cd2957f"
+      "sha256": "61506f59de0422b507b127a93b77096e3b525c7586d728cafd22dac03b4014a8"
     }
   ],
   "suiteFeatures": [

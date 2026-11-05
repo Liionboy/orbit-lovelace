@@ -1,5 +1,7 @@
 # Included card catalog
 
+**Stable v1.21.1:** Bambu Orbit1.0.1 preserves camera/model preview geometry during viewport/tab visibility cleanup, preventing media-induced scroll shifts. Same configurations and resource; other34 cards,27 imported pins, Compact profiles/runtime and Themes1.2.0 unchanged. [Details](docs/BAMBU.md#mobile-scroll-stability).
+
 **Stable v1.21.0:** adds [Bambu Print/AMS/Camera Orbit](docs/BAMBU.md) plus a [complete responsive dashboard template](examples/bambu-dashboard.yaml). Three new types in one suite-owned Bambu module; existing34 card implementations,27 upstream pins, previous Compact profiles/adapters and Themes1.2.0 unchanged.
 
 **Stable v1.20.1:** [Chips content inset](docs/CHIPS.md#content-inset) adds comfortable start-aligned icon/text padding without centering or changing the slim capsule/font/visibility/actions. Chips1.1.3 is CSS-only; other33 card implementations,27 upstream pins, prior adapters/profiles and Themes1.2.0 remain unchanged.
@@ -14,9 +16,9 @@ The suite provides37 card types from27 unchanged upstream packages and six suite
 
 | Card / package | Included release | Existing Lovelace types |
 | --- | --- | --- |
-| [Bambu Print Orbit](docs/BAMBU.md) | Suite-owned1.0.0 | `custom:ha-bambu-print-orbit-card` |
-| [Bambu AMS Orbit](docs/BAMBU.md) | Suite-owned1.0.0 | `custom:ha-bambu-ams-orbit-card` |
-| [Bambu Camera Orbit](docs/BAMBU.md) | Suite-owned1.0.0 | `custom:ha-bambu-camera-orbit-card` |
+| [Bambu Print Orbit](docs/BAMBU.md) | Suite-owned1.0.1 | `custom:ha-bambu-print-orbit-card` |
+| [Bambu AMS Orbit](docs/BAMBU.md) | Suite-owned1.0.1 | `custom:ha-bambu-ams-orbit-card` |
+| [Bambu Camera Orbit](docs/BAMBU.md) | Suite-owned1.0.1 | `custom:ha-bambu-camera-orbit-card` |
 | [Title Orbit Card](docs/TITLE.md) | Suite-owned1.0.0 | `custom:ha-title-orbit-card` |
 | [Chips Orbit Card](docs/CHIPS.md) | Suite-owned1.1.3 | `custom:ha-chips-orbit-card` |
 | [Gauge Orbit Card](docs/GAUGE.md) | 1.0.0 (suite-owned) | `custom:ha-gauge-orbit-card` |

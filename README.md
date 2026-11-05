@@ -6,7 +6,11 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
-## New in v1.21.0 — Bambu Orbit cards and dashboard
+## Fixed in v1.21.1 — Stable Bambu scrolling
+
+Bambu Print model previews and Bambu Camera keep their 16:9 space while the media player is released offscreen or in a hidden tab. Pausing/reloading media no longer collapses the dashboard around the scroll position. Status messages also reserve space at phone/narrow widths; Compact still hides closed Details completely. Same YAML and resource: update in HACS and fully reload the phone frontend. [Scope and verification](docs/BAMBU.md#mobile-scroll-stability). No live dashboard, printer, theme or resource changes.
+
+## Added in v1.21.0 — Bambu Orbit cards and dashboard
 
 Three suite-owned cards: **Bambu Print**, **Bambu AMS** and **Bambu Camera**, with the Orbit palettes, native visual forms and Normal/Compact. Reported job/progress/layers/ETA, actual/target dual-nozzle/bed/chamber temperatures, visible HMS alerts, four AMS trays and native HA camera/model previews. [Full configuration and limits](docs/BAMBU.md) · [Complete responsive dashboard YAML](examples/bambu-dashboard.yaml). Existing Temperature/Gauge/Chips supply history, cooling percentages and light/camera controls. Monitoring-first: no printer movement/G-code/start/pause commands. Same HACS resource; update + reload, no new backend/dependency/theme update/restart.37 cards/33 packages; previous34 implementations and Themes1.2.0 unchanged.
 
