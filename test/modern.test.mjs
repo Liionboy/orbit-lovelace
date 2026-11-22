@@ -10,11 +10,11 @@ function fixture(){
  const orbitModernProfiles=JSON.parse(readFileSync(new URL('../src/modern-profiles.json',import.meta.url))).profiles;
  const context=vm.createContext({HTMLElement:Element,window:{},console,orbitModernProfiles,orbitPaletteCatalog:JSON.parse(readFileSync(new URL('../src/card-palettes.json',import.meta.url))).palettes,orbitFallbackPaletteTypes:fallbackPaletteTypes,CSSStyleSheet:class{replaceSync(css){this.css=css;}}});vm.runInContext(source+';globalThis.modern=orbitModern;',context);
  class Card extends Element{setConfig(config){if(config.invalid)throw Error('native validation');this.saved=config;this.configCalls=(this.configCalls||0)+1;}static getConfigForm(){return{schema:[{name:'entity'}],computeLabel:s=>s.name};}}
- context.modern.prepare('ha-temperature-orbit-card',Card);return{Card,modern:context.modern,Element};
+ context.modern.prepare('ha-temperature-orbit-card',Card);return{Card,modern:context.modern,Element,context};
 }
 test('Modern provenance, coverage and immutable feature scope',()=>{
  const m=JSON.parse(readFileSync(new URL('../components.json',import.meta.url))),f=m.suiteFeatures.find(f=>f.id==='modern-design');
- assert.equal(f.sha256,createHash('sha256').update(source).digest('hex'));assert.equal(f.version,'0.3.0');
+ assert.equal(f.sha256,createHash('sha256').update(source).digest('hex'));assert.equal(f.version,'0.4.0');
  assert.deepEqual([...fixture().modern.types],f.types);assert.equal(new Set(f.types).size,37);
  assert.ok(f.types.every(t=>[...m.components,...m.nativeComponents].some(c=>c.types.includes(t))));
 });
@@ -31,9 +31,19 @@ test('presentation switches preserve original config, nodes, subscriptions and c
  c.setConfig({...config,entity:'sensor.other',design:'modern'});assert.equal(c.configCalls,3,'unchanged configs still follow the original source path');
 });
 test('native form preserves original fields and adds a separate design choice',()=>{
- const{Card}=fixture(),form=Card.getConfigForm();assert.deepEqual(form.schema.map(s=>s.name).join(','),'design,entity');assert.equal(form.computeLabel({name:'entity'}),'entity');assert.equal(form.computeLabel({name:'design'}),'Card design');assert.equal(form.schema[0].default,'classic');
+ const{Card}=fixture(),form=Card.getConfigForm();assert.deepEqual(form.schema.map(s=>s.name).join(','),'design,glow,entity');assert.equal(form.computeLabel({name:'entity'}),'entity');assert.equal(form.computeLabel({name:'design'}),'Card design');assert.equal(form.computeLabel({name:'glow'}),'Glow');assert.equal(form.schema[0].default,'classic');assert.equal(form.schema[1].default,false);
 });
 test('unregistered types and constructors are unchanged',()=>{const{modern}=fixture();class Other{}assert.equal(modern.prepare('not-an-orbit-card',Other),Other);assert.equal(Other.prototype.setConfig,undefined);});
+test('Glow validates before source changes, strips the key and preserves caller and native nodes on toggles',()=>{const{Card}=fixture(),c=new Card(),config=Object.freeze({entity:'sensor.example',glow:true});c.setConfig(config);assert.equal(c.saved.glow,undefined);assert.equal(c.getAttribute('data-orbit-glow'),'true');const saved=c.saved;c.setConfig({...config,glow:false});assert.equal(c.configCalls,1);assert.equal(c.saved,saved);assert.equal(c.getAttribute('data-orbit-glow'),undefined);for(const glow of ['true','false',0,1,{},[]])assert.throws(()=>c.setConfig({...config,glow}),/glow must/);assert.equal(c.configCalls,1);assert.throws(()=>c.setConfig({invalid:true,glow:true}),/native validation/);assert.equal(c.getAttribute('data-orbit-glow'),undefined);});
+test('Glow sheets are cached, removable and independent of Classic/Modern',()=>{const{Card}=fixture(),c=new Card();c.shadowRoot={adoptedStyleSheets:[]};c.setConfig({entity:'sensor.example',glow:true,palette:'teal'});const sheet=c._orbitGlowSheet;assert.ok(sheet.css.includes('box-shadow'));assert.equal(c.shadowRoot.adoptedStyleSheets.length,1);c.setConfig({entity:'sensor.example',glow:false,palette:'teal'});assert.equal(c.shadowRoot.adoptedStyleSheets.length,0);c.setConfig({entity:'sensor.example',glow:true,palette:'teal',design:'modern'});assert.equal(c._orbitGlowSheet,sheet);assert.equal(c.shadowRoot.adoptedStyleSheets.at(-1),c._orbitModernSheet);assert.equal(new Set(c.shadowRoot.adoptedStyleSheets).size,2);});
+test('Glow falls back to one removable style element without constructable sheets',()=>{
+ const{Card,context}=fixture(),c=new Card(),nodes=[];context.CSSStyleSheet=undefined;
+ context.document={createElement:()=>({dataset:{},remove(){nodes.splice(nodes.indexOf(this),1);}})};
+ c.shadowRoot={querySelector:()=>nodes[0],append:n=>nodes.push(n)};
+ c.setConfig({entity:'sensor.example',glow:true,palette:'ice'});assert.equal(nodes.length,1);assert.ok(nodes[0].textContent.includes('box-shadow'));
+ const style=nodes[0];c.setConfig({entity:'sensor.example',glow:true,palette:'teal'});assert.equal(nodes.length,1);assert.equal(nodes[0],style);
+ c.setConfig({entity:'sensor.example',glow:false,palette:'teal'});assert.equal(nodes.length,0);
+});
 test('Modern cascade remains last after Compact inserts a sheet; never duplicates styles',()=>{
  const{Card}=fixture(),c=new Card();c.shadowRoot={adoptedStyleSheets:[]};c.setConfig({entity:'sensor.example',design:'modern'});const modern=c.shadowRoot.adoptedStyleSheets[0],compact={};c.shadowRoot.adoptedStyleSheets.push(compact);
  c.setConfig({entity:'sensor.example',design:'modern'});assert.equal(c.shadowRoot.adoptedStyleSheets.at(-1),modern);assert.equal(c.shadowRoot.adoptedStyleSheets.length,2);

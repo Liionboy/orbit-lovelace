@@ -1,6 +1,6 @@
 {
   "name": "orbit-lovelace",
-  "version": "1.22.0-beta.4",
+  "version": "1.22.0-beta.5",
   "private": true,
   "type": "module",
   "description": "Orbit Lovelace and companion Home Assistant card suite",
@@ -39,6 +39,7 @@
     "test:modern:browser": "node test/modern.browser.mjs",
     "test:palettes:browser": "node test/card-palettes.browser.mjs",
     "test:modern:gallery": "node test/modern-gallery.browser.mjs",
+    "test:glow:browser": "GLOW_GALLERY=true node test/modern-gallery.browser.mjs",
     "test:modern:regressions": "node test/modern-regressions.mjs"
   }
 }

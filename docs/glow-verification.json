@@ -1,0 +1,73 @@
+{
+  "version": "1.22.0-beta.5",
+  "adapterVersion": "0.4.0",
+  "types": 37,
+  "nodeTests": 1028,
+  "smokeSuites": 2,
+  "glowMounts": 5920,
+  "glowPalettes": 10,
+  "glowDesigns": [
+    "classic",
+    "modern"
+  ],
+  "glowLayouts": [
+    "normal",
+    "compact"
+  ],
+  "glowModes": [
+    "light",
+    "dark"
+  ],
+  "glowViewportWidths": [
+    390,
+    1100
+  ],
+  "galleryCaptures": 88,
+  "editorChecks": 37,
+  "pureToggleCases": 592,
+  "toggleAssertions": [
+    "Computed shadow/filter differs from Glow-off",
+    "Geometry and foreground/background/font unchanged",
+    "Native controls/player/chart nodes retained",
+    "Zero added service calls or history queries",
+    "One cached stylesheet"
+  ],
+  "glowOffBaselines": 74,
+  "baselineVersion": "1.22.0-beta.4",
+  "modernMounts": 9472,
+  "compactTouchCases": 111,
+  "compactControlMediaRegressions": "Original Select/Number and Media suites with forced Modern/Teal/Glow/Compact; existing transparent title long-press harness only",
+  "generalRegisteredMountedTypes": 37,
+  "alarmMounts": 192,
+  "alarmStateSamples": 2304,
+  "bambuMounts": 768,
+  "bambuDashboardFixtures": 16,
+  "mediaGeometryCases": 16,
+  "syntheticScrollCases": 14,
+  "originalInteractionRegressions": [
+    "Select/Number controls",
+    "Media touch/keyboard/pending/error/cancel",
+    "Bambu telemetry/AMS/media/lifecycle",
+    "Frigate decoded synthetic red-to-blue MP4/lifecycle",
+    "Alarm Chips semantic states/editor/More Info"
+  ],
+  "unchanged": {
+    "componentSectionsIdentical": 33,
+    "pinsIdentical": 27,
+    "nativeSourcesIdentical": 6,
+    "perTypeProfilesIdentical": 37,
+    "compactVersion": "0.4.0",
+    "palettesVersion": "0.2.0",
+    "themesVersion": "1.2.0"
+  },
+  "bundleBytes": 959668,
+  "bundleSha256": "2f91dfbaea81cb3a962d768be73cf1f4373ca90d69fe0043d7f46d9365bcd6e7",
+  "defaultGlow": false,
+  "permanentAnimation": false,
+  "newQueriesOrServices": false,
+  "syntheticHA": true,
+  "nativeHA": false,
+  "physicalCompanion": false,
+  "safari": false,
+  "liveChanges": false
+}
