@@ -1,5 +1,7 @@
 # Included card catalog
 
+**Beta v1.22.0-beta.1:** optional [Modern design](docs/MODERN.md) for Room, Chips, Temperature and Frigate. Classic remains the default; all 37 existing types and imported/native sources remain unchanged. Suite-owned Modern 0.1.0 is traced separately in `components.json`.
+
 **Stable v1.21.1:** Bambu Orbit1.0.1 preserves camera/model preview geometry during viewport/tab visibility cleanup, preventing media-induced scroll shifts. Same configurations and resource; other34 cards,27 imported pins, Compact profiles/runtime and Themes1.2.0 unchanged. [Details](docs/BAMBU.md#mobile-scroll-stability).
 
 **Stable v1.21.0:** adds [Bambu Print/AMS/Camera Orbit](docs/BAMBU.md) plus a [complete responsive dashboard template](examples/bambu-dashboard.yaml). Three new types in one suite-owned Bambu module; existing34 card implementations,27 upstream pins, previous Compact profiles/adapters and Themes1.2.0 unchanged.

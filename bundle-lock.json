@@ -1,5 +1,5 @@
 {
-  "version": "1.21.1",
+  "version": "1.22.0-beta.1",
   "packages": 33,
   "upstreamPackages": 27,
   "nativePackages": 6,
@@ -13,9 +13,11 @@
   "frigateLiveVersion": "1.0.0",
   "frigateLiveSha256": "dbb3ffb25097a6554ea8512b9992de53903ac2031b056660beddcfc1e162a57c",
   "frigateLiveAdaptationSha256": "db205226500a03a0be300e440c80289164096b56b91ca46c992199adee02c975",
+  "modernDesignVersion": "0.1.0",
+  "modernDesignSha256": "14424238374fdcde0a28baaf5bfdf958b86e8b8f51a50f9ba4ec3498fb16bfd6",
   "themeBridgeVersion": 1,
   "themesVersion": "1.2.0",
   "themeSha256": "984a2ced43adb87efe7e2414c87a0f49ecd6cae68a5a1a1279dfe431cd80378e",
-  "bytes": 895031,
-  "sha256": "711daab8f83e1231b3fe676a53fc05bab01a1584f34aaa685db7a2e30f304566"
+  "bytes": 907257,
+  "sha256": "d52ef2fdaca0aba64c69c44e0c30b933ae464ab40aabf0d2ee93b06b9806f2ba"
 }

@@ -1,0 +1,38 @@
+# Optional beta demo. Replace these generic entity IDs and import into a NEW dashboard.
+title: Orbit Modern
+views:
+  - title: Home
+    path: home
+    type: masonry
+    cards:
+      - type: custom:ha-chips-orbit-card
+        design: modern
+        chips:
+          - entity: sensor.living_room_temperature
+            icon: mdi:thermometer
+            show_name: false
+          - entity: light.living_room
+            name: Lights
+            show_state: false
+            tap_action:
+              action: toggle
+      - type: custom:ha-room-orbit-card
+        design: modern
+        title: Living room
+        icon: mdi:door-open
+        palette: ocean
+        temperature_entity: sensor.living_room_temperature
+        humidity_entity: sensor.living_room_humidity
+        entity_1: light.living_room
+      - type: custom:ha-temperature-orbit-card
+        design: modern
+        entity: sensor.living_room_temperature
+        name: Living room
+        palette: sunset
+      - type: custom:frigate-control-card
+        design: modern
+        camera_entity: camera.entrance
+        title: Entrance
+        palette: ocean
+        camera_view: live
+        live_provider: ha

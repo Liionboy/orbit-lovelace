@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.21.1",
+  "version": "1.22.0-beta.1",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -608,6 +608,19 @@
       "adaptation": "scripts/frigate-live.mjs",
       "adaptationSha256": "db205226500a03a0be300e440c80289164096b56b91ca46c992199adee02c975",
       "types": [
+        "frigate-control-card"
+      ]
+    },
+    {
+      "id": "modern-design",
+      "origin": "suite",
+      "version": "0.1.0",
+      "source": "src/orbit-modern.js",
+      "sha256": "14424238374fdcde0a28baaf5bfdf958b86e8b8f51a50f9ba4ec3498fb16bfd6",
+      "types": [
+        "ha-room-orbit-card",
+        "ha-chips-orbit-card",
+        "ha-temperature-orbit-card",
         "frigate-control-card"
       ]
     }

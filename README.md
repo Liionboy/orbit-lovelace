@@ -6,6 +6,10 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
+## Preview in v1.22.0-beta.1 — Orbit Modern
+
+Optional **Card design → Classic / Modern · beta** on Room, Chips, Temperature and Frigate, independent of Normal/Compact. Clean surfaces, calmer typography, rounded-square icons and restrained accents; existing cards remain Classic by default. No live dashboard changes or camera codec fix. **Stable remains v1.21.1.** [Preview gallery, beta installation and rollback](docs/MODERN.md) · [Optional generic demo dashboard](examples/modern-dashboard.yaml).
+
 ## Fixed in v1.21.1 — Stable Bambu scrolling
 
 Bambu Print model previews and Bambu Camera keep their 16:9 space while the media player is released offscreen or in a hidden tab. Pausing/reloading media no longer collapses the dashboard around the scroll position. Status messages also reserve space at phone/narrow widths; Compact still hides closed Details completely. Same YAML and resource: update in HACS and fully reload the phone frontend. [Scope and verification](docs/BAMBU.md#mobile-scroll-stability). No live dashboard, printer, theme or resource changes.
