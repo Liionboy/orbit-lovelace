@@ -1,4 +1,4 @@
-/* Orbit Modern v0.2.0 — MIT. Optional, suite-owned presentation only. */
+/* Orbit Modern v0.3.0 — MIT. Optional, suite-owned presentation only. */
 const orbitModern = (() => {
  const types = Object.keys(orbitModernProfiles),wrappedMethods=new WeakSet(),wrappedForms=new WeakSet(),wrappedFactories=new WeakSet(),originalFactories=new WeakMap();
  const field = {name:'design',default:'classic',selector:{select:{options:[{value:'classic',label:'Classic'},{value:'modern',label:'Modern · beta'}],mode:'dropdown'}}};
@@ -62,8 +62,19 @@ const orbitModern = (() => {
  :host([data-orbit-design=modern]) .chip.chip .chip-name,:host([data-orbit-design=modern]) .chip.chip .chip-state{font-weight:550}
  `
  };
+ function attachPalette(card,type){
+  if(!card.shadowRoot||!orbitFallbackPaletteTypes.includes(type))return;
+  const palette=card._orbitPalette;if(!palette){if(card._orbitPaletteSheet)card.shadowRoot.adoptedStyleSheets=card.shadowRoot.adoptedStyleSheets.filter(s=>s!==card._orbitPaletteSheet);return;}
+  const legacy={aurora:['#078f72','#27b7b0'],ocean:['#1477c9','#22a7c7'],sunset:['#cf573e','#e79a55'],lavender:['#8059c7','#ab88df']};
+  const colors=orbitPaletteCatalog[palette]?.colors||legacy[palette],color='color-mix(in srgb,'+colors[0]+' 76%,var(--primary-text-color,#202b3c))';
+  const heading=orbitModernProfiles[type].heading,scope=':host([data-orbit-palette][data-orbit-palette="'+palette+'"]) ';
+  const css=scope+'ha-card{border-top:2px solid '+color+'}'+(heading?scope+heading+'{color:'+color+'}':'')+(type.startsWith('unifi')?':host([data-orbit-palette="'+palette+'"]) {--orbit-accent:'+color+';--orbit-accent-2:'+colors[1]+'}':'')+(type==='media-player-card'||type==='action-button-card'?scope+'.shell.shell{--accent:'+color+'}':'');
+  card._orbitPaletteSheet||=new CSSStyleSheet();if(card._orbitPaletteLast!==palette){card._orbitPaletteSheet.replaceSync(css);card._orbitPaletteLast=palette;}if(!card.shadowRoot.adoptedStyleSheets.includes(card._orbitPaletteSheet))card.shadowRoot.adoptedStyleSheets=[...card.shadowRoot.adoptedStyleSheets,card._orbitPaletteSheet];
+ }
+ function paletteForm(form,type){const options=Object.keys(orbitPaletteCatalog);let found=false;const schema=form.schema.map(f=>{if(f.name!=='palette')return f;found=true;const select=f.selector.select,old=select.options;return{...f,selector:{select:{...select,options:[...old,...options.filter(n=>!old.some(o=>(o.value??o)===n))]}}};});if(!found&&orbitFallbackPaletteTypes.includes(type))schema.push({name:'palette',selector:{select:{options:['aurora','ocean','sunset','lavender',...options],mode:'dropdown'}}});return{...form,schema};}
  function attach(card,type){
   type=types.includes(card.localName)?card.localName:type;
+  attachPalette(card,type);
   if(!card.shadowRoot||card.getAttribute('data-orbit-design')!=='modern')return;
   const root=card.shadowRoot;
   if(typeof CSSStyleSheet!=='undefined'&&CSSStyleSheet.prototype.replaceSync&&'adoptedStyleSheets' in root){
@@ -81,11 +92,11 @@ const orbitModern = (() => {
  }
  class ModernEditor extends HTMLElement{
   constructor(){super();this.attachShadow({mode:'open'});this.shadowRoot.innerHTML='<style>label{display:grid;gap:8px;margin-bottom:16px;color:var(--primary-text-color);font:inherit}select{min-height:44px;padding:8px;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);color:inherit;font:inherit}</style><label>Card design<select aria-label="Card design"><option value="classic">Classic</option><option value="modern">Modern · beta</option></select></label><div id="editor"></div>';this._select=this.shadowRoot.querySelector('select');this._select.addEventListener('change',()=>{this._config={...this._config,design:this._select.value};this._emit();});}
-  async initialize(factory){this._child=await factory();this._child.addEventListener('config-changed',e=>{e.stopPropagation();if(!e.detail?.config)return;this._config={...e.detail.config,...(this._config?.design!=null?{design:this._config.design}:{})};this._emit();});this.shadowRoot.querySelector('#editor').append(this._child);this._sync();}
+  async initialize(factory,type){this._paletteEnabled=orbitFallbackPaletteTypes.includes(type);if(this._paletteEnabled){const label=document.createElement('label');label.textContent='Orbit palette';this._paletteSelect=document.createElement('select');this._paletteSelect.setAttribute('aria-label','Orbit palette');for(const value of ['', 'aurora','ocean','sunset','lavender',...Object.keys(orbitPaletteCatalog)])this._paletteSelect.add(new Option(value||'Existing behavior',value));label.append(this._paletteSelect);this.shadowRoot.querySelector('#editor').before(label);this._paletteSelect.addEventListener('change',()=>{this._config={...this._config,palette:this._paletteSelect.value};this._emit();});}this._child=await factory();this._child.addEventListener('config-changed',e=>{e.stopPropagation();if(!e.detail?.config)return;this._config={...e.detail.config,...(this._config?.design!=null?{design:this._config.design}:{}),...(this._paletteEnabled&&this._config?.palette!=null?{palette:this._config.palette}:{})};this._emit();});this.shadowRoot.querySelector('#editor').append(this._child);this._sync();}
   _emit(){this.dispatchEvent(new CustomEvent('config-changed',{detail:{config:{...this._config}},bubbles:true,composed:true}));}
   setConfig(config){this._config={...config};this._sync();}
   set hass(value){this._hass=value;if(this._child)this._child.hass=value;}
-  _sync(){if(!this._config)return;this._select.value=this._config.design||'classic';if(this._child){const next={...this._config};delete next.design;this._child.setConfig(next);if(this._hass)this._child.hass=this._hass;}}
+  _sync(){if(!this._config)return;this._select.value=this._config.design||'classic';if(this._child){const next={...this._config};delete next.design;if(this._paletteEnabled){delete next.palette;this._paletteSelect.value=this._config.palette||'';}this._child.setConfig(next);if(this._hass)this._child.hass=this._hass;}}
  }
  // Installed before definition, so cached callbacks retain the original lifecycle.
  function prepare(type,C){
@@ -94,16 +105,16 @@ const orbitModern = (() => {
   if(!wrappedMethods.has(original)){p.setConfig=function(config){
    if(!config||typeof config!=='object'||Array.isArray(config))return original.call(this,config);
    const design=config.design??'classic';if(!['classic','modern'].includes(design))throw Error('design must be classic or modern.');
-   const next={...config};delete next.design;const signature=JSON.stringify(next);
-   const result=signature===this._orbitModernSignature&&design!==this._orbitModernDesign?undefined:original.call(this,next);
-   this._orbitModernSignature=signature;
+   const palette=orbitFallbackPaletteTypes.includes(type)?config.palette:undefined;if(palette!=null&&palette!==''&&!['aurora','ocean','sunset','lavender',...Object.keys(orbitPaletteCatalog)].includes(palette))throw Error('Invalid Orbit palette.');const next={...config};delete next.design;if(orbitFallbackPaletteTypes.includes(type))delete next.palette;const signature=JSON.stringify(next);
+   const result=signature===this._orbitModernSignature&&(design!==this._orbitModernDesign||palette!==this._orbitPalette)?undefined:original.call(this,next);
+   this._orbitPalette=palette;if(palette)this.setAttribute('data-orbit-palette',palette);else this.removeAttribute('data-orbit-palette');this._orbitModernSignature=signature;
    this._orbitModernDesign=design;
    if(design==='modern')this.setAttribute('data-orbit-design','modern');else this.removeAttribute('data-orbit-design');
    attach(this,type);return result;
   };wrappedMethods.add(p.setConfig);}
   for(const name of ['_render','_build','_draw','_paint','draw','render','updated','connectedCallback'])if((typeof p[name]==='function'||name==='updated'&&typeof p.requestUpdate==='function')&&!wrappedMethods.has(p[name])){const method=p[name];p[name]=function(...args){const result=method?.apply(this,args);attach(this,type);return result;};wrappedMethods.add(p[name]);}
-  if(typeof C.getConfigForm==='function'){if(!wrappedForms.has(C.getConfigForm)){const form=C.getConfigForm;C.getConfigForm=function(...args){const current=form.apply(this,args);return{...current,schema:[field,...current.schema.filter(s=>s.name!=='design')],computeLabel:s=>s.name==='design'?'Card design':current.computeLabel?.(s),computeHelper:s=>s.name==='design'?'Modern beta changes appearance only. Classic preserves the stable design.':current.computeHelper?.(s)};};wrappedForms.add(C.getConfigForm);}}
-  else if(typeof C.getConfigElement==='function'&&!wrappedFactories.has(C.getConfigElement)){const factory=C.getConfigElement;C.getConfigElement=function(...args){if(!window.customElements.get('orbit-modern-config-editor'))window.customElements.define('orbit-modern-config-editor',ModernEditor);const child=factory.apply(this,args);if(child instanceof ModernEditor)return child;const editor=document.createElement('orbit-modern-config-editor');editor.initialize(()=>child);return editor;};wrappedFactories.add(C.getConfigElement);originalFactories.set(C.getConfigElement,factory);}
+  if(typeof C.getConfigForm==='function'){if(!wrappedForms.has(C.getConfigForm)){const form=C.getConfigForm;C.getConfigForm=function(...args){const current=paletteForm(form.apply(this,args),type);return{...current,schema:[field,...current.schema.filter(s=>s.name!=='design')],computeLabel:s=>s.name==='design'?'Card design':current.computeLabel?.(s),computeHelper:s=>s.name==='design'?'Modern beta changes appearance only. Classic preserves the stable design.':current.computeHelper?.(s)};};wrappedForms.add(C.getConfigForm);}}
+  else if(typeof C.getConfigElement==='function'&&!wrappedFactories.has(C.getConfigElement)){const factory=C.getConfigElement;C.getConfigElement=function(...args){if(!window.customElements.get('orbit-modern-config-editor'))window.customElements.define('orbit-modern-config-editor',ModernEditor);const child=factory.apply(this,args);if(child instanceof ModernEditor)return child;const editor=document.createElement('orbit-modern-config-editor');editor.initialize(()=>child,type);return editor;};wrappedFactories.add(C.getConfigElement);originalFactories.set(C.getConfigElement,factory);}
   return C;
  }
  // Let Compact recognize its own inherited factory before installing Modern.

@@ -1,4 +1,5 @@
 import test from 'node:test';
+import {fallbackPaletteTypes} from '../scripts/card-palettes.mjs';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
@@ -7,13 +8,13 @@ const source=readFileSync(new URL('../src/orbit-modern.js',import.meta.url),'utf
 function fixture(){
  class Element{constructor(){this.attrs=new Map();}setAttribute(k,v){this.attrs.set(k,v);}getAttribute(k){return this.attrs.get(k);}removeAttribute(k){this.attrs.delete(k);}}
  const orbitModernProfiles=JSON.parse(readFileSync(new URL('../src/modern-profiles.json',import.meta.url))).profiles;
- const context=vm.createContext({HTMLElement:Element,window:{},console,orbitModernProfiles,CSSStyleSheet:class{replaceSync(css){this.css=css;}}});vm.runInContext(source+';globalThis.modern=orbitModern;',context);
+ const context=vm.createContext({HTMLElement:Element,window:{},console,orbitModernProfiles,orbitPaletteCatalog:JSON.parse(readFileSync(new URL('../src/card-palettes.json',import.meta.url))).palettes,orbitFallbackPaletteTypes:fallbackPaletteTypes,CSSStyleSheet:class{replaceSync(css){this.css=css;}}});vm.runInContext(source+';globalThis.modern=orbitModern;',context);
  class Card extends Element{setConfig(config){if(config.invalid)throw Error('native validation');this.saved=config;this.configCalls=(this.configCalls||0)+1;}static getConfigForm(){return{schema:[{name:'entity'}],computeLabel:s=>s.name};}}
- context.modern.prepare('ha-temperature-orbit-card',Card);return{Card,modern:context.modern};
+ context.modern.prepare('ha-temperature-orbit-card',Card);return{Card,modern:context.modern,Element};
 }
 test('Modern provenance, coverage and immutable feature scope',()=>{
  const m=JSON.parse(readFileSync(new URL('../components.json',import.meta.url))),f=m.suiteFeatures.find(f=>f.id==='modern-design');
- assert.equal(f.sha256,createHash('sha256').update(source).digest('hex'));assert.equal(f.version,'0.2.0');
+ assert.equal(f.sha256,createHash('sha256').update(source).digest('hex'));assert.equal(f.version,'0.3.0');
  assert.deepEqual([...fixture().modern.types],f.types);assert.equal(new Set(f.types).size,37);
  assert.ok(f.types.every(t=>[...m.components,...m.nativeComponents].some(c=>c.types.includes(t))));
 });
@@ -45,3 +46,5 @@ test('inherited editor factories are unwrapped only before Compact, preserving t
  assert.equal(modern.beforeCompact(Child),Child);assert.equal(Child.getConfigElement,native);assert.equal(Parent.getConfigElement,parentFactory);
  class Own extends Parent{static getConfigElement(){return 'custom';}}const own=Own.getConfigElement;modern.beforeCompact(Own);assert.equal(Own.getConfigElement,own);
 });
+
+test('formerly palette-less cards validate and strip palette without recreating source on color switches',()=>{const{modern,Element}=fixture();class Media extends Element{setConfig(c){this.saved=c;this.calls=(this.calls||0)+1;}}modern.prepare('media-player-card',Media);const c=new Media();c.setConfig({entity:'media_player.example',design:'modern',palette:'teal'});assert.equal(c.saved.palette,undefined);assert.equal(c.getAttribute('data-orbit-palette'),'teal');c.setConfig({entity:'media_player.example',design:'modern',palette:'ice'});assert.equal(c.calls,1);for(const palette of ['bad',false,{},12])assert.throws(()=>c.setConfig({palette}),/palette/);assert.equal(c.getAttribute('data-orbit-palette'),'ice');});

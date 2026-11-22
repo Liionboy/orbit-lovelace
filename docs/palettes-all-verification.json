@@ -1,0 +1,46 @@
+{
+  "version": "1.22.0-beta.3",
+  "bundleSha256": "e3fcd83cc736db49552c1659386ed9e51d7c628cfeda03d3a9deff07d515fa96",
+  "primaryTypes": 37,
+  "newPalettes": [
+    "slate",
+    "indigo",
+    "teal",
+    "rose",
+    "amber",
+    "ice"
+  ],
+  "bothDesigns": [
+    "classic",
+    "modern"
+  ],
+  "bothLayouts": [
+    "normal",
+    "compact"
+  ],
+  "gallery": {
+    "screenshots": 56,
+    "cardMounts": 3552,
+    "types": 37,
+    "syntheticHA": true,
+    "nativeHA": false,
+    "physicalCompanion": false
+  },
+  "distinctAccents": "Every type has6 distinct computed accents in each design/layout/light-dark/width combination",
+  "editorCoverage": "Every native form includes6 new values; formerly palette-less legacy editors have exactly one palette selector, preserving design/layout on change",
+  "nodeTests": 1025,
+  "smokeSuites": 2,
+  "modernCases": 9472,
+  "classicBaselines": 74,
+  "compactCases": 111,
+  "fourCardPaletteThemeCases": 3072,
+  "semanticStateCases": 480,
+  "regressions": "Original Controls, Media touch/keyboard/feedback, Bambu media/16geometry/14scroll and Frigate decoded MP4 assertions with Modern and Teal forced in a test-only harness",
+  "immutablePins": 27,
+  "immutableNativeSources": 6,
+  "themesVersionUnchanged": "1.2.0",
+  "syntheticHA": true,
+  "physicalCompanion": false,
+  "nativeHA": false,
+  "liveChanges": false
+}

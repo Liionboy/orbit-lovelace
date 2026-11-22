@@ -1,10 +1,11 @@
 import assert from 'node:assert/strict';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {compactFixtures} from './compact-fixtures.mjs';
-import {paletteCatalog,paletteTypes} from '../scripts/card-palettes.mjs';
+import {paletteCatalog} from '../scripts/card-palettes.mjs';
 const {chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
 const root=new URL('../',import.meta.url),source=await readFile(new URL('dist/orbit-lovelace.js',root),'utf8'),themes=JSON.parse(await readFile(new URL('themes/catalog.json',root),'utf8')).themes;
 const icons={...JSON.parse(await readFile(new URL('test/fixtures/chips-icons.json',root),'utf8')),...JSON.parse(await readFile(new URL('test/fixtures/modern-icons.json',root),'utf8'))};
+const paletteTypes=['ha-room-orbit-card','ha-chips-orbit-card','ha-temperature-orbit-card','frigate-control-card'];
 const names=Object.keys(paletteCatalog.palettes),out=process.env.SCREENSHOT_DIR||new URL('artifacts/palettes/screens/',root).pathname;await mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_EXECUTABLE?{executablePath:process.env.CHROMIUM_EXECUTABLE}:{})}),errors=[],rows=[];
 try{

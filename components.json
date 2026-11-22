@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.22.0-beta.2",
+  "version": "1.22.0-beta.3",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -614,9 +614,9 @@
     {
       "id": "modern-design",
       "origin": "suite",
-      "version": "0.2.0",
+      "version": "0.3.0",
       "source": "src/orbit-modern.js",
-      "sha256": "09c5431c978628f799f19dbc1a91fde8b6b7481ba7b3721404aee7f5dfb78c4d",
+      "sha256": "0056f28b86bd012f2fcedd23727eb6b6dbbd522716f41658335a5525fe21e783",
       "types": [
         "ha-alerts-orbit-card",
         "ha-battery-orbit-card",
@@ -657,21 +657,54 @@
         "ha-bambu-camera-orbit-card"
       ],
       "profiles": "src/modern-profiles.json",
-      "profilesSha256": "4af0cee3765d585fc81805700eb830a744ac5fcb29ced8a550e996f12c6475e7"
+      "profilesSha256": "562094482a2b00a88d09953f63ae0b426cdfe8cedfa569fc9314ebd278f69f9f"
     },
     {
       "id": "card-palettes",
       "origin": "suite",
-      "version": "0.1.0",
+      "version": "0.2.0",
       "source": "scripts/card-palettes.mjs",
-      "sha256": "91aa70b44915b4801a12f8c3d1bd3721df29fc8464ed4b7a16eff9fde29805bf",
+      "sha256": "e39117d4fb48b4d167788e7e52ee4f338d0314a1de4a754a673316ebe38e278d",
       "catalog": "src/card-palettes.json",
-      "catalogSha256": "8dfa00c7dec3266e37feea3b2135d64bdb8d002b8072aa05d01f7e93e8617ce3",
+      "catalogSha256": "b8f231c030a5c81b335a0dfbb2b6ddc20ee6da0e6ca1f91e9468657b0e411abb",
       "types": [
+        "ha-alerts-orbit-card",
+        "ha-battery-orbit-card",
+        "ha-fan-orbit-card",
+        "ha-nas-orbit-card",
+        "ha-person-orbit-card",
         "ha-room-orbit-card",
-        "ha-chips-orbit-card",
+        "ha-scenes-orbit-card",
+        "ha-sensor-graph-orbit-card",
+        "ha-server-orbit-card",
+        "ha-speedtest-orbit-card",
+        "unifi-orbit-card",
+        "unifi-command-center-card",
+        "ha-vacuum-commander-card",
+        "ha-weather-orbit-card",
+        "ha-welcome-orbit-card",
+        "action-button-card",
+        "alecoair-dehumidifier-card",
+        "animated-gate-card",
+        "climate-control-card",
+        "frigate-control-card",
+        "home-connect-washer-card",
+        "hp-printer-card",
+        "luma-control-card",
+        "pihole-control-card",
+        "sensor-meter-card",
+        "switch-control-card",
+        "media-player-card",
+        "temperature-humidity-card",
+        "ha-select-orbit-card",
+        "ha-number-orbit-card",
         "ha-temperature-orbit-card",
-        "frigate-control-card"
+        "ha-gauge-orbit-card",
+        "ha-chips-orbit-card",
+        "ha-title-orbit-card",
+        "ha-bambu-print-orbit-card",
+        "ha-bambu-ams-orbit-card",
+        "ha-bambu-camera-orbit-card"
       ]
     }
   ]

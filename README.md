@@ -6,9 +6,9 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
-## Preview in v1.22.0-beta.2 — Orbit Modern
+## Preview in v1.22.0-beta.3 — Orbit Modern
 
-Optional **Card design → Classic / Modern · beta** on **all 37 cards**, independent of Normal/Compact. Clean surfaces, calmer typography, rounded-square icons and restrained accents; existing cards remain Classic by default. Six new [modern palettes](docs/PALETTES.md) on Room/Chips/Temperature/Frigate: Slate, Indigo, Teal, Rose, Amber and Ice. Other cards retain their existing palette options. No live dashboard changes or camera codec fix. **Stable remains v1.21.1.** [Preview gallery, beta installation and rollback](docs/MODERN.md) · [Optional generic demo dashboard](examples/modern-dashboard.yaml).
+Optional **Card design → Classic / Modern · beta** on **all 37 cards**, independent of Normal/Compact. Clean surfaces, calmer typography, rounded-square icons and restrained accents; existing cards remain Classic by default. Six new [modern palettes](docs/PALETTES.md) on all 37 cards: Slate, Indigo, Teal, Rose, Amber and Ice. All cards expose the same six additional choices. No live dashboard changes or camera codec fix. **Stable remains v1.21.1.** [Preview gallery, beta installation and rollback](docs/MODERN.md) · [Optional generic demo dashboard](examples/modern-dashboard.yaml).
 
 ## Fixed in v1.21.1 — Stable Bambu scrolling
 

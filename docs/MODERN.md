@@ -1,6 +1,6 @@
 # Orbit Modern — Design Refresh beta
 
-**Available in v1.22.0-beta.2; not promoted to stable.** Modern 0.2.0 is an optional suite-owned presentation for **all 37 primary card types**. Classic remains the default on every existing card. Beta.1 introduced the first four treatments; beta.2 extends the same visual system across the collection.
+**Available in v1.22.0-beta.3; not promoted to stable.** Modern 0.3.0 is an optional suite-owned presentation for **all 37 primary card types**. Classic remains the default on every existing card. Beta.1 introduced the first four treatments; beta.2 extends the same visual system across the collection.
 
 ## Visual direction
 
@@ -27,7 +27,7 @@ These are **the actual final bundle**, with synthetic entities/history, licensed
 
 ## Install and try
 
-1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.2**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
+1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.3**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
 2. Fully reload the frontend/Companion app so the new constructors replace cached ones. Keep the **same single Orbit resource**; do not add standalone resources.
 3. Edit any Orbit card and select **Card design → Modern · beta**. Keep Card layout Normal or Compact as preferred. For YAML, add `design: modern` to that card.
 4. A small generic [demo dashboard](../examples/modern-dashboard.yaml) is provided. Replace example entity IDs and import into a **new empty dashboard**, never over your existing configuration. Importing is optional; existing cards can be edited individually.
@@ -53,13 +53,13 @@ Choose **Classic**, use `design: classic`, or remove `design` to restore the sta
 
 The suite imports/pins, six native modules, Compact runtime/profiles and optional Themes 1.2.0 are unchanged. Modern lives in separately hashed `src/orbit-modern.js` and explicit `src/modern-profiles.json` and wraps constructors before registration. CSS attaches to each selected card's shadow root; existing media/controller implementations remain in place.
 
-See [beta.2 verification](modern-all-verification.json) and the historical [beta.1 verification](modern-verification.json) for measured coverage. Tests cover stable Classic comparisons, supported themes/layouts/widths, invalid configuration, editor roundtrips, no-query CSS switches, native action/More Info handlers and final-bundle gallery captures. Synthetic tests do not establish native HA editor, Safari/Companion, assistive-technology or hardware behavior. No live HA dashboard, resource, theme or device was changed.
+See [beta.3 verification](palettes-all-verification.json) and the historical [beta.1 verification](modern-verification.json) for measured coverage. Tests cover stable Classic comparisons, supported themes/layouts/widths, invalid configuration, editor roundtrips, no-query CSS switches, native action/More Info handlers and final-bundle gallery captures. Synthetic tests do not establish native HA editor, Safari/Companion, assistive-technology or hardware behavior. No live HA dashboard, resource, theme or device was changed.
 
-## Beta.2 collection coverage
+## Beta.3 collection coverage
 
 Every type receives the Modern frame, typography and focus treatment; explicit per-card profiles refine native icon and inner-surface shapes without replacing controls, artwork, charts, topology or device animations. Title and Chips remain unframed. Compact retains its primary actions and Details behavior.
 
-[Six additional palettes](PALETTES.md) are available on Room, Chips, Temperature and Frigate; this palette expansion is separate from all-card Modern support. Other cards keep their existing palette selectors.
+[Six additional palettes](PALETTES.md) are available on every one of the 37 cards, in both designs and layouts.
 
 | Type | Per-card treatment |
 | --- | --- |
@@ -101,7 +101,7 @@ Every type receives the Modern frame, typography and focus treatment; explicit p
 | `custom:ha-bambu-ams-orbit-card` | Clean tray surfaces; real material colors and remaining data retained |
 | `custom:ha-bambu-camera-orbit-card` | Quiet camera chrome; media lifecycle and frame geometry retained |
 
-### Actual beta.2 collection previews
+### Actual beta.3 collection previews
 
 ![Modern home, dark desktop](images/modern-all-home-dark.png)
 

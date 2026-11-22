@@ -1,6 +1,6 @@
 # Included card catalog
 
-**Beta v1.22.0-beta.2:** optional [Modern design](docs/MODERN.md) on all 37 primary types. Classic remains the default; imported/native sources remain unchanged. Modern 0.2.0 and explicit per-type profiles are traced in `components.json`. Six new [palettes](docs/PALETTES.md) are available on Room/Chips/Temperature/Frigate; other card palettes are unchanged.
+**Beta v1.22.0-beta.3:** optional [Modern design](docs/MODERN.md) on all 37 primary types. Classic remains the default; imported/native sources remain unchanged. Modern 0.3.0 and explicit per-type profiles are traced in `components.json`. Six new [palettes](docs/PALETTES.md) are available on all 37 cards.
 
 **Stable v1.21.1:** Bambu Orbit1.0.1 preserves camera/model preview geometry during viewport/tab visibility cleanup, preventing media-induced scroll shifts. Same configurations and resource; other34 cards,27 imported pins, Compact profiles/runtime and Themes1.2.0 unchanged. [Details](docs/BAMBU.md#mobile-scroll-stability).
 

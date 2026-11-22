@@ -8,7 +8,7 @@ import {welcomeNormalToolbar} from './welcome-normal-toolbar.mjs';
 import {lumaAppearance} from './luma-appearance.mjs';
 import {switchStateIcon} from './switch-state-icon.mjs';
 import {frigateLive} from './frigate-live.mjs';
-import {applyCardPalettes} from './card-palettes.mjs';
+import {applyCardPalettes,fallbackPaletteTypes,paletteCatalog} from './card-palettes.mjs';
 export const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 export const manifest=JSON.parse(readFileSync(resolve(root,'components.json'),'utf8'));
 export const components=[...manifest.components,...(manifest.nativeComponents||[])];
@@ -48,12 +48,12 @@ export function componentSource(c){
  if(c.id==='lovelace-luma-control-card'){
   const feature=manifest.suiteFeatures.find(f=>f.id==='luma-appearance');
   if(!feature||createHash('sha256').update(readFileSync(resolve(root,feature.source))).digest('hex')!==feature.sha256)throw Error('Luma appearance provenance mismatch');
-  return lumaAppearance(themed.source);
+  return applyCardPalettes(lumaAppearance(themed.source),c.id);
  }
  if(c.id==='lovelace-switch-control-card'){
   const feature=manifest.suiteFeatures.find(f=>f.id==='switch-state-icon');
   if(!feature||createHash('sha256').update(readFileSync(resolve(root,feature.source))).digest('hex')!==feature.sha256)throw Error('Switch state icon provenance mismatch');
-  return switchStateIcon(themed.source);
+  return applyCardPalettes(switchStateIcon(themed.source),c.id);
  }
  if(c.id==='lovelace-frigate-control-card'){
   const f=manifest.suiteFeatures.find(f=>f.id==='frigate-live');
@@ -77,6 +77,7 @@ export function build(){
  const notices=['LICENSE','licenses/lit-LICENSE','licenses/lit-html-LICENSE','licenses/lit-element-LICENSE','licenses/@lit-reactive-element-LICENSE','licenses/custom-card-helpers-LICENSE'].map(file=>file+NL+readFileSync(resolve(root,file),'utf8')).join(NL+NL);
  const lines=['/* Orbit Lovelace v'+manifest.version+' — MIT. */','/*'+NL+notices+NL+'*/','(() => {','const suite = window.orbitLovelace ||= {version:'+JSON.stringify(manifest.version)+',components:{},skipped:{},errors:[]};'];
  lines.push(compact.runtime);
+ lines.push('const orbitPaletteCatalog='+JSON.stringify(paletteCatalog.palettes)+';const orbitFallbackPaletteTypes='+JSON.stringify(fallbackPaletteTypes)+';');
  lines.push('const orbitModernProfiles='+JSON.stringify(modernProfiles.profiles)+';',modernRuntime);
  for(const c of components){
   const types=[...c.types,...c.aliases];
