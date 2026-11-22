@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFile,mkdir,writeFile} from 'node:fs/promises';
 import {compactFixtures} from './compact-fixtures.mjs';
 const{chromium}=await import(process.env.PLAYWRIGHT_MODULE||'playwright');
-const source=await readFile(new URL('../dist/orbit-lovelace.js',import.meta.url),'utf8'),manifest=JSON.parse(await readFile(new URL('../components.json',import.meta.url),'utf8')),catalog=JSON.parse(await readFile(new URL('../themes/catalog.json',import.meta.url),'utf8'));
+const source=await readFile(process.env.CARD_RESOURCE||new URL('../dist/orbit-lovelace.js',import.meta.url),'utf8'),manifest=JSON.parse(await readFile(new URL('../components.json',import.meta.url),'utf8')),catalog=JSON.parse(await readFile(new URL('../themes/catalog.json',import.meta.url),'utf8'));
 const types=[...manifest.components,...manifest.nativeComponents].flatMap(c=>c.types),out=process.env.SCREENSHOT_DIR;if(out)await mkdir(out,{recursive:true});
 const browser=await chromium.launch({headless:true,...(process.env.CHROMIUM_EXECUTABLE?{executablePath:process.env.CHROMIUM_EXECUTABLE}:{})});
 const errors=[],measurements=[];

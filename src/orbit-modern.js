@@ -1,6 +1,6 @@
-/* Orbit Modern v0.1.0 — MIT. Optional, suite-owned presentation only. */
+/* Orbit Modern v0.2.0 — MIT. Optional, suite-owned presentation only. */
 const orbitModern = (() => {
- const types = ['ha-room-orbit-card','ha-chips-orbit-card','ha-temperature-orbit-card','frigate-control-card'];
+ const types = Object.keys(orbitModernProfiles),wrappedMethods=new WeakSet(),wrappedForms=new WeakSet(),wrappedFactories=new WeakSet(),originalFactories=new WeakMap();
  const field = {name:'design',default:'classic',selector:{select:{options:[{value:'classic',label:'Classic'},{value:'modern',label:'Modern · beta'}],mode:'dropdown'}}};
  const common = `
  :host([data-orbit-design=modern]){font-family:var(--ha-font-family-body,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);-webkit-font-smoothing:antialiased}
@@ -63,6 +63,7 @@ const orbitModern = (() => {
  `
  };
  function attach(card,type){
+  type=types.includes(card.localName)?card.localName:type;
   if(!card.shadowRoot||card.getAttribute('data-orbit-design')!=='modern')return;
   const root=card.shadowRoot;
   if(typeof CSSStyleSheet!=='undefined'&&CSSStyleSheet.prototype.replaceSync&&'adoptedStyleSheets' in root){
@@ -71,8 +72,12 @@ const orbitModern = (() => {
   }else{let style=root.querySelector('style[data-orbit-modern]');if(!style){style=document.createElement('style');style.dataset.orbitModern='';style.textContent=cssFor(type);root.append(style);}else if(style.nextSibling)root.append(style);}
  }
  function cssFor(type){
-  const specific=type==='ha-room-orbit-card'?styles[type].replaceAll(':host([data-orbit-design=modern])',':host([data-orbit-design=modern]:not([data-orbit-layout=compact]))'):styles[type];
-  return common+specific+(type==='ha-room-orbit-card'?':host([data-orbit-design=modern]) .quick.quick,:host([data-orbit-design=modern]) .action.action{min-height:44px;height:44px}':'');
+  const profile=orbitModernProfiles[type],scope=':host([data-orbit-design=modern]:not([data-orbit-layout=compact])) ';
+  const rule=(selector,body)=>selector?selector.split(',').map(s=>scope+s.trim()).join(',')+'{'+body+'}':'';
+  const perCard=rule(profile.heading,'font-weight:650;letter-spacing:-.02em')+rule(profile.icon,'border-radius:12px;box-shadow:none;outline:none')+rule(profile.surface,'border-radius:12px;box-shadow:none')+(profile.css?profile.css.replace(/(^|})([^{}]+){/g,(_,start,selectors)=>start+selectors.split(',').map(s=>':host([data-orbit-design=modern]) '+s.trim()).join(',')+'{'):'');
+  const specific=type==='ha-room-orbit-card'?styles[type].replaceAll(':host([data-orbit-design=modern])',scope.trim()):(styles[type]||'');
+  const narrow=profile.narrowContainer?'@container '+profile.narrowContainer+' (max-width:240px){:host([data-orbit-design=modern]) .shell.shell{padding:12px}}':'';
+  return common+perCard+specific+narrow+(type==='ha-room-orbit-card'?':host([data-orbit-design=modern]) .quick.quick,:host([data-orbit-design=modern]) .action.action{min-height:44px;height:44px}':'');
  }
  class ModernEditor extends HTMLElement{
   constructor(){super();this.attachShadow({mode:'open'});this.shadowRoot.innerHTML='<style>label{display:grid;gap:8px;margin-bottom:16px;color:var(--primary-text-color);font:inherit}select{min-height:44px;padding:8px;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);color:inherit;font:inherit}</style><label>Card design<select aria-label="Card design"><option value="classic">Classic</option><option value="modern">Modern · beta</option></select></label><div id="editor"></div>';this._select=this.shadowRoot.querySelector('select');this._select.addEventListener('change',()=>{this._config={...this._config,design:this._select.value};this._emit();});}
@@ -86,7 +91,7 @@ const orbitModern = (() => {
  function prepare(type,C){
   if(!types.includes(type))return C;
   const p=C.prototype,original=p.setConfig;
-  p.setConfig=function(config){
+  if(!wrappedMethods.has(original)){p.setConfig=function(config){
    if(!config||typeof config!=='object'||Array.isArray(config))return original.call(this,config);
    const design=config.design??'classic';if(!['classic','modern'].includes(design))throw Error('design must be classic or modern.');
    const next={...config};delete next.design;const signature=JSON.stringify(next);
@@ -95,11 +100,14 @@ const orbitModern = (() => {
    this._orbitModernDesign=design;
    if(design==='modern')this.setAttribute('data-orbit-design','modern');else this.removeAttribute('data-orbit-design');
    attach(this,type);return result;
-  };
-  for(const name of ['_render','_build','connectedCallback'])if(typeof p[name]==='function'){const method=p[name];p[name]=function(...args){const result=method.apply(this,args);attach(this,type);return result;};}
-  if(typeof C.getConfigForm==='function'){const form=C.getConfigForm;C.getConfigForm=function(...args){const current=form.apply(this,args);return{...current,schema:[field,...current.schema],computeLabel:s=>s.name==='design'?'Card design':current.computeLabel?.(s),computeHelper:s=>s.name==='design'?'Modern beta changes appearance only. Classic preserves the stable design.':current.computeHelper?.(s)};};}
-  else if(typeof C.getConfigElement==='function'){const factory=C.getConfigElement;C.getConfigElement=function(...args){if(!window.customElements.get('orbit-modern-config-editor'))window.customElements.define('orbit-modern-config-editor',ModernEditor);const editor=document.createElement('orbit-modern-config-editor');editor.initialize(()=>factory.apply(this,args));return editor;};}
+  };wrappedMethods.add(p.setConfig);}
+  for(const name of ['_render','_build','_draw','_paint','draw','render','updated','connectedCallback'])if((typeof p[name]==='function'||name==='updated'&&typeof p.requestUpdate==='function')&&!wrappedMethods.has(p[name])){const method=p[name];p[name]=function(...args){const result=method?.apply(this,args);attach(this,type);return result;};wrappedMethods.add(p[name]);}
+  if(typeof C.getConfigForm==='function'){if(!wrappedForms.has(C.getConfigForm)){const form=C.getConfigForm;C.getConfigForm=function(...args){const current=form.apply(this,args);return{...current,schema:[field,...current.schema.filter(s=>s.name!=='design')],computeLabel:s=>s.name==='design'?'Card design':current.computeLabel?.(s),computeHelper:s=>s.name==='design'?'Modern beta changes appearance only. Classic preserves the stable design.':current.computeHelper?.(s)};};wrappedForms.add(C.getConfigForm);}}
+  else if(typeof C.getConfigElement==='function'&&!wrappedFactories.has(C.getConfigElement)){const factory=C.getConfigElement;C.getConfigElement=function(...args){if(!window.customElements.get('orbit-modern-config-editor'))window.customElements.define('orbit-modern-config-editor',ModernEditor);const child=factory.apply(this,args);if(child instanceof ModernEditor)return child;const editor=document.createElement('orbit-modern-config-editor');editor.initialize(()=>child);return editor;};wrappedFactories.add(C.getConfigElement);originalFactories.set(C.getConfigElement,factory);}
   return C;
  }
- return{prepare,types};
+ // Let Compact recognize its own inherited factory before installing Modern.
+ // Otherwise a subclass gains Modern > Compact > Modern > Compact editors.
+ function beforeCompact(C){const factory=C.getConfigElement;if(!Object.hasOwn(C,'getConfigElement')&&originalFactories.has(factory))Object.defineProperty(C,'getConfigElement',{value:originalFactories.get(factory),writable:true,configurable:true});return C;}
+ return{prepare,beforeCompact,types};
 })();

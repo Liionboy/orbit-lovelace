@@ -1,6 +1,6 @@
 # Orbit Modern — Design Refresh beta
 
-**Available in v1.22.0-beta.1; not promoted to stable.** Modern 0.1.0 is an optional suite-owned presentation for Room, Chips, Temperature and Frigate. The other 33 cards retain their existing design. Classic remains the default on every existing card.
+**Available in v1.22.0-beta.2; not promoted to stable.** Modern 0.2.0 is an optional suite-owned presentation for **all 37 primary card types**. Classic remains the default on every existing card. Beta.1 introduced the first four treatments; beta.2 extends the same visual system across the collection.
 
 ## Visual direction
 
@@ -27,9 +27,9 @@ These are **the actual final bundle**, with synthetic entities/history, licensed
 
 ## Install and try
 
-1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.1**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
+1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.2**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
 2. Fully reload the frontend/Companion app so the new constructors replace cached ones. Keep the **same single Orbit resource**; do not add standalone resources.
-3. Edit one of the four supported cards and select **Card design → Modern · beta**. Keep Card layout Normal or Compact as preferred. For YAML, add `design: modern` to that card.
+3. Edit any Orbit card and select **Card design → Modern · beta**. Keep Card layout Normal or Compact as preferred. For YAML, add `design: modern` to that card.
 4. A small generic [demo dashboard](../examples/modern-dashboard.yaml) is provided. Replace example entity IDs and import into a **new empty dashboard**, never over your existing configuration. Importing is optional; existing cards can be edited individually.
 
 ```yaml
@@ -43,7 +43,7 @@ layout: normal
 design: modern
 ```
 
-Supported types: `custom:ha-room-orbit-card`, `custom:ha-chips-orbit-card`, `custom:ha-temperature-orbit-card`, `custom:frigate-control-card`. Native forms expose the design selector on Room/Temperature/Frigate; Chips has it above its existing visual editor. All other card fields are preserved.
+Supported types: all 37 primary types listed below. Legacy aliases are compatibility names, not additional cards. Native forms expose a separate design selector; legacy visual editors receive a design selector above their existing fields. Inherited UniFi editors retain exactly one design and one layout selector. All other card fields are preserved.
 
 ## Reset and rollback
 
@@ -51,6 +51,66 @@ Choose **Classic**, use `design: classic`, or remove `design` to restore the sta
 
 ## Verification boundaries
 
-The suite imports/pins, six native modules, Compact runtime/profiles and optional Themes 1.2.0 are unchanged. Modern lives in separately hashed `src/orbit-modern.js` and wraps constructors before registration. CSS attaches to each selected card's shadow root; existing media/controller implementations remain in place.
+The suite imports/pins, six native modules, Compact runtime/profiles and optional Themes 1.2.0 are unchanged. Modern lives in separately hashed `src/orbit-modern.js` and explicit `src/modern-profiles.json` and wraps constructors before registration. CSS attaches to each selected card's shadow root; existing media/controller implementations remain in place.
 
-See [verification](modern-verification.json) for measured coverage. Tests cover stable Classic comparisons, supported themes/layouts/widths, invalid configuration, editor roundtrips, no-query CSS switches, native action/More Info handlers and final-bundle gallery captures. Synthetic tests do not establish native HA editor, Safari/Companion, assistive-technology or hardware behavior. No live HA dashboard, resource, theme or device was changed.
+See [beta.2 verification](modern-all-verification.json) and the historical [beta.1 verification](modern-verification.json) for measured coverage. Tests cover stable Classic comparisons, supported themes/layouts/widths, invalid configuration, editor roundtrips, no-query CSS switches, native action/More Info handlers and final-bundle gallery captures. Synthetic tests do not establish native HA editor, Safari/Companion, assistive-technology or hardware behavior. No live HA dashboard, resource, theme or device was changed.
+
+## Beta.2 collection coverage
+
+Every type receives the Modern frame, typography and focus treatment; explicit per-card profiles refine native icon and inner-surface shapes without replacing controls, artwork, charts, topology or device animations. Title and Chips remain unframed. Compact retains its primary actions and Details behavior.
+
+[Six additional palettes](PALETTES.md) are available on Room, Chips, Temperature and Frigate; this palette expansion is separate from all-card Modern support. Other cards keep their existing palette selectors.
+
+| Type | Per-card treatment |
+| --- | --- |
+| `custom:ha-alerts-orbit-card` | Quiet alert list; severity colors and complete rows retained |
+| `custom:ha-battery-orbit-card` | Clean battery overview; low/charging indicators retained |
+| `custom:ha-fan-orbit-card` | Calm fan identity with full speed and oscillation controls |
+| `custom:ha-nas-orbit-card` | Clean storage and drive telemetry; health semantics retained |
+| `custom:ha-person-orbit-card` | Readable identity and paired readings; avatar and presence retained |
+| `custom:ha-room-orbit-card` | Existing Modern Room treatment with touch-friendly shortcuts |
+| `custom:ha-scenes-orbit-card` | Clean scene tiles; confirmation, pending and scripts retained |
+| `custom:ha-sensor-graph-orbit-card` | Quiet chart frames; labels, gaps and history retained |
+| `custom:ha-server-orbit-card` | Clean server metrics; power guards and availability retained |
+| `custom:ha-speedtest-orbit-card` | Calm throughput typography; radar and reported readings retained |
+| `custom:unifi-orbit-card` | Quiet topology surface; nodes, selection and links retained |
+| `custom:unifi-command-center-card` | Clean command-center topology; all interaction retained |
+| `custom:ha-vacuum-commander-card` | Clean vacuum identity; room selection and command guards retained |
+| `custom:ha-weather-orbit-card` | Quiet forecast tiles and bars; current marker and clock retained |
+| `custom:ha-welcome-orbit-card` | Clean welcome surface; bold clock, date and native navigation retained |
+| `custom:action-button-card` | Calm action surface; confirmation and pending/error feedback retained |
+| `custom:alecoair-dehumidifier-card` | Clear humidity readings; target, modes and power retained |
+| `custom:animated-gate-card` | Quiet gate scene; reported movement and command guards retained |
+| `custom:climate-control-card` | Clean thermostat readings; targets, steps and HVAC semantics retained |
+| `custom:frigate-control-card` | Existing Modern camera treatment; stable frame and native player retained |
+| `custom:home-connect-washer-card` | Quiet appliance telemetry; progress, warnings and drum animation retained |
+| `custom:hp-printer-card` | Clean printer summary; ink colors and alerts retained |
+| `custom:luma-control-card` | Clean light controls; real RGB, brightness and native feedback retained |
+| `custom:pihole-control-card` | Quiet DNS telemetry; pause, enable and error feedback retained |
+| `custom:sensor-meter-card` | Calm numeric readout; configured scale and units retained |
+| `custom:switch-control-card` | Clean switch surface; neutral OFF icon and real state retained |
+| `custom:media-player-card` | Quiet media chrome; artwork, touch controls and command feedback retained |
+| `custom:temperature-humidity-card` | Calm temperature/humidity tiles; independent scales and units retained |
+| `custom:ha-select-orbit-card` | Clean selector surface; options and pending/error guards retained |
+| `custom:ha-number-orbit-card` | Clean numeric control; draft, range and decimal-step guards retained |
+| `custom:ha-temperature-orbit-card` | Existing Modern temperature treatment with scoped history |
+| `custom:ha-gauge-orbit-card` | Quiet gauge typography; exact arc, marker and range semantics retained |
+| `custom:ha-chips-orbit-card` | Existing unframed slim Modern chip collection |
+| `custom:ha-title-orbit-card` | Transparent semantic heading; no tile, state or controls |
+| `custom:ha-bambu-print-orbit-card` | Clean print telemetry; progress, alerts and reserved media geometry retained |
+| `custom:ha-bambu-ams-orbit-card` | Clean tray surfaces; real material colors and remaining data retained |
+| `custom:ha-bambu-camera-orbit-card` | Quiet camera chrome; media lifecycle and frame geometry retained |
+
+### Actual beta.2 collection previews
+
+![Modern home, dark desktop](images/modern-all-home-dark.png)
+
+![Modern controls, light desktop](images/modern-all-controls-light.png)
+
+![Modern monitoring, dark desktop](images/modern-all-monitoring-dark.png)
+
+![Modern devices, light desktop](images/modern-all-devices-light.png)
+
+![Modern controls, compact phone](images/modern-all-controls-phone.png)
+
+These use synthetic data and labelled media stubs. The device player/codec/stream resolution is unchanged; Modern is not a fix for the still-unconfirmed physical-phone scroll issue or H.265 decoding. Existing beta.1 four-card comparison images above remain historical previews.

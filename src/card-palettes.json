@@ -1,0 +1,11 @@
+{
+  "version": "0.1.0",
+  "palettes": {
+    "slate": {"label": "Slate", "colors": ["#7a8da5", "#9baac0", "#bbc6d5"]},
+    "indigo": {"label": "Indigo", "colors": ["#8076ed", "#9c91f5", "#b8aff9"]},
+    "teal": {"label": "Teal", "colors": ["#28aa9a", "#60bdb0", "#91cec4"]},
+    "rose": {"label": "Rose", "colors": ["#d56d98", "#e494b3", "#edb3ca"]},
+    "amber": {"label": "Amber", "colors": ["#d4a34b", "#dfbd7b", "#ead1a2"]},
+    "ice": {"label": "Ice", "colors": ["#55a8c9", "#83bfd8", "#aed6e5"]}
+  }
+}

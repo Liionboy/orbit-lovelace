@@ -1,0 +1,75 @@
+{
+  "version": "1.22.0-beta.2",
+  "matrixCases": 3072,
+  "narrowCases": 24,
+  "semanticCases": 480,
+  "minimumIconContrast": 3.0574021313430957,
+  "paletteCatalog": {
+    "version": "0.1.0",
+    "palettes": {
+      "slate": {
+        "label": "Slate",
+        "colors": [
+          "#7a8da5",
+          "#9baac0",
+          "#bbc6d5"
+        ]
+      },
+      "indigo": {
+        "label": "Indigo",
+        "colors": [
+          "#8076ed",
+          "#9c91f5",
+          "#b8aff9"
+        ]
+      },
+      "teal": {
+        "label": "Teal",
+        "colors": [
+          "#28aa9a",
+          "#60bdb0",
+          "#91cec4"
+        ]
+      },
+      "rose": {
+        "label": "Rose",
+        "colors": [
+          "#d56d98",
+          "#e494b3",
+          "#edb3ca"
+        ]
+      },
+      "amber": {
+        "label": "Amber",
+        "colors": [
+          "#d4a34b",
+          "#dfbd7b",
+          "#ead1a2"
+        ]
+      },
+      "ice": {
+        "label": "Ice",
+        "colors": [
+          "#55a8c9",
+          "#83bfd8",
+          "#aed6e5"
+        ]
+      }
+    }
+  },
+  "syntheticHA": true,
+  "nativeHA": false,
+  "physicalCompanion": false,
+  "bundleSha256": "d8ec034bc6bd8c8b0a2146d1b1a3ab81829a5b179fef06761238923120664ce2",
+  "paletteAdapterSha256": "91aa70b44915b4801a12f8c3d1bd3721df29fc8464ed4b7a16eff9fde29805bf",
+  "paletteCatalogSha256": "8dfa00c7dec3266e37feea3b2135d64bdb8d002b8072aa05d01f7e93e8617ce3",
+  "supportedTypes": [
+    "ha-room-orbit-card",
+    "ha-chips-orbit-card",
+    "ha-temperature-orbit-card",
+    "frigate-control-card"
+  ],
+  "screenshots": 4,
+  "measurements": "Identity icon contrast against its own local surface; not general accessibility certification",
+  "liveChanges": false
+}
