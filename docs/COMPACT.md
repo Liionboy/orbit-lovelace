@@ -1,5 +1,15 @@
 # Selectable Compact layouts — v1.14.0
 
+## Current beta: always-visible Compact (v1.22.0-beta.4)
+
+All 37 card types retain Compact typography, spacing and a single primary identity, but secondary content is now visible immediately. There is no suite Show/Hide Details arrow and no extra YAML option: existing `layout: compact` adopts this behavior after updating to beta.4 and fully reloading. This applies to Classic and Modern, with every palette. Normal is unchanged; stable Latest remains v1.21.1.
+
+![Compact without a Details arrow — real cards with synthetic data](images/compact-open-phone.png)
+
+Graphs, forecasts, measurements, lists and camera previews remain in the compact card instead of an extra collapsed layer. Cards are naturally taller than the old closed summaries. Native controls such as Adjust, Browse, Room navigation and Welcome shortcut expansion still perform their original jobs; device guards, alarms and confirmation steps are not bypassed. Cameras start only while visible/online and pause offscreen or in a hidden tab, without collapsing their media frame.
+
+[Verification](compact-open-verification.json). `npm run test:compact:browser` now checks always-open behavior against the previous beta's expanded content. Older closed-tile/disclosure fixtures and the sections below describe historical stable behavior, not the beta.4 interaction contract. The published beta does not alter a live dashboard, resource or theme. Physical Companion/Safari and native HA remain unverified.
+
 ## Bambu cards (suite1.21.0+)
 
 Print/Camera use a reported-state summary with native More Info and secondary telemetry/media in Details. HMS/print errors remain outside the collapsed panels. Native media is removed when Compact Details closes, not merely hidden behind CSS. AMS is a collection: all configured slots remain visible, with no aggregate tile or Details arrow; only typography/spacing reduces. The34 previous profiles/runtime are unchanged. [Configuration and dashboard](BAMBU.md).

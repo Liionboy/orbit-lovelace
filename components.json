@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.22.0-beta.3",
+  "version": "1.22.0-beta.4",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -571,11 +571,11 @@
     {
       "id": "compact-layouts",
       "origin": "suite",
-      "version": "0.3.4",
+      "version": "0.4.0",
       "source": "src/orbit-compact.js",
-      "sha256": "b610506b7545fcdfb43da6a8425ed464839a1d0e8e2491874685552168843ee5",
+      "sha256": "3651c436f783840ed37aa4e33b181644e216c4258d98b354f2dd276eceaa7a2d",
       "profiles": "src/compact-profiles.json",
-      "profilesSha256": "cc409831c89e4c2485b50084a97f79ee85e45575e450f065ebd5ab58b0638795",
+      "profilesSha256": "db0eb0d6549325a117d279e002b2474e8010a9e0323c7cead99a52a281ca5518",
       "adaptation": "scripts/welcome-normal-toolbar.mjs",
       "adaptationSha256": "6e9be8d99c010b286ee75942082c6601626349fa54e4d619761d7048e3d296d7"
     },

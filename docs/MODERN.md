@@ -1,6 +1,6 @@
 # Orbit Modern — Design Refresh beta
 
-**Available in v1.22.0-beta.3; not promoted to stable.** Modern 0.3.0 is an optional suite-owned presentation for **all 37 primary card types**. Classic remains the default on every existing card. Beta.1 introduced the first four treatments; beta.2 extends the same visual system across the collection.
+**Available in v1.22.0-beta.4; not promoted to stable.** Modern 0.3.0 is an optional suite-owned presentation for **all 37 primary card types**. Classic remains the default on every existing card. Beta.1 introduced the first four treatments; beta.2 extends the same visual system across the collection.
 
 ## Visual direction
 
@@ -11,7 +11,7 @@ Clean surfaces instead of layered decorative gradients; quieter borders/shadows;
 - **Temperature:** a calmer large reading, squared icon surface, lighter graph grid and neutral min/max containers. Recorded data, units, missing states and history requests are unchanged.
 - **Frigate:** quieter header, a larger visual emphasis on the camera, thin separated detection readings and preserved status/errors. The frame stays 16:9; image/player/codec behavior is unchanged. This beta does **not** fix H.265/MP4 compatibility or increase a camera's resolution.
 
-Normal/Compact is independent of Classic/Modern. Compact still uses the existing tile and Details behavior; Modern does not force secondary content open or remove warnings/actions.
+Normal/Compact is independent of Classic/Modern. Beta.4 keeps compact typography and spacing, with all secondary content visible immediately and no suite Details chevron. Original Adjust/Browse/navigation controls retain their own semantics. Cards can be taller than the former collapsed tiles.
 
 ## Preview
 
@@ -27,7 +27,7 @@ These are **the actual final bundle**, with synthetic entities/history, licensed
 
 ## Install and try
 
-1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.3**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
+1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.4**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
 2. Fully reload the frontend/Companion app so the new constructors replace cached ones. Keep the **same single Orbit resource**; do not add standalone resources.
 3. Edit any Orbit card and select **Card design → Modern · beta**. Keep Card layout Normal or Compact as preferred. For YAML, add `design: modern` to that card.
 4. A small generic [demo dashboard](../examples/modern-dashboard.yaml) is provided. Replace example entity IDs and import into a **new empty dashboard**, never over your existing configuration. Importing is optional; existing cards can be edited individually.
@@ -53,7 +53,7 @@ Choose **Classic**, use `design: classic`, or remove `design` to restore the sta
 
 The suite imports/pins, six native modules, Compact runtime/profiles and optional Themes 1.2.0 are unchanged. Modern lives in separately hashed `src/orbit-modern.js` and explicit `src/modern-profiles.json` and wraps constructors before registration. CSS attaches to each selected card's shadow root; existing media/controller implementations remain in place.
 
-See [beta.3 verification](palettes-all-verification.json) and the historical [beta.1 verification](modern-verification.json) for measured coverage. Tests cover stable Classic comparisons, supported themes/layouts/widths, invalid configuration, editor roundtrips, no-query CSS switches, native action/More Info handlers and final-bundle gallery captures. Synthetic tests do not establish native HA editor, Safari/Companion, assistive-technology or hardware behavior. No live HA dashboard, resource, theme or device was changed.
+See [beta.4 Compact verification](compact-open-verification.json) and [beta.3 palette verification](palettes-all-verification.json) and the historical [beta.1 verification](modern-verification.json) for measured coverage. Tests cover stable Classic comparisons, supported themes/layouts/widths, invalid configuration, editor roundtrips, no-query CSS switches, native action/More Info handlers and final-bundle gallery captures. Synthetic tests do not establish native HA editor, Safari/Companion, assistive-technology or hardware behavior. No live HA dashboard, resource, theme or device was changed.
 
 ## Beta.3 collection coverage
 

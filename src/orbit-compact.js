@@ -1,12 +1,9 @@
-/* Suite-owned compact presentation adapter v0.3.4 — MIT. */
+/* Suite-owned compact presentation adapter v0.4.0 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
  const installed = new Set(),wrappedEditors=new WeakSet();
  const field = {name:"layout",default:"normal",selector:{select:{options:[{value:"normal",label:"Normal"},{value:"compact",label:"Compact"}],mode:"dropdown"}}};
  const baseCSS = `:host([data-orbit-layout="compact"]){display:block;min-width:0;max-width:100%;container:orbit-compact/inline-size}
- :host([data-orbit-layout="compact"]) .orbit-compact-disclosure{display:block;min-height:44px;width:100%;margin:8px 0 0;padding:8px;border:1px solid var(--divider-color,#dfe5eb);border-radius:10px;background:var(--card-background-color,#fff);color:var(--primary-text-color,#202b3c);font:inherit;font-size:12px;cursor:pointer}
- :host([data-orbit-layout="compact"]) .orbit-compact-disclosure:focus-visible{outline:2px solid var(--primary-color,#5565da);outline-offset:2px}
- :host([data-orbit-layout="compact"]:not([data-orbit-details-open])) [data-orbit-detail]{display:none!important}
  :host([data-orbit-layout="compact"]) :is(.power,.toggle,.step-button,.stepper,.confirm-button,.controls-toggle,.control-btn,.ctrl-btn,.action-btn){min-height:44px;min-width:44px}
  :host([data-orbit-layout="compact"]) :is(.title,.header-title,.metric-value,.reading-value,.info-value,.capacity,.state-value){white-space:normal;text-overflow:clip;overflow-wrap:anywhere;max-width:100%}
  @media(prefers-reduced-motion:reduce){:host([data-orbit-layout="compact"]) *{animation:none!important;transition:none!important}}`;
@@ -44,17 +41,14 @@ const orbitCompact = (() => {
  }
  function synchronize(card,profile){
   profile=card._orbitProfile||profile;
-  if(!card._orbitCompact||!card.isConnected)return;attachStyle(card,profile);const tile=tileHeader(card,profile);
+  if(!card._orbitCompact||!card.isConnected)return;
+  // Keep the existing media visibility contract open; viewport/tab/offline gates still apply.
+  if(!card.hasAttribute("data-orbit-details-open"))card.setAttribute("data-orbit-details-open","");
+  attachStyle(card,profile);tileHeader(card,profile);
   if(!profile.details?.length)return;const root=card.shadowRoot;if(!root)return;
   const targets=profile.details.flatMap(s=>[...root.querySelectorAll(s)]);
   for(let i=0;i<targets.length;i++){const target=targets[i];if(!target.hasAttribute("data-orbit-detail"))target.setAttribute("data-orbit-detail","");if(!target.id)target.id=card._orbitDetailId+"-"+i;}
-  let button=root.querySelector(".orbit-compact-disclosure");if(!targets.length){button?.remove();return;}
-  if(!button){button=document.createElement("button");button.type="button";button.className="orbit-compact-disclosure";button.addEventListener("click",event=>{event.stopPropagation();card.toggleAttribute("data-orbit-details-open");synchronize(card,profile);});(tile||root.querySelector(profile.footer||".shell")||root.querySelector("ha-card")||root).append(button);}
-  const expanded=card.hasAttribute("data-orbit-details-open"),label=expanded?"Hide details":"Show details",text=tile?(expanded?"⌃":"⌄"):label;
-  if(button.textContent!==text)button.textContent=text;
-  if(button.getAttribute("aria-label")!==label)button.setAttribute("aria-label",label);
-  if(button.getAttribute("aria-expanded")!==String(expanded))button.setAttribute("aria-expanded",String(expanded));
-  const ids=targets.map(n=>n.id).join(" ");if(button.getAttribute("aria-controls")!==ids)button.setAttribute("aria-controls",ids);
+  root.querySelector(".orbit-compact-disclosure")?.remove();
  }
  function watch(card,profile){
   profile=card._orbitProfile||profile;

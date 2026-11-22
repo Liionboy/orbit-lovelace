@@ -11,7 +11,7 @@ try{
  const measurements=[];
  for(const width of [164,243,390,440])for(const layout of ['normal','compact'])for(const kind of ['print','camera']){
  await page.setViewportSize({width:1000,height:2200});await page.evaluate(({width,kind,layout})=>{scrollTo(0,0);document.querySelector('#host').style.width=width+'px';mount(kind,layout);},{width,kind,layout});
- if(layout==='compact')await page.locator('#host .orbit-compact-disclosure').click();
+ if(layout==='compact')assert.equal(await page.locator('#host .orbit-compact-disclosure').count(),0);
  await page.locator('#host hui-image').waitFor();await page.evaluate(()=>card._intersection?.disconnect());
  const size=()=>page.evaluate(()=>({height:card.getBoundingClientRect().height,slot:card.shadowRoot.querySelector('.preview').getBoundingClientRect().height,media:!!card._media}));
  const loaded=await size();assert.ok(loaded.slot>0);
@@ -25,7 +25,7 @@ try{
  await page.evaluate(()=>card._media.dispatchEvent(new Event('error')));await page.waitForTimeout(25);const failed=await size();assert.equal(failed.media,false);assert.ok(Math.abs(failed.slot-loaded.slot)<=1);assert.equal(await page.locator('#host .retry').isVisible(),true);
  await page.evaluate(()=>{card._visible=false;card._mediaSync();});const failedPaused=await size();assert.ok(Math.abs(failed.height-failedPaused.height)<=1,'Error→offscreen must not trigger a geometry loop');
  await page.evaluate(()=>card._visible=true);await page.locator('#host .retry').click();await page.locator('#host hui-image').waitFor();
- if(layout==='compact'){await page.locator('#host .orbit-compact-disclosure').click();const closed=await size();assert.equal(closed.media,false);assert.equal(closed.slot,0,'Closed Details must not reserve a blank preview');await page.locator('#host .orbit-compact-disclosure').click();await page.locator('#host hui-image').waitFor();}
+ if(layout==='compact'){assert.equal(await page.evaluate(()=>card.hasAttribute('data-orbit-details-open')),true);assert.ok((await size()).slot>0,'Compact preview is visible without disclosure');}
  measurements.push({width,layout,kind,loaded,paused,resumed,hidden,offline,failed,failedPaused});
  }
 
