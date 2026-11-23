@@ -24,9 +24,10 @@ function orbitFrigateLive(C) {
   const oldFrame=this.shadowRoot.querySelector('.camera-frame');
   if(!oldFrame){this.shadowRoot.innerHTML=markup;return;}
   const template=document.createElement('template');template.innerHTML=markup;
-  for(const selector of ['.header','.sensor-grid','.footer']){const old=this.shadowRoot.querySelector(selector),next=template.content.querySelector(selector);if(old&&next)old.replaceWith(next);else if(old)old.remove();else if(next)this.shadowRoot.querySelector('.shell').append(next);}
-  const card=this.shadowRoot.querySelector('ha-card');card.dataset.palette=this._config.palette;
-  oldFrame.querySelector('.camera-open').setAttribute('aria-label',template.content.querySelector('.camera-open').getAttribute('aria-label'));
+  for(const selector of ['.header','.sensor-grid','.footer']){const old=this.shadowRoot.querySelector(selector),next=template.content.querySelector(selector);if(old&&next)patchControlNode(old,next);else if(old)old.remove();else if(next)this.shadowRoot.querySelector('.shell').append(next);}
+  const card=this.shadowRoot.querySelector('ha-card');if(card.dataset.palette!==this._config.palette)card.dataset.palette=this._config.palette;
+  const trigger=oldFrame.querySelector('.camera-open'),label=template.content.querySelector('.camera-open').getAttribute('aria-label');
+  if(trigger.getAttribute('aria-label')!==label)trigger.setAttribute('aria-label',label);
  };
  p._render=function(){render.call(this);this._orbitObserve();this._orbitSync();};
  Object.defineProperty(p,'hass',{get:hass.get,set(value){hass.set.call(this,value);if(this._orbitMedia)this._orbitMedia.hass=value;this._orbitSync();},configurable:true});

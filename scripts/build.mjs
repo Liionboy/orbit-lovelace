@@ -6,7 +6,7 @@ import {themeBridge,bridgeVersion} from './theme-bridge.mjs';
 import {buildThemes,palettes} from './themes.mjs';
 import {welcomeNormalToolbar} from './welcome-normal-toolbar.mjs';
 import {lumaAppearance} from './luma-appearance.mjs';
-import {stableControlRender,stableControlTypes} from './stable-control-render.mjs';
+import {stableControlRender,stableControlTypes,stableControlRuntime} from './stable-control-render.mjs';
 import {switchStateIcon} from './switch-state-icon.mjs';
 import {frigateLive} from './frigate-live.mjs';
 import {applyCardPalettes,fallbackPaletteTypes,paletteCatalog} from './card-palettes.mjs';
@@ -81,7 +81,7 @@ export function build(){
  for(const c of components){const original=readFileSync(resolve(root,c.source),'utf8');for(const type of c.types)for(const key of ['heading','icon','surface']){const selector=modernProfiles.profiles[type][key];if(selector&&!original.includes(selector.replace(/^\./,'')))throw Error('Modern selector contract changed: '+type+' '+selector);}}
  const notices=['LICENSE','licenses/lit-LICENSE','licenses/lit-html-LICENSE','licenses/lit-element-LICENSE','licenses/@lit-reactive-element-LICENSE','licenses/custom-card-helpers-LICENSE'].map(file=>file+NL+readFileSync(resolve(root,file),'utf8')).join(NL+NL);
  const lines=['/* Orbit Lovelace v'+manifest.version+' — MIT. */','/*'+NL+notices+NL+'*/','(() => {','const suite = window.orbitLovelace ||= {version:'+JSON.stringify(manifest.version)+',components:{},skipped:{},errors:[]};'];
- lines.push(compact.runtime);
+ lines.push(compact.runtime,stableControlRuntime);
  lines.push('const orbitPaletteCatalog='+JSON.stringify(paletteCatalog.palettes)+';const orbitFallbackPaletteTypes='+JSON.stringify(fallbackPaletteTypes)+';');
  lines.push('const orbitModernProfiles='+JSON.stringify(modernProfiles.profiles)+';',modernRuntime);
  for(const c of components){

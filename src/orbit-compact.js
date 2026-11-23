@@ -53,7 +53,7 @@ const orbitCompact = (() => {
  function watch(card,profile){
   profile=card._orbitProfile||profile;
   if(!card._orbitCompact||!card.shadowRoot)return;synchronize(card,profile);
-  if(!card._orbitObserver){card._orbitObserver=new MutationObserver(records=>{if(records.some(record=>!record.target.closest?.(".orbit-tile")))synchronize(card,profile);});card._orbitObserver.observe(card.shadowRoot,{childList:true,subtree:true,attributes:true,attributeFilter:["icon","src","hidden","data-kind"]});}
+  if(!card._orbitObserver){card._orbitObserver=new MutationObserver(records=>{if(records.some(record=>!(record.target.nodeType===3?record.target.parentElement:record.target)?.closest?.(".orbit-tile")))synchronize(card,profile);});card._orbitObserver.observe(card.shadowRoot,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["icon","src","hidden","data-kind"]});}
  }
  function stop(card){card._orbitObserver?.disconnect();card._orbitObserver=null;}
  class CompactEditor extends HTMLElement{

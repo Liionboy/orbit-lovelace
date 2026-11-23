@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.22.0-beta.14",
+  "version": "1.22.0-beta.15",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -573,7 +573,7 @@
       "origin": "suite",
       "version": "0.4.0",
       "source": "src/orbit-compact.js",
-      "sha256": "3651c436f783840ed37aa4e33b181644e216c4258d98b354f2dd276eceaa7a2d",
+      "sha256": "580623806eb769461e2712303f87eff2e67b20f6e5cab7d0a3cf0bddf630693d",
       "profiles": "src/compact-profiles.json",
       "profilesSha256": "db0eb0d6549325a117d279e002b2474e8010a9e0323c7cead99a52a281ca5518",
       "adaptation": "scripts/welcome-normal-toolbar.mjs",
@@ -602,9 +602,9 @@
     {
       "id": "frigate-live",
       "origin": "suite",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "source": "src/orbit-frigate-live.js",
-      "sha256": "dbb3ffb25097a6554ea8512b9992de53903ac2031b056660beddcfc1e162a57c",
+      "sha256": "0571b8e1021e2ae52373ff3593688f61b2804436311d8b7ad1e26ec06ef5c827",
       "adaptation": "scripts/frigate-live.mjs",
       "adaptationSha256": "db205226500a03a0be300e440c80289164096b56b91ca46c992199adee02c975",
       "types": [
@@ -710,13 +710,36 @@
     {
       "id": "stable-control-render",
       "origin": "suite",
-      "version": "1.0.0",
+      "version": "2.0.0",
       "source": "scripts/stable-control-render.mjs",
-      "sha256": "5b0db9f617fb51c4e8f46cc481347e77a665b3b8e5dca4c8b2f8256f34fd0cdb",
+      "sha256": "fc50efce3b68a466006e7176d0e5389b300a01ed17e42d072fa076c92ba11ff5",
       "types": [
-        "luma-control-card",
+        "ha-alerts-orbit-card",
+        "ha-battery-orbit-card",
+        "ha-fan-orbit-card",
+        "ha-nas-orbit-card",
+        "ha-person-orbit-card",
+        "ha-room-orbit-card",
+        "ha-scenes-orbit-card",
+        "ha-sensor-graph-orbit-card",
+        "ha-server-orbit-card",
+        "ha-speedtest-orbit-card",
+        "unifi-orbit-card",
+        "unifi-command-center-card",
+        "ha-weather-orbit-card",
+        "ha-welcome-orbit-card",
+        "action-button-card",
+        "alecoair-dehumidifier-card",
+        "animated-gate-card",
         "climate-control-card",
-        "switch-control-card"
+        "home-connect-washer-card",
+        "hp-printer-card",
+        "luma-control-card",
+        "pihole-control-card",
+        "sensor-meter-card",
+        "switch-control-card",
+        "media-player-card",
+        "temperature-humidity-card"
       ]
     }
   ]

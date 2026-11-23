@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.22.0-beta.14 — MIT. */
+/* Orbit Lovelace v1.22.0-beta.15 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.22.0-beta.14",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.22.0-beta.15",components:{},skipped:{},errors:[]};
 /* Suite-owned compact presentation adapter v0.4.0 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
@@ -226,7 +226,7 @@ const orbitCompact = (() => {
  function watch(card,profile){
   profile=card._orbitProfile||profile;
   if(!card._orbitCompact||!card.shadowRoot)return;synchronize(card,profile);
-  if(!card._orbitObserver){card._orbitObserver=new MutationObserver(records=>{if(records.some(record=>!record.target.closest?.(".orbit-tile")))synchronize(card,profile);});card._orbitObserver.observe(card.shadowRoot,{childList:true,subtree:true,attributes:true,attributeFilter:["icon","src","hidden","data-kind"]});}
+  if(!card._orbitObserver){card._orbitObserver=new MutationObserver(records=>{if(records.some(record=>!(record.target.nodeType===3?record.target.parentElement:record.target)?.closest?.(".orbit-tile")))synchronize(card,profile);});card._orbitObserver.observe(card.shadowRoot,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["icon","src","hidden","data-kind"]});}
  }
  function stop(card){card._orbitObserver?.disconnect();card._orbitObserver=null;}
  class CompactEditor extends HTMLElement{
@@ -273,6 +273,85 @@ const orbitCompact = (() => {
  return{prepare,installed};
 })();
 
+const boundControlEvents = new WeakMap(), templateAttributes = new WeakMap();
+function bindControl(node, type, listener) {
+  if (!node) return;
+  let bound = boundControlEvents.get(node);
+  if (!bound) boundControlEvents.set(node, bound = new Map());
+  if (!bound.has(type)) node.addEventListener(type, event => bound.get(type).call(node, event));
+  bound.set(type, listener);
+}
+function renderControl(root, html) {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  const oldFrame = Array.from(root.children).find(node => node.localName !== 'style');
+  const newFrame = Array.from(template.content.children).find(node => node.localName !== 'style');
+  const oldStyle = root.querySelector('style:not([data-orbit-compact])');
+  const newStyle = template.content.querySelector('style');
+  if (!oldFrame || !newFrame || oldFrame.localName !== newFrame.localName || oldFrame.namespaceURI !== newFrame.namespaceURI) {
+    if (newFrame) rememberTemplate(newFrame);
+    root.replaceChildren(template.content);
+    return;
+  }
+  if (oldStyle && newStyle && oldStyle.textContent !== newStyle.textContent) oldStyle.textContent = newStyle.textContent;
+  patchControlNode(oldFrame, newFrame);
+}
+function rememberTemplate(node) {
+  templateAttributes.set(node, node.getAttributeNames());
+  for (const child of node.children) rememberTemplate(child);
+}
+function controlNodeKey(node) {
+  if (node.nodeType !== 1) return String(node.nodeType);
+  const action = ['data-action', 'data-control', 'data-step', 'data-flash', 'data-entity',
+    'data-device', 'data-cc-device', 'data-action-entity', 'data-cc-action-entity',
+    'data-confirm', 'data-power', 'data-cmd'].map(name => node.getAttribute(name) || '').join(':');
+  // Classes describe identity for layout containers, not changing state or feedback.
+  const role = /^(DIV|SECTION|FOOTER|HEADER)$/.test(node.tagName)
+    ? node.classList[0] : '';
+  return [node.namespaceURI, node.localName, node.id && !node.id.startsWith('orbit-compact-') ? node.id : '',
+    action, role, node.localName === 'option' ? node.value : ''].join(':');
+}
+function patchControlNode(current, next) {
+  const input = current.localName === 'input';
+  const valueChanged = input && current.getAttribute('value') !== next.getAttribute('value');
+  for (const name of templateAttributes.get(current) || next.getAttributeNames()) {
+    if (name === 'hidden' && current.localName === 'img' && current.getAttribute('src') === next.getAttribute('src')) continue;
+    if (name.startsWith('data-orbit-') || (name === 'id' && current.id.startsWith('orbit-compact-'))) continue;
+    if (!next.hasAttribute(name)) current.removeAttribute(name);
+  }
+  for (const { name, value } of next.attributes) {
+    if (current.getAttribute(name) !== value) current.setAttribute(name, value);
+  }
+
+  templateAttributes.set(current, next.getAttributeNames());
+  if (current.localName === "ha-icon" && !next.hasChildNodes()) return;
+
+  const candidates = new Map();
+  const ownsNode = node => !node.classList?.contains('orbit-tile');
+  for (const child of current.childNodes) {
+    if (!ownsNode(child)) continue;
+    const key = controlNodeKey(child);
+    if (!candidates.has(key)) candidates.set(key, []);
+    candidates.get(key).push(child);
+  }
+  const desired = Array.from(next.childNodes);
+  const matches = desired.map(child => candidates.get(controlNodeKey(child))?.shift());
+  for (const unused of candidates.values()) for (const child of unused) child.remove();
+  let cursor = Array.from(current.childNodes).find(ownsNode) || null;
+  desired.forEach((child, index) => {
+    const retained = matches[index];
+    if (retained?.nodeType === 1) patchControlNode(retained, child);
+    if (retained && retained.nodeType !== 1 && retained.nodeValue !== child.nodeValue) {
+      retained.nodeValue = child.nodeValue;
+    }
+    const node = retained || child.cloneNode(true);
+    if (!retained && node.nodeType === 1) rememberTemplate(node);
+    if (node !== cursor) current.insertBefore(node, cursor);
+    cursor = node.nextSibling;
+  });
+  if (valueChanged) current.value = next.value;
+  if (current.localName === 'select' && current.value !== next.value) current.value = next.value;
+}
 const orbitPaletteCatalog={"slate":{"label":"Slate","colors":["#7a8da5","#9baac0","#bbc6d5"]},"indigo":{"label":"Indigo","colors":["#8076ed","#9c91f5","#b8aff9"]},"teal":{"label":"Teal","colors":["#28aa9a","#60bdb0","#91cec4"]},"rose":{"label":"Rose","colors":["#d56d98","#e494b3","#edb3ca"]},"amber":{"label":"Amber","colors":["#d4a34b","#dfbd7b","#ead1a2"]},"ice":{"label":"Ice","colors":["#55a8c9","#83bfd8","#aed6e5"]}};const orbitFallbackPaletteTypes=["unifi-orbit-card","unifi-command-center-card","action-button-card","animated-gate-card","climate-control-card","home-connect-washer-card","hp-printer-card","media-player-card","temperature-humidity-card"];
 const orbitModernProfiles={"ha-alerts-orbit-card":{"heading":"h2","icon":".orbit","surface":".rows","treatment":"Quiet alert list; severity colors and complete rows retained"},"ha-battery-orbit-card":{"heading":"h2","icon":".orbit","surface":".rows","treatment":"Clean battery overview; low/charging indicators retained"},"ha-fan-orbit-card":{"heading":".name","icon":".orbit","surface":".controls","treatment":"Calm fan identity with full speed and oscillation controls"},"ha-nas-orbit-card":{"heading":".title","icon":".icon-wrap","surface":".metric","treatment":"Clean storage and drive telemetry; health semantics retained"},"ha-person-orbit-card":{"heading":".name","icon":"","surface":".metric","treatment":"Readable identity and paired readings; avatar and presence retained"},"ha-room-orbit-card":{"heading":"","icon":"","surface":"","treatment":"Existing Modern Room treatment with touch-friendly shortcuts"},"ha-scenes-orbit-card":{"heading":"h2","icon":"","surface":".tile","treatment":"Clean scene tiles; confirmation, pending and scripts retained"},"ha-sensor-graph-orbit-card":{"heading":"h2","icon":"","surface":".series","treatment":"Quiet chart frames; labels, gaps and history retained"},"ha-server-orbit-card":{"heading":".title","icon":".icon-wrap","surface":".metric","treatment":"Clean server metrics; power guards and availability retained"},"ha-speedtest-orbit-card":{"heading":".title","icon":".icon-wrap","surface":".metric","treatment":"Calm throughput typography; radar and reported readings retained"},"unifi-orbit-card":{"heading":"h2","icon":".core-icon","surface":".stat","treatment":"Quiet topology surface; nodes, selection and links retained","css":".noise{display:none}"},"unifi-command-center-card":{"heading":"h2","icon":".cc-node-icon","surface":".cc-node","treatment":"Clean command-center topology; all interaction retained","css":".noise{display:none}"},"ha-vacuum-commander-card":{"heading":".header-title","icon":".icon-wrap","surface":".room-btn","treatment":"Clean vacuum identity; room selection and command guards retained"},"ha-weather-orbit-card":{"heading":".condition","icon":"","surface":".entry","treatment":"Quiet forecast tiles and bars; current marker and clock retained"},"ha-welcome-orbit-card":{"heading":"h2","icon":".orbit","surface":".shortcut","treatment":"Clean welcome surface; bold clock, date and native navigation retained"},"action-button-card":{"heading":".title","icon":".icon-wrap","surface":".confirm","treatment":"Calm action surface; confirmation and pending/error feedback retained"},"alecoair-dehumidifier-card":{"heading":".title","icon":".icon-wrap","surface":".humidity-tile","treatment":"Clear humidity readings; target, modes and power retained"},"animated-gate-card":{"heading":".title","icon":".mark","surface":".scene","treatment":"Quiet gate scene; reported movement and command guards retained"},"climate-control-card":{"heading":".title","icon":".icon-wrap","surface":".temperature","treatment":"Clean thermostat readings; targets, steps and HVAC semantics retained"},"frigate-control-card":{"heading":"","icon":"","surface":"","treatment":"Existing Modern camera treatment; stable frame and native player retained"},"home-connect-washer-card":{"heading":".title","icon":".brand-mark","surface":".info","treatment":"Quiet appliance telemetry; progress, warnings and drum animation retained"},"hp-printer-card":{"heading":"h2","icon":".mark","surface":".stat","treatment":"Clean printer summary; ink colors and alerts retained"},"luma-control-card":{"heading":".title","icon":".icon-wrap","surface":".section","treatment":"Clean light controls; real RGB, brightness and native feedback retained"},"pihole-control-card":{"heading":".title","icon":".icon-wrap","surface":".metric","treatment":"Quiet DNS telemetry; pause, enable and error feedback retained"},"sensor-meter-card":{"heading":".title","icon":".icon-wrap","surface":".meter-panel","treatment":"Calm numeric readout; configured scale and units retained"},"switch-control-card":{"heading":".title","icon":".icon-wrap","surface":".panel","treatment":"Clean switch surface; neutral OFF icon and real state retained"},"media-player-card":{"heading":".player-name","icon":".brand-icon","surface":".artwork","treatment":"Quiet media chrome; artwork, touch controls and command feedback retained"},"temperature-humidity-card":{"heading":".title","icon":".brand-icon","surface":".metric","treatment":"Calm temperature/humidity tiles; independent scales and units retained"},"ha-select-orbit-card":{"heading":".name","icon":".orbit","surface":".field","treatment":"Clean selector surface; options and pending/error guards retained","narrowContainer":"orbit-control"},"ha-number-orbit-card":{"heading":".name","icon":".orbit","surface":".field","treatment":"Clean numeric control; draft, range and decimal-step guards retained","narrowContainer":"orbit-control"},"ha-temperature-orbit-card":{"heading":"","icon":"","surface":"","treatment":"Existing Modern temperature treatment with scoped history"},"ha-gauge-orbit-card":{"heading":".name","icon":".orbit","surface":"","treatment":"Quiet gauge typography; exact arc, marker and range semantics retained"},"ha-chips-orbit-card":{"heading":"","icon":"","surface":"","treatment":"Existing unframed slim Modern chip collection"},"ha-title-orbit-card":{"heading":".title","icon":"","surface":"","treatment":"Transparent semantic heading; no tile, state or controls","css":"ha-card{background:transparent;border:0;box-shadow:none}.shell.shell{padding:8px 2px}"},"ha-bambu-print-orbit-card":{"heading":".name","icon":".identity-icon","surface":".metric","treatment":"Clean print telemetry; progress, alerts and reserved media geometry retained"},"ha-bambu-ams-orbit-card":{"heading":".name","icon":".identity-icon","surface":".slot","treatment":"Clean tray surfaces; real material colors and remaining data retained"},"ha-bambu-camera-orbit-card":{"heading":".name","icon":".identity-icon","surface":".preview","treatment":"Quiet camera chrome; media lifecycle and frame geometry retained"}};
 /* Orbit Modern v0.5.2 — MIT. Optional, suite-owned presentation only. */
@@ -541,7 +620,7 @@ class OrbitCard extends HTMLElement {
  }
  _render(rows) {
   const counts = this._counts(rows), shown = this._visible(rows);
-  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + this._config.palette + '"><div class="shell"><header><div class="orbit">' + icon(HEADER_ICON) + '</div><div class="heading"><h2>' + esc(this._config.title) + '</h2><div class="summary" role="status">' + esc(this._summary(rows, counts)) + '</div></div></header>' + (rows.length ? '<div class="counts">' + Object.entries(counts).map(([key, value]) => '<span><b>' + value + '</b> ' + esc(key) + '</span>').join('') + '</div>' : '') + '<div class="rows">' + shown.map((row) => '<button type="button" data-entity="' + esc(row.id) + '" data-status="' + row.status + '" aria-label="More information: ' + esc(row.name) + '">' + icon(row.icon) + '<span class="copy"><span class="name">' + esc(row.name) + '</span><div class="value">' + esc(row.label) + '</div>' + (row.percent != null ? '<div class="meter" aria-hidden="true"><i style="--level:' + row.percent + '%"></i></div>' : '') + '</span></button>').join('') + '</div>' + (!rows.length ? '<p class="hint">Select entities in the visual editor to get started.</p>' : !shown.length ? '<p class="hint">Inactive rows are hidden.</p>' : '') + '</div></ha-card>';
+  renderControl(this.shadowRoot, '<style>' + STYLE + '</style><ha-card data-palette="' + this._config.palette + '"><div class="shell"><header><div class="orbit">' + icon(HEADER_ICON) + '</div><div class="heading"><h2>' + esc(this._config.title) + '</h2><div class="summary" role="status">' + esc(this._summary(rows, counts)) + '</div></div></header>' + (rows.length ? '<div class="counts">' + Object.entries(counts).map(([key, value]) => '<span><b>' + value + '</b> ' + esc(key) + '</span>').join('') + '</div>' : '') + '<div class="rows">' + shown.map((row) => '<button type="button" data-entity="' + esc(row.id) + '" data-status="' + row.status + '" aria-label="More information: ' + esc(row.name) + '">' + icon(row.icon) + '<span class="copy"><span class="name">' + esc(row.name) + '</span><div class="value">' + esc(row.label) + '</div>' + (row.percent != null ? '<div class="meter" aria-hidden="true"><i style="--level:' + row.percent + '%"></i></div>' : '') + '</span></button>').join('') + '</div>' + (!rows.length ? '<p class="hint">Select entities in the visual editor to get started.</p>' : !shown.length ? '<p class="hint">Inactive rows are hidden.</p>' : '') + '</div></ha-card>');
  }
  _classify(id, state) {
   if (!state) return { status: 'unknown', label: 'Missing entity' };
@@ -633,7 +712,7 @@ class OrbitCard extends HTMLElement {
  }
  _render(rows) {
   const counts = this._counts(rows), shown = this._visible(rows);
-  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + this._config.palette + '"><div class="shell"><header><div class="orbit">' + icon(HEADER_ICON) + '</div><div class="heading"><h2>' + esc(this._config.title) + '</h2><div class="summary" role="status">' + esc(this._summary(rows, counts)) + '</div></div></header>' + (rows.length ? '<div class="counts">' + Object.entries(counts).map(([key, value]) => '<span><b>' + value + '</b> ' + esc(key) + '</span>').join('') + '</div>' : '') + '<div class="rows">' + shown.map((row) => '<button type="button" data-entity="' + esc(row.id) + '" data-status="' + row.status + '" aria-label="More information: ' + esc(row.name) + '">' + icon(row.icon) + '<span class="copy"><span class="name">' + esc(row.name) + '</span><div class="value">' + esc(row.label) + '</div>' + (row.percent != null ? '<div class="meter" aria-hidden="true"><i style="--level:' + row.percent + '%"></i></div>' : '') + '</span></button>').join('') + '</div>' + (!rows.length ? '<p class="hint">Select entities in the visual editor to get started.</p>' : !shown.length ? '<p class="hint">Inactive rows are hidden.</p>' : '') + '</div></ha-card>';
+  renderControl(this.shadowRoot, '<style>' + STYLE + '</style><ha-card data-palette="' + this._config.palette + '"><div class="shell"><header><div class="orbit">' + icon(HEADER_ICON) + '</div><div class="heading"><h2>' + esc(this._config.title) + '</h2><div class="summary" role="status">' + esc(this._summary(rows, counts)) + '</div></div></header>' + (rows.length ? '<div class="counts">' + Object.entries(counts).map(([key, value]) => '<span><b>' + value + '</b> ' + esc(key) + '</span>').join('') + '</div>' : '') + '<div class="rows">' + shown.map((row) => '<button type="button" data-entity="' + esc(row.id) + '" data-status="' + row.status + '" aria-label="More information: ' + esc(row.name) + '">' + icon(row.icon) + '<span class="copy"><span class="name">' + esc(row.name) + '</span><div class="value">' + esc(row.label) + '</div>' + (row.percent != null ? '<div class="meter" aria-hidden="true"><i style="--level:' + row.percent + '%"></i></div>' : '') + '</span></button>').join('') + '</div>' + (!rows.length ? '<p class="hint">Select entities in the visual editor to get started.</p>' : !shown.length ? '<p class="hint">Inactive rows are hidden.</p>' : '') + '</div></ha-card>');
  }
  _classify(id, state) {
   if (!state) return { status: 'unknown', label: 'Missing entity' };
@@ -752,7 +831,7 @@ class FanOrbitCard extends HTMLElement {
   if (m.oscillate) rows.push('<button class="oscillate" data-action="oscillate" aria-pressed="' + esc(a.oscillating) + '"' + disabled('oscillate') + '>Oscillation · ' + (a.oscillating ? 'On' : 'Off') + '</button>');
   if (m.direction) rows.push('<div class="row"><label for="direction">Direction</label><select id="direction" data-action="direction"' + disabled('set_direction') + '>' + options(['forward', 'reverse'], a.direction) + '</select></div>');
   const status = !this._config.entity ? 'Choose a fan to get started' : !m.s ? 'Entity not found' : m.s.state === 'unavailable' ? 'Unavailable' : m.s.state === 'unknown' ? 'Unknown' : m.s.state === 'on' ? 'On' : m.s.state === 'off' ? 'Off' : 'Unknown';
-  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + esc(this._config.palette) + '"><div class="shell"><div class="head"><button class="info" data-action="info" aria-label="Fan information"' + (!m.s ? ' disabled' : '') + '><span class="orbit"><ha-icon icon="' + esc(m.icon) + '"></ha-icon></span><span class="copy"><span class="name">' + esc(m.name) + '</span><span class="status">' + status + (this._config.read_only ? ' · Read only' : '') + '</span></span></button>' + (m.power ? '<button class="power" data-action="power"' + disabled(m.power) + '>' + (m.power === 'turn_on' ? 'Turn on' : 'Turn off') + '</button>' : '') + '</div>' + (rows.length ? '<div class="controls">' + rows.join('') + '</div>' : '<p class="hint">' + (!this._config.entity ? 'Select a fan in the visual editor or set entity in YAML.' : 'No additional controls reported by this fan.') + '</p>') + '<p class="message" role="status" aria-live="polite"></p></div></ha-card>';
+  renderControl(this.shadowRoot, '<style>' + STYLE + '</style><ha-card data-palette="' + esc(this._config.palette) + '"><div class="shell"><div class="head"><button class="info" data-action="info" aria-label="Fan information"' + (!m.s ? ' disabled' : '') + '><span class="orbit"><ha-icon icon="' + esc(m.icon) + '"></ha-icon></span><span class="copy"><span class="name">' + esc(m.name) + '</span><span class="status">' + status + (this._config.read_only ? ' · Read only' : '') + '</span></span></button>' + (m.power ? '<button class="power" data-action="power"' + disabled(m.power) + '>' + (m.power === 'turn_on' ? 'Turn on' : 'Turn off') + '</button>' : '') + '</div>' + (rows.length ? '<div class="controls">' + rows.join('') + '</div>' : '<p class="hint">' + (!this._config.entity ? 'Select a fan in the visual editor or set entity in YAML.' : 'No additional controls reported by this fan.') + '</p>') + '<p class="message" role="status" aria-live="polite"></p></div></ha-card>');
   this._syncFeedback();
  }
  _syncFeedback() {
@@ -998,9 +1077,9 @@ class NasOrbitCard extends HTMLElement {
       <footer class="footer"><span class="footer-note">Live telemetry from Home Assistant</span>${data.wakeAvailable ? `<button class="wake" data-wake ${this._pressingWake ? "disabled" : ""}><ha-icon icon="mdi:power"></ha-icon>${this._pressingWake ? "Sending…" : "Wake NAS"}</button>` : ""}</footer>`
       : `<section class="collapsed"><div class="collapsed-copy">NAS is offline or telemetry is unavailable. Details are hidden until it responds.</div>${data.wakeAvailable ? `<button class="wake" data-wake ${this._pressingWake ? "disabled" : ""}><ha-icon icon="mdi:power"></ha-icon>${this._pressingWake ? "Sending…" : "Wake NAS"}</button>` : ""}</section>`;
     const noSensors = !data.online && !data.statusEntity && !data.wakeAvailable;
-    this.shadowRoot.innerHTML = `<style>${STYLE}</style><ha-card data-palette="${escapeHtml(data.palette)}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="mdi:nas"></ha-icon></div><div class="identity-copy"><div class="eyebrow">Storage · System</div><h2 class="title">${escapeHtml(data.title)}</h2></div></div><div class="pill ${data.online ? "online" : "offline"}"><span class="dot"></span>${escapeHtml(statusLabel)}</div></header>${details}${noSensors ? `<div class="hint error">No NAS sensors found. Select your sensor entities in the card editor or check the NAS name used by auto-discovery.</div>` : ""}</div></ha-card>`;
+    renderControl(this.shadowRoot, `<style>${STYLE}</style><ha-card data-palette="${escapeHtml(data.palette)}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="mdi:nas"></ha-icon></div><div class="identity-copy"><div class="eyebrow">Storage · System</div><h2 class="title">${escapeHtml(data.title)}</h2></div></div><div class="pill ${data.online ? "online" : "offline"}"><span class="dot"></span>${escapeHtml(statusLabel)}</div></header>${details}${noSensors ? `<div class="hint error">No NAS sensors found. Select your sensor entities in the card editor or check the NAS name used by auto-discovery.</div>` : ""}</div></ha-card>`);
     const wake = this.shadowRoot.querySelector("[data-wake]");
-    wake?.addEventListener("click", () => this._pressWake(data.ids.wake));
+    bindControl(wake, "click", () => this._pressWake(data.ids.wake));
   }
 
   async _pressWake(entityId) {
@@ -1151,7 +1230,7 @@ class PersonOrbitCard extends HTMLElement {
  _render(model) {
   const c = this._config, active = this.shadowRoot.activeElement?.dataset?.action;
   const content = !c.entity ? '<div class="hint"><strong>Person Orbit</strong>Choose a person in the card editor. Optional battery, travel-time and additional sensors are never selected automatically.</div>' : '<button class="person" data-action="entity" aria-label="More information: ' + esc(model.name) + '"' + (!this._state(c.entity) ? ' disabled' : '') + '><span class="avatar" aria-hidden="true">' + icon(model.icon) + (model.picture ? '<img alt="" referrerpolicy="no-referrer" src="' + esc(model.picture) + '">' : '') + '<span class="dot"></span></span><span class="copy"><span class="name">' + esc(model.name) + '</span><span class="status">' + esc(model.status) + '</span></span></button>' + (model.metrics.length ? '<div class="metrics ' + c.metrics_layout + '">' + model.metrics.map((m) => '<button class="metric' + (m.low ? ' low' : '') + (m.charging ? ' charging' : '') + (m.extra ? ' extra' : '') + '" data-action="' + m.key + '" aria-label="More information: ' + esc(m.label + ': ' + m.text) + '" title="' + esc(m.label + ': ' + m.text) + '"' + (!this._state(m.id) ? ' disabled' : '') + '>' + icon(m.icon) + '<span class="metric-copy"><span class="label">' + esc(m.label) + '</span><span class="value">' + esc(m.text) + '</span></span></button>').join('') + '</div>' : '');
-  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '" data-presence="' + model.presence + '"><div class="shell">' + content + '</div></ha-card>';
+  renderControl(this.shadowRoot, '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '" data-presence="' + model.presence + '"><div class="shell">' + content + '</div></ha-card>');
   if (active) this.shadowRoot.querySelector('[data-action="' + active + '"]')?.focus();
  }
  _moreInfo(action) {
@@ -1387,7 +1466,7 @@ class RoomOrbitCard extends HTMLElement {
    return '<article class="tile">' + this._infoButton(slot.id, icon(slot.image) + '<span class="tile-copy"><span class="tile-name" title="' + esc(slot.name) + '">' + esc(slot.name) + '</span><span class="tile-state">' + esc(slot.state) + '</span></span>', 'tile-head') + (buttons ? '<div class="actions">' + buttons + '</div>' : '') + '</article>';
   }).join('') : '';
   const title = c.title || DEFAULTS.title;
-  this.shadowRoot.innerHTML = '<style>' + STYLE + NAV_STYLE + CLIMATE_STYLE + HUMIDIFIER_STYLE + TEMPERATURE_STYLE + '</style><ha-card data-palette="' + c.palette + '" data-temperature="' + this._temperatureEffect() + '" data-temperature-animation="' + (c.temperature_effect && c.temperature_animation) + '"><div class="shell"><div class="summary ' + (!slots.length ? 'no-shortcuts' : '') + '">' + (c.navigation_path ? '<a class="room-navigation" data-action="navigate" data-entity="" href="' + esc(c.navigation_path) + '" aria-label="Open room view: ' + esc(title) + '"><span class="sr-only">Open ' + esc(title) + '</span></a>' : '') + '<div class="identity"><button class="room-icon ' + (occupied ? 'occupied' : '') + '" data-action="details" data-entity="" aria-label="' + (this._expanded ? 'Hide' : 'Show') + ' room details: ' + esc(title) + '" aria-expanded="' + !!this._expanded + '" title="' + status + ' · Room details">' + icon(c.icon || DEFAULTS.icon) + (c.presence_entity ? '<span class="dot"></span>' : '') + '</button><h2 title="' + esc(title) + '">' + esc(title) + '</h2><span class="sr-only">' + status + '</span><div class="telemetry">' + (readings || '<span class="hint">' + status + '</span>') + '</div>' + badge + '</div>' + (slots.length ? '<section class="shortcuts count-' + slots.length + '" aria-label="Room shortcuts">' + quick + '</section>' : '') + '</div>' + (details ? '<section class="tiles" aria-label="Room details">' + details + '</section>' : '') + (!slots.length && !readings ? '<p class="hint">Add up to four shortcuts in the card editor.</p>' : '') + (this._error ? '<div class="error" role="alert">' + esc(this._error) + '</div>' : '') + '</div></ha-card>';
+  renderControl(this.shadowRoot, '<style>' + STYLE + NAV_STYLE + CLIMATE_STYLE + HUMIDIFIER_STYLE + TEMPERATURE_STYLE + '</style><ha-card data-palette="' + c.palette + '" data-temperature="' + this._temperatureEffect() + '" data-temperature-animation="' + (c.temperature_effect && c.temperature_animation) + '"><div class="shell"><div class="summary ' + (!slots.length ? 'no-shortcuts' : '') + '">' + (c.navigation_path ? '<a class="room-navigation" data-action="navigate" data-entity="" href="' + esc(c.navigation_path) + '" aria-label="Open room view: ' + esc(title) + '"><span class="sr-only">Open ' + esc(title) + '</span></a>' : '') + '<div class="identity"><button class="room-icon ' + (occupied ? 'occupied' : '') + '" data-action="details" data-entity="" aria-label="' + (this._expanded ? 'Hide' : 'Show') + ' room details: ' + esc(title) + '" aria-expanded="' + !!this._expanded + '" title="' + status + ' · Room details">' + icon(c.icon || DEFAULTS.icon) + (c.presence_entity ? '<span class="dot"></span>' : '') + '</button><h2 title="' + esc(title) + '">' + esc(title) + '</h2><span class="sr-only">' + status + '</span><div class="telemetry">' + (readings || '<span class="hint">' + status + '</span>') + '</div>' + badge + '</div>' + (slots.length ? '<section class="shortcuts count-' + slots.length + '" aria-label="Room shortcuts">' + quick + '</section>' : '') + '</div>' + (details ? '<section class="tiles" aria-label="Room details">' + details + '</section>' : '') + (!slots.length && !readings ? '<p class="hint">Add up to four shortcuts in the card editor.</p>' : '') + (this._error ? '<div class="error" role="alert">' + esc(this._error) + '</div>' : '') + '</div></ha-card>');
  }
  async _activate(id, action) {
   if (action === 'navigate' && id === '') { this._navigate(); return; }
@@ -1499,7 +1578,7 @@ class ScenesOrbitCard extends HTMLElement {
    const state = busy ? 'Sending…' : reason || (armed ? 'Tap again to confirm' : d === 'scene' ? 'Scene · ready' : 'Script · ready');
    return '<article class="tile ' + (reason === 'Running' ? 'running ' : '') + (armed ? 'confirm' : '') + '"><button class="activate" data-action="activate" data-entity="' + esc(id) + '" aria-label="' + (armed ? 'Confirm: ' : 'Activate: ') + esc(name) + '"' + (!this._can(id) ? ' disabled' : '') + (busy ? ' aria-busy="true"' : '') + '>' + icon(s?.attributes?.icon || (d === 'scene' ? 'mdi:palette-outline' : 'mdi:script-text-outline')) + '<span class="copy"><span class="name">' + esc(name) + '</span><span class="state">' + esc(state) + '</span></span></button><button class="info" data-action="info" data-entity="' + esc(id) + '" aria-label="More information: ' + esc(name) + '">' + icon('mdi:information-outline') + '</button></article>';
   }).join('');
-  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + this._config.palette + '"><div class="shell"><header class="header">' + icon('mdi:palette-outline') + '<div><h2>' + esc(this._config.title || DEFAULTS.title) + '</h2><div class="subtitle">Scenes &amp; scripts</div></div></header>' + (tiles ? '<section class="grid" aria-label="Scenes and scripts">' + tiles + '</section>' : '<p class="hint">Choose scenes or scripts in the card editor. No entities are required.</p>') + (this._armed ? '<button class="cancel" data-action="cancel" data-entity="">Cancel confirmation</button>' : '') + (this._error ? '<div role="alert" class="message error">' + esc(this._error) + '</div>' : this._message ? '<div role="status" class="message">' + esc(this._message) + '</div>' : '') + '</div></ha-card>';
+  renderControl(this.shadowRoot, '<style>' + STYLE + '</style><ha-card data-palette="' + this._config.palette + '"><div class="shell"><header class="header">' + icon('mdi:palette-outline') + '<div><h2>' + esc(this._config.title || DEFAULTS.title) + '</h2><div class="subtitle">Scenes &amp; scripts</div></div></header>' + (tiles ? '<section class="grid" aria-label="Scenes and scripts">' + tiles + '</section>' : '<p class="hint">Choose scenes or scripts in the card editor. No entities are required.</p>') + (this._armed ? '<button class="cancel" data-action="cancel" data-entity="">Cancel confirmation</button>' : '') + (this._error ? '<div role="alert" class="message error">' + esc(this._error) + '</div>' : this._message ? '<div role="status" class="message">' + esc(this._message) + '</div>' : '') + '</div></ha-card>');
   if (focusAction) [...this.shadowRoot.querySelectorAll('[data-action]')].find((el) => el.dataset.entity === focusId && el.dataset.action === focusAction)?.focus();
  }
  async _activate(id, action) {
@@ -1680,7 +1759,7 @@ if(knownTypes.some(type=>customElements.get(type))){suite.skipped["ha-sensor-gra
    }).join('');
    const message = this._status === 'error' ? 'History could not be loaded. Check Recorder, history access and your connection. Current readings remain available.' : this._status === 'loading' ? 'Loading history…' : 'Independent scales · last ' + c.hours_to_show + 'h · refresh every 60s';
    const focused = this.shadowRoot.activeElement, action = focused?.dataset?.action, entity = focused?.dataset?.entity;
-   this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '"><div class="shell"><header><ha-icon icon="mdi:chart-timeline-variant"></ha-icon><h2>' + esc(c.title || 'Sensor history') + '</h2><span class="period">' + c.hours_to_show + ' hour window</span></header>' + (series || '<div class="note">Choose up to six sensors in the card editor to show numeric history. No sensors are selected automatically.</div>') + (series ? '<div class="status" role="status"><span>' + message + '</span>' + (this._status === 'error' ? '<button class="retry" data-action="retry">Retry</button>' : '') + '</div>' : '') + '</div></ha-card>';
+   renderControl(this.shadowRoot, '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '"><div class="shell"><header><ha-icon icon="mdi:chart-timeline-variant"></ha-icon><h2>' + esc(c.title || 'Sensor history') + '</h2><span class="period">' + c.hours_to_show + ' hour window</span></header>' + (series || '<div class="note">Choose up to six sensors in the card editor to show numeric history. No sensors are selected automatically.</div>') + (series ? '<div class="status" role="status"><span>' + message + '</span>' + (this._status === 'error' ? '<button class="retry" data-action="retry">Retry</button>' : '') + '</div>' : '') + '</div></ha-card>');
    if (action) [...this.shadowRoot.querySelectorAll('[data-action]')].find((el) => el.dataset.action === action && el.dataset.entity === entity)?.focus();
   }
  }
@@ -1742,8 +1821,8 @@ class ServerOrbitCard extends HTMLElement{
  _render(d=this._data()){if(!this.shadowRoot||!this._hass)return;const config=this._config,hasSwitch=this._config.power_entity.startsWith("switch.");const off=d.offline&&hasSwitch;const detail=off?`<section class="collapsed"><div class="collapsed-copy">${esc(config.title)} is powered off. Metrics are hidden until it is on.</div>${d.controllable?`<button class="power" data-power><ha-icon icon="mdi:power"></ha-icon>${this._busy?"Switching…":"Power on"}</button>`:""}</section>`:`<section class="metrics">${d.metrics.map(m=>{const v=m.percent??0;return `<article class="metric" data-color="${m.color}"><div class="metric-head"><ha-icon icon="${esc(m.icon)}"></ha-icon><span class="metric-name">${esc(m.name)}</span></div><div class="readout">${m.percent===null?`<ha-icon class="plain-icon" icon="${esc(m.icon)}"></ha-icon>`:`<div class="gauge" style="--value:${v}%"><ha-icon icon="${esc(m.icon)}"></ha-icon></div>`}<div class="metric-value ${m.available?"":"unavailable"}">${esc(m.value)}${m.available&&m.unit?`<span class="metric-unit">${esc(m.unit)}</span>`:""}</div></div>${m.percent!==null?`<div class="bar" style="--value:${v}%"><div class="bar-fill"></div></div>`:""}</article>`}).join("")}</section>`;
   const status=hasSwitch?(d.powerState==="on"?"Powered on":d.powerState==="off"?"Powered off":d.powerState):d.on===true?"Online":d.on===false?"Offline":"Monitoring";const cls=d.on===true?"online":d.on===false?"offline":"";
   const actionable=hasSwitch&&d.controllable&&!off;
-  this.shadowRoot.innerHTML=`<style>${STYLE}.plain-icon{color:var(--accent);--mdc-icon-size:28px;flex:none}</style><ha-card data-palette="${config.palette}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="mdi:server"></ha-icon></div><div class="copy"><div class="eyebrow">${esc(config.subtitle||"SYSTEM MONITOR")}</div><h2 class="title">${esc(config.title||"Server Orbit")}</h2></div></div><div class="pill ${cls}"><span class="dot"></span>${esc(status)}</div></header>${detail}<footer class="footer"><span class="note">${d.metrics.length} configurable metric${d.metrics.length===1?"":"s"} · live Home Assistant data</span>${actionable?`<button class="power" data-power><ha-icon icon="mdi:power"></ha-icon>${this._busy?"Switching…":"Power off"}</button>`:""}</footer></div></ha-card>`;
-  this.shadowRoot.querySelector("[data-power]")?.addEventListener("click",()=>this._togglePower());
+  renderControl(this.shadowRoot, `<style>${STYLE}.plain-icon{color:var(--accent);--mdc-icon-size:28px;flex:none}</style><ha-card data-palette="${config.palette}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="mdi:server"></ha-icon></div><div class="copy"><div class="eyebrow">${esc(config.subtitle||"SYSTEM MONITOR")}</div><h2 class="title">${esc(config.title||"Server Orbit")}</h2></div></div><div class="pill ${cls}"><span class="dot"></span>${esc(status)}</div></header>${detail}<footer class="footer"><span class="note">${d.metrics.length} configurable metric${d.metrics.length===1?"":"s"} · live Home Assistant data</span>${actionable?`<button class="power" data-power><ha-icon icon="mdi:power"></ha-icon>${this._busy?"Switching…":"Power off"}</button>`:""}</footer></div></ha-card>`);
+  bindControl(this.shadowRoot.querySelector("[data-power]"), "click",()=>this._togglePower());
  }
  async _togglePower(){if(this._busy||!this._config.power_entity)return;this._busy=true;this._sig="";this._render();try{await this._hass.callService("switch","toggle",{entity_id:this._config.power_entity})}catch(e){console.warn("Server Orbit Card could not toggle the configured power switch.",e)}finally{this._busy=false;this._sig="";this._render()}}
 }
@@ -1944,7 +2023,7 @@ class SpeedtestOrbitCard extends HTMLElement {
       const date = new Date(data.lastChanged);
       if (Number.isFinite(date.getTime())) updated = new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(date);
     }
-    this.shadowRoot.innerHTML = `<style>${STYLE}</style><ha-card data-palette="${escapeHtml(data.palette)}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="mdi:speedometer"></ha-icon></div><div class="identity-copy"><div class="eyebrow">Network · Speedtest</div><h2 class="title">${escapeHtml(data.title)}</h2></div></div><div class="pill ${ready === 3 ? "online" : ""}"><span class="dot"></span>${escapeHtml(status)}</div></header>${heroHtml}<section class="metrics">${metrics}</section>${updated ? `<footer class="footer"><div class="footer-copy"><strong>Last measurement:</strong> ${escapeHtml(updated)}</div><div class="footer-copy">Values from Home Assistant</div></footer>` : ""}</div></ha-card>`;
+    renderControl(this.shadowRoot, `<style>${STYLE}</style><ha-card data-palette="${escapeHtml(data.palette)}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="mdi:speedometer"></ha-icon></div><div class="identity-copy"><div class="eyebrow">Network · Speedtest</div><h2 class="title">${escapeHtml(data.title)}</h2></div></div><div class="pill ${ready === 3 ? "online" : ""}"><span class="dot"></span>${escapeHtml(status)}</div></header>${heroHtml}<section class="metrics">${metrics}</section>${updated ? `<footer class="footer"><div class="footer-copy"><strong>Last measurement:</strong> ${escapeHtml(updated)}</div><div class="footer-copy">Values from Home Assistant</div></footer>` : ""}</div></ha-card>`);
   }
 }
 
@@ -2150,7 +2229,7 @@ class UnifiOrbitCard extends HTMLElement {
       return;
     }
     this._renderSignature = signature;
-    this._root.innerHTML = `<style>${STYLES}</style>${this.renderCard(data)}`;
+    renderControl(this._root, `<style>${STYLES}</style>${this.renderCard(data)}`);
     this.bindEvents(data);
   }
 
@@ -2387,19 +2466,19 @@ class UnifiOrbitCard extends HTMLElement {
   }
 
   bindEvents(data) {
-    this._root.querySelectorAll("[data-device]").forEach((node) => node.addEventListener("click", () => {
+    this._root.querySelectorAll("[data-device]").forEach((node) => bindControl(node, "click", () => {
       this._selectedDevice = node.dataset.device === this._selectedDevice ? null : node.dataset.device;
       this._renderSignature = null;
       this.render();
     }));
-    this._root.querySelectorAll("[data-action-entity]").forEach((button) => button.addEventListener("click", (event) => {
+    this._root.querySelectorAll("[data-action-entity]").forEach((button) => bindControl(button, "click", (event) => {
       event.stopPropagation();
       const entityId = button.dataset.actionEntity;
       const domain = button.dataset.actionDomain;
       if (!this._hass?.callService || !entityId) return;
       this._hass.callService(domain, domain === "button" ? "press" : "toggle", { entity_id: entityId });
     }));
-    this._root.querySelector("[data-clear-selection]")?.addEventListener("click", () => { this._selectedDevice = null; this._renderSignature = null; this.render(); });
+    bindControl(this._root.querySelector("[data-clear-selection]"), "click", () => { this._selectedDevice = null; this._renderSignature = null; this.render(); });
   }
 
   positions(count) {
@@ -2594,7 +2673,7 @@ class UnifiCommandCenterCard extends UnifiOrbitCard {
       return;
     }
     this._centerSignature = signature;
-    this._root.innerHTML = `<style>${COMMAND_CENTER_STYLES}</style>${this.renderCenter(data)}`;
+    renderControl(this._root, `<style>${COMMAND_CENTER_STYLES}</style>${this.renderCenter(data)}`);
     this.bindCenterEvents();
   }
 
@@ -2657,9 +2736,9 @@ class UnifiCommandCenterCard extends UnifiOrbitCard {
   }
 
   bindCenterEvents() {
-    this._root.querySelectorAll("[data-cc-device]").forEach((node) => node.addEventListener("click", () => { this._selectedDevice = node.dataset.ccDevice === this._selectedDevice ? null : node.dataset.ccDevice; this._centerSignature = null; this.render(); }));
-    this._root.querySelectorAll("[data-cc-action-entity]").forEach((button) => button.addEventListener("click", (event) => { event.stopPropagation(); const entityId = button.dataset.ccActionEntity; const domain = button.dataset.ccActionDomain; if (this._hass?.callService && entityId) this._hass.callService(domain, domain === "button" ? "press" : "toggle", { entity_id: entityId }); }));
-    this._root.querySelector("[data-cc-clear]")?.addEventListener("click", () => { this._selectedDevice = null; this._centerSignature = null; this.render(); });
+    this._root.querySelectorAll("[data-cc-device]").forEach((node) => bindControl(node, "click", () => { this._selectedDevice = node.dataset.ccDevice === this._selectedDevice ? null : node.dataset.ccDevice; this._centerSignature = null; this.render(); }));
+    this._root.querySelectorAll("[data-cc-action-entity]").forEach((button) => bindControl(button, "click", (event) => { event.stopPropagation(); const entityId = button.dataset.ccActionEntity; const domain = button.dataset.ccActionDomain; if (this._hass?.callService && entityId) this._hass.callService(domain, domain === "button" ? "press" : "toggle", { entity_id: entityId }); }));
+    bindControl(this._root.querySelector("[data-cc-clear]"), "click", () => { this._selectedDevice = null; this._centerSignature = null; this.render(); });
   }
 }
 
@@ -3028,7 +3107,7 @@ class WeatherOrbitCard extends HTMLElement {
    const fc = condition(f.condition), rain = finite(f.precipitation) && Number(f.precipitation) >= 0 ? this._value(f.precipitation, a.precipitation_unit) : '';
    return '<div class="entry"><time datetime="' + esc(f.datetime) + '">' + esc(this._date(f.datetime)) + '</time>' + (typeof f.is_daytime === 'boolean' ? '<div class="period">' + (f.is_daytime ? 'Day' : 'Night') + '</div>' : '') + icon(fc[1]) + '<div class="condition">' + esc(fc[0]) + '</div>' + (finite(f.temperature) ? '<div class="high">' + this._value(f.temperature, a.temperature_unit) + '</div>' : '') + (finite(f.templow) ? '<div class="low">Low ' + this._value(f.templow, a.temperature_unit) + '</div>' : '') + (rain ? '<div class="rain">Rain ' + rain + '</div>' : '') + '</div>';
   }).join('') : '';
-  this.shadowRoot.innerHTML = '<style>' + STYLE + BARS_STYLE + '</style><ha-card data-palette="' + c.palette + '"><div class="shell"><div class="eyebrow">' + esc(c.title || 'Weather') + '</div>' + (c.show_time || c.show_date ? '<div class="datetime">' + (c.show_time ? '<time class="clock"></time>' : '') + (c.show_date ? '<time class="calendar"></time>' : '') + '</div>' : '') + this._outdoor() + (!c.entity ? (c.outdoor_temperature_entity ? '' : '<p class="message">Choose a weather entity in the card configuration to see current conditions and forecasts.</p>') : '<button class="current" data-action="info" aria-label="More information: ' + esc(a.friendly_name || 'Weather') + '"' + (!s ? ' disabled' : '') + '><span class="orbit">' + icon(valid ? cond[1] : 'cloudy-alert') + '</span><span class="copy">' + (c.outdoor_temperature_entity ? '<div class="source-label">Weather provider</div>' : '') + (valid && finite(a.temperature) ? '<div class="temperature">' + esc(this._number(a.temperature)) + '<small>' + esc(a.temperature_unit || '') + '</small></div>' : '') + '<div class="condition">' + esc(label) + '</div></span></button>' + (stats ? '<div class="stats">' + stats + '</div>' : '') + (c.show_forecast ? '<section class="forecast" aria-label="Forecast"><div class="forecast-heading">' + esc(c.forecast_type.replace('_', '-')) + ' forecast' + (this._status === 'Forecast unavailable. Try again.' ? '<button class="retry" data-action="retry">Retry</button>' : '') + '</div>' + (entries ? '<div class="entries' + (bars ? ' bars' : '') + '">' + entries + '</div>' : '<div class="message" role="status">' + esc(this._status) + '</div>') + '</section>' : '')) + '</div></ha-card>';
+  renderControl(this.shadowRoot, '<style>' + STYLE + BARS_STYLE + '</style><ha-card data-palette="' + c.palette + '"><div class="shell"><div class="eyebrow">' + esc(c.title || 'Weather') + '</div>' + (c.show_time || c.show_date ? '<div class="datetime">' + (c.show_time ? '<time class="clock"></time>' : '') + (c.show_date ? '<time class="calendar"></time>' : '') + '</div>' : '') + this._outdoor() + (!c.entity ? (c.outdoor_temperature_entity ? '' : '<p class="message">Choose a weather entity in the card configuration to see current conditions and forecasts.</p>') : '<button class="current" data-action="info" aria-label="More information: ' + esc(a.friendly_name || 'Weather') + '"' + (!s ? ' disabled' : '') + '><span class="orbit">' + icon(valid ? cond[1] : 'cloudy-alert') + '</span><span class="copy">' + (c.outdoor_temperature_entity ? '<div class="source-label">Weather provider</div>' : '') + (valid && finite(a.temperature) ? '<div class="temperature">' + esc(this._number(a.temperature)) + '<small>' + esc(a.temperature_unit || '') + '</small></div>' : '') + '<div class="condition">' + esc(label) + '</div></span></button>' + (stats ? '<div class="stats">' + stats + '</div>' : '') + (c.show_forecast ? '<section class="forecast" aria-label="Forecast"><div class="forecast-heading">' + esc(c.forecast_type.replace('_', '-')) + ' forecast' + (this._status === 'Forecast unavailable. Try again.' ? '<button class="retry" data-action="retry">Retry</button>' : '') + '</div>' + (entries ? '<div class="entries' + (bars ? ' bars' : '') + '">' + entries + '</div>' : '<div class="message" role="status">' + esc(this._status) + '</div>') + '</section>' : '')) + '</div></ha-card>');
   this._updateClock();
  }
 }
@@ -3186,7 +3265,7 @@ class WelcomeOrbitCard extends HTMLElement {
   const compact = c.layout === 'compact';
   const toolbar = compact || this._orbitWelcomeNormal ? '<div class="toolbar">' + (links ? '<button class="toolbar-control toggle" data-action="expand" aria-expanded="' + this._expanded + '" aria-controls="welcome-shortcuts" aria-label="' + (this._expanded ? 'Hide quick navigation' : 'Show quick navigation') + '">' + icon(this._expanded ? 'mdi:chevron-up' : 'mdi:chevron-down') + '</button>' : '<span class="toolbar-placeholder"></span>') + '<div class="toolbar-center">' + (compact ? this._weather(now) : '') + '</div>' + (c.settings_path ? '<a class="toolbar-control settings" data-action="settings" aria-label="Open settings" href="' + esc(c.settings_path) + '">' + icon('mdi:cog-outline') + '</a>' : '<span class="toolbar-placeholder settings-placeholder"></span>') + '</div>' : '';
   const heading = compact ? '<h1>' + esc(greeting) + (name ? ',<span class="greeting-name">' + esc(name) + '</span>' : '') + '</h1>' + (time ? '<div class="meta">' + time + '</div>' : '') : '<div class="eyebrow">' + icon('mdi:home-variant-outline') + '<span>' + esc(c.title || 'Home overview') + '</span></div><h1>' + esc(greeting + (name ? ', ' + name : '')) + '</h1>' + (time || date ? '<div class="meta">' + date + time + '</div>' : '');
-  this.shadowRoot.innerHTML = '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '" data-animate="' + c.animate + '"><div class="shell' + (compact ? ' compact' : this._orbitWelcomeNormal ? ' orbit-welcome-normal' : '') + '">' + toolbar + '<div class="header"><div class="copy">' + heading + '</div>' + (!compact ? '<div class="orbit" aria-hidden="true"><span class="ring"></span>' + icon(image) + '</div>' : '') + '</div>' + (!compact ? this._weather(now) : '') + (links ? '<nav id="welcome-shortcuts" class="shortcuts" aria-label="Rooms and scenes"' + ((compact || this._orbitWelcomeNormal) && !this._expanded ? ' hidden' : '') + '>' + links + '</nav>' : '') + (this._error ? '<div class="message error" role="alert">' + esc(this._error) + '</div>' : this._message ? '<div class="message" role="status">' + esc(this._message) + '</div>' : '') + '</div></ha-card>';
+  renderControl(this.shadowRoot, '<style>' + STYLE + '</style><ha-card data-palette="' + c.palette + '" data-animate="' + c.animate + '"><div class="shell' + (compact ? ' compact' : this._orbitWelcomeNormal ? ' orbit-welcome-normal' : '') + '">' + toolbar + '<div class="header"><div class="copy">' + heading + '</div>' + (!compact ? '<div class="orbit" aria-hidden="true"><span class="ring"></span>' + icon(image) + '</div>' : '') + '</div>' + (!compact ? this._weather(now) : '') + (links ? '<nav id="welcome-shortcuts" class="shortcuts" aria-label="Rooms and scenes"' + ((compact || this._orbitWelcomeNormal) && !this._expanded ? ' hidden' : '') + '>' + links + '</nav>' : '') + (this._error ? '<div class="message error" role="alert">' + esc(this._error) + '</div>' : this._message ? '<div class="message" role="status">' + esc(this._message) + '</div>' : '') + '</div></ha-card>');
   if (focusAction) [...this.shadowRoot.querySelectorAll('[data-action]')].find((el) => el.dataset.action === focusAction && el.dataset.index === focusIndex)?.focus();
  }
  _navigate(path, settings = false) {
@@ -3347,7 +3426,7 @@ class ActionButtonCard extends HTMLElement {
   render() {
     if (!this._root || !this._config) return;
     if (!this.actionEntity && !this._hass) {
-      this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="setup">Choose a button entity in the card editor to get started.</div></ha-card>`;
+      renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="setup">Choose a button entity in the card editor to get started.</div></ha-card>`);
       return;
     }
     const entityId = this._config.entity;
@@ -3359,22 +3438,22 @@ class ActionButtonCard extends HTMLElement {
       ? `<div class="confirm"><span class="confirm-copy">Send this action now?</span><button class="confirm-button" type="button" data-cancel>Cancel</button><button class="confirm-button primary" type="button" data-confirm ${actionDisabled ? "disabled" : ""}>Send</button></div>`
       : `<button class="action" type="button" data-action ${actionDisabled ? "disabled" : ""}><ha-icon icon="${escapeHtml(this.icon())}"></ha-icon><span>${escapeHtml(this._pending ? "Sending…" : actionLabel)}</span></button>`;
     const feedback = this._error ? this._feedback : this._feedback || (this.unavailable ? "The action entity is not available." : "Tap to send the command.");
-    this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell"><header class="header"><div class="identity"><span class="icon-wrap"><ha-icon icon="${escapeHtml(this.icon())}"></ha-icon></span><div class="copy"><div class="eyebrow">Action</div><h2 class="title">${escapeHtml(this.title())}</h2><p class="subtitle">${escapeHtml(subtitle)}</p></div></div><span class="status ${state.className}"><span class="status-dot"></span>${escapeHtml(state.label)}</span></header><div class="action-area">${confirmation}${!this._confirming ? `<div class="feedback${this._error ? " error" : ""}" role="status">${escapeHtml(feedback)}</div>` : ""}</div></div></ha-card>`;
+    renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="shell"><header class="header"><div class="identity"><span class="icon-wrap"><ha-icon icon="${escapeHtml(this.icon())}"></ha-icon></span><div class="copy"><div class="eyebrow">Action</div><h2 class="title">${escapeHtml(this.title())}</h2><p class="subtitle">${escapeHtml(subtitle)}</p></div></div><span class="status ${state.className}"><span class="status-dot"></span>${escapeHtml(state.label)}</span></header><div class="action-area">${confirmation}${!this._confirming ? `<div class="feedback${this._error ? " error" : ""}" role="status">${escapeHtml(feedback)}</div>` : ""}</div></div></ha-card>`);
     this.bindEvents();
   }
 
   bindEvents() {
-    this._root.querySelector("[data-action]")?.addEventListener("click", () => {
+    bindControl(this._root.querySelector("[data-action]"), "click", () => {
       if (this._config.confirmation) {
         this._confirming = true;
         this.render();
       } else this.press();
     });
-    this._root.querySelector("[data-cancel]")?.addEventListener("click", () => {
+    bindControl(this._root.querySelector("[data-cancel]"), "click", () => {
       this._confirming = false;
       this.render();
     });
-    this._root.querySelector("[data-confirm]")?.addEventListener("click", () => {
+    bindControl(this._root.querySelector("[data-confirm]"), "click", () => {
       this._confirming = false;
       this.press();
     });
@@ -3382,7 +3461,7 @@ class ActionButtonCard extends HTMLElement {
     const interactive = (target) => target instanceof Element && target.closest("button,input,select,textarea,a,[contenteditable=true]");
     let timer;
     let held = false;
-    shell?.addEventListener("pointerdown", (event) => {
+    bindControl(shell, "pointerdown", (event) => {
       if (interactive(event.target)) return;
       held = false;
       timer = setTimeout(() => {
@@ -3391,10 +3470,10 @@ class ActionButtonCard extends HTMLElement {
       }, 550);
     });
     const clear = () => clearTimeout(timer);
-    shell?.addEventListener("pointerup", clear);
-    shell?.addEventListener("pointerleave", clear);
-    shell?.addEventListener("pointercancel", clear);
-    shell?.addEventListener("click", (event) => {
+    bindControl(shell, "pointerup", clear);
+    bindControl(shell, "pointerleave", clear);
+    bindControl(shell, "pointercancel", clear);
+    bindControl(shell, "click", (event) => {
       if (!interactive(event.target) && held) {
         event.preventDefault();
         event.stopPropagation();
@@ -3596,7 +3675,7 @@ class AlecoairDehumidifierCard extends HTMLElement {
     const state = this._state();
     if (!this._config.entity || !this._hass || !this.shadowRoot) return;
     if (!state) {
-      this.shadowRoot.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell"><div class="notice">Entity not found: ${escapeHtml(this._config.entity)}</div></div></ha-card>`;
+      renderControl(this.shadowRoot, `<style>${STYLE}</style><ha-card><div class="shell"><div class="notice">Entity not found: ${escapeHtml(this._config.entity)}</div></div></ha-card>`);
       return;
     }
     const attr = state.attributes || {};
@@ -3614,7 +3693,7 @@ class AlecoairDehumidifierCard extends HTMLElement {
     const stateLabel = unavailable ? "Unavailable" : active ? "On" : "Off";
     const modeSelect = modes.length > 0 ? `<label class="mode-wrap"><span class="mode-label">Mode</span><select class="mode-select" aria-label="Operating mode" data-control="mode">${modes.map((item) => `<option value="${escapeHtml(item)}" ${item === mode ? "selected" : ""}>${escapeHtml(this._formatMode(item))}</option>`).join("")}</select></label>` : "";
 
-    this.shadowRoot.innerHTML = `
+    renderControl(this.shadowRoot, `
       <style>${STYLE}</style>
       <ha-card data-palette="${this._config.palette}">
         <div class="shell">
@@ -3631,8 +3710,8 @@ class AlecoairDehumidifierCard extends HTMLElement {
           ${this._feedback ? `<p class="notice ${this._error ? "error" : ""}" role="status">${escapeHtml(this._feedback)}</p>` : ""}
           ${modes.length === 0 && attr.available_modes ? `<p class="notice">No operating modes are available for this entity.</p>` : ""}
         </div>
-      </ha-card>`;
-    this.shadowRoot.querySelector('[data-action="power"]')?.addEventListener("click", () => this._togglePower());
+      </ha-card>`);
+    bindControl(this.shadowRoot.querySelector('[data-action="power"]'), "click", () => this._togglePower());
   }
 }
 
@@ -3808,7 +3887,7 @@ class AnimatedGateCard extends HTMLElement {
     const positionMarkup = position === null ? "" : `<div class="position"><span class="position-value">${Math.round(position)}%</span><span class="position-caption">Open</span></div>`;
     const statusMessage = position === null ? stateInfo[2] : `${stateInfo[2]} · ${Math.round(position)}% open`;
 
-    this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell">
+    renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="shell">
       <header class="head"><div class="brand"><div class="mark" aria-hidden="true">⌂</div><div style="min-width:0"><div class="eyebrow">Home Assistant · Cover</div><h2 class="title">${this.escape(title)}</h2></div></div><div class="pill ${stateInfo[1]}"><span class="dot"></span>${stateInfo[0]}</div></header>
       <div class="scene ${visualState}">${GATE_ART}</div>
       <section class="status"><div class="status-copy"><div class="state-label">${stateInfo[0]}</div><div class="sub-label">${this.escape(statusMessage)}</div></div>${positionMarkup}</section>
@@ -3819,12 +3898,12 @@ class AnimatedGateCard extends HTMLElement {
         <button class="control-btn stop" data-action="stop" ${!entity || !canStop || busy ? "disabled" : ""}><span class="icon" aria-hidden="true">■</span><span>${busy && this._busyAction === "stop" ? "Sending…" : "Stop"}</span></button>
       </section>
       ${this._actionError ? `<div class="action-error" role="status">${this.escape(this._actionError)}</div>` : this._actionMessage ? `<div class="action-notice" role="status">${this.escape(this._actionMessage)}</div>` : ""}
-    </div></ha-card>`;
+    </div></ha-card>`);
 
     // Bind at the button itself so Home Assistant's dashboard event handling
     // cannot swallow a click before it reaches a delegated shadow-root handler.
     for (const button of this._root.querySelectorAll("button[data-action]")) {
-      button.addEventListener("click", (event) => {
+      bindControl(button, "click", (event) => {
         event.preventDefault();
         event.stopPropagation();
         void this.performAction(button.dataset.action);
@@ -3898,78 +3977,6 @@ const compactProfiles={"climate-control-card":{"css":".shell{padding:10px}.heade
 const customElements={get:name=>window.customElements.get(name),define:(name,C,options)=>window.customElements.define(name,orbitModern.prepare(name,compactProfiles[name]?orbitCompact.prepare(name,orbitModern.beforeCompact(C),compactProfiles[name]):C),options)};
 const knownTypes=["climate-control-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["lovelace-climate-control-card"]="Already registered; remove old resources and reload to use the suite version.";return;}
-const boundControlEvents = new WeakMap();
-function bindControl(node, type, listener) {
-  if (!node) return;
-  const bound = boundControlEvents.get(node) || new Set();
-  if (bound.has(type)) return;
-  bound.add(type);
-  boundControlEvents.set(node, bound);
-  node.addEventListener(type, listener);
-}
-function renderControl(root, html) {
-  const template = document.createElement('template');
-  template.innerHTML = html;
-  const oldFrame = root.querySelector('ha-card');
-  const newFrame = template.content.querySelector('ha-card');
-  const oldStyle = root.querySelector('style:not([data-orbit-compact])');
-  const newStyle = template.content.querySelector('style');
-  if (!oldFrame || !newFrame || oldStyle?.textContent !== newStyle?.textContent) {
-    root.innerHTML = html;
-    return;
-  }
-  patchControlNode(oldFrame, newFrame);
-}
-function controlNodeKey(node) {
-  if (node.nodeType !== 1) return String(node.nodeType);
-  const action = node.getAttribute('data-action') || node.getAttribute('data-control') ||
-    node.getAttribute('data-step') || node.getAttribute('data-flash');
-  // Classes describe identity for layout containers, not changing state or feedback.
-  const role = /^(DIV|SECTION|FOOTER|HEADER)$/.test(node.tagName)
-    ? node.classList[0] : '';
-  return [node.localName, node.id && !node.id.startsWith('orbit-compact-') ? node.id : '',
-    action, role, node.localName === 'option' ? node.value : ''].join(':');
-}
-function patchControlNode(current, next) {
-  const input = current.localName === 'input';
-  const valueChanged = input && current.getAttribute('value') !== next.getAttribute('value');
-  for (const name of current.getAttributeNames()) {
-    if (name.startsWith('data-orbit-') || (name === 'id' && current.id.startsWith('orbit-compact-'))) continue;
-    if (!next.hasAttribute(name)) current.removeAttribute(name);
-  }
-  for (const { name, value } of next.attributes) {
-    if (current.getAttribute(name) !== value) current.setAttribute(name, value);
-  }
-
-  const candidates = new Map();
-  const ownsNode = node => !node.classList?.contains('orbit-tile');
-  for (const child of current.childNodes) {
-    if (!ownsNode(child)) continue;
-    const key = controlNodeKey(child);
-    if (!candidates.has(key)) candidates.set(key, []);
-    candidates.get(key).push(child);
-  }
-  const desired = Array.from(next.childNodes);
-  const matches = desired.map(child => candidates.get(controlNodeKey(child))?.shift());
-  for (const unused of candidates.values()) for (const child of unused) child.remove();
-  let cursor = Array.from(current.childNodes).find(ownsNode) || null;
-  desired.forEach((child, index) => {
-    let retained = matches[index];
-    if (retained?.nodeType === 1) patchControlNode(retained, child);
-    if (retained && retained.nodeType !== 1 && retained.nodeValue !== child.nodeValue) {
-      // Observe text changes through the existing Compact child-list observer.
-      const text = child.cloneNode(true);
-      retained.replaceWith(text);
-      if (cursor === retained) cursor = text;
-      retained = text;
-    }
-    const node = retained || child.cloneNode(true);
-    if (node !== cursor) current.insertBefore(node, cursor);
-    cursor = node.nextSibling;
-  });
-  if (valueChanged) current.value = next.value;
-  if (current.localName === 'select' && current.value !== next.value) current.value = next.value;
-}
 const CARD_TYPE = "climate-control-card";
 const VERSION = "1.3.2";
 
@@ -4225,9 +4232,10 @@ function orbitFrigateLive(C) {
   const oldFrame=this.shadowRoot.querySelector('.camera-frame');
   if(!oldFrame){this.shadowRoot.innerHTML=markup;return;}
   const template=document.createElement('template');template.innerHTML=markup;
-  for(const selector of ['.header','.sensor-grid','.footer']){const old=this.shadowRoot.querySelector(selector),next=template.content.querySelector(selector);if(old&&next)old.replaceWith(next);else if(old)old.remove();else if(next)this.shadowRoot.querySelector('.shell').append(next);}
-  const card=this.shadowRoot.querySelector('ha-card');card.dataset.palette=this._config.palette;
-  oldFrame.querySelector('.camera-open').setAttribute('aria-label',template.content.querySelector('.camera-open').getAttribute('aria-label'));
+  for(const selector of ['.header','.sensor-grid','.footer']){const old=this.shadowRoot.querySelector(selector),next=template.content.querySelector(selector);if(old&&next)patchControlNode(old,next);else if(old)old.remove();else if(next)this.shadowRoot.querySelector('.shell').append(next);}
+  const card=this.shadowRoot.querySelector('ha-card');if(card.dataset.palette!==this._config.palette)card.dataset.palette=this._config.palette;
+  const trigger=oldFrame.querySelector('.camera-open'),label=template.content.querySelector('.camera-open').getAttribute('aria-label');
+  if(trigger.getAttribute('aria-label')!==label)trigger.setAttribute('aria-label',label);
  };
  p._render=function(){render.call(this);this._orbitObserve();this._orbitSync();};
  Object.defineProperty(p,'hass',{get:hass.get,set(value){hass.set.call(this,value);if(this._orbitMedia)this._orbitMedia.hass=value;this._orbitSync();},configurable:true});
@@ -4660,16 +4668,16 @@ class HomeConnectWasherCard extends HTMLElement {
     const remainingCopy = isRunning ? "Cycle in progress · time not reported" : finishedText || (operationLabel === "Standby" || operationLabel === "Ready" ? "Ready for the next cycle" : "Live appliance status");
     const progressCopy = hasProgress ? `${Math.round(progress)}%` : progress === null ? "—" : `${progress}%`;
 
-    this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell">
+    renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="shell">
       <header class="head"><div class="brand"><div class="brand-mark" aria-hidden="true">⌁</div><div style="min-width:0"><div class="eyebrow">Home Connect · Laundry</div><h2 class="title">${this.escape(this._config.title)}</h2></div></div><div class="state-pill ${statusClass}"><span class="state-dot"></span>${this.escape(statusLabel)}</div></header>
       <main class="hero"><div class="machine ${isRunning ? "spinning" : ""}">${WASHER_ART}</div><section class="hero-info"><div class="state-label">WASH CYCLE</div><div class="operation">${this.escape(operationLabel)}</div><div class="program">${this.escape(program ? this.pretty(program) : "No active program")}</div><div class="progress-block"><div class="progress-meta"><span class="progress-caption">${this.escape(remainingCopy)}</span><span class="progress-value">${hasProgress ? progressCopy : "—"}</span></div><div class="track"><div class="bar" style="--progress:${hasProgress ? progress : progress === 100 ? 100 : 0}%"></div></div></div></section></main>
       ${infoItems.length ? `<section class="info-grid">${infoItems.map((item) => `<div class="info"><span class="info-label">${this.escape(item.label)}</span><span class="info-value ${item.className}">${this.escape(item.value)}</span></div>`).join("")}</section>` : ""}
       ${(idos1 || idos2 || powerEntityId || stopEntityId) ? `<section class="extras">${idos1 || idos2 ? `<div class="idos"><span class="idos-title">i-Dos detergent</span>${[idos1 && { name: "i-Dos 1", ...idos1 }, idos2 && { name: "i-Dos 2", ...idos2 }].filter(Boolean).map((item) => `<span class="idos-chip ${item.className}"><i class="idos-dot"></i>${this.escape(item.name)} · ${this.escape(item.text)}</span>`).join("")}</div>` : "<div></div>"}<div class="actions">${stopEntityId ? (actionMode === "stop" ? `<button class="action-btn confirm" data-confirm="stop" ${!canStop || actionBusy ? "disabled" : ""}>${actionBusy ? "Sending…" : "Confirm stop"}</button><button class="action-btn" data-cancel>Cancel</button>` : `<button class="action-btn stop" data-action="stop" ${!canStop || actionBusy ? "disabled" : ""}>Stop</button>`) : ""}${powerEntityId ? (actionMode === "power" ? `<button class="action-btn confirm" data-confirm="power" ${!powerAvailable || actionBusy ? "disabled" : ""}>${actionBusy ? "Sending…" : `Confirm power ${powerState === "on" ? "off" : "on"}`}</button><button class="action-btn" data-cancel>Cancel</button>` : `<button class="action-btn" data-action="power" ${!powerAvailable || actionBusy ? "disabled" : ""}>Power ${powerState === "on" ? "Off" : "On"}</button>`) : ""}${this._actionError ? `<span class="action-error">${this.escape(this._actionError)}</span>` : ""}</div></section>` : ""}
       <footer class="footer"><span>${connected === false ? "Appliance disconnected" : connected === true ? "Connected to Home Assistant" : "Home Connect appliance"}</span><span>${this.escape(remainingCopy)}</span></footer>
-    </div></ha-card>`;
-    this._root.querySelectorAll("[data-action]").forEach((button) => button.addEventListener("click", () => { this._actionMode = button.dataset.action; this._actionError = ""; this.render(); }));
-    this._root.querySelectorAll("[data-cancel]").forEach((button) => button.addEventListener("click", () => { this._actionMode = ""; this._actionError = ""; this.render(); }));
-    this._root.querySelectorAll("[data-confirm]").forEach((button) => button.addEventListener("click", () => this.performAction(button.dataset.confirm)));
+    </div></ha-card>`);
+    this._root.querySelectorAll("[data-action]").forEach((button) => bindControl(button, "click", () => { this._actionMode = button.dataset.action; this._actionError = ""; this.render(); }));
+    this._root.querySelectorAll("[data-cancel]").forEach((button) => bindControl(button, "click", () => { this._actionMode = ""; this._actionError = ""; this.render(); }));
+    this._root.querySelectorAll("[data-confirm]").forEach((button) => bindControl(button, "click", () => this.performAction(button.dataset.confirm)));
   }
 
   async performAction(action) {
@@ -4884,12 +4892,12 @@ class HpPrinterCard extends HTMLElement {
     const inks = (Array.isArray(this._config.ink_entities) ? this._config.ink_entities : []).filter(Boolean).map((id) => this.getInk(id));
     const stats = this.collectStats();
     const alerts = inks.filter((ink) => ink.level !== null && ink.level <= (Number(this._config.low_ink_threshold) || 15));
-    this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell">
+    renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="shell">
       <header class="header"><div class="brand"><div class="mark">${PRINTER_ICON}</div><div style="min-width:0"><div class="eyebrow">HP · Print system</div><h2>${this.escape(this._config.title)}</h2></div></div><div class="status ${status.className}"><span class="dot"></span>${this.escape(status.text)}</div></header>
       <main class="main"><section><h3 class="section-title">Supplies</h3>${inks.length ? `<div class="ink-list">${inks.map((ink) => `<div class="ink" title="${this.escape(ink.entityId)}"><div class="ink-name"><span class="ink-chip" style="--ink-color:${ink.color}"></span>${this.escape(ink.label)}</div><div class="track"><div class="fill" style="--level:${ink.level ?? 0}%;--ink-color:${ink.color}"></div></div><div class="level">${ink.unavailable ? "—" : ink.level === null ? "—" : `${Math.round(ink.level)}%`}</div></div>`).join("")}</div>` : `<div class="empty">Add one or more cartridge level sensors using <code>ink_entities</code>.</div>`}${alerts.length ? `<div class="alerts">${alerts.map((ink) => `<div class="alert ${ink.level <= 5 ? "error" : ""}">⚠ <span>${this.escape(ink.label)} is low (${Math.round(ink.level)}%).</span></div>`).join("")}</div>` : ""}</section>
       <section><h3 class="section-title">Usage overview</h3>${stats.length ? `<div class="stats">${stats.map((stat) => `<div class="stat"><div class="stat-label">${this.escape(stat.label)}</div><div class="stat-value">${this.format(stat.value)}${stat.unit ? `<span class="stat-unit">${this.escape(stat.unit)}</span>` : ""}</div></div>`).join("")}</div>` : `<div class="empty">Page counters appear here when available on the selected printer sensor.</div>`}</section></main>
       <footer class="footer"><span class="source">Home Assistant · Live entity data</span><span>${this.escape(status.message)}</span></footer>
-    </div></ha-card>`;
+    </div></ha-card>`);
   }
 }
 
@@ -4941,78 +4949,6 @@ const compactProfiles={"luma-control-card":{"css":".shell{padding:10px}.header{g
 const customElements={get:name=>window.customElements.get(name),define:(name,C,options)=>window.customElements.define(name,orbitModern.prepare(name,compactProfiles[name]?orbitCompact.prepare(name,orbitModern.beforeCompact(C),compactProfiles[name]):C),options)};
 const knownTypes=["luma-control-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["lovelace-luma-control-card"]="Already registered; remove old resources and reload to use the suite version.";return;}
-const boundControlEvents = new WeakMap();
-function bindControl(node, type, listener) {
-  if (!node) return;
-  const bound = boundControlEvents.get(node) || new Set();
-  if (bound.has(type)) return;
-  bound.add(type);
-  boundControlEvents.set(node, bound);
-  node.addEventListener(type, listener);
-}
-function renderControl(root, html) {
-  const template = document.createElement('template');
-  template.innerHTML = html;
-  const oldFrame = root.querySelector('ha-card');
-  const newFrame = template.content.querySelector('ha-card');
-  const oldStyle = root.querySelector('style:not([data-orbit-compact])');
-  const newStyle = template.content.querySelector('style');
-  if (!oldFrame || !newFrame || oldStyle?.textContent !== newStyle?.textContent) {
-    root.innerHTML = html;
-    return;
-  }
-  patchControlNode(oldFrame, newFrame);
-}
-function controlNodeKey(node) {
-  if (node.nodeType !== 1) return String(node.nodeType);
-  const action = node.getAttribute('data-action') || node.getAttribute('data-control') ||
-    node.getAttribute('data-step') || node.getAttribute('data-flash');
-  // Classes describe identity for layout containers, not changing state or feedback.
-  const role = /^(DIV|SECTION|FOOTER|HEADER)$/.test(node.tagName)
-    ? node.classList[0] : '';
-  return [node.localName, node.id && !node.id.startsWith('orbit-compact-') ? node.id : '',
-    action, role, node.localName === 'option' ? node.value : ''].join(':');
-}
-function patchControlNode(current, next) {
-  const input = current.localName === 'input';
-  const valueChanged = input && current.getAttribute('value') !== next.getAttribute('value');
-  for (const name of current.getAttributeNames()) {
-    if (name.startsWith('data-orbit-') || (name === 'id' && current.id.startsWith('orbit-compact-'))) continue;
-    if (!next.hasAttribute(name)) current.removeAttribute(name);
-  }
-  for (const { name, value } of next.attributes) {
-    if (current.getAttribute(name) !== value) current.setAttribute(name, value);
-  }
-
-  const candidates = new Map();
-  const ownsNode = node => !node.classList?.contains('orbit-tile');
-  for (const child of current.childNodes) {
-    if (!ownsNode(child)) continue;
-    const key = controlNodeKey(child);
-    if (!candidates.has(key)) candidates.set(key, []);
-    candidates.get(key).push(child);
-  }
-  const desired = Array.from(next.childNodes);
-  const matches = desired.map(child => candidates.get(controlNodeKey(child))?.shift());
-  for (const unused of candidates.values()) for (const child of unused) child.remove();
-  let cursor = Array.from(current.childNodes).find(ownsNode) || null;
-  desired.forEach((child, index) => {
-    let retained = matches[index];
-    if (retained?.nodeType === 1) patchControlNode(retained, child);
-    if (retained && retained.nodeType !== 1 && retained.nodeValue !== child.nodeValue) {
-      // Observe text changes through the existing Compact child-list observer.
-      const text = child.cloneNode(true);
-      retained.replaceWith(text);
-      if (cursor === retained) cursor = text;
-      retained = text;
-    }
-    const node = retained || child.cloneNode(true);
-    if (node !== cursor) current.insertBefore(node, cursor);
-    cursor = node.nextSibling;
-  });
-  if (valueChanged) current.value = next.value;
-  if (current.localName === 'select' && current.value !== next.value) current.value = next.value;
-}
 const CARD_TYPE = "luma-control-card";
 const VERSION = "1.2.1";
 
@@ -5502,7 +5438,7 @@ class PiHoleControlCard extends HTMLElement {
     const actionsOpen = this.shadowRoot.querySelector("details.fold")?.open || false;
     if (!config?.entity) {
       const message = this._registryLoading ? "Searching for Pi-hole integrations…" : this._registryError ? "Could not read Home Assistant's entity registry. Use an administrator account or configure the entities manually." : "No Pi-hole integration was found. Check that its entities are enabled, or switch to manual setup.";
-      this.shadowRoot.innerHTML = `<style>${STYLE}</style><ha-card data-palette="${this._config.palette}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="mdi:pi-hole"></ha-icon></div><div class="identity-copy"><div class="eyebrow">Home Assistant · Network</div><h2 class="title">${escapeHtml(this._config.title || "Pi-hole")}</h2></div></div></header><div class="hint ${this._registryError ? "error" : ""}" role="status">${escapeHtml(message)}</div></div></ha-card>`;
+      renderControl(this.shadowRoot, `<style>${STYLE}</style><ha-card data-palette="${this._config.palette}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="mdi:pi-hole"></ha-icon></div><div class="identity-copy"><div class="eyebrow">Home Assistant · Network</div><h2 class="title">${escapeHtml(this._config.title || "Pi-hole")}</h2></div></div></header><div class="hint ${this._registryError ? "error" : ""}" role="status">${escapeHtml(message)}</div></div></ha-card>`);
       return;
     }
     const power = this._state(config.entity), status = this._state(config.status_entity);
@@ -5524,7 +5460,7 @@ class PiHoleControlCard extends HTMLElement {
     const remainingText = remaining > 0 ? `<div class="hint">Ad-blocking resumes in ${escapeHtml(new Intl.NumberFormat(undefined, { maximumFractionDigits: 0 }).format(Math.ceil(remaining / 60)))} min.</div>` : "";
     const instances = this._config.mode === "manual" ? [] : discoverPiHoleInstances(this._registry, this._hass?.states);
     const instancePicker = instances.length > 1 ? `<select class="instance-picker" data-instance-select aria-label="Pi-hole instance">${instances.map((instance) => `<option value="${escapeHtml(instance.id)}" ${instance.id === this._selectedInstance ? "selected" : ""}>${escapeHtml(instance.name)}</option>`).join("")}</select>` : "";
-    this.shadowRoot.innerHTML = `<style>${STYLE}</style><ha-card data-palette="${config.palette}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="${escapeHtml(config.icon || "mdi:pi-hole")}"></ha-icon></div><div class="identity-copy"><div class="eyebrow">Home Assistant · Network</div><h2 class="title">${escapeHtml(config.title || "Pi-hole")}</h2></div></div><div class="status ${isRunning ? "running" : statusText === "Stopped" ? "stopped" : ""}"><span class="status-dot"></span>${escapeHtml(statusText)}</div></header>${instancePicker}${mainStats.length ? `<section class="metrics">${mainStats.map(metricHtml).join("")}</section>` : ""}${secondaryStats.length ? `<section class="metrics-secondary">${secondaryStats.map(secondaryHtml).join("")}</section>` : ""}<section class="panel"><div class="panel-head"><span class="panel-title">Ad-blocking</span><span class="switch-name">${power?.state === "on" ? "Enabled" : power?.state === "off" ? "Disabled" : "Unavailable"}</span></div><div class="switch-row"><div class="switch-copy"><span class="switch-icon"><ha-icon icon="mdi:shield-check-outline"></ha-icon></span><span class="switch-name">${escapeHtml(power?.attributes?.friendly_name || "Pi-hole")}</span></div><button class="toggle ${power?.state === "off" ? "off" : ""}" data-action="toggle" data-entity="${escapeHtml(config.entity)}" ${!power || !["on", "off"].includes(power.state) || this._pending.has("toggle" + config.entity) ? "disabled" : ""}>${power?.state === "on" ? "Disable" : "Enable"}</button></div>${pauseButtons}${remainingText}${groups ? `<div class="groups">${groups}</div>` : ""}${actions ? `<details class="fold" ${actionsOpen ? "open" : ""}><summary>Maintenance actions</summary><div class="actions">${actions}</div></details>` : ""}${versions ? `<div class="versions">${versions}</div>` : ""}${this._feedback ? `<div class="hint ${this._error ? "error" : ""}" role="status">${escapeHtml(this._feedback)}</div>` : ""}</section></div></ha-card>`;
+    renderControl(this.shadowRoot, `<style>${STYLE}</style><ha-card data-palette="${config.palette}"><div class="shell"><header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="${escapeHtml(config.icon || "mdi:pi-hole")}"></ha-icon></div><div class="identity-copy"><div class="eyebrow">Home Assistant · Network</div><h2 class="title">${escapeHtml(config.title || "Pi-hole")}</h2></div></div><div class="status ${isRunning ? "running" : statusText === "Stopped" ? "stopped" : ""}"><span class="status-dot"></span>${escapeHtml(statusText)}</div></header>${instancePicker}${mainStats.length ? `<section class="metrics">${mainStats.map(metricHtml).join("")}</section>` : ""}${secondaryStats.length ? `<section class="metrics-secondary">${secondaryStats.map(secondaryHtml).join("")}</section>` : ""}<section class="panel"><div class="panel-head"><span class="panel-title">Ad-blocking</span><span class="switch-name">${power?.state === "on" ? "Enabled" : power?.state === "off" ? "Disabled" : "Unavailable"}</span></div><div class="switch-row"><div class="switch-copy"><span class="switch-icon"><ha-icon icon="mdi:shield-check-outline"></ha-icon></span><span class="switch-name">${escapeHtml(power?.attributes?.friendly_name || "Pi-hole")}</span></div><button class="toggle ${power?.state === "off" ? "off" : ""}" data-action="toggle" data-entity="${escapeHtml(config.entity)}" ${!power || !["on", "off"].includes(power.state) || this._pending.has("toggle" + config.entity) ? "disabled" : ""}>${power?.state === "on" ? "Disable" : "Enable"}</button></div>${pauseButtons}${remainingText}${groups ? `<div class="groups">${groups}</div>` : ""}${actions ? `<details class="fold" ${actionsOpen ? "open" : ""}><summary>Maintenance actions</summary><div class="actions">${actions}</div></details>` : ""}${versions ? `<div class="versions">${versions}</div>` : ""}${this._feedback ? `<div class="hint ${this._error ? "error" : ""}" role="status">${escapeHtml(this._feedback)}</div>` : ""}</section></div></ha-card>`);
   }
 }
 
@@ -5701,7 +5637,7 @@ class SensorMeterCard extends HTMLElement {
     if (!this._config.entity || !this._hass || !this.shadowRoot) return;
     const entity = this._entity();
     if (!entity) {
-      this.shadowRoot.innerHTML = `<style>${STYLE}</style><ha-card><div class="content"><div class="copy"><div class="value">Sensor not found</div><div class="name">${escapeHtml(this._config.entity)}</div></div></div></ha-card>`;
+      renderControl(this.shadowRoot, `<style>${STYLE}</style><ha-card><div class="content"><div class="copy"><div class="value">Sensor not found</div><div class="name">${escapeHtml(this._config.entity)}</div></div></div></ha-card>`);
       return;
     }
 
@@ -5723,7 +5659,7 @@ class SensorMeterCard extends HTMLElement {
       ? `<section class="meter-panel"><div class="section-head"><span class="section-title">Sensor range</span><span class="meter-pct">${Math.round(progress)}% of range</span></div><div class="track" role="meter" aria-label="${escapeHtml(title)}" aria-valuemin="${min}" aria-valuemax="${max}" aria-valuenow="${value}" aria-valuetext="${escapeHtml(formattedValue)}"><div class="fill" style="width:${progress}%"></div></div><div class="range-limits"><span>${escapeHtml(this._formatValue(min, attributes))}</span><span>${escapeHtml(this._formatValue(max, attributes))}</span></div></section>`
       : unavailable ? "" : `<div class="hint">Set a maximum value to show the progress bar.</div>`;
 
-    this.shadowRoot.innerHTML = `
+    renderControl(this.shadowRoot, `
       <style>${STYLE}</style>
       <ha-card data-palette="${this._config.palette}">
         <div class="shell">
@@ -5733,7 +5669,7 @@ class SensorMeterCard extends HTMLElement {
           </header>
           ${meter}
         </div>
-      </ha-card>`;
+      </ha-card>`);
   }
 }
 
@@ -5753,78 +5689,6 @@ const compactProfiles={"switch-control-card":{"css":".shell{padding:10px}.header
 const customElements={get:name=>window.customElements.get(name),define:(name,C,options)=>window.customElements.define(name,orbitModern.prepare(name,compactProfiles[name]?orbitCompact.prepare(name,orbitModern.beforeCompact(C),compactProfiles[name]):C),options)};
 const knownTypes=["switch-control-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["lovelace-switch-control-card"]="Already registered; remove old resources and reload to use the suite version.";return;}
-const boundControlEvents = new WeakMap();
-function bindControl(node, type, listener) {
-  if (!node) return;
-  const bound = boundControlEvents.get(node) || new Set();
-  if (bound.has(type)) return;
-  bound.add(type);
-  boundControlEvents.set(node, bound);
-  node.addEventListener(type, listener);
-}
-function renderControl(root, html) {
-  const template = document.createElement('template');
-  template.innerHTML = html;
-  const oldFrame = root.querySelector('ha-card');
-  const newFrame = template.content.querySelector('ha-card');
-  const oldStyle = root.querySelector('style:not([data-orbit-compact])');
-  const newStyle = template.content.querySelector('style');
-  if (!oldFrame || !newFrame || oldStyle?.textContent !== newStyle?.textContent) {
-    root.innerHTML = html;
-    return;
-  }
-  patchControlNode(oldFrame, newFrame);
-}
-function controlNodeKey(node) {
-  if (node.nodeType !== 1) return String(node.nodeType);
-  const action = node.getAttribute('data-action') || node.getAttribute('data-control') ||
-    node.getAttribute('data-step') || node.getAttribute('data-flash');
-  // Classes describe identity for layout containers, not changing state or feedback.
-  const role = /^(DIV|SECTION|FOOTER|HEADER)$/.test(node.tagName)
-    ? node.classList[0] : '';
-  return [node.localName, node.id && !node.id.startsWith('orbit-compact-') ? node.id : '',
-    action, role, node.localName === 'option' ? node.value : ''].join(':');
-}
-function patchControlNode(current, next) {
-  const input = current.localName === 'input';
-  const valueChanged = input && current.getAttribute('value') !== next.getAttribute('value');
-  for (const name of current.getAttributeNames()) {
-    if (name.startsWith('data-orbit-') || (name === 'id' && current.id.startsWith('orbit-compact-'))) continue;
-    if (!next.hasAttribute(name)) current.removeAttribute(name);
-  }
-  for (const { name, value } of next.attributes) {
-    if (current.getAttribute(name) !== value) current.setAttribute(name, value);
-  }
-
-  const candidates = new Map();
-  const ownsNode = node => !node.classList?.contains('orbit-tile');
-  for (const child of current.childNodes) {
-    if (!ownsNode(child)) continue;
-    const key = controlNodeKey(child);
-    if (!candidates.has(key)) candidates.set(key, []);
-    candidates.get(key).push(child);
-  }
-  const desired = Array.from(next.childNodes);
-  const matches = desired.map(child => candidates.get(controlNodeKey(child))?.shift());
-  for (const unused of candidates.values()) for (const child of unused) child.remove();
-  let cursor = Array.from(current.childNodes).find(ownsNode) || null;
-  desired.forEach((child, index) => {
-    let retained = matches[index];
-    if (retained?.nodeType === 1) patchControlNode(retained, child);
-    if (retained && retained.nodeType !== 1 && retained.nodeValue !== child.nodeValue) {
-      // Observe text changes through the existing Compact child-list observer.
-      const text = child.cloneNode(true);
-      retained.replaceWith(text);
-      if (cursor === retained) cursor = text;
-      retained = text;
-    }
-    const node = retained || child.cloneNode(true);
-    if (node !== cursor) current.insertBefore(node, cursor);
-    cursor = node.nextSibling;
-  });
-  if (valueChanged) current.value = next.value;
-  if (current.localName === 'select' && current.value !== next.value) current.value = next.value;
-}
 const CARD_TAG = "switch-control-card";
 const PALETTES = new Set(["aurora","ocean","sunset","lavender","slate","indigo","teal","rose","amber","ice"]);
 
@@ -6471,12 +6335,12 @@ class MediaPlayerCard extends HTMLElement {
     if (!this._root || !this._config) return;
     const entityId = this._config.entity;
     if (!entityId) {
-      this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="setup">Choose a media player in the card editor to get started.</div></ha-card>`;
+      renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="setup">Choose a media player in the card editor to get started.</div></ha-card>`);
       return;
     }
     const entity = this.entity;
     if (!entity) {
-      this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="setup">Waiting for <strong>${escapeHtml(entityId)}</strong> to become available in Home Assistant.</div></ha-card>`;
+      renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="setup">Waiting for <strong>${escapeHtml(entityId)}</strong> to become available in Home Assistant.</div></ha-card>`);
       return;
     }
     const attrs = entity.attributes || {};
@@ -6522,7 +6386,7 @@ class MediaPlayerCard extends HTMLElement {
       body = `<div class="now-playing${showArtwork ? "" : " no-artwork"}">${showArtwork ? `<div class="artwork">${art}</div>` : ""}<div class="track-copy"><div class="track-kicker">${escapeHtml(deviceClass)} · ${escapeHtml(stateText)}</div><div class="track-title">${escapeHtml(mediaTitle)}</div>${subtitle ? `<div class="track-subtitle">${escapeHtml(subtitle)}</div>` : ""}${album ? `<div class="album">${escapeHtml(album)}</div>` : ""}</div></div>${progressMarkup}${transport}${volume}${this._renderAdvanced(entity, unavailable)}${stop}`;
     }
     const stateToken = state === "playing" ? "playing" : state === "paused" ? "paused" : off ? "off" : unavailable ? "unavailable" : "";
-    this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="${playerClass}"><header class="topline"><div class="brand"><span class="brand-icon"><ha-icon icon="${deviceClass === "tv" ? "mdi:television-play" : "mdi:music-note-eighth"}"></ha-icon></span><div class="brand-copy"><div class="eyebrow">${isPlaying ? "Now playing" : "Media player"}</div><h2 class="player-name">${escapeHtml(cardTitle)}</h2></div></div><span class="state-pill ${stateToken}"><span class="state-dot"></span>${escapeHtml(statusClass)}</span></header>${body}<div class="action-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div></div></ha-card>`;
+    renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="${playerClass}"><header class="topline"><div class="brand"><span class="brand-icon"><ha-icon icon="${deviceClass === "tv" ? "mdi:television-play" : "mdi:music-note-eighth"}"></ha-icon></span><div class="brand-copy"><div class="eyebrow">${isPlaying ? "Now playing" : "Media player"}</div><h2 class="player-name">${escapeHtml(cardTitle)}</h2></div></div><span class="state-pill ${stateToken}"><span class="state-dot"></span>${escapeHtml(statusClass)}</span></header>${body}<div class="action-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></div></div></ha-card>`);
     this._paintFeedback();
   }
 }
@@ -6684,7 +6548,7 @@ class TemperatureHumidityCard extends HTMLElement {
   render() {
     if (!this._root || !this._config || !this._hass) return;
     if (!this._config.temperature_entity) {
-      this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell"><header class="topline"><div class="brand"><span class="brand-icon"><ha-icon icon="mdi:home-thermometer"></ha-icon></span><div class="brand-copy"><div class="eyebrow">Indoor climate</div><h2 class="title">${escapeHtml(this.title())}</h2></div></div></header><p class="footer-note">Choose a temperature sensor in the card editor to get started.</p></div></ha-card>`;
+      renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="shell"><header class="topline"><div class="brand"><span class="brand-icon"><ha-icon icon="mdi:home-thermometer"></ha-icon></span><div class="brand-copy"><div class="eyebrow">Indoor climate</div><h2 class="title">${escapeHtml(this.title())}</h2></div></div></header><p class="footer-note">Choose a temperature sensor in the card editor to get started.</p></div></ha-card>`);
       return;
     }
     const temperature = this.metricMarkup({ kind: "temperature", entity: this.temperatureEntity, label: "Temperature", fallbackIcon: "mdi:thermometer" });
@@ -6692,7 +6556,7 @@ class TemperatureHumidityCard extends HTMLElement {
     const title = this.title();
     const updated = [this.temperatureEntity?.last_changed, this.humidityEntity?.last_changed].filter(Boolean).sort().at(-1);
     const freshness = updated ? `Updated ${new Date(updated).toLocaleTimeString(undefined, { hour: "2-digit", minute: "2-digit" })}` : "Live sensor readings";
-    this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell"><header class="topline"><div class="brand"><span class="brand-icon"><ha-icon icon="mdi:home-thermometer"></ha-icon></span><div class="brand-copy"><div class="eyebrow">Indoor climate</div><h2 class="title">${escapeHtml(title)}</h2></div></div><span class="live"><span class="live-dot"></span>Live</span></header><div class="metrics">${temperature}${humidity}</div><footer class="footer"><span class="footer-note"><ha-icon icon="mdi:clock-outline"></ha-icon>${escapeHtml(freshness)}</span><span class="footer-accent">Comfort at a glance</span></footer></div></ha-card>`;
+    renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="shell"><header class="topline"><div class="brand"><span class="brand-icon"><ha-icon icon="mdi:home-thermometer"></ha-icon></span><div class="brand-copy"><div class="eyebrow">Indoor climate</div><h2 class="title">${escapeHtml(title)}</h2></div></div><span class="live"><span class="live-dot"></span>Live</span></header><div class="metrics">${temperature}${humidity}</div><footer class="footer"><span class="footer-note"><ha-icon icon="mdi:clock-outline"></ha-icon>${escapeHtml(freshness)}</span><span class="footer-accent">Comfort at a glance</span></footer></div></ha-card>`);
   }
 }
 
