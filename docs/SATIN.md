@@ -1,6 +1,6 @@
 # Orbit Satin
 
-In v1.22.0-beta.9, enable **Satin** in the card editor or add:
+In v1.22.0, enable **Satin** in the card editor or add:
 
 ```yaml
 satin: true

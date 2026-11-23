@@ -1,6 +1,6 @@
-# Modern accent palettes — beta.3
+# Modern accent palettes
 
-Six additional, restrained color families are available in **v1.22.0-beta.5** on **all 37 primary card types**, in Classic/Modern and Normal/Compact. This is a local card palette, not a new Home Assistant theme. Every card has the palette option in its native or wrapped visual editor and in YAML. Optional [Glow](GLOW.md) follows these colors without changing semantic indicators.
+Six additional, restrained color families are available in **v1.22.0** on **all 37 primary card types**, in Classic/Modern and Normal/Compact. This is a local card palette, not a new Home Assistant theme. Every card has the palette option in its native or wrapped visual editor and in YAML. Optional [Glow](GLOW.md) follows these colors without changing semantic indicators.
 
 | Key | Direction |
 | --- | --- |
@@ -25,7 +25,7 @@ Color comparison images below are historical beta.2 captures with unchanged colo
 
 ## Try it
 
-HACS → Orbit Lovelace → Redownload → **v1.22.0-beta.5** (show beta versions if necessary), then fully reload the frontend/Companion app. Same resource; no theme YAML, new dependency or HA restart. Stable Latest remains v1.21.1.
+Update to **v1.22.0** in HACS → Orbit Lovelace, then fully reload the frontend/Companion app. No new resource, theme YAML, dependency or HA restart is required for palettes.
 
 ```yaml
 type: custom:ha-room-orbit-card

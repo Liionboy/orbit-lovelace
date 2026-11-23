@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.22.0-beta.15",
+  "version": "1.22.0",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -616,7 +616,7 @@
       "origin": "suite",
       "version": "0.5.2",
       "source": "src/orbit-modern.js",
-      "sha256": "eb2c9e99bd4320e0a05855b7185b05a9e5d17d9140725fb3ad5109aca896da6c",
+      "sha256": "efab2be32fa4a2a715b2004fa42cb675633d3a73c988057de588330eff7b51f7",
       "types": [
         "ha-alerts-orbit-card",
         "ha-battery-orbit-card",

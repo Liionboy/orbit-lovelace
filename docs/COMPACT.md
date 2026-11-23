@@ -1,16 +1,16 @@
-# Selectable Compact layouts — v1.14.0
+# Selectable Compact layouts
 
-## Current beta: always-visible Compact (v1.22.0-beta.4)
+## Always-visible Compact (v1.22.0)
 
-All 37 card types retain Compact typography, spacing and a single primary identity, but secondary content is now visible immediately. There is no suite Show/Hide Details arrow and no extra YAML option: existing `layout: compact` adopts this behavior after updating to beta.4 and fully reloading. This applies to Classic and Modern, with every palette. Normal is unchanged; stable Latest remains v1.21.1.
+All 37 card types retain Compact typography, spacing and a single primary identity, but secondary content is now visible immediately. There is no suite Show/Hide Details arrow and no extra YAML option: existing `layout: compact` adopts this behavior after updating to v1.22.0 and fully reloading. This applies to Classic and Modern, with every palette. The Normal layout still has no Compact disclosure.
 
 ![Compact without a Details arrow — real cards with synthetic data](images/compact-open-phone.png)
 
 Graphs, forecasts, measurements, lists and camera previews remain in the compact card instead of an extra collapsed layer. Cards are naturally taller than the old closed summaries. Native controls such as Adjust, Browse, Room navigation and Welcome shortcut expansion still perform their original jobs; device guards, alarms and confirmation steps are not bypassed. Cameras start only while visible/online and pause offscreen or in a hidden tab, without collapsing their media frame.
 
-[Verification](compact-open-verification.json). `npm run test:compact:browser` now checks always-open behavior against the previous beta's expanded content. Older closed-tile/disclosure fixtures and the sections below describe historical stable behavior, not the beta.4 interaction contract. The published beta does not alter a live dashboard, resource or theme. Physical Companion/Safari and native HA remain unverified.
+[Verification](compact-open-verification.json). `npm run test:compact:browser` now checks always-open behavior against the previous beta's expanded content. Older closed-tile and disclosure examples below describe historical behavior. Updating does not change saved dashboard or theme configuration. Physical Companion/Safari and native HA remain unverified.
 
-## Bambu cards (suite1.21.0+)
+## Bambu cards before v1.22.0 (v1.21.x)
 
 Print/Camera use a reported-state summary with native More Info and secondary telemetry/media in Details. HMS/print errors remain outside the collapsed panels. Native media is removed when Compact Details closes, not merely hidden behind CSS. AMS is a collection: all configured slots remain visible, with no aggregate tile or Details arrow; only typography/spacing reduces. The34 previous profiles/runtime are unchanged. [Configuration and dashboard](BAMBU.md).
 
@@ -63,7 +63,7 @@ Names/values are text, not injected HTML; configured source icons and Person pic
 ## Install or update in HACS
 
 1. Save a copy of the card/dashboard YAML and note the installed suite version.
-2. Open **HACS → Orbit Lovelace** and update to **v1.14.0**, the latest stable release. If changing from a beta or the update is not listed yet, refresh repository metadata or use **⋮ → Redownload → Need a different version? → v1.14.0**. Prerelease visibility is not required for this stable release.
+2. Open **HACS → Orbit Lovelace** and update to **v1.22.0**. If changing from a beta or the update is not listed yet, refresh repository metadata or use **⋮ → Redownload → Need a different version? → v1.22.0**. Prerelease visibility is not required for this stable release.
 3. Download, then fully reload each browser and Companion frontend. No HA restart or theme YAML replacement is needed.
 4. Edit a card and select **Card layout → Compact**. Legacy editors retain their original controls below the common layout selector. The new Vacuum native form exposes common settings; existing room mappings stay in YAML.
 5. Existing beta.5 layouts and settings work unchanged; there is no automatic switch into Compact. When first trying Compact, use a copied card or test view. Report the card type, actual dashboard/container width, YAML without private data, and screenshot if any layout is wrong. No real device command is necessary to inspect the layout.

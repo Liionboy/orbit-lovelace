@@ -6,14 +6,16 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
-## Preview in v1.22.0-beta.15 — Orbit Modern + Glow
-Optional [Orbit Satin](docs/SATIN.md) adds a soft surface reflection independently of Glow.
+## New in v1.22.0 — Modern, Satin and smoother live updates
 
-**Optional Glow on all 37 cards:** enable **Glow** in the editor or set `glow: true`. A static palette halo, independent of Classic/Modern and Normal/Compact; disabled by default. Chips and Title remain unframed and semantic colors are preserved. [Glow preview and installation](docs/GLOW.md).
+This stable release promotes v1.22.0-beta.15 without functional changes. Update Orbit Lovelace in HACS and fully reload the frontend. Existing card YAML and the single Orbit resource stay the same.
 
-**Compact without an extra click:** all 37 cards now show their secondary content immediately, using compact spacing/type with no suite Details arrow. Existing `layout: compact` works unchanged in Classic and Modern. [Scope and verification](docs/COMPACT.md).
+- **Live updates on all 37 cards:** readings and states update in the existing card instead of replacing its frame, reducing unintended scroll movement. Commands, chart/history updates and camera/media lifecycles are retained.
+- **Optional [Modern design](docs/MODERN.md)** and six additional [palettes](docs/PALETTES.md) on all 37 cards. Classic remains the default. On two-column phone dashboards, Modern Room keeps shortcuts on the right and pairs temperature with humidity on one row.
+- **Optional [Satin](docs/SATIN.md) and [Glow](docs/GLOW.md):** use the surface reflection and outer halo separately or together. Room Glow follows the reported temperature, with cool blue below 22 °C and warm amber from 22 °C. The optional Orbit Satin theme is installed separately from the card update; see [Themes](THEMES.md).
+- **[Always-open Compact](docs/COMPACT.md):** secondary content is visible without a suite Details arrow in both Classic and Modern. Existing `layout: compact` configurations work unchanged.
 
-Optional **Card design → Classic / Modern · beta** on **all 37 cards**, independent of Normal/Compact. Clean surfaces, calmer typography, rounded-square icons and restrained accents; existing cards remain Classic by default. Six new [modern palettes](docs/PALETTES.md) on all 37 cards: Slate, Indigo, Teal, Rose, Amber and Ice. All cards expose the same six additional choices. No live dashboard changes or camera codec fix. **Stable remains v1.21.1.** [Preview gallery, beta installation and rollback](docs/MODERN.md) · [Optional generic demo dashboard](examples/modern-dashboard.yaml).
+[Optional generic Modern demo dashboard](examples/modern-dashboard.yaml)
 
 ## Fixed in v1.21.1 — Stable Bambu scrolling
 
