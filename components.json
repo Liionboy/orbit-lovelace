@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.22.0-beta.12",
+  "version": "1.22.0-beta.13",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -705,6 +705,18 @@
         "ha-bambu-print-orbit-card",
         "ha-bambu-ams-orbit-card",
         "ha-bambu-camera-orbit-card"
+      ]
+    },
+    {
+      "id": "stable-control-render",
+      "origin": "suite",
+      "version": "1.0.0",
+      "source": "scripts/stable-control-render.mjs",
+      "sha256": "5b0db9f617fb51c4e8f46cc481347e77a665b3b8e5dca4c8b2f8256f34fd0cdb",
+      "types": [
+        "luma-control-card",
+        "climate-control-card",
+        "switch-control-card"
       ]
     }
   ]

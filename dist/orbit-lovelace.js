@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.22.0-beta.12 — MIT. */
+/* Orbit Lovelace v1.22.0-beta.13 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.22.0-beta.12",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.22.0-beta.13",components:{},skipped:{},errors:[]};
 /* Suite-owned compact presentation adapter v0.4.0 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
@@ -3898,6 +3898,78 @@ const compactProfiles={"climate-control-card":{"css":".shell{padding:10px}.heade
 const customElements={get:name=>window.customElements.get(name),define:(name,C,options)=>window.customElements.define(name,orbitModern.prepare(name,compactProfiles[name]?orbitCompact.prepare(name,orbitModern.beforeCompact(C),compactProfiles[name]):C),options)};
 const knownTypes=["climate-control-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["lovelace-climate-control-card"]="Already registered; remove old resources and reload to use the suite version.";return;}
+const boundControlEvents = new WeakMap();
+function bindControl(node, type, listener) {
+  if (!node) return;
+  const bound = boundControlEvents.get(node) || new Set();
+  if (bound.has(type)) return;
+  bound.add(type);
+  boundControlEvents.set(node, bound);
+  node.addEventListener(type, listener);
+}
+function renderControl(root, html) {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  const oldFrame = root.querySelector('ha-card');
+  const newFrame = template.content.querySelector('ha-card');
+  const oldStyle = root.querySelector('style:not([data-orbit-compact])');
+  const newStyle = template.content.querySelector('style');
+  if (!oldFrame || !newFrame || oldStyle?.textContent !== newStyle?.textContent) {
+    root.innerHTML = html;
+    return;
+  }
+  patchControlNode(oldFrame, newFrame);
+}
+function controlNodeKey(node) {
+  if (node.nodeType !== 1) return String(node.nodeType);
+  const action = node.getAttribute('data-action') || node.getAttribute('data-control') ||
+    node.getAttribute('data-step') || node.getAttribute('data-flash');
+  // Classes describe identity for layout containers, not changing state or feedback.
+  const role = /^(DIV|SECTION|FOOTER|HEADER)$/.test(node.tagName)
+    ? node.classList[0] : '';
+  return [node.localName, node.id && !node.id.startsWith('orbit-compact-') ? node.id : '',
+    action, role, node.localName === 'option' ? node.value : ''].join(':');
+}
+function patchControlNode(current, next) {
+  const input = current.localName === 'input';
+  const valueChanged = input && current.getAttribute('value') !== next.getAttribute('value');
+  for (const name of current.getAttributeNames()) {
+    if (name.startsWith('data-orbit-') || (name === 'id' && current.id.startsWith('orbit-compact-'))) continue;
+    if (!next.hasAttribute(name)) current.removeAttribute(name);
+  }
+  for (const { name, value } of next.attributes) {
+    if (current.getAttribute(name) !== value) current.setAttribute(name, value);
+  }
+
+  const candidates = new Map();
+  const ownsNode = node => !node.classList?.contains('orbit-tile');
+  for (const child of current.childNodes) {
+    if (!ownsNode(child)) continue;
+    const key = controlNodeKey(child);
+    if (!candidates.has(key)) candidates.set(key, []);
+    candidates.get(key).push(child);
+  }
+  const desired = Array.from(next.childNodes);
+  const matches = desired.map(child => candidates.get(controlNodeKey(child))?.shift());
+  for (const unused of candidates.values()) for (const child of unused) child.remove();
+  let cursor = Array.from(current.childNodes).find(ownsNode) || null;
+  desired.forEach((child, index) => {
+    let retained = matches[index];
+    if (retained?.nodeType === 1) patchControlNode(retained, child);
+    if (retained && retained.nodeType !== 1 && retained.nodeValue !== child.nodeValue) {
+      // Observe text changes through the existing Compact child-list observer.
+      const text = child.cloneNode(true);
+      retained.replaceWith(text);
+      if (cursor === retained) cursor = text;
+      retained = text;
+    }
+    const node = retained || child.cloneNode(true);
+    if (node !== cursor) current.insertBefore(node, cursor);
+    cursor = node.nextSibling;
+  });
+  if (valueChanged) current.value = next.value;
+  if (current.localName === 'select' && current.value !== next.value) current.value = next.value;
+}
 const CARD_TYPE = "climate-control-card";
 const VERSION = "1.3.2";
 
@@ -4030,7 +4102,7 @@ class ClimateControlCard extends HTMLElement {
   render() {
     if (!this._root || !this._config || !this._hass) return;
     if (this._config.entity?.split(".")[0] !== "climate") {
-      this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell"><strong>Climate Control Card</strong><p>Select a climate entity.</p></div></ha-card>`;
+      renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="shell"><strong>Climate Control Card</strong><p>Select a climate entity.</p></div></ha-card>`);
       return;
     }
     const state = this.unavailable ? "Unavailable" : humanize(this.activeMode(), MODE_LABELS);
@@ -4056,23 +4128,23 @@ class ClimateControlCard extends HTMLElement {
     }
     const feedback = this._feedback || (this.unavailable ? "Check the entity connection." : "Ready");
     const message = `<div class="compact-control"><div class="feedback ${this._error ? "error" : ""}" role="status">${escapeHtml(feedback)}</div><div class="actions">${toggle}${power}</div></div>`;
-    this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell" style="--glow:${glow}">${header}<div class="temperatures">${current}${target}</div>${stepper}${message}${settings}</div></ha-card>`;
+    renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="shell" style="--glow:${glow}">${header}<div class="temperatures">${current}${target}</div>${stepper}${message}${settings}</div></ha-card>`);
     this.bindEvents();
   }
 
   bindEvents() {
-    this._root.querySelector('[data-action="power"]')?.addEventListener("click", () => this.togglePower());
-    this._root.querySelector('[data-action="toggle-controls"]')?.addEventListener("click", () => {
+    bindControl(this._root.querySelector('[data-action="power"]'), "click", () => this.togglePower());
+    bindControl(this._root.querySelector('[data-action="toggle-controls"]'), "click", () => {
       this._showControls = !this._showControls;
       this.render();
     });
-    this._root.querySelectorAll("[data-step]").forEach((button) => button.addEventListener("click", () => {
+    this._root.querySelectorAll("[data-step]").forEach((button) => bindControl(button, "click", () => {
       const next = Math.max(this.min, Math.min(this.max, (this.target ?? this.min) + Number(button.dataset.step) * this.step));
       const rounded = Math.round(next / this.step) * this.step;
       this.call("set_temperature", { temperature: Number(rounded.toFixed(2)) });
     }));
-    this._root.querySelector('[data-control="mode"]')?.addEventListener("change", (event) => this.call("set_hvac_mode", { hvac_mode: event.currentTarget.value }));
-    this._root.querySelector('[data-control="preset"]')?.addEventListener("change", (event) => this.call("set_preset_mode", { preset_mode: event.currentTarget.value }));
+    bindControl(this._root.querySelector('[data-control="mode"]'), "change", (event) => this.call("set_hvac_mode", { hvac_mode: event.currentTarget.value }));
+    bindControl(this._root.querySelector('[data-control="preset"]'), "change", (event) => this.call("set_preset_mode", { preset_mode: event.currentTarget.value }));
   }
 
   async togglePower() {
@@ -4869,6 +4941,78 @@ const compactProfiles={"luma-control-card":{"css":".shell{padding:10px}.header{g
 const customElements={get:name=>window.customElements.get(name),define:(name,C,options)=>window.customElements.define(name,orbitModern.prepare(name,compactProfiles[name]?orbitCompact.prepare(name,orbitModern.beforeCompact(C),compactProfiles[name]):C),options)};
 const knownTypes=["luma-control-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["lovelace-luma-control-card"]="Already registered; remove old resources and reload to use the suite version.";return;}
+const boundControlEvents = new WeakMap();
+function bindControl(node, type, listener) {
+  if (!node) return;
+  const bound = boundControlEvents.get(node) || new Set();
+  if (bound.has(type)) return;
+  bound.add(type);
+  boundControlEvents.set(node, bound);
+  node.addEventListener(type, listener);
+}
+function renderControl(root, html) {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  const oldFrame = root.querySelector('ha-card');
+  const newFrame = template.content.querySelector('ha-card');
+  const oldStyle = root.querySelector('style:not([data-orbit-compact])');
+  const newStyle = template.content.querySelector('style');
+  if (!oldFrame || !newFrame || oldStyle?.textContent !== newStyle?.textContent) {
+    root.innerHTML = html;
+    return;
+  }
+  patchControlNode(oldFrame, newFrame);
+}
+function controlNodeKey(node) {
+  if (node.nodeType !== 1) return String(node.nodeType);
+  const action = node.getAttribute('data-action') || node.getAttribute('data-control') ||
+    node.getAttribute('data-step') || node.getAttribute('data-flash');
+  // Classes describe identity for layout containers, not changing state or feedback.
+  const role = /^(DIV|SECTION|FOOTER|HEADER)$/.test(node.tagName)
+    ? node.classList[0] : '';
+  return [node.localName, node.id && !node.id.startsWith('orbit-compact-') ? node.id : '',
+    action, role, node.localName === 'option' ? node.value : ''].join(':');
+}
+function patchControlNode(current, next) {
+  const input = current.localName === 'input';
+  const valueChanged = input && current.getAttribute('value') !== next.getAttribute('value');
+  for (const name of current.getAttributeNames()) {
+    if (name.startsWith('data-orbit-') || (name === 'id' && current.id.startsWith('orbit-compact-'))) continue;
+    if (!next.hasAttribute(name)) current.removeAttribute(name);
+  }
+  for (const { name, value } of next.attributes) {
+    if (current.getAttribute(name) !== value) current.setAttribute(name, value);
+  }
+
+  const candidates = new Map();
+  const ownsNode = node => !node.classList?.contains('orbit-tile');
+  for (const child of current.childNodes) {
+    if (!ownsNode(child)) continue;
+    const key = controlNodeKey(child);
+    if (!candidates.has(key)) candidates.set(key, []);
+    candidates.get(key).push(child);
+  }
+  const desired = Array.from(next.childNodes);
+  const matches = desired.map(child => candidates.get(controlNodeKey(child))?.shift());
+  for (const unused of candidates.values()) for (const child of unused) child.remove();
+  let cursor = Array.from(current.childNodes).find(ownsNode) || null;
+  desired.forEach((child, index) => {
+    let retained = matches[index];
+    if (retained?.nodeType === 1) patchControlNode(retained, child);
+    if (retained && retained.nodeType !== 1 && retained.nodeValue !== child.nodeValue) {
+      // Observe text changes through the existing Compact child-list observer.
+      const text = child.cloneNode(true);
+      retained.replaceWith(text);
+      if (cursor === retained) cursor = text;
+      retained = text;
+    }
+    const node = retained || child.cloneNode(true);
+    if (node !== cursor) current.insertBefore(node, cursor);
+    cursor = node.nextSibling;
+  });
+  if (valueChanged) current.value = next.value;
+  if (current.localName === 'select' && current.value !== next.value) current.value = next.value;
+}
 const CARD_TYPE = "luma-control-card";
 const VERSION = "1.2.1";
 
@@ -5022,7 +5166,7 @@ class LumaControlCard extends HTMLElement {
     if (!this._root || !this._config || !this._hass) return;
     const domain = this.domain;
     if (!["light", "switch"].includes(domain)) {
-      this._root.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell"><strong>Luma Control Card</strong><p>Select a light or switch entity.</p></div></ha-card>`;
+      renderControl(this._root, `<style>${STYLE}</style><ha-card><div class="shell"><strong>Luma Control Card</strong><p>Select a light or switch entity.</p></div></ha-card>`);
       return;
     }
     const paletteColor = LUMA_PALETTES[this._config.palette];
@@ -5031,7 +5175,7 @@ class LumaControlCard extends HTMLElement {
     const header = `<header class="header"><div class="identity"><div class="icon-wrap"><ha-icon icon="${escapeHtml(this.icon())}"></ha-icon></div><div class="identity-copy"><div class="eyebrow">${domain === "light" ? "Home Assistant · Light" : "Home Assistant · Switch"}</div><h2 class="title">${escapeHtml(this.title())}</h2></div></div><div class="pill ${this.unavailable ? "unavailable" : this.isOn ? "on" : ""}"><span class="dot"></span>${this.stateLabel()}</div></header>`;
     const shellStyle = `style="--glow:${escapeHtml(primaryColor)}${paletteColor ? ";--accent:" + paletteColor : ""}"${paletteColor ? ' data-luma-palette="' + this._config.palette + '"' : ""}`;
     let body = domain === "light" ? this.renderLight() : this.renderSwitch();
-    this._root.innerHTML = `${rootStyle}<ha-card><div class="shell" ${shellStyle}>${header}${body}</div></ha-card>`;
+    renderControl(this._root, `${rootStyle}<ha-card><div class="shell" ${shellStyle}>${header}${body}</div></ha-card>`);
     this.bindEvents();
   }
 
@@ -5099,38 +5243,38 @@ class LumaControlCard extends HTMLElement {
   }
 
   bindEvents() {
-    this._root.querySelector('[data-action="power"]')?.addEventListener("click", () => this.togglePower());
-    this._root.querySelector('[data-action="toggle-controls"]')?.addEventListener("click", () => {
+    bindControl(this._root.querySelector('[data-action="power"]'), "click", () => this.togglePower());
+    bindControl(this._root.querySelector('[data-action="toggle-controls"]'), "click", () => {
       this._showControls = !this._showControls;
       this.render();
     });
     const brightness = this._root.querySelector('[data-control="brightness"]');
-    brightness?.addEventListener("input", (event) => {
+    bindControl(brightness, "input", (event) => {
       const value = Number(event.currentTarget.value);
       const output = this._root.querySelector("[data-brightness-label]");
       if (output) output.textContent = `${value}%`;
     });
-    brightness?.addEventListener("change", (event) => this.callLightService("turn_on", { brightness_pct: Number(event.currentTarget.value) }));
+    bindControl(brightness, "change", (event) => this.callLightService("turn_on", { brightness_pct: Number(event.currentTarget.value) }));
     const temperature = this._root.querySelector('[data-control="temperature"]');
-    temperature?.addEventListener("input", (event) => {
+    bindControl(temperature, "input", (event) => {
       const output = this._root.querySelector("[data-temperature-label]");
       if (output) output.textContent = `${Number(event.currentTarget.value).toLocaleString()} K`;
     });
-    temperature?.addEventListener("change", (event) => this.callLightService("turn_on", { color_temp_kelvin: Number(event.currentTarget.value) }));
+    bindControl(temperature, "change", (event) => this.callLightService("turn_on", { color_temp_kelvin: Number(event.currentTarget.value) }));
     const color = this._root.querySelector('[data-control="color"]');
-    color?.addEventListener("input", (event) => {
+    bindControl(color, "input", (event) => {
       const output = this._root.querySelector("[data-color-label]");
       if (output) output.textContent = event.currentTarget.value.toUpperCase();
     });
-    color?.addEventListener("change", (event) => {
+    bindControl(color, "change", (event) => {
       const hex = event.currentTarget.value.slice(1);
       const rgb = [0, 2, 4].map((index) => Number.parseInt(hex.slice(index, index + 2), 16));
       this.callLightService("turn_on", { hs_color: rgbToHs(...rgb) });
     });
-    this._root.querySelector('[data-control="effect"]')?.addEventListener("change", (event) => this.callLightService("turn_on", { effect: event.currentTarget.value || "off" }));
-    this._root.querySelectorAll("[data-flash]").forEach((button) => button.addEventListener("click", () => this.callLightService("turn_on", { flash: button.dataset.flash })));
+    bindControl(this._root.querySelector('[data-control="effect"]'), "change", (event) => this.callLightService("turn_on", { effect: event.currentTarget.value || "off" }));
+    this._root.querySelectorAll("[data-flash]").forEach((button) => bindControl(button, "click", () => this.callLightService("turn_on", { flash: button.dataset.flash })));
     const transition = this._root.querySelector('[data-control="transition"]');
-    transition?.addEventListener("input", (event) => {
+    bindControl(transition, "input", (event) => {
       this._transition = Number(event.currentTarget.value);
       const output = this._root.querySelector("[data-transition-label]");
       if (output) output.textContent = `${this.transition.toFixed(1)} s`;
@@ -5609,6 +5753,78 @@ const compactProfiles={"switch-control-card":{"css":".shell{padding:10px}.header
 const customElements={get:name=>window.customElements.get(name),define:(name,C,options)=>window.customElements.define(name,orbitModern.prepare(name,compactProfiles[name]?orbitCompact.prepare(name,orbitModern.beforeCompact(C),compactProfiles[name]):C),options)};
 const knownTypes=["switch-control-card"];
 if(knownTypes.some(type=>customElements.get(type))){suite.skipped["lovelace-switch-control-card"]="Already registered; remove old resources and reload to use the suite version.";return;}
+const boundControlEvents = new WeakMap();
+function bindControl(node, type, listener) {
+  if (!node) return;
+  const bound = boundControlEvents.get(node) || new Set();
+  if (bound.has(type)) return;
+  bound.add(type);
+  boundControlEvents.set(node, bound);
+  node.addEventListener(type, listener);
+}
+function renderControl(root, html) {
+  const template = document.createElement('template');
+  template.innerHTML = html;
+  const oldFrame = root.querySelector('ha-card');
+  const newFrame = template.content.querySelector('ha-card');
+  const oldStyle = root.querySelector('style:not([data-orbit-compact])');
+  const newStyle = template.content.querySelector('style');
+  if (!oldFrame || !newFrame || oldStyle?.textContent !== newStyle?.textContent) {
+    root.innerHTML = html;
+    return;
+  }
+  patchControlNode(oldFrame, newFrame);
+}
+function controlNodeKey(node) {
+  if (node.nodeType !== 1) return String(node.nodeType);
+  const action = node.getAttribute('data-action') || node.getAttribute('data-control') ||
+    node.getAttribute('data-step') || node.getAttribute('data-flash');
+  // Classes describe identity for layout containers, not changing state or feedback.
+  const role = /^(DIV|SECTION|FOOTER|HEADER)$/.test(node.tagName)
+    ? node.classList[0] : '';
+  return [node.localName, node.id && !node.id.startsWith('orbit-compact-') ? node.id : '',
+    action, role, node.localName === 'option' ? node.value : ''].join(':');
+}
+function patchControlNode(current, next) {
+  const input = current.localName === 'input';
+  const valueChanged = input && current.getAttribute('value') !== next.getAttribute('value');
+  for (const name of current.getAttributeNames()) {
+    if (name.startsWith('data-orbit-') || (name === 'id' && current.id.startsWith('orbit-compact-'))) continue;
+    if (!next.hasAttribute(name)) current.removeAttribute(name);
+  }
+  for (const { name, value } of next.attributes) {
+    if (current.getAttribute(name) !== value) current.setAttribute(name, value);
+  }
+
+  const candidates = new Map();
+  const ownsNode = node => !node.classList?.contains('orbit-tile');
+  for (const child of current.childNodes) {
+    if (!ownsNode(child)) continue;
+    const key = controlNodeKey(child);
+    if (!candidates.has(key)) candidates.set(key, []);
+    candidates.get(key).push(child);
+  }
+  const desired = Array.from(next.childNodes);
+  const matches = desired.map(child => candidates.get(controlNodeKey(child))?.shift());
+  for (const unused of candidates.values()) for (const child of unused) child.remove();
+  let cursor = Array.from(current.childNodes).find(ownsNode) || null;
+  desired.forEach((child, index) => {
+    let retained = matches[index];
+    if (retained?.nodeType === 1) patchControlNode(retained, child);
+    if (retained && retained.nodeType !== 1 && retained.nodeValue !== child.nodeValue) {
+      // Observe text changes through the existing Compact child-list observer.
+      const text = child.cloneNode(true);
+      retained.replaceWith(text);
+      if (cursor === retained) cursor = text;
+      retained = text;
+    }
+    const node = retained || child.cloneNode(true);
+    if (node !== cursor) current.insertBefore(node, cursor);
+    cursor = node.nextSibling;
+  });
+  if (valueChanged) current.value = next.value;
+  if (current.localName === 'select' && current.value !== next.value) current.value = next.value;
+}
 const CARD_TAG = "switch-control-card";
 const PALETTES = new Set(["aurora","ocean","sunset","lavender","slate","indigo","teal","rose","amber","ice"]);
 
@@ -5764,7 +5980,7 @@ class SwitchControlCard extends HTMLElement {
     const state = this._state();
     if (!this._config.entity || !this._hass || !this.shadowRoot) return;
     if (!state) {
-      this.shadowRoot.innerHTML = `<style>${STYLE}</style><ha-card><div class="shell"><p class="hint">Entity not found: ${escapeHtml(this._config.entity)}</p></div></ha-card>`;
+      renderControl(this.shadowRoot, `<style>${STYLE}</style><ha-card><div class="shell"><p class="hint">Entity not found: ${escapeHtml(this._config.entity)}</p></div></ha-card>`);
       return;
     }
     const unavailable = ["unknown", "unavailable"].includes(state.state);
@@ -5781,7 +5997,7 @@ class SwitchControlCard extends HTMLElement {
       this._config.voltage_entity && { label: "Voltage", icon: "mdi:sine-wave", state: voltageState },
     ].filter(Boolean);
     const consumptionHtml = consumption.length ? `<section class="consumption" aria-label="Power consumption">${consumption.map((item) => `<div class="reading"><ha-icon icon="${item.icon}"></ha-icon><div class="reading-copy"><div class="reading-label">${item.label}</div><div class="reading-value">${escapeHtml(this._formatSensor(item.state))}</div></div></div>`).join("")}</section>` : "";
-    this.shadowRoot.innerHTML = `
+    renderControl(this.shadowRoot, `
       <style>${STYLE}</style>
       <ha-card data-palette="${this._config.palette}" data-orbit-switch-on="${isOn}">
         <div class="shell">
@@ -5796,8 +6012,8 @@ class SwitchControlCard extends HTMLElement {
           ${consumptionHtml}
           ${this._feedback ? `<p class="hint ${this._error ? "error" : ""}" role="status">${escapeHtml(this._feedback)}</p>` : ""}
         </div>
-      </ha-card>`;
-    this.shadowRoot.querySelector('[data-action="toggle"]')?.addEventListener("click", () => this._toggle());
+      </ha-card>`);
+    bindControl(this.shadowRoot.querySelector('[data-action="toggle"]'), "click", () => this._toggle());
   }
 }
 

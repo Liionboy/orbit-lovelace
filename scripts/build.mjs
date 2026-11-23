@@ -6,6 +6,7 @@ import {themeBridge,bridgeVersion} from './theme-bridge.mjs';
 import {buildThemes,palettes} from './themes.mjs';
 import {welcomeNormalToolbar} from './welcome-normal-toolbar.mjs';
 import {lumaAppearance} from './luma-appearance.mjs';
+import {stableControlRender,stableControlTypes} from './stable-control-render.mjs';
 import {switchStateIcon} from './switch-state-icon.mjs';
 import {frigateLive} from './frigate-live.mjs';
 import {applyCardPalettes,fallbackPaletteTypes,paletteCatalog} from './card-palettes.mjs';
@@ -42,25 +43,29 @@ export function componentSource(c){
   replaceOnce('const VERSION = "1.2.5";','const VERSION = "1.2.6";');
  }
  if(source.split(NL).some(line=>line.startsWith('import ')||line.startsWith('export ')))throw Error('Unexpected module dependency: '+c.id);
+ if(stableControlTypes.includes(c.id)){
+  const feature=manifest.suiteFeatures.find(f=>f.id==='stable-control-render');
+  if(!feature||createHash('sha256').update(readFileSync(resolve(root,feature.source))).digest('hex')!==feature.sha256)throw Error('Stable control render provenance mismatch');
+ }
  if(c.id==='ha-welcome-orbit-card')source=welcomeNormalToolbar(source);
  const themed=themeBridge(source,c.id);
  if(JSON.stringify(themed.hooks)!==JSON.stringify(themeContracts[c.id]))throw Error('Theme hook contract changed: '+c.id);
  if(c.id==='lovelace-luma-control-card'){
   const feature=manifest.suiteFeatures.find(f=>f.id==='luma-appearance');
   if(!feature||createHash('sha256').update(readFileSync(resolve(root,feature.source))).digest('hex')!==feature.sha256)throw Error('Luma appearance provenance mismatch');
-  return applyCardPalettes(lumaAppearance(themed.source),c.id);
+  return applyCardPalettes(stableControlRender(lumaAppearance(themed.source),c.id),c.id);
  }
  if(c.id==='lovelace-switch-control-card'){
   const feature=manifest.suiteFeatures.find(f=>f.id==='switch-state-icon');
   if(!feature||createHash('sha256').update(readFileSync(resolve(root,feature.source))).digest('hex')!==feature.sha256)throw Error('Switch state icon provenance mismatch');
-  return applyCardPalettes(switchStateIcon(themed.source),c.id);
+  return applyCardPalettes(stableControlRender(switchStateIcon(themed.source),c.id),c.id);
  }
  if(c.id==='lovelace-frigate-control-card'){
   const f=manifest.suiteFeatures.find(f=>f.id==='frigate-live');
   for(const [path,hash] of [[f.source,f.sha256],[f.adaptation,f.adaptationSha256]])if(createHash('sha256').update(readFileSync(resolve(root,path))).digest('hex')!==hash)throw Error('Frigate live provenance mismatch');
   return applyCardPalettes(frigateLive(themed.source,readFileSync(resolve(root,f.source),'utf8')),c.id);
  }
- return applyCardPalettes(themed.source,c.id);
+ return applyCardPalettes(stableControlTypes.includes(c.id)?stableControlRender(themed.source,c.id):themed.source,c.id);
 }
 export function build(){
  buildThemes();
@@ -88,6 +93,6 @@ export function build(){
  }
  lines.push('suite.compact={version:'+JSON.stringify(compact.version)+',types:[...new Set([...(suite.compact?.types||[]),...orbitCompact.installed])]};','})();','');const source=lines.join(NL);mkdirSync(resolve(root,'dist'),{recursive:true});writeFileSync(resolve(root,'dist/orbit-lovelace.js'),source);
  const paletteFeature=manifest.suiteFeatures.find(f=>f.id==='card-palettes');
- const info={version:manifest.version,packages:components.length,upstreamPackages:manifest.components.length,nativePackages:(manifest.nativeComponents||[]).length,cards:components.flatMap(c=>c.types).length,compactVersion:compact.version,compactSha256:compact.sha256,lumaAppearanceVersion:manifest.suiteFeatures.find(f=>f.id==='luma-appearance').version,lumaAppearanceSha256:manifest.suiteFeatures.find(f=>f.id==='luma-appearance').sha256,switchStateIconVersion:manifest.suiteFeatures.find(f=>f.id==='switch-state-icon').version,switchStateIconSha256:manifest.suiteFeatures.find(f=>f.id==='switch-state-icon').sha256,frigateLiveVersion:manifest.suiteFeatures.find(f=>f.id==='frigate-live').version,frigateLiveSha256:manifest.suiteFeatures.find(f=>f.id==='frigate-live').sha256,frigateLiveAdaptationSha256:manifest.suiteFeatures.find(f=>f.id==='frigate-live').adaptationSha256,modernDesignVersion:modern.version,modernDesignSha256:modern.sha256,modernProfilesSha256:modern.profilesSha256,cardPalettesVersion:paletteFeature.version,cardPalettesSha256:paletteFeature.sha256,cardPalettesCatalogSha256:paletteFeature.catalogSha256,themeBridgeVersion:bridgeVersion,themesVersion:palettes.version,themeSha256:createHash('sha256').update(readFileSync(resolve(root,'themes/orbit-themes.yaml'))).digest('hex'),bytes:Buffer.byteLength(source),sha256:createHash('sha256').update(source).digest('hex')};writeFileSync(resolve(root,'bundle-lock.json'),JSON.stringify(info,null,2)+NL);console.log(JSON.stringify(info));return source;
+ const info={version:manifest.version,packages:components.length,upstreamPackages:manifest.components.length,nativePackages:(manifest.nativeComponents||[]).length,cards:components.flatMap(c=>c.types).length,compactVersion:compact.version,compactSha256:compact.sha256,lumaAppearanceVersion:manifest.suiteFeatures.find(f=>f.id==='luma-appearance').version,lumaAppearanceSha256:manifest.suiteFeatures.find(f=>f.id==='luma-appearance').sha256,switchStateIconVersion:manifest.suiteFeatures.find(f=>f.id==='switch-state-icon').version,switchStateIconSha256:manifest.suiteFeatures.find(f=>f.id==='switch-state-icon').sha256,frigateLiveVersion:manifest.suiteFeatures.find(f=>f.id==='frigate-live').version,frigateLiveSha256:manifest.suiteFeatures.find(f=>f.id==='frigate-live').sha256,frigateLiveAdaptationSha256:manifest.suiteFeatures.find(f=>f.id==='frigate-live').adaptationSha256,modernDesignVersion:modern.version,modernDesignSha256:modern.sha256,modernProfilesSha256:modern.profilesSha256,cardPalettesVersion:paletteFeature.version,cardPalettesSha256:paletteFeature.sha256,cardPalettesCatalogSha256:paletteFeature.catalogSha256,stableControlRenderSha256:manifest.suiteFeatures.find(f=>f.id==='stable-control-render').sha256,themeBridgeVersion:bridgeVersion,themesVersion:palettes.version,themeSha256:createHash('sha256').update(readFileSync(resolve(root,'themes/orbit-themes.yaml'))).digest('hex'),bytes:Buffer.byteLength(source),sha256:createHash('sha256').update(source).digest('hex')};writeFileSync(resolve(root,'bundle-lock.json'),JSON.stringify(info,null,2)+NL);console.log(JSON.stringify(info));return source;
 }
 if(process.argv[1]===fileURLToPath(import.meta.url))build();
