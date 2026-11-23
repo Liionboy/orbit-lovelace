@@ -39,14 +39,16 @@ try {
    }
   },{mode,layout,width,vars:satinTheme[mode]});
   const metrics=await page.evaluate(()=>Array.from(document.querySelector('main').children,card=>{
-   const root=card.shadowRoot, summary=root.querySelector('.summary').getBoundingClientRect(), identity=root.querySelector('.identity').getBoundingClientRect();
-   return {height:card.getBoundingClientRect().height,shortcuts:[...root.querySelectorAll('.quick')].map(button=>{
+   const root=card.shadowRoot, summary=root.querySelector('.summary').getBoundingClientRect(), title=root.querySelector('h2').getBoundingClientRect();
+   const readings=[...root.querySelectorAll('.telemetry .reading')].map(n=>n.getBoundingClientRect().top);
+   return {sameRow:readings.length===2 && Math.abs(readings[0]-readings[1])<1,height:card.getBoundingClientRect().height,shortcuts:[...root.querySelectorAll('.quick')].map(button=>{
     const r=button.getBoundingClientRect();
-    return {width:r.width,height:r.height,right:r.right<=summary.right+1,beside:r.left>=identity.right-1,accessible:!!button.getAttribute('aria-label')};
+    return {width:r.width,height:r.height,right:r.right<=summary.right+1,beside:r.left>=title.right-1,accessible:!!button.getAttribute('aria-label')};
    })};
   }));
-  for (const [count,{shortcuts}] of metrics.entries()){
+  for (const [count,{shortcuts,sameRow}] of metrics.entries()){
    assert.equal(shortcuts.length,count);
+   if(layout==='normal' && width>=164 && width<=203)assert.ok(sameRow,'Temperature and humidity must share a row');
    for (const button of shortcuts){
     assert.ok(button.right && button.accessible && button.height>=44);
     if(layout==='normal'){

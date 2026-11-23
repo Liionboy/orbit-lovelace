@@ -1,4 +1,4 @@
-/* Orbit Modern v0.5.1 — MIT. Optional, suite-owned presentation only. */
+/* Orbit Modern v0.5.2 — MIT. Optional, suite-owned presentation only. */
 const orbitModern = (() => {
  const types = Object.keys(orbitModernProfiles),wrappedMethods=new WeakSet(),wrappedForms=new WeakSet(),wrappedFactories=new WeakSet(),originalFactories=new WeakMap();
  const field = {name:'design',default:'classic',selector:{select:{options:[{value:'classic',label:'Classic'},{value:'modern',label:'Modern · beta'}],mode:'dropdown'}}};
@@ -38,6 +38,14 @@ const orbitModern = (() => {
   :host([data-orbit-design=modern]) .reading{font-size:10px}
   :host([data-orbit-design=modern]) .shortcuts:is(.count-3,.count-4){grid-template-columns:repeat(2,40px)}
   :host([data-orbit-design=modern]) .shortcuts:is(.count-3,.count-4) .quick{width:40px}
+ }
+ @container room-orbit (150px < width <= 216px){
+  :host([data-orbit-design=modern]) .identity{display:contents}
+  :host([data-orbit-design=modern]) .room-icon{grid-area:1/1}
+  :host([data-orbit-design=modern]) h2{grid-area:2/1;margin:0}
+  :host([data-orbit-design=modern]) .shortcuts{grid-area:1/2/3/3}
+  :host([data-orbit-design=modern]) .telemetry{grid-area:3/1/4/-1}
+  :host([data-orbit-design=modern]) .climate-status{grid-area:4/1/5/-1;justify-self:start;margin-top:0}
  }
  @container room-orbit (max-width:150px){
   :host([data-orbit-design=modern]) .summary{grid-template-columns:minmax(0,1fr);min-height:0}

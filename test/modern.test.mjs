@@ -14,7 +14,7 @@ function fixture(){
 }
 test('Modern provenance, coverage and immutable feature scope',()=>{
  const m=JSON.parse(readFileSync(new URL('../components.json',import.meta.url))),f=m.suiteFeatures.find(f=>f.id==='modern-design');
- assert.equal(f.sha256,createHash('sha256').update(source).digest('hex'));assert.equal(f.version,'0.5.1');
+ assert.equal(f.sha256,createHash('sha256').update(source).digest('hex'));assert.equal(f.version,'0.5.2');
  assert.deepEqual([...fixture().modern.types],f.types);assert.equal(new Set(f.types).size,37);
  assert.ok(f.types.every(t=>[...m.components,...m.nativeComponents].some(c=>c.types.includes(t))));
 });
