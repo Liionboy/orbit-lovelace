@@ -14,7 +14,7 @@ function fixture(){
 }
 test('Modern provenance, coverage and immutable feature scope',()=>{
  const m=JSON.parse(readFileSync(new URL('../components.json',import.meta.url))),f=m.suiteFeatures.find(f=>f.id==='modern-design');
- assert.equal(f.sha256,createHash('sha256').update(source).digest('hex'));assert.equal(f.version,'0.4.3');
+ assert.equal(f.sha256,createHash('sha256').update(source).digest('hex'));assert.equal(f.version,'0.5.0');
  assert.deepEqual([...fixture().modern.types],f.types);assert.equal(new Set(f.types).size,37);
  assert.ok(f.types.every(t=>[...m.components,...m.nativeComponents].some(c=>c.types.includes(t))));
 });
@@ -31,7 +31,7 @@ test('presentation switches preserve original config, nodes, subscriptions and c
  c.setConfig({...config,entity:'sensor.other',design:'modern'});assert.equal(c.configCalls,3,'unchanged configs still follow the original source path');
 });
 test('native form preserves original fields and adds a separate design choice',()=>{
- const{Card}=fixture(),form=Card.getConfigForm();assert.deepEqual(form.schema.map(s=>s.name).join(','),'design,glow,entity');assert.equal(form.computeLabel({name:'entity'}),'entity');assert.equal(form.computeLabel({name:'design'}),'Card design');assert.equal(form.computeLabel({name:'glow'}),'Glow');assert.equal(form.schema[0].default,'classic');assert.equal(form.schema[1].default,false);
+ const{Card}=fixture(),form=Card.getConfigForm();assert.deepEqual(form.schema.map(s=>s.name).join(','),'design,glow,satin,entity');assert.equal(form.computeLabel({name:'entity'}),'entity');assert.equal(form.computeLabel({name:'design'}),'Card design');assert.equal(form.computeLabel({name:'glow'}),'Glow');assert.equal(form.schema[0].default,'classic');assert.equal(form.schema[1].default,false);
 });
 test('unregistered types and constructors are unchanged',()=>{const{modern}=fixture();class Other{}assert.equal(modern.prepare('not-an-orbit-card',Other),Other);assert.equal(Other.prototype.setConfig,undefined);});
 test('Glow validates before source changes, strips the key and preserves caller and native nodes on toggles',()=>{const{Card}=fixture(),c=new Card(),config=Object.freeze({entity:'sensor.example',glow:true});c.setConfig(config);assert.equal(c.saved.glow,undefined);assert.equal(c.getAttribute('data-orbit-glow'),'true');const saved=c.saved;c.setConfig({...config,glow:false});assert.equal(c.configCalls,1);assert.equal(c.saved,saved);assert.equal(c.getAttribute('data-orbit-glow'),undefined);for(const glow of ['true','false',0,1,{},[]])assert.throws(()=>c.setConfig({...config,glow}),/glow must/);assert.equal(c.configCalls,1);assert.throws(()=>c.setConfig({invalid:true,glow:true}),/native validation/);assert.equal(c.getAttribute('data-orbit-glow'),undefined);});

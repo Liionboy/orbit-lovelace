@@ -32,7 +32,7 @@ try {
    const entities=['light.example','switch.example','climate.example','sensor.temperature'];
    for (const [count,title] of titles.entries()){
     const card=document.createElement('ha-room-orbit-card');
-    const config={...compactConfigs['ha-room-orbit-card'],layout,design:'modern',glow:true,palette:count%2?'teal':'indigo',title,navigation_path:'/example/room'};
+    const config={...compactConfigs['ha-room-orbit-card'],layout,design:'modern',glow:true,satin:true,palette:count%2?'teal':'indigo',title,navigation_path:'/example/room'};
     for (let i=0;i<4;i++) config['entity_'+(i+1)]=i<count?entities[i]:'';
     card.setConfig(config);card.hass=compactHass;host.append(card);
    }

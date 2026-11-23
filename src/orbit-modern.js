@@ -1,8 +1,9 @@
-/* Orbit Modern v0.4.3 — MIT. Optional, suite-owned presentation only. */
+/* Orbit Modern v0.5.0 — MIT. Optional, suite-owned presentation only. */
 const orbitModern = (() => {
  const types = Object.keys(orbitModernProfiles),wrappedMethods=new WeakSet(),wrappedForms=new WeakSet(),wrappedFactories=new WeakSet(),originalFactories=new WeakMap();
  const field = {name:'design',default:'classic',selector:{select:{options:[{value:'classic',label:'Classic'},{value:'modern',label:'Modern · beta'}],mode:'dropdown'}}};
  const glowField = {name:'glow',default:false,selector:{boolean:{}}};
+ const satinField = {name:'satin',default:false,selector:{boolean:{}}};
  const common = `
  :host([data-orbit-design=modern]){font-family:var(--ha-font-family-body,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif);-webkit-font-smoothing:antialiased}
  :host([data-orbit-design=modern]) ha-card{border-radius:18px;border:1px solid color-mix(in srgb,var(--primary-text-color,#182335) 9%,transparent);box-shadow:0 2px 8px #10182a06;background:var(--ha-card-background,var(--card-background-color,#fff))}
@@ -112,10 +113,24 @@ const orbitModern = (() => {
   if(typeof CSSStyleSheet!=='undefined'&&CSSStyleSheet.prototype.replaceSync&&'adoptedStyleSheets' in root){card._orbitGlowSheet||=new CSSStyleSheet();if(card._orbitGlowCSS!==css){card._orbitGlowSheet.replaceSync(css);card._orbitGlowCSS=css;}if(!root.adoptedStyleSheets.includes(card._orbitGlowSheet))root.adoptedStyleSheets=[...root.adoptedStyleSheets,card._orbitGlowSheet];}
   else{let style=root.querySelector('style[data-orbit-glow]');if(!style){style=document.createElement('style');style.dataset.orbitGlow='';root.append(style);}if(style.textContent!==css)style.textContent=css;}
  }
+ function attachSatin(card,type){
+  const root=card.shadowRoot;
+  if(!root||!card._orbitSatin||root.querySelector('style[data-orbit-satin]'))return;
+  const scope=':host([data-orbit-satin]) ';
+  const surface=type==='ha-chips-orbit-card'?'.chip.chip::before':type==='ha-title-orbit-card'?'.title-icon':'ha-card';
+  const tint='var(--orbit-satin-accent,var(--chip-accent,var(--accent,var(--primary-color,#8059c7))))';
+  // Paint only the surface. External shadows, hit areas and foreground state colors stay intact.
+  const css=scope+surface+'{background-image:linear-gradient(to bottom,light-dark(rgb(255 255 255 / .85),rgb(255 255 255 / .32)),transparent 2px),radial-gradient(ellipse 110% 90% at 5% 0%,light-dark(rgb(255 255 255 / .86),rgb(238 223 255 / .25)),transparent 67%),linear-gradient(145deg,color-mix(in srgb,'+tint+' 17%,transparent),transparent 88%) !important}';
+  const style=document.createElement('style');
+  style.dataset.orbitSatin='';
+  style.textContent=css;
+  root.append(style);
+ }
  function attach(card,type){
   type=types.includes(card.localName)?card.localName:type;
   attachPalette(card,type);
   attachGlow(card,type);
+  attachSatin(card,type);
   if(!card.shadowRoot||card.getAttribute('data-orbit-design')!=='modern')return;
   const root=card.shadowRoot;
   if(typeof CSSStyleSheet!=='undefined'&&CSSStyleSheet.prototype.replaceSync&&'adoptedStyleSheets' in root){
@@ -132,12 +147,12 @@ const orbitModern = (() => {
   return common+perCard+specific+narrow+(type==='ha-room-orbit-card'?':host([data-orbit-design=modern]) .quick.quick,:host([data-orbit-design=modern]) .action.action{min-height:44px;height:44px}':'');
  }
  class ModernEditor extends HTMLElement{
-  constructor(){super();this.attachShadow({mode:'open'});this.shadowRoot.innerHTML='<style>label{display:grid;gap:8px;margin-bottom:16px;color:var(--primary-text-color);font:inherit}select{min-height:44px;padding:8px;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);color:inherit;font:inherit}.glow{display:flex;align-items:center;min-height:44px}input{width:22px;height:22px}</style><label>Card design<select aria-label="Card design"><option value="classic">Classic</option><option value="modern">Modern · beta</option></select></label><label class="glow"><input type="checkbox" aria-label="Glow">Glow</label><div id="editor"></div>';this._glow=this.shadowRoot.querySelector('input');this._glow.addEventListener('change',()=>{this._config={...this._config,glow:this._glow.checked};this._emit();});this._select=this.shadowRoot.querySelector('select');this._select.addEventListener('change',()=>{this._config={...this._config,design:this._select.value};this._emit();});}
-  async initialize(factory,type){this._paletteEnabled=orbitFallbackPaletteTypes.includes(type);if(this._paletteEnabled){const label=document.createElement('label');label.textContent='Orbit palette';this._paletteSelect=document.createElement('select');this._paletteSelect.setAttribute('aria-label','Orbit palette');for(const value of ['', 'aurora','ocean','sunset','lavender',...Object.keys(orbitPaletteCatalog)])this._paletteSelect.add(new Option(value||'Existing behavior',value));label.append(this._paletteSelect);this.shadowRoot.querySelector('#editor').before(label);this._paletteSelect.addEventListener('change',()=>{this._config={...this._config,palette:this._paletteSelect.value};this._emit();});}this._child=await factory();this._child.addEventListener('config-changed',e=>{e.stopPropagation();if(!e.detail?.config)return;this._config={...e.detail.config,...(this._config?.design!=null?{design:this._config.design}:{}),...(this._paletteEnabled&&this._config?.palette!=null?{palette:this._config.palette}:{}),...(this._config?.glow!=null?{glow:this._config.glow}:{})};this._emit();});this.shadowRoot.querySelector('#editor').append(this._child);this._sync();}
+  constructor(){super();this.attachShadow({mode:'open'});this.shadowRoot.innerHTML='<style>label{display:grid;gap:8px;margin-bottom:16px;color:var(--primary-text-color);font:inherit}select{min-height:44px;padding:8px;border:1px solid var(--divider-color);border-radius:10px;background:var(--card-background-color);color:inherit;font:inherit}.glow{display:flex;align-items:center;min-height:44px}input{width:22px;height:22px}</style><label>Card design<select aria-label="Card design"><option value="classic">Classic</option><option value="modern">Modern · beta</option></select></label><label class="glow"><input type="checkbox" aria-label="Glow">Glow</label><label class="glow"><input type="checkbox" aria-label="Satin">Satin</label><div id="editor"></div>';this._glow=this.shadowRoot.querySelector('input');this._glow.addEventListener('change',()=>{this._config={...this._config,glow:this._glow.checked};this._emit();});this._satin=this.shadowRoot.querySelector('input[aria-label="Satin"]');this._satin.addEventListener('change',()=>{this._config={...this._config,satin:this._satin.checked};this._emit();});this._select=this.shadowRoot.querySelector('select');this._select.addEventListener('change',()=>{this._config={...this._config,design:this._select.value};this._emit();});}
+  async initialize(factory,type){this._paletteEnabled=orbitFallbackPaletteTypes.includes(type);if(this._paletteEnabled){const label=document.createElement('label');label.textContent='Orbit palette';this._paletteSelect=document.createElement('select');this._paletteSelect.setAttribute('aria-label','Orbit palette');for(const value of ['', 'aurora','ocean','sunset','lavender',...Object.keys(orbitPaletteCatalog)])this._paletteSelect.add(new Option(value||'Existing behavior',value));label.append(this._paletteSelect);this.shadowRoot.querySelector('#editor').before(label);this._paletteSelect.addEventListener('change',()=>{this._config={...this._config,palette:this._paletteSelect.value};this._emit();});}this._child=await factory();this._child.addEventListener('config-changed',e=>{e.stopPropagation();if(!e.detail?.config)return;this._config={...e.detail.config,...(this._config?.design!=null?{design:this._config.design}:{}),...(this._paletteEnabled&&this._config?.palette!=null?{palette:this._config.palette}:{}),...(this._config?.glow!=null?{glow:this._config.glow}:{}),...(this._config?.satin!=null?{satin:this._config.satin}:{})};this._emit();});this.shadowRoot.querySelector('#editor').append(this._child);this._sync();}
   _emit(){this.dispatchEvent(new CustomEvent('config-changed',{detail:{config:{...this._config}},bubbles:true,composed:true}));}
   setConfig(config){this._config={...config};this._sync();}
   set hass(value){this._hass=value;if(this._child)this._child.hass=value;}
-  _sync(){if(!this._config)return;this._select.value=this._config.design||'classic';this._glow.checked=this._config.glow===true;if(this._child){const next={...this._config};delete next.design;delete next.glow;if(this._paletteEnabled){delete next.palette;this._paletteSelect.value=this._config.palette||'';}this._child.setConfig(next);if(this._hass)this._child.hass=this._hass;}}
+  _sync(){if(!this._config)return;this._select.value=this._config.design||'classic';this._glow.checked=this._config.glow===true;this._satin.checked=this._config.satin===true;if(this._child){const next={...this._config};delete next.design;delete next.glow;delete next.satin;if(this._paletteEnabled){delete next.palette;this._paletteSelect.value=this._config.palette||'';}this._child.setConfig(next);if(this._hass)this._child.hass=this._hass;}}
  }
  // Installed before definition, so cached callbacks retain the original lifecycle.
  function prepare(type,C){
@@ -146,16 +161,27 @@ const orbitModern = (() => {
   if(!wrappedMethods.has(original)){p.setConfig=function(config){
    if(!config||typeof config!=='object'||Array.isArray(config))return original.call(this,config);
    const glow=config.glow??false;if(typeof glow!=='boolean')throw Error('glow must be a boolean.');
+   const satin=config.satin??false;if(typeof satin!=='boolean')throw Error('satin must be a boolean.');
    const design=config.design??'classic';if(!['classic','modern'].includes(design))throw Error('design must be classic or modern.');
-   const palette=orbitFallbackPaletteTypes.includes(type)?config.palette:undefined;if(palette!=null&&palette!==''&&!['aurora','ocean','sunset','lavender',...Object.keys(orbitPaletteCatalog)].includes(palette))throw Error('Invalid Orbit palette.');const next={...config};delete next.design;delete next.glow;if(orbitFallbackPaletteTypes.includes(type))delete next.palette;const signature=JSON.stringify(next);
-   const result=signature===this._orbitModernSignature&&(design!==this._orbitModernDesign||palette!==this._orbitPalette||glow!==this._orbitGlow)?undefined:original.call(this,next);
+   const palette=orbitFallbackPaletteTypes.includes(type)?config.palette:undefined;if(palette!=null&&palette!==''&&!['aurora','ocean','sunset','lavender',...Object.keys(orbitPaletteCatalog)].includes(palette))throw Error('Invalid Orbit palette.');const next={...config};delete next.design;delete next.glow;delete next.satin;if(orbitFallbackPaletteTypes.includes(type))delete next.palette;const signature=JSON.stringify(next);
+   const result=signature===this._orbitModernSignature&&(design!==this._orbitModernDesign||palette!==this._orbitPalette||glow!==this._orbitGlow||satin!==this._orbitSatin)?undefined:original.call(this,next);
    this._orbitPalette=palette;if(palette)this.setAttribute('data-orbit-palette',palette);else this.removeAttribute('data-orbit-palette');this._orbitModernSignature=signature;
    this._orbitModernDesign=design;this._orbitGlow=glow;this._orbitGlowPalette=config.palette;if(glow)this.setAttribute('data-orbit-glow','true');else this.removeAttribute('data-orbit-glow');
+   this._orbitSatin=satin;
+   if(satin){
+    this.setAttribute('data-orbit-satin','true');
+    const accent=orbitPaletteCatalog[config.palette]?.colors[0]||{aurora:'#078f72',ocean:'#1477c9',sunset:'#cf573e',lavender:'#8059c7'}[config.palette];
+    if(typeof accent==='string')this.style.setProperty('--orbit-satin-accent',accent);
+    else this.style.removeProperty('--orbit-satin-accent');
+   }else if(this.getAttribute('data-orbit-satin')){
+    this.removeAttribute('data-orbit-satin');
+    this.style.removeProperty('--orbit-satin-accent');
+   }
    if(design==='modern')this.setAttribute('data-orbit-design','modern');else this.removeAttribute('data-orbit-design');
    attach(this,type);return result;
   };wrappedMethods.add(p.setConfig);}
   for(const name of ['_render','_build','_draw','_paint','draw','render','updated','connectedCallback'])if((typeof p[name]==='function'||name==='updated'&&typeof p.requestUpdate==='function')&&!wrappedMethods.has(p[name])){const method=p[name];p[name]=function(...args){const result=method?.apply(this,args);attach(this,type);return result;};wrappedMethods.add(p[name]);}
-  if(typeof C.getConfigForm==='function'){if(!wrappedForms.has(C.getConfigForm)){const form=C.getConfigForm;C.getConfigForm=function(...args){const current=paletteForm(form.apply(this,args),type);return{...current,schema:[field,glowField,...current.schema.filter(s=>s.name!=='design'&&s.name!=='glow')],computeLabel:s=>s.name==='design'?'Card design':s.name==='glow'?'Glow':current.computeLabel?.(s),computeHelper:s=>s.name==='design'?'Modern beta changes appearance only. Classic preserves the stable design.':s.name==='glow'?'Optional decorative glow. Room follows its temperature sensor when available. Device state is unchanged.':current.computeHelper?.(s)};};wrappedForms.add(C.getConfigForm);}}
+  if(typeof C.getConfigForm==='function'){if(!wrappedForms.has(C.getConfigForm)){const form=C.getConfigForm;C.getConfigForm=function(...args){const current=paletteForm(form.apply(this,args),type);return{...current,schema:[field,glowField,satinField,...current.schema.filter(s=>!['design','glow','satin'].includes(s.name))],computeLabel:s=>s.name==='design'?'Card design':s.name==='glow'?'Glow':s.name==='satin'?'Satin':current.computeLabel?.(s),computeHelper:s=>s.name==='design'?'Modern beta changes appearance only. Classic preserves the stable design.':s.name==='glow'?'Optional decorative glow. Room follows its temperature sensor when available. Device state is unchanged.':current.computeHelper?.(s)};};wrappedForms.add(C.getConfigForm);}}
   else if(typeof C.getConfigElement==='function'&&!wrappedFactories.has(C.getConfigElement)){const factory=C.getConfigElement;C.getConfigElement=function(...args){if(!window.customElements.get('orbit-modern-config-editor'))window.customElements.define('orbit-modern-config-editor',ModernEditor);const child=factory.apply(this,args);if(child instanceof ModernEditor)return child;const editor=document.createElement('orbit-modern-config-editor');editor.initialize(()=>child,type);return editor;};wrappedFactories.add(C.getConfigElement);originalFactories.set(C.getConfigElement,factory);}
   return C;
  }
