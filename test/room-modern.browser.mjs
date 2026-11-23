@@ -66,5 +66,38 @@ try {
  const button=page.locator('ha-room-orbit-card').nth(2).locator('.quick').first();
  await button.tap();
  assert.deepEqual(await page.evaluate(()=>calls.at(-1)),['light','toggle',{entity_id:'light.example'}]);
+ const effects = await page.evaluate(() => {
+  const card = document.querySelector('ha-room-orbit-card');
+  const config = {...compactConfigs['ha-room-orbit-card'],design:'modern',glow:true,palette:'teal'};
+  const state = compactHass.states['sensor.temperature'];
+  const shadow = () => getComputedStyle(card.shadowRoot.querySelector('ha-card')).boxShadow;
+  const update = (reading,unit='°C',connected=true) => {
+   card.hass={...compactHass,connected,states:{...compactHass.states,'sensor.temperature':{
+    ...state,state:reading,attributes:{...state.attributes,unit_of_measurement:unit}
+   }}};
+   return shadow();
+  };
+  card.setConfig(config);
+  const cold = update('21.9');
+  const amber = update('22');
+  const hot = update('27');
+  const fahrenheit = update('71.6','°F');
+  const kelvin = update('295.15','K');
+  const unavailable = update('unavailable');
+  const unsupported = update('25','%');
+  const offline = update('25','°C',false);
+  const live = update('27');
+  card.setConfig({...config,glow:false});
+  return {cold,amber,hot,fahrenheit,kelvin,unavailable,unsupported,offline,live,off:shadow()};
+ });
+ assert.match(effects.cold,/21px 3px/);
+ assert.match(effects.amber,/21px 2px/);
+ assert.notEqual(effects.amber,effects.hot);
+ assert.equal(effects.fahrenheit,effects.amber);
+ assert.equal(effects.kelvin,effects.amber);
+ assert.equal(effects.unavailable,effects.unsupported);
+ assert.equal(effects.unavailable,effects.offline);
+ assert.equal(effects.live,effects.hot);
+ assert.notEqual(effects.off,effects.hot);
  console.log(tested+' Room geometry cases and native shortcut tap passed');
 } finally { await browser.close(); }

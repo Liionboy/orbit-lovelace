@@ -1,4 +1,4 @@
-/* Orbit Modern v0.4.1 — MIT. Optional, suite-owned presentation only. */
+/* Orbit Modern v0.4.2 — MIT. Optional, suite-owned presentation only. */
 const orbitModern = (() => {
  const types = Object.keys(orbitModernProfiles),wrappedMethods=new WeakSet(),wrappedForms=new WeakSet(),wrappedFactories=new WeakSet(),originalFactories=new WeakMap();
  const field = {name:'design',default:'classic',selector:{select:{options:[{value:'classic',label:'Classic'},{value:'modern',label:'Modern · beta'}],mode:'dropdown'}}};
@@ -81,12 +81,25 @@ const orbitModern = (() => {
   card._orbitPaletteSheet||=new CSSStyleSheet();if(card._orbitPaletteLast!==palette){card._orbitPaletteSheet.replaceSync(css);card._orbitPaletteLast=palette;}if(!card.shadowRoot.adoptedStyleSheets.includes(card._orbitPaletteSheet))card.shadowRoot.adoptedStyleSheets=[...card.shadowRoot.adoptedStyleSheets,card._orbitPaletteSheet];
  }
  function paletteForm(form,type){const options=Object.keys(orbitPaletteCatalog);let found=false;const schema=form.schema.map(f=>{if(f.name!=='palette')return f;found=true;const select=f.selector.select,old=select.options;return{...f,selector:{select:{...select,options:[...old,...options.filter(n=>!old.some(o=>(o.value??o)===n))]}}};});if(!found&&orbitFallbackPaletteTypes.includes(type))schema.push({name:'palette',selector:{select:{options:['aurora','ocean','sunset','lavender',...options],mode:'dropdown'}}});return{...form,schema};}
+ function roomGlowShadow(card){
+  if(card._hass?.connected===false)return null;
+  const sensor=card._state(card._config?.temperature_entity),state=sensor?.state;
+  if(typeof state!=='string'||!state.trim())return null;
+  const value=Number(state),unit=sensor.attributes?.unit_of_measurement;
+  if(!Number.isFinite(value)||!['°C','°F','K'].includes(unit))return null;
+  const celsius=Math.round((unit==='°F'?(value-32)*5/9:unit==='K'?value-273.15:value)*1e6)/1e6;
+  const cold=celsius<22;
+  const hue=Math.round(cold?205+Math.min(20,(22-celsius)*3):40-Math.min(26,(celsius-22)*4));
+  const color='hsl('+hue+' 94% '+(cold?'54%':'52%')+')';
+  return '0 0 0 1px color-mix(in srgb,'+color+' 62%,transparent),0 0 21px '+(cold?'3px':'2px')+' color-mix(in srgb,'+color+' '+(cold?'47%':'39%')+',transparent),0 4px 30px color-mix(in srgb,'+color+' 25%,transparent)';
+ }
  function attachGlow(card,type){
   const root=card.shadowRoot;if(!root)return;
   if(!card._orbitGlow){if(card._orbitGlowSheet&&root.adoptedStyleSheets)root.adoptedStyleSheets=root.adoptedStyleSheets.filter(s=>s!==card._orbitGlowSheet);root.querySelector?.('style[data-orbit-glow]')?.remove();return;}
   const legacy={aurora:'#078f72',ocean:'#1477c9',sunset:'#cf573e',lavender:'#8059c7'},base=orbitPaletteCatalog[card._orbitGlowPalette]?.colors[0]||legacy[card._orbitGlowPalette]||'var(--orbit-theme-accent,var(--primary-color,#078f72))';
   const color='color-mix(in srgb,'+base+' 80%,var(--primary-text-color,#202b3c))',scope=':host([data-orbit-glow][data-orbit-glow="true"]) ';
-  const shadow='0 0 0 1px color-mix(in srgb,'+color+' 20%,transparent),0 0 18px 1px color-mix(in srgb,'+color+' 18%,transparent),0 6px 22px color-mix(in srgb,'+color+' 10%,transparent)';
+  const paletteShadow='0 0 0 1px color-mix(in srgb,'+color+' 20%,transparent),0 0 18px 1px color-mix(in srgb,'+color+' 18%,transparent),0 6px 22px color-mix(in srgb,'+color+' 10%,transparent)';
+  const shadow=(type==='ha-room-orbit-card'?roomGlowShadow(card):null)||paletteShadow;
   // Collections/headings remain unframed; Chips use their semantic/local accent.
   const css=type==='ha-title-orbit-card'?scope+'.title,'+scope+'.title-icon{text-shadow:0 0 16px color-mix(in srgb,'+color+' 35%,transparent);filter:drop-shadow(0 0 5px color-mix(in srgb,'+color+' 24%,transparent))}':type==='ha-chips-orbit-card'?scope+'.chip.chip::before{box-shadow:0 0 0 1px color-mix(in srgb,var(--chip-accent) 18%,transparent),0 0 12px color-mix(in srgb,var(--chip-accent) 22%,transparent)}':scope+'ha-card{box-shadow:'+shadow+'}';
   if(typeof CSSStyleSheet!=='undefined'&&CSSStyleSheet.prototype.replaceSync&&'adoptedStyleSheets' in root){card._orbitGlowSheet||=new CSSStyleSheet();if(card._orbitGlowCSS!==css){card._orbitGlowSheet.replaceSync(css);card._orbitGlowCSS=css;}if(!root.adoptedStyleSheets.includes(card._orbitGlowSheet))root.adoptedStyleSheets=[...root.adoptedStyleSheets,card._orbitGlowSheet];}
@@ -135,7 +148,7 @@ const orbitModern = (() => {
    attach(this,type);return result;
   };wrappedMethods.add(p.setConfig);}
   for(const name of ['_render','_build','_draw','_paint','draw','render','updated','connectedCallback'])if((typeof p[name]==='function'||name==='updated'&&typeof p.requestUpdate==='function')&&!wrappedMethods.has(p[name])){const method=p[name];p[name]=function(...args){const result=method?.apply(this,args);attach(this,type);return result;};wrappedMethods.add(p[name]);}
-  if(typeof C.getConfigForm==='function'){if(!wrappedForms.has(C.getConfigForm)){const form=C.getConfigForm;C.getConfigForm=function(...args){const current=paletteForm(form.apply(this,args),type);return{...current,schema:[field,glowField,...current.schema.filter(s=>s.name!=='design'&&s.name!=='glow')],computeLabel:s=>s.name==='design'?'Card design':s.name==='glow'?'Glow':current.computeLabel?.(s),computeHelper:s=>s.name==='design'?'Modern beta changes appearance only. Classic preserves the stable design.':s.name==='glow'?'Optional decorative palette glow. Device state is unchanged.':current.computeHelper?.(s)};};wrappedForms.add(C.getConfigForm);}}
+  if(typeof C.getConfigForm==='function'){if(!wrappedForms.has(C.getConfigForm)){const form=C.getConfigForm;C.getConfigForm=function(...args){const current=paletteForm(form.apply(this,args),type);return{...current,schema:[field,glowField,...current.schema.filter(s=>s.name!=='design'&&s.name!=='glow')],computeLabel:s=>s.name==='design'?'Card design':s.name==='glow'?'Glow':current.computeLabel?.(s),computeHelper:s=>s.name==='design'?'Modern beta changes appearance only. Classic preserves the stable design.':s.name==='glow'?'Optional decorative glow. Room follows its temperature sensor when available. Device state is unchanged.':current.computeHelper?.(s)};};wrappedForms.add(C.getConfigForm);}}
   else if(typeof C.getConfigElement==='function'&&!wrappedFactories.has(C.getConfigElement)){const factory=C.getConfigElement;C.getConfigElement=function(...args){if(!window.customElements.get('orbit-modern-config-editor'))window.customElements.define('orbit-modern-config-editor',ModernEditor);const child=factory.apply(this,args);if(child instanceof ModernEditor)return child;const editor=document.createElement('orbit-modern-config-editor');editor.initialize(()=>child,type);return editor;};wrappedFactories.add(C.getConfigElement);originalFactories.set(C.getConfigElement,factory);}
   return C;
  }

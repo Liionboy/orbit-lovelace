@@ -1,6 +1,6 @@
 # Orbit Modern — Design Refresh beta
 
-**Available in v1.22.0-beta.6; not promoted to stable.** Modern adapter 0.4.1 provides optional suite-owned presentation for **all 37 primary card types**. Classic remains the default on every existing card. Beta.1 introduced the first four treatments; beta.2 extended the same visual system across the collection. Beta.5 adds independent, optional [Glow](GLOW.md) on every card, disabled by default.
+**Available in v1.22.0-beta.7; not promoted to stable.** Modern adapter 0.4.2 provides optional suite-owned presentation for **all 37 primary card types**. Classic remains the default on every existing card. Beta.1 introduced the first four treatments; beta.2 extended the same visual system across the collection. Beta.5 adds independent, optional [Glow](GLOW.md) on every card, disabled by default.
 
 ## Visual direction
 
@@ -27,7 +27,7 @@ These are **the actual final bundle**, with synthetic entities/history, licensed
 
 ## Install and try
 
-1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.6**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
+1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.7**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
 2. Fully reload the frontend/Companion app so the new constructors replace cached ones. Keep the **same single Orbit resource**; do not add standalone resources.
 3. Edit any Orbit card and select **Card design → Modern · beta**. Keep Card layout Normal or Compact as preferred. For YAML, add `design: modern` to that card.
 4. A small generic [demo dashboard](../examples/modern-dashboard.yaml) is provided. Replace example entity IDs and import into a **new empty dashboard**, never over your existing configuration. Importing is optional; existing cards can be edited individually.

@@ -14,6 +14,11 @@ glow: true
 
 These are additional keys on an existing card; keep its `type`, entity IDs and other configuration. Classic also supports Glow. Disable the editor toggle, remove `glow`, or set `glow: false` to turn it off. No new resource, theme YAML, dependency or HA restart is required. Stable Latest remains v1.21.1.
 
+
+## Temperature-aware Room glow
+
+From beta.7, a Room card with `glow: true` uses its existing `temperature_entity`. Below **22 °C** the halo is a stronger blue; at **22 °C** it changes to amber, becoming more orange as the reported temperature rises. The effect is static, works in Classic and Modern, and accepts °C, °F and K. An unavailable, missing or unsupported reading falls back to the existing palette glow. Other cards, palette accents, card layout and the Room temperature-animation option are unchanged.
+
 ## Appearance
 
 - Ordinary cards receive a restrained outer halo, following the selected local palette: Aurora, Ocean, Sunset, Lavender, Slate, Indigo, Teal, Rose, Amber or Ice. Without an explicit supported palette, it inherits the theme accent.

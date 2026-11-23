@@ -1,6 +1,6 @@
 {
   "name": "Orbit Lovelace",
-  "version": "1.22.0-beta.6",
+  "version": "1.22.0-beta.7",
   "homeassistant": "2026.6.0",
   "components": [
     {
@@ -614,9 +614,9 @@
     {
       "id": "modern-design",
       "origin": "suite",
-      "version": "0.4.1",
+      "version": "0.4.2",
       "source": "src/orbit-modern.js",
-      "sha256": "9ab7e9027bb074e124c0ca4ba54729783a57e7c7c471acc2cf286a4b0520bad3",
+      "sha256": "88be68a0527aee24ad00bcfcb7a01a1a9da47ee9986b5ddf1044c2af33853f96",
       "types": [
         "ha-alerts-orbit-card",
         "ha-battery-orbit-card",
@@ -657,7 +657,7 @@
         "ha-bambu-camera-orbit-card"
       ],
       "profiles": "src/modern-profiles.json",
-      "profilesSha256": "c39b5e90d7a160a2ae2b2d1939cdd61d40a25e1655f4ced27c19e92b1e7413e4"
+      "profilesSha256": "28300f23446ad0906fb99ac6a41452d0f1781beb289771bb5bf25931a90c8471"
     },
     {
       "id": "card-palettes",
