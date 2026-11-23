@@ -2,7 +2,7 @@
 
 **Beta.4 Compact:** all 37 primary types show details immediately, without the suite disclosure arrow. Normal is unchanged. Original controls, semantic colors, all Modern/palette options and media visibility cleanup are retained. [Compact contract](docs/COMPACT.md).
 
-**Beta v1.22.0-beta.13:** optional [Modern design](docs/MODERN.md), [Glow](docs/GLOW.md) and six new [palettes](docs/PALETTES.md) on all 37 primary types. Classic remains the default and Glow is off by default; imported/native sources remain unchanged. Modern adapter 0.4.0 and explicit per-type profiles are traced in `components.json`.
+**Beta v1.22.0-beta.14:** optional [Modern design](docs/MODERN.md), [Glow](docs/GLOW.md) and six new [palettes](docs/PALETTES.md) on all 37 primary types. Classic remains the default and Glow is off by default; imported/native sources remain unchanged. Modern adapter 0.4.0 and explicit per-type profiles are traced in `components.json`.
 
 **Stable v1.21.1:** Bambu Orbit1.0.1 preserves camera/model preview geometry during viewport/tab visibility cleanup, preventing media-induced scroll shifts. Same configurations and resource; other34 cards,27 imported pins, Compact profiles/runtime and Themes1.2.0 unchanged. [Details](docs/BAMBU.md#mobile-scroll-stability).
 

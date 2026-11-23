@@ -19,9 +19,17 @@ export function switchStateIcon(source) {
       this._render();
       return;
     }
-    nodes.forEach((node, index) => {
-      if (node.textContent !== readings[index]) node.textContent = readings[index];
-    });`);
+    const updateText = (node, text) => {
+      if (!node || node.textContent === text) return;
+      const existing = node.firstChild;
+      if (existing?.nodeType === 3 && existing === node.lastChild) existing.data = text;
+      else node.textContent = text;
+    };
+    nodes.forEach((node, index) => updateText(node, readings[index]));
+    // Keep the existing Compact summary live without rerunning its DOM synchronizer.
+    const badge = readings[0]?.trim() || "";
+    updateText(this.shadowRoot.querySelector(".orbit-tile-badge"), badge);
+    updateText(this.shadowRoot.querySelector(".orbit-tile-mobile-badge"), badge ? " · " + badge : "");`);
  const before='<ha-card data-palette="${this._config.palette}">';
  if(source.split(before).length!==2)throw Error('Switch state icon render contract changed');
  source=source.replace(before,'<ha-card data-palette="${this._config.palette}" data-orbit-switch-on="${isOn}">');

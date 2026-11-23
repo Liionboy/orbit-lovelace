@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.22.0-beta.13 — MIT. */
+/* Orbit Lovelace v1.22.0-beta.14 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.22.0-beta.13",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.22.0-beta.14",components:{},skipped:{},errors:[]};
 /* Suite-owned compact presentation adapter v0.4.0 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
@@ -5900,9 +5900,17 @@ class SwitchControlCard extends HTMLElement {
       this._render();
       return;
     }
-    nodes.forEach((node, index) => {
-      if (node.textContent !== readings[index]) node.textContent = readings[index];
-    });
+    const updateText = (node, text) => {
+      if (!node || node.textContent === text) return;
+      const existing = node.firstChild;
+      if (existing?.nodeType === 3 && existing === node.lastChild) existing.data = text;
+      else node.textContent = text;
+    };
+    nodes.forEach((node, index) => updateText(node, readings[index]));
+    // Keep the existing Compact summary live without rerunning its DOM synchronizer.
+    const badge = readings[0]?.trim() || "";
+    updateText(this.shadowRoot.querySelector(".orbit-tile-badge"), badge);
+    updateText(this.shadowRoot.querySelector(".orbit-tile-mobile-badge"), badge ? " · " + badge : "");
   }
   get hass() { return this._hass; }
 
