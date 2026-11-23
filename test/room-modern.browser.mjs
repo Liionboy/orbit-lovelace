@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import {readFile, mkdir} from 'node:fs/promises';
 import {compactFixtures} from './compact-fixtures.mjs';
 
-const {chromium} = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
+const engines = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const bundle = await readFile(process.env.ROOM_RESOURCE || new URL('../dist/orbit-lovelace.js', import.meta.url), 'utf8');
 const iconPaths = JSON.parse(await readFile(new URL('fixtures/modern-icons.json', import.meta.url)));
-const browser = await chromium.launch(process.env.CHROMIUM_EXECUTABLE ? {executablePath:process.env.CHROMIUM_EXECUTABLE} : {});
+const browser = await engines[process.env.ROOM_BROWSER || 'chromium'].launch(process.env.CHROMIUM_EXECUTABLE ? {executablePath:process.env.CHROMIUM_EXECUTABLE} : {});
 try {
- const page = await browser.newPage({viewport:{width:486,height:800},hasTouch:true});
- await page.setContent('<style>body{font:14px system-ui;background:var(--primary-background-color)}main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:start}</style><main></main>');
+ const page = await browser.newPage({viewport:{width:390,height:800},hasTouch:true,isMobile:true});
+ await page.setContent('<meta name="viewport" content="width=device-width,initial-scale=1"><style>body{font:14px system-ui;background:var(--primary-background-color)}main{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:start}</style><main></main>');
  await page.evaluate(paths => {
   customElements.define('ha-card',class extends HTMLElement{connectedCallback(){this.style.display='block';}});
   customElements.define('ha-icon',class extends HTMLElement{connectedCallback(){
@@ -19,7 +19,7 @@ try {
  await page.addScriptTag({content:bundle});
  await page.evaluate(compactFixtures);
  let tested = 0;
- for (const mode of ['light','dark']) for (const layout of ['normal','compact']) for (const width of [164,183,203,243,440]) {
+ for (const mode of ['light','dark']) for (const layout of ['normal','compact']) for (const width of [144,164,183,203,243,440]) {
   await page.evaluate(({mode,layout,width})=>{
    const host=document.querySelector('main');
    host.style.width=(width*2+8)+'px';
@@ -49,13 +49,14 @@ try {
    for (const button of shortcuts){
     assert.ok(button.right && button.accessible && button.height>=44);
     if(layout==='normal'){
-     assert.equal(button.width,44,'Modern shortcuts should not stretch across a grid column');
-     if(width>=243) assert.ok(button.beside,'Shortcuts should sit beside Room identity');
+     const expectedWidth = width<=216 && count>=3 ? 40 : 44;
+     assert.equal(button.width,expectedWidth,'Shortcut width must stay bounded');
+     if(width>=164) assert.ok(button.beside,'Shortcuts must sit beside Room identity even on phones');
     }
    }
    tested++;
   }
-  if(layout==='normal' && width===243){
+  if(layout==='normal' && width===183){
    assert.ok(metrics[4].height<=165,JSON.stringify(metrics));
    if(process.env.SCREENSHOT_DIR){
     const out=process.env.SCREENSHOT_DIR;await mkdir(out,{recursive:true});

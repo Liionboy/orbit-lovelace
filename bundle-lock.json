@@ -1,5 +1,5 @@
 {
-  "version": "1.22.0-beta.7",
+  "version": "1.22.0-beta.8",
   "packages": 33,
   "upstreamPackages": 27,
   "nativePackages": 6,
@@ -13,15 +13,15 @@
   "frigateLiveVersion": "1.0.0",
   "frigateLiveSha256": "dbb3ffb25097a6554ea8512b9992de53903ac2031b056660beddcfc1e162a57c",
   "frigateLiveAdaptationSha256": "db205226500a03a0be300e440c80289164096b56b91ca46c992199adee02c975",
-  "modernDesignVersion": "0.4.2",
-  "modernDesignSha256": "88be68a0527aee24ad00bcfcb7a01a1a9da47ee9986b5ddf1044c2af33853f96",
-  "modernProfilesSha256": "28300f23446ad0906fb99ac6a41452d0f1781beb289771bb5bf25931a90c8471",
+  "modernDesignVersion": "0.4.3",
+  "modernDesignSha256": "e155365febe2fc79adf4d35b7d57ec352206c5b4d2ea93eb50d3e4d6099d0780",
+  "modernProfilesSha256": "956843d089950f29568c025e8aafe81b45da4c7409ca0a873765824f6db4ef04",
   "cardPalettesVersion": "0.2.0",
   "cardPalettesSha256": "e39117d4fb48b4d167788e7e52ee4f338d0314a1de4a754a673316ebe38e278d",
   "cardPalettesCatalogSha256": "b8f231c030a5c81b335a0dfbb2b6ddc20ee6da0e6ca1f91e9468657b0e411abb",
   "themeBridgeVersion": 1,
   "themesVersion": "1.2.0",
   "themeSha256": "984a2ced43adb87efe7e2414c87a0f49ecd6cae68a5a1a1279dfe431cd80378e",
-  "bytes": 960923,
-  "sha256": "f54d3c837cf54c9b3cae07f16cf4ca1c3d41b6d763d2338c3adeaacf9114530f"
+  "bytes": 961298,
+  "sha256": "90941e973371617d7d808c986055d40e3d97cf6fe34701b5b05fb9a9dae6aa5a"
 }

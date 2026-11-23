@@ -1,12 +1,12 @@
 # Orbit Modern — Design Refresh beta
 
-**Available in v1.22.0-beta.7; not promoted to stable.** Modern adapter 0.4.2 provides optional suite-owned presentation for **all 37 primary card types**. Classic remains the default on every existing card. Beta.1 introduced the first four treatments; beta.2 extended the same visual system across the collection. Beta.5 adds independent, optional [Glow](GLOW.md) on every card, disabled by default.
+**Available in v1.22.0-beta.8; not promoted to stable.** Modern adapter 0.4.3 provides optional suite-owned presentation for **all 37 primary card types**. Classic remains the default on every existing card. Beta.1 introduced the first four treatments; beta.2 extended the same visual system across the collection. Beta.5 adds independent, optional [Glow](GLOW.md) on every card, disabled by default.
 
 ## Visual direction
 
 Clean surfaces instead of layered decorative gradients; quieter borders/shadows; 18px card corners; rounded-square icon surfaces; restrained typography with readable primary values. Existing local palettes and semantic warning/heating/cooling/alarm colors remain meaningful. No web fonts, extra runtime dependency, permanent animation or hover movement.
 
-- **Room:** Beta.6 keeps 44px square shortcuts beside the Room identity when space permits. Narrow cards place the same small buttons below the readings without stretching the buttons to fill the card. The optional temperature-effect indicator is retained.
+- **Room:** Beta.8 keeps shortcuts beside the room readings on two-column phones; only ultra-narrow cards stack them. The optional temperature-effect indicator is retained.
 - **Chips:** slim rounded rectangles, subtle active-state tint, plain icons and existing name/state choices. The visible capsule remains 40px Normal / 36px Compact inside 48px / 44px touch targets. No outer card frame.
 - **Temperature:** a calmer large reading, squared icon surface, lighter graph grid and neutral min/max containers. Recorded data, units, missing states and history requests are unchanged.
 - **Frigate:** quieter header, a larger visual emphasis on the camera, thin separated detection readings and preserved status/errors. The frame stays 16:9; image/player/codec behavior is unchanged. This beta does **not** fix H.265/MP4 compatibility or increase a camera's resolution.
@@ -27,7 +27,7 @@ These are **the actual final bundle**, with synthetic entities/history, licensed
 
 ## Install and try
 
-1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.7**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
+1. Preserve a copy of your dashboard YAML. In **HACS → Orbit Lovelace → Redownload**, enable/select beta versions if necessary and choose **v1.22.0-beta.8**. Stable v1.21.1 remains available; this is not an automatic stable upgrade.
 2. Fully reload the frontend/Companion app so the new constructors replace cached ones. Keep the **same single Orbit resource**; do not add standalone resources.
 3. Edit any Orbit card and select **Card design → Modern · beta**. Keep Card layout Normal or Compact as preferred. For YAML, add `design: modern` to that card.
 4. A small generic [demo dashboard](../examples/modern-dashboard.yaml) is provided. Replace example entity IDs and import into a **new empty dashboard**, never over your existing configuration. Importing is optional; existing cards can be edited individually.
