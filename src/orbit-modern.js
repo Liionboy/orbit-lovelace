@@ -1,4 +1,4 @@
-/* Orbit Modern v0.4.0 — MIT. Optional, suite-owned presentation only. */
+/* Orbit Modern v0.4.1 — MIT. Optional, suite-owned presentation only. */
 const orbitModern = (() => {
  const types = Object.keys(orbitModernProfiles),wrappedMethods=new WeakSet(),wrappedForms=new WeakSet(),wrappedFactories=new WeakSet(),originalFactories=new WeakMap();
  const field = {name:'design',default:'classic',selector:{select:{options:[{value:'classic',label:'Classic'},{value:'modern',label:'Modern · beta'}],mode:'dropdown'}}};
@@ -17,15 +17,23 @@ const orbitModern = (() => {
  `;
  const styles = {
  'ha-room-orbit-card':`
- :host([data-orbit-design=modern]) .summary{min-height:108px;gap:16px;grid-template-columns:minmax(0,1fr) 96px}
+ :host([data-orbit-design=modern]) .shell.shell{padding:12px}
+ :host([data-orbit-design=modern]) .summary{min-height:92px;gap:10px;padding-top:0;grid-template-columns:minmax(0,1fr) max-content}
  :host([data-orbit-design=modern]) .summary.no-shortcuts{grid-template-columns:1fr}
- :host([data-orbit-design=modern]) .room-icon{width:44px;height:44px;border-radius:13px;background:color-mix(in srgb,var(--accent) 10%,transparent)}
- :host([data-orbit-design=modern]) h2{font-size:17px;line-height:23px;font-weight:650;margin:10px 0 5px;letter-spacing:-.025em}
- :host([data-orbit-design=modern]) .reading{font-size:12px;line-height:20px;min-height:28px}
- :host([data-orbit-design=modern]) .quick{height:44px;min-height:44px;border-radius:12px}
- :host([data-orbit-design=modern]) .shortcuts{gap:6px}
+ :host([data-orbit-design=modern]) .room-icon{width:36px;height:36px;border-radius:11px;background:color-mix(in srgb,var(--accent) 10%,transparent)}
+ :host([data-orbit-design=modern]) h2{position:static;overflow-wrap:anywhere;white-space:normal;font-size:15px;line-height:19px;font-weight:650;margin:6px 0 3px;letter-spacing:-.025em}
+ :host([data-orbit-design=modern]) .reading{font-size:11px;line-height:16px;min-height:18px}
+ :host([data-orbit-design=modern]) .quick{width:44px;height:44px;border-radius:12px}
+ :host([data-orbit-design=modern]) .shortcuts{grid-template-columns:repeat(2,44px);gap:4px}
+ :host([data-orbit-design=modern]) .shortcuts.count-1,
+ :host([data-orbit-design=modern]) .shortcuts.count-2{grid-template-columns:44px}
+ :host([data-orbit-design=modern]) .summary:has(.humidity-status){padding-bottom:0}
+ :host([data-orbit-design=modern]) .humidity-status{position:relative}
  :host([data-orbit-design=modern]) .action{width:44px;height:44px}
- @container room-orbit (max-width:260px){:host([data-orbit-design=modern]) .shell.shell{padding:12px}:host([data-orbit-design=modern]) .summary{grid-template-columns:1fr;padding-top:0;gap:12px}:host([data-orbit-design=modern]) h2{position:static;font-size:15px;line-height:21px;white-space:normal;overflow-wrap:anywhere}:host([data-orbit-design=modern]) .shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}:host([data-orbit-design=modern]) .humidity-status{position:static}}
+ @container room-orbit (max-width:216px){
+  :host([data-orbit-design=modern]) .summary{grid-template-columns:minmax(0,1fr);min-height:0;gap:8px}
+  :host([data-orbit-design=modern]) .shortcuts:is(.count-1,.count-2,.count-3){grid-template-columns:repeat(auto-fit,44px)}
+ }
  `,
  'ha-temperature-orbit-card':`
  :host([data-orbit-design=modern]) .orbit{width:40px;height:40px;border-radius:12px;outline:none;background:color-mix(in srgb,var(--accent) 10%,transparent)}
