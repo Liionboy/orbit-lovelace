@@ -1,4 +1,4 @@
-/* Orbit Lovelace v1.22.0-beta.11 — MIT. */
+/* Orbit Lovelace v1.22.0-beta.12 — MIT. */
 /*
 LICENSE
 MIT License
@@ -170,7 +170,7 @@ SOFTWARE.
 
 */
 (() => {
-const suite = window.orbitLovelace ||= {version:"1.22.0-beta.11",components:{},skipped:{},errors:[]};
+const suite = window.orbitLovelace ||= {version:"1.22.0-beta.12",components:{},skipped:{},errors:[]};
 /* Suite-owned compact presentation adapter v0.4.0 — MIT. */
 const orbitCompact = (() => {
  let sequence = 0;
@@ -5673,11 +5673,20 @@ class SwitchControlCard extends HTMLElement {
 
   set hass(value) {
     this._hass = value;
-    const signature = JSON.stringify([this._state(), this._sensorState(this._config.power_entity), this._sensorState(this._config.energy_entity), this._sensorState(this._config.voltage_entity)]);
-    if (signature !== this._entitySignature) {
+    const state = this._state();
+    const signature = JSON.stringify([state?.state, state?.attributes?.friendly_name, state?.attributes?.icon]);
+    const readings = [this._config.power_entity, this._config.energy_entity, this._config.voltage_entity]
+      .filter(Boolean)
+      .map(id => this._formatSensor(this._sensorState(id)));
+    const nodes = this.shadowRoot.querySelectorAll(".consumption .reading-value");
+    if (signature !== this._entitySignature || nodes.length !== readings.length) {
       this._entitySignature = signature;
       this._render();
+      return;
     }
+    nodes.forEach((node, index) => {
+      if (node.textContent !== readings[index]) node.textContent = readings[index];
+    });
   }
   get hass() { return this._hass; }
 

@@ -1,5 +1,27 @@
-// Suite-owned presentation only; original commands, inputs and listeners stay intact.
+// Suite-owned Switch presentation and stable telemetry updates.
 export function switchStateIcon(source) {
+ const previousSetter = `    this._hass = value;
+    const signature = JSON.stringify([this._state(), this._sensorState(this._config.power_entity), this._sensorState(this._config.energy_entity), this._sensorState(this._config.voltage_entity)]);
+    if (signature !== this._entitySignature) {
+      this._entitySignature = signature;
+      this._render();
+    }`;
+ if (source.split(previousSetter).length !== 2) throw Error('Switch telemetry render contract changed');
+ source = source.replace(previousSetter, `    this._hass = value;
+    const state = this._state();
+    const signature = JSON.stringify([state?.state, state?.attributes?.friendly_name, state?.attributes?.icon]);
+    const readings = [this._config.power_entity, this._config.energy_entity, this._config.voltage_entity]
+      .filter(Boolean)
+      .map(id => this._formatSensor(this._sensorState(id)));
+    const nodes = this.shadowRoot.querySelectorAll(".consumption .reading-value");
+    if (signature !== this._entitySignature || nodes.length !== readings.length) {
+      this._entitySignature = signature;
+      this._render();
+      return;
+    }
+    nodes.forEach((node, index) => {
+      if (node.textContent !== readings[index]) node.textContent = readings[index];
+    });`);
  const before='<ha-card data-palette="${this._config.palette}">';
  if(source.split(before).length!==2)throw Error('Switch state icon render contract changed');
  source=source.replace(before,'<ha-card data-palette="${this._config.palette}" data-orbit-switch-on="${isOn}">');

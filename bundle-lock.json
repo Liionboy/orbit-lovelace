@@ -1,5 +1,5 @@
 {
-  "version": "1.22.0-beta.11",
+  "version": "1.22.0-beta.12",
   "packages": 33,
   "upstreamPackages": 27,
   "nativePackages": 6,
@@ -8,8 +8,8 @@
   "compactSha256": "992af907619316a82495afdf38c4f7928609d979f6b11d40e13dc133d027c6cb",
   "lumaAppearanceVersion": "1.0.0",
   "lumaAppearanceSha256": "b2792f699279e7bbbd9fb01da722040482e7cd7ea4a45ae231d04aa94c1879c1",
-  "switchStateIconVersion": "1.0.0",
-  "switchStateIconSha256": "ef8a573efdfdb75a01fc6dd051dd2ecfb33523eb72abc444014bd41dff33c286",
+  "switchStateIconVersion": "1.1.0",
+  "switchStateIconSha256": "7256b453df10734c6b308c84500605c2a127016eee1dec781e5e0662b83e43a2",
   "frigateLiveVersion": "1.0.0",
   "frigateLiveSha256": "dbb3ffb25097a6554ea8512b9992de53903ac2031b056660beddcfc1e162a57c",
   "frigateLiveAdaptationSha256": "db205226500a03a0be300e440c80289164096b56b91ca46c992199adee02c975",
@@ -22,6 +22,6 @@
   "themeBridgeVersion": 1,
   "themesVersion": "1.3.0",
   "themeSha256": "52c65d3bbcfa94b6ae6141a3460c6f19b5426edbd31549abc1344be63356f48f",
-  "bytes": 964090,
-  "sha256": "7a8f92833cb300be4f74ab3318bb1e1e2b9d5d34882eaba6c14ba28647a68ffc"
+  "bytes": 964492,
+  "sha256": "c5414678f9e0a4f9d55cb04f117f6d697454497d35bb6395d4f0be74f4496bf9"
 }
