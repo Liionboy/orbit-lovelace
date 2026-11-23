@@ -1,4 +1,4 @@
-/* Orbit Modern v0.5.0 — MIT. Optional, suite-owned presentation only. */
+/* Orbit Modern v0.5.1 — MIT. Optional, suite-owned presentation only. */
 const orbitModern = (() => {
  const types = Object.keys(orbitModernProfiles),wrappedMethods=new WeakSet(),wrappedForms=new WeakSet(),wrappedFactories=new WeakSet(),originalFactories=new WeakMap();
  const field = {name:'design',default:'classic',selector:{select:{options:[{value:'classic',label:'Classic'},{value:'modern',label:'Modern · beta'}],mode:'dropdown'}}};
@@ -120,7 +120,7 @@ const orbitModern = (() => {
   const surface=type==='ha-chips-orbit-card'?'.chip.chip::before':type==='ha-title-orbit-card'?'.title-icon':'ha-card';
   const tint='var(--orbit-satin-accent,var(--chip-accent,var(--accent,var(--primary-color,#8059c7))))';
   // Paint only the surface. External shadows, hit areas and foreground state colors stay intact.
-  const css=scope+surface+'{background-image:linear-gradient(to bottom,light-dark(rgb(255 255 255 / .85),rgb(255 255 255 / .32)),transparent 2px),radial-gradient(ellipse 110% 90% at 5% 0%,light-dark(rgb(255 255 255 / .86),rgb(238 223 255 / .25)),transparent 67%),linear-gradient(145deg,color-mix(in srgb,'+tint+' 17%,transparent),transparent 88%) !important}';
+  const css=scope+surface+'{background-image:linear-gradient(to bottom,var(--orbit-satin-edge,light-dark(rgb(255 255 255 / .85),rgb(255 255 255 / .32))),transparent 2px),radial-gradient(ellipse 110% 90% at 5% 0%,var(--orbit-satin-reflection,light-dark(rgb(255 255 255 / .86),rgb(238 223 255 / .25))),transparent 67%),linear-gradient(145deg,color-mix(in srgb,'+tint+' 17%,transparent),var(--orbit-satin-falloff,transparent) 88%) !important}';
   const style=document.createElement('style');
   style.dataset.orbitSatin='';
   style.textContent=css;

@@ -4,6 +4,7 @@ import {compactFixtures} from './compact-fixtures.mjs';
 
 const engines = await import(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const bundle = await readFile(process.env.ROOM_RESOURCE || new URL('../dist/orbit-lovelace.js', import.meta.url), 'utf8');
+const satinTheme=JSON.parse(await readFile(new URL('../themes/catalog.json',import.meta.url))).themes['Orbit Satin'].modes;
 const iconPaths = JSON.parse(await readFile(new URL('fixtures/modern-icons.json', import.meta.url)));
 const browser = await engines[process.env.ROOM_BROWSER || 'chromium'].launch(process.env.CHROMIUM_EXECUTABLE ? {executablePath:process.env.CHROMIUM_EXECUTABLE} : {});
 try {
@@ -20,13 +21,11 @@ try {
  await page.evaluate(compactFixtures);
  let tested = 0;
  for (const mode of ['light','dark']) for (const layout of ['normal','compact']) for (const width of [144,164,183,203,243,440]) {
-  await page.evaluate(({mode,layout,width})=>{
+  await page.evaluate(({mode,layout,width,vars})=>{
    const host=document.querySelector('main');
    host.style.width=(width*2+8)+'px';
    document.documentElement.style.colorScheme=mode;
-   for (const [key,value] of Object.entries(mode==='dark'
-    ? {'primary-background-color':'#121724','card-background-color':'#181f30','primary-text-color':'#eef1f8','secondary-text-color':'#a6b1cb'}
-    : {'primary-background-color':'#eaeef8','card-background-color':'#fff','primary-text-color':'#182238','secondary-text-color':'#56637e'})) document.documentElement.style.setProperty('--'+key,value);
+   for (const [key,value] of Object.entries(vars)) document.documentElement.style.setProperty('--'+key,value);
    host.replaceChildren();
    const titles=['Pompa de căldură','Hol','Living room','Dormitor','Camera centrală'];
    const entities=['light.example','switch.example','climate.example','sensor.temperature'];
@@ -34,9 +33,11 @@ try {
     const card=document.createElement('ha-room-orbit-card');
     const config={...compactConfigs['ha-room-orbit-card'],layout,design:'modern',glow:true,satin:true,palette:count%2?'teal':'indigo',title,navigation_path:'/example/room'};
     for (let i=0;i<4;i++) config['entity_'+(i+1)]=i<count?entities[i]:'';
-    card.setConfig(config);card.hass=compactHass;host.append(card);
+    card.setConfig(config);
+    const temperature=compactHass.states['sensor.temperature'];
+    card.hass={...compactHass,states:{...compactHass.states,'sensor.temperature':{...temperature,state:count===0?'19.8':'23.3'}}};host.append(card);
    }
-  },{mode,layout,width});
+  },{mode,layout,width,vars:satinTheme[mode]});
   const metrics=await page.evaluate(()=>Array.from(document.querySelector('main').children,card=>{
    const root=card.shadowRoot, summary=root.querySelector('.summary').getBoundingClientRect(), identity=root.querySelector('.identity').getBoundingClientRect();
    return {height:card.getBoundingClientRect().height,shortcuts:[...root.querySelectorAll('.quick')].map(button=>{

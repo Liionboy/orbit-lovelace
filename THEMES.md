@@ -1,6 +1,6 @@
 # Orbit Themes
 
-Four complete Home Assistant theme families, each with native **light and dark modes**. Current definitions **1.2.0** in suite **1.17.0** add expressive **Orbit Prism** alongside **Desktop, Mobile and iOS Mobile** profiles. Original names/styles remain unchanged. [Device profiles, card-mod, Room/Back navigation and recovery](docs/themes/DEVICE-PROFILES.md).
+Five Home Assistant theme families, each with native Light and Dark modes. Themes 1.3.0 adds Orbit Satin in suite v1.22.0-beta.10. Existing theme definitions remain unchanged. [Satin setup](docs/SATIN.md) · [Device profiles](docs/themes/DEVICE-PROFILES.md).
 
 - **Orbit Prism** — expressive native card gradients, precise violet/cyan accents and layered ink-blue surfaces. Recommended for more visible card colors.
 - **Orbit Graphite** — architectural graphite neutrals and restrained indigo.

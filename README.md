@@ -6,7 +6,7 @@ Orbit Lovelace packages the Orbit cards and the matching companion card collecti
 
 Requires **Home Assistant 2026.6.0+** (the strictest native configuration-form API requirement among included cards). No backend integration is installed. There are no dynamic code downloads, CDNs or npm runtime installation requirements. Vacuum Commander's existing Lit runtime is included in the compiled resource.
 
-## Preview in v1.22.0-beta.9 — Orbit Modern + Glow
+## Preview in v1.22.0-beta.10 — Orbit Modern + Glow
 Optional [Orbit Satin](docs/SATIN.md) adds a soft surface reflection independently of Glow.
 
 **Optional Glow on all 37 cards:** enable **Glow** in the editor or set `glow: true`. A static palette halo, independent of Classic/Modern and Normal/Compact; disabled by default. Chips and Title remain unframed and semantic colors are preserved. [Glow preview and installation](docs/GLOW.md).

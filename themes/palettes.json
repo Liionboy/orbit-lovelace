@@ -1,5 +1,5 @@
 {
-  "version": "1.2.0",
+  "version": "1.3.0",
   "families": [
     {
       "name": "Orbit Prism",
@@ -104,6 +104,32 @@
         "accent": "#dfbd8c",
         "accent2": "#c8b798",
         "button": "#76572f"
+      }
+    },
+    {
+      "name": "Orbit Satin",
+      "description": "Pearlescent lavender and violet graphite, with a satin reflection on enabled Orbit cards.",
+      "light": {
+        "bg": "#eee8f3",
+        "surface": "#eee4f0",
+        "raised": "#e6d9ed",
+        "text": "#211b2c",
+        "muted": "#51445e",
+        "line": "#d6c6df",
+        "accent": "#624a82",
+        "accent2": "#754e87",
+        "button": "#624a82"
+      },
+      "dark": {
+        "bg": "#2b2636",
+        "surface": "#332d40",
+        "raised": "#40374d",
+        "text": "#f5eff8",
+        "muted": "#d1c3dc",
+        "line": "#5b5067",
+        "accent": "#d9beff",
+        "accent2": "#e0b9e7",
+        "button": "#713f8a"
       }
     }
   ]

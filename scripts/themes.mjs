@@ -34,6 +34,11 @@ function familyMode(f,dark){
   for(const key of ['shell-background','overlay-background','strip-background'])delete v['orbit-theme-'+key];
   v['ha-card-box-shadow']=v['orbit-theme-shadow']=dark?'0 8px 28px rgba(0, 0, 0, 0.24)':'0 6px 22px rgba(48, 39, 104, 0.09)';
  }
+ if(f.name==='Orbit Satin'){
+  v['orbit-satin-edge']=dark?'rgb(248 230 255 / .68)':'rgb(255 255 255 / .98)';
+  v['orbit-satin-reflection']=dark?'rgb(238 215 255 / .45)':'rgb(255 255 255 / .95)';
+  v['orbit-satin-falloff']=dark?'rgb(15 11 24 / .22)':'rgb(255 255 255 / .22)';
+ }
  return v;
 }
 export function definitions(){return Object.fromEntries(palettes.families.flatMap(f=>{const modes={light:familyMode(f,false),dark:familyMode(f,true)};return [[f.name,{modes}],...profiles.map(profile=>{const name=f.name+' '+profile,vars=profileVariables(name,profile),fonts=Object.fromEntries(Object.entries(vars).filter(([k])=>k.startsWith('ha-font-')));return[name,{...vars,modes:Object.fromEntries(Object.entries(modes).map(([m,v])=>[m,{...v,...fonts}]))}];})];}));}
